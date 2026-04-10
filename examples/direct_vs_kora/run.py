@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import argparse
 import json
 import os
 from pathlib import Path
@@ -483,7 +484,15 @@ def run_cases(offline: bool = False) -> dict[str, Any]:
 
 
 def main() -> None:
-    offline = not bool(os.getenv("OPENAI_API_KEY"))
+    parser = argparse.ArgumentParser(description="Run the direct_vs_kora benchmark.")
+    parser.add_argument("--offline", action="store_true", help="force mock/offline mode")
+    args = parser.parse_args()
+
+    offline = bool(args.offline) or not bool(os.getenv("OPENAI_API_KEY"))
+    if offline:
+        print("Running direct_vs_kora in offline mock mode")
+    else:
+        print("Running direct_vs_kora in online OpenAI mode")
     payload = run_cases(offline=offline)
     print(json.dumps(payload, indent=2))
     for case_name in payload["cases"]:
