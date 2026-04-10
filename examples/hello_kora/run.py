@@ -16,7 +16,7 @@ def main() -> None:
     validate_graph(normalized)
 
     result = run_graph(normalized)
-    print(json.dumps(result["final_output"], indent=2))
+    print(json.dumps(result["final"], indent=2))
 
 
 if __name__ == "__main__":
