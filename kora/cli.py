@@ -104,7 +104,12 @@ def main(argv: list[str] | None = None) -> int:
     examples_subparsers = examples_parser.add_subparsers(dest="examples_command", required=True)
     examples_subparsers.add_parser("list", help="list runnable examples")
 
-    run_parser = subparsers.add_parser("run", help="run an example")
+    run_parser = subparsers.add_parser(
+        "run",
+        help="run an example",
+        description="Run an example. Use -- to pass arguments through to the example.\nExample: kora run direct_vs_kora -- --offline",
+        formatter_class=argparse.RawDescriptionHelpFormatter,
+    )
     run_parser.add_argument("example", help="example name under examples/")
     run_parser.add_argument("example_args", nargs=argparse.REMAINDER, help="arguments passed to the example")
 
