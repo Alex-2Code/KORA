@@ -1,5 +1,13 @@
 # Real Workload Benchmark Harness
 
+## Next Step After First Run
+
+Use this example after the basic runnable flows in the root README.
+
+- `OPENAI_API_KEY` enables the online benchmark path.
+- Without credentials, parts of the runtime benchmark flow may be skipped.
+- This flow produces JSON/report artifacts that can later be summarized with `telemetry`.
+
 ## What This Simulates
 
 `examples/real_workload_harness/run.py` simulates a production-like request path where:
