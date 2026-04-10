@@ -1,0 +1,25 @@
+{
+  "timestamp": "2026-04-10T00:00:00+00:00",
+  "mode": "kora",
+  "model": "gpt-4o-mini",
+  "ok": true,
+  "total_time_ms": 12,
+  "total_llm_calls": 0,
+  "tokens_in": 0,
+  "tokens_out": 0,
+  "kora_events": {
+    "ok": 2,
+    "fail": 0,
+    "skipped": 1,
+    "stages": {
+      "DETERMINISTIC": 1,
+      "ADAPTER": 1
+    }
+  },
+  "final": {
+    "status": "ok",
+    "task_id": "task_llm",
+    "skipped": true,
+    "message": "Skipped due to skip_if condition"
+  }
+}
