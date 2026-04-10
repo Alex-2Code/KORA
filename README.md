@@ -69,7 +69,7 @@ Terminal-first v0.1 CLI flow:
 kora examples list
 kora run hello_kora
 kora run direct_vs_kora
-kora telemetry --input artifacts/run.json
+kora telemetry --input docs/reports/real_app_benchmark.json
 ```
 
 Current examples available in this repository:
@@ -85,7 +85,7 @@ Example local runs:
 ```bash
 python3 -m kora run hello_kora
 python3 -m kora run direct_vs_kora
-python3 -m kora telemetry --input artifacts/run.json
+python3 -m kora telemetry --input docs/reports/real_app_benchmark.json
 ```
 
 ## What KORA Does
