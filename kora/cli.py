@@ -4,6 +4,8 @@ from __future__ import annotations
 
 import argparse
 import json
+import subprocess
+import sys
 from pathlib import Path
 
 from kora.cost_model import compute_savings
@@ -16,6 +18,59 @@ def _default_json_out(input_path: Path) -> Path:
 
 def _default_md_out(input_path: Path) -> Path:
     return input_path.with_name(f"{input_path.stem}.telemetry.md")
+
+
+def _examples_root() -> Path:
+    return Path(__file__).resolve().parent.parent / "examples"
+
+
+def _discover_examples() -> list[dict[str, object]]:
+    root = _examples_root()
+    if not root.exists():
+        return []
+
+    examples: list[dict[str, object]] = []
+    for child in sorted(root.iterdir(), key=lambda path: path.name):
+        if not child.is_dir():
+            continue
+        run_path = child / "run.py"
+        if not run_path.exists():
+            continue
+        examples.append(
+            {
+                "name": child.name,
+                "run_path": run_path,
+                "has_graph": (child / "graph.json").exists(),
+            }
+        )
+    return examples
+
+
+def _print_examples_list() -> None:
+    examples = _discover_examples()
+    if not examples:
+        print("No runnable examples found.")
+        return
+
+    print("Runnable examples")
+    for example in examples:
+        graph_label = "yes" if example["has_graph"] else "no"
+        print(f"- {example['name']} (graph.json: {graph_label})")
+
+
+def _run_example(example_name: str, extra_args: list[str]) -> int:
+    examples = _discover_examples()
+    example_map = {str(example["name"]): Path(example["run_path"]) for example in examples}
+
+    if example_name not in example_map:
+        available = ", ".join(sorted(example_map)) if example_map else "(none)"
+        print(f"Unknown example: {example_name}", file=sys.stderr)
+        print(f"Available examples: {available}", file=sys.stderr)
+        return 2
+
+    command = [sys.executable, str(example_map[example_name]), *extra_args]
+    completed = subprocess.run(command, check=False)
+    return int(completed.returncode)
 
 
 def _print_summary(summary: dict) -> None:
@@ -45,6 +100,14 @@ def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(prog="kora.cli", description="KORA CLI")
     subparsers = parser.add_subparsers(dest="command", required=True)
 
+    examples_parser = subparsers.add_parser("examples", help="list available runnable examples")
+    examples_subparsers = examples_parser.add_subparsers(dest="examples_command", required=True)
+    examples_subparsers.add_parser("list", help="list runnable examples")
+
+    run_parser = subparsers.add_parser("run", help="run an example")
+    run_parser.add_argument("example", help="example name under examples/")
+    run_parser.add_argument("example_args", nargs=argparse.REMAINDER, help="arguments passed to the example")
+
     telemetry_parser = subparsers.add_parser("telemetry", help="summarize a run JSON file")
     telemetry_parser.add_argument("--input", required=True, help="path to run/report JSON")
     telemetry_parser.add_argument("--json-out", help="output path for telemetry JSON")
@@ -54,6 +117,16 @@ def main(argv: list[str] | None = None) -> int:
     telemetry_parser.add_argument("--compare", help="optional second run/report JSON to compute savings delta")
 
     args = parser.parse_args(argv)
+
+    if args.command == "examples" and args.examples_command == "list":
+        _print_examples_list()
+        return 0
+
+    if args.command == "run":
+        extra_args = list(args.example_args)
+        if extra_args and extra_args[0] == "--":
+            extra_args = extra_args[1:]
+        return _run_example(args.example, extra_args)
 
     if args.command == "telemetry":
         input_path = Path(args.input)
