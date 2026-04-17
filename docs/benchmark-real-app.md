@@ -3,6 +3,7 @@
 ## Next Step After First Run
 
 Use this example after the basic runnable flows in the root README.
+This is the next step after `hello_kora`, `retry_demo`, `direct_vs_kora -- --offline`, and the sample `telemetry` command. It is not the first-run path.
 
 - `OPENAI_API_KEY` enables the online benchmark path.
 - Without credentials, parts of the runtime benchmark flow may be skipped.
@@ -42,12 +43,6 @@ If `OPENAI_API_KEY` is missing, the harness skips the runtime call and writes a 
 Generate a deterministic telemetry summary from a saved report:
 
 ```bash
-python3 -m kora.cli telemetry --input docs/reports/real_app_benchmark.json
-```
-
-or:
-
-```bash
 python3 -m kora telemetry --input docs/reports/real_app_benchmark.json
 ```
 
@@ -62,13 +57,13 @@ By default, Markdown report output is also written as:
 You can estimate token-to-cost and compute savings delta between two runs:
 
 ```bash
-python3 -m kora.cli telemetry --input A.json --compare B.json
+python3 -m kora telemetry --input A.json --compare B.json
 ```
 
 Optional price overrides:
 
 ```bash
-python3 -m kora.cli telemetry --input A.json --compare B.json --price-input 0.00015 --price-output 0.0006
+python3 -m kora telemetry --input A.json --compare B.json --price-input 0.00015 --price-output 0.0006
 ```
 
 ## Captured Metrics
@@ -84,7 +79,7 @@ python3 -m kora.cli telemetry --input A.json --compare B.json --price-input 0.00
 
 Skip rate can be derived from `kora_events.skipped` against total KORA events.
 
-## Results Placeholder
+## Example Report Shape
 
 Example snippet:
 
