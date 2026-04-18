@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import os
 import subprocess
 import sys
 from pathlib import Path
@@ -81,7 +82,15 @@ def _run_example(example_name: str, extra_args: list[str]) -> int:
         return 2
 
     command = [sys.executable, str(example_map[example_name]), *extra_args]
-    completed = subprocess.run(command, check=False)
+    repo_root = Path(__file__).resolve().parent.parent
+    env = os.environ.copy()
+    existing_pythonpath = env.get("PYTHONPATH")
+    env["PYTHONPATH"] = (
+        str(repo_root)
+        if not existing_pythonpath
+        else str(repo_root) + os.pathsep + existing_pythonpath
+    )
+    completed = subprocess.run(command, check=False, env=env)
     return int(completed.returncode)
 
 
