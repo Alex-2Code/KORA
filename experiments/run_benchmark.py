@@ -200,19 +200,23 @@ def summarize_workload(workload: dict[str, Any]) -> dict[str, Any]:
 
 
 def resolve_deterministic_task(task: dict[str, Any]) -> Any:
+    task_id = task.get("id", "<unknown>")
     category = task.get("category")
-    if not isinstance(category, str):
-        raise ValueError("deterministic task must contain a category")
+    if not isinstance(category, str) or not category:
+        raise ValueError(f"deterministic task {task_id} must contain a non-empty string category")
 
     resolver = DETERMINISTIC_RESOLVERS.get(category)
     if resolver is None:
-        raise ValueError(f"no deterministic resolver for category: {category}")
+        raise ValueError(f"no deterministic resolver for task {task_id} category: {category}")
 
     input_data = task.get("input")
     if not isinstance(input_data, dict):
-        raise ValueError(f"deterministic task {task.get('id', '<unknown>')} must contain object input")
+        raise ValueError(f"deterministic task {task_id} category {category} must contain object input")
 
-    return resolver(input_data)
+    try:
+        return resolver(input_data)
+    except ValueError as exc:
+        raise ValueError(f"deterministic task {task_id} category {category} failed: {exc}") from exc
 
 
 def validate_expected_outputs(workload: dict[str, Any]) -> dict[str, int]:
@@ -220,6 +224,9 @@ def validate_expected_outputs(workload: dict[str, Any]) -> dict[str, int]:
     skipped_fallback_candidates = 0
 
     for index, task in enumerate(workload["tasks"]):
+        if not isinstance(task, dict):
+            raise ValueError(f"task at index {index} must be an object")
+
         if task["requires_model"] is True:
             skipped_fallback_candidates += 1
             continue
