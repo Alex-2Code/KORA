@@ -1,11 +1,15 @@
 import json
 from pathlib import Path
 
+import pytest
+
 from experiments.run_benchmark import (
+    DeterministicOutputMismatch,
     load_workload,
     run_direct_baseline,
     run_dry_run,
     run_kora_controlled,
+    validate_expected_outputs,
 )
 
 
@@ -86,6 +90,9 @@ def test_kora_controlled_result_counts_avoided_model_invocations(tmp_path: Path)
     assert result["total_tasks"] == 20
     assert result["deterministic_resolutions"] == 16
     assert result["fallback_candidates"] == 4
+    assert result["deterministic_output_checks"] == 16
+    assert result["deterministic_output_mismatches"] == 0
+    assert result["fallback_candidates_skipped_for_output_check"] == 4
     assert result["simulated_model_invocations"] == 4
     assert result["avoided_model_invocations_vs_direct_baseline"] == 16
     assert result["avoided_model_invocation_rate"] == 0.8
@@ -101,3 +108,49 @@ def test_kora_controlled_writes_output_json(tmp_path: Path) -> None:
     assert saved["status"] == "ok"
     assert saved["mode"] == "kora-controlled"
     assert saved["simulated_model_invocations"] == 4
+
+
+def test_expected_output_validation_accepts_matching_deterministic_task() -> None:
+    workload = {
+        "tasks": [
+            {
+                "id": "arithmetic_pass",
+                "category": "arithmetic",
+                "input": {"left": 2, "right": 3, "operation": "multiply"},
+                "expected_output": 6,
+                "requires_model": False,
+            },
+            {
+                "id": "fallback_skip",
+                "category": "arithmetic",
+                "input": {"left": 2, "right": 3, "operation": "multiply"},
+                "expected_output": {"fallback_required": True},
+                "requires_model": True,
+            },
+        ]
+    }
+
+    result = validate_expected_outputs(workload)
+
+    assert result == {
+        "deterministic_output_checks": 1,
+        "deterministic_output_mismatches": 0,
+        "fallback_candidates_skipped_for_output_check": 1,
+    }
+
+
+def test_expected_output_validation_rejects_mismatched_deterministic_task() -> None:
+    workload = {
+        "tasks": [
+            {
+                "id": "arithmetic_mismatch",
+                "category": "arithmetic",
+                "input": {"left": 2, "right": 3, "operation": "multiply"},
+                "expected_output": 5,
+                "requires_model": False,
+            }
+        ]
+    }
+
+    with pytest.raises(DeterministicOutputMismatch, match="arithmetic_mismatch"):
+        validate_expected_outputs(workload)
