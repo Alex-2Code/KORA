@@ -6,12 +6,16 @@ dist/
 .venv/
 .DS_Store
 .env
-docs/reports/
+docs/reports/*.json
+docs/reports/*.jsonl
+docs/reports/generated/
 docs/experiments/
 logs/
 logs/debug/
 logs/experiments/
 *experiment*.json
+experiments/results/*.json
+experiments/results/*.jsonl
 studio/backend/.venv_tmp/
 artifacts/*.jsonl
 artifacts/*.json
