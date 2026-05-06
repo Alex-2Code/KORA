@@ -32,9 +32,9 @@ dependencies = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/hkalbertkim/KORA"
-Repository = "https://github.com/hkalbertkim/KORA"
-Issues = "https://github.com/hkalbertkim/KORA/issues"
+Homepage = "https://github.com/Krako-Labs/KORA"
+Repository = "https://github.com/Krako-Labs/KORA"
+Issues = "https://github.com/Krako-Labs/KORA/issues"
 
 [project.scripts]
 kora = "kora.cli:main"

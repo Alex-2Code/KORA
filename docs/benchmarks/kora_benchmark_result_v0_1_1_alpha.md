@@ -8,7 +8,7 @@ Date: 2026-05-04
 |---|---|
 | Release tag | `v0.1.1-alpha` |
 | Public HEAD | `origin/main 036776ce2286453743cf1f9cea4cad4128621364` |
-| GitHub Release | `https://github.com/hkalbertkim/KORA/releases/tag/v0.1.1-alpha` |
+| GitHub Release | `https://github.com/Krako-Labs/KORA/releases/tag/v0.1.1-alpha` |
 | Workload | `experiments/workloads/deterministic_heavy_v0.json` |
 | Runner | `experiments/run_benchmark.py` |
 

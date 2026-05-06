@@ -6,7 +6,7 @@ Date: 2026-05-04
 
 This document is an early technical preview results document.
 
-The current primary evidence is the reproducible 100-task deterministic-heavy benchmark workload merged after KORA v0.1.1-alpha. The benchmark remains simulated, deterministic-heavy, and intentionally scoped. It is not yet a production benchmark.
+The current primary evidence is the reproducible 100-task deterministic-heavy benchmark workload merged after KORA v0.1.1-alpha. The benchmark remains simulated, deterministic-heavy, and intentionally scoped.
 
 The earlier v0.1.1-alpha 20-task result is preserved as historical skeleton evidence. The current 100-task workload is the primary evidence for the path toward v0.2.0-alpha.
 
@@ -16,7 +16,7 @@ The earlier v0.1.1-alpha 20-task result is preserved as historical skeleton evid
 |---|---|
 | Current released tag | `v0.1.1-alpha` |
 | Public HEAD | `origin/main de20e8c2a2f1b8e80d1260cccd638d18eff344fc` |
-| GitHub Release | `https://github.com/hkalbertkim/KORA/releases/tag/v0.1.1-alpha` |
+| GitHub Release | `https://github.com/Krako-Labs/KORA/releases/tag/v0.1.1-alpha` |
 | Current benchmark summary | `docs/benchmarks/kora_benchmark_result_v1_100.md` |
 | Historical benchmark summary | `docs/benchmarks/kora_benchmark_result_v0_1_1_alpha.md` |
 | Current workload | `experiments/workloads/deterministic_heavy_v1_100.json` |

@@ -2,16 +2,17 @@
 
 Date: `2026-05-06`
 
-Purpose: prepare a public-safe migration of KORA from Albert's personal GitHub account to the Krako-cloud organization before broader community, paper, EIC, investor, and partner activity begins.
+Purpose: document the public-safe migration of KORA from Albert's personal GitHub account to the Krako-Labs organization before broader community, paper, EIC, investor, and partner activity begins.
 
 ## 1. Current Repository State
 
-- Current repo URL: https://github.com/hkalbertkim/KORA
-- Target official repo URL: https://github.com/Krako-cloud/KORA
+- Previous repo location: Albert's personal GitHub account
+- Official repo URL after migration: https://github.com/Krako-Labs/KORA
 - Public truth before migration: `origin/main`
 - Current public HEAD: `376b6406bfdbf7381e55e0d9bb0c75fc8dac38dc`
 - Published release: `v0.2.0-alpha`
-- Current release URL: https://github.com/hkalbertkim/KORA/releases/tag/v0.2.0-alpha
+- Current release URL: https://github.com/Krako-Labs/KORA/releases/tag/v0.2.0-alpha
+- Migration note: `Krako-Labs` is the actual final organization. The earlier `Krako-cloud` planning placeholder is superseded.
 
 Current safe benchmark claim:
 
@@ -19,17 +20,17 @@ Current safe benchmark claim:
 
 ## 2. Migration Rationale
 
-KORA should move from Albert's personal GitHub account to `Krako-cloud` so the official project home matches the organization that will steward the project, documentation, community surface, and future governance. A personal account is acceptable for early incubation, but the official repo should live under the organization before the project is presented more broadly.
+KORA moved from Albert's personal GitHub account to `Krako-Labs` so the official project home matches the organization that will steward the project, documentation, community surface, and future governance. A personal account was acceptable for early incubation, but the official repo should live under the organization before the project is presented more broadly.
 
 The move should happen before broader public community activation because early contributors, readers, and stakeholders will form habits around the canonical URL. Moving first reduces link churn, avoids confusing forks or duplicated issue trackers, and gives the project a cleaner operational base for docs, issue templates, permissions, and project boards.
 
 This supports paper, EIC, investor, partner, and community readiness by making the repository easier to cite, share, govern, and maintain. The organization URL makes the project look less like a private working copy and more like the official open-source home for the KORA effort.
 
-Albert's technical origin story should be preserved in the README, release history, changelog, and early commit history. The migration should frame Albert as the originator and initial technical lead while making `Krako-cloud/KORA` the official maintained home going forward.
+Albert's technical origin story should be preserved in the README, release history, changelog, and early commit history. The migration should frame Albert as the originator and initial technical lead while making `Krako-Labs/KORA` the official maintained home going forward.
 
 ## 3. Recommended Migration Approach
 
-Preferred option: transfer the existing repository from `hkalbertkim/KORA` to `Krako-cloud/KORA`.
+Preferred option: transfer the existing repository from Albert's personal GitHub account to `Krako-Labs/KORA`.
 
 Reasons:
 
@@ -38,17 +39,17 @@ Reasons:
 - Lets GitHub redirects help existing links continue to resolve, subject to GitHub's redirect caveats.
 - Avoids creating an unnecessary duplicate repository with split history.
 
-Alternative option: create a new `Krako-cloud/KORA` repository and leave `hkalbertkim/KORA` as an archive notice.
+Alternative option: create a new `Krako-Labs/KORA` repository and leave the personal repository as an archive notice.
 
 This is only preferable if transfer permissions, organization policy, or repository-name conflicts block a direct transfer. It creates more operational work because releases, links, settings, and community surfaces must be recreated or clearly redirected.
 
-Recommendation: use the direct GitHub repository transfer to `Krako-cloud/KORA`, then run a short post-transfer URL and settings cleanup pass.
+Recommendation: use the direct GitHub repository transfer to `Krako-Labs/KORA`, then run a short post-transfer URL and settings cleanup pass.
 
 ## 4. Pre-Transfer Checklist
 
-- Confirm Albert has the required admin permissions on `hkalbertkim/KORA`.
-- Confirm Albert has permission to create or receive repositories in the `Krako-cloud` organization.
-- Confirm the target repo name `KORA` is available under `Krako-cloud`.
+- Confirm Albert has the required admin permissions on the personal source repository.
+- Confirm Albert has permission to create or receive repositories in the `Krako-Labs` organization.
+- Confirm the target repo name `KORA` is available under `Krako-Labs`.
 - Confirm no critical open PRs are pending or mid-review.
 - Confirm release and tag state:
   - Tag `v0.2.0-alpha` exists.
@@ -64,19 +65,19 @@ Recommendation: use the direct GitHub repository transfer to `Krako-cloud/KORA`,
 
 Manual GitHub steps for Albert:
 
-1. Open https://github.com/hkalbertkim/KORA/settings.
+1. Open the source repository settings in Albert's personal GitHub account.
 2. Go to the repository transfer section.
-3. Select transfer owner: `Krako-cloud`.
+3. Select transfer owner: `Krako-Labs`.
 4. Confirm repository name: `KORA`.
 5. Complete the GitHub confirmation flow.
-6. After transfer, open https://github.com/Krako-cloud/KORA.
+6. After transfer, open https://github.com/Krako-Labs/KORA.
 7. Confirm the repository, releases, tags, issues, pull requests, and settings are present.
 
 Do not ask Codex to perform the repository transfer.
 
 Expected target URL after transfer:
 
-- https://github.com/Krako-cloud/KORA
+- https://github.com/Krako-Labs/KORA
 
 Expected redirect behavior caveat:
 
@@ -87,7 +88,7 @@ Expected redirect behavior caveat:
 - Update local git remote:
 
 ```bash
-git remote set-url origin git@github.com:Krako-cloud/KORA.git
+git remote set-url origin git@github.com:Krako-Labs/KORA.git
 ```
 
 - Verify the remote:
@@ -106,11 +107,7 @@ git ls-remote --tags origin "refs/tags/v0.2.0-alpha"
 - Verify README links and badges.
 - Verify CHANGELOG release links.
 - Verify docs links under `docs/`.
-- Search for old repo URLs and replace them where appropriate:
-
-```bash
-rg "github.com/hkalbertkim/KORA|hkalbertkim/KORA"
-```
+- Search for old personal-repository URLs and the superseded Krako-cloud planning placeholder, then replace them where appropriate.
 
 - Keep old URLs only where historical context is explicitly useful.
 - Verify CLI smoke tests still pass:
@@ -147,7 +144,7 @@ python3 -m kora run direct_vs_kora -- --offline
 
 Approved migration message:
 
-> KORA is moving from Albert's personal GitHub account to the `Krako-cloud` organization so the project has a clear official home before broader community, paper, EIC, investor, and partner activity begins. Albert's early technical authorship and release history remain preserved in the repository history.
+> KORA has moved from Albert's personal GitHub account to the `Krako-Labs` organization so the project has a clear official home before broader community, paper, EIC, investor, and partner activity begins. Albert's early technical authorship and release history remain preserved in the repository history.
 
 Approved benchmark claim:
 
