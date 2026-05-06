@@ -28,6 +28,10 @@ KORA v0.1 is terminal-first and developer-oriented.
 
 Want to contribute? Start with [CONTRIBUTING.md](CONTRIBUTING.md), or browse [good first issue candidates](docs/good_first_issues.md).
 
+## Documentation
+
+Start with the [KORA Documentation Index](docs/README.md) to find technical docs, benchmark evidence, claim guidance, community workflows, and operating docs.
+
 ## What KORA Is
 
 KORA sits between a request and a model call.
