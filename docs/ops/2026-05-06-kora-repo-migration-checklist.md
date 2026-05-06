@@ -82,6 +82,7 @@ Expected target URL after transfer:
 Expected redirect behavior caveat:
 
 - GitHub usually redirects old repository URLs after a transfer, but redirects can be affected by future repository creation, rename, or ownership changes. Treat redirects as compatibility support, not as the canonical long-term URL.
+- Do not recreate the previous personal repository as a placeholder repository because GitHub's automatic redirect from the old repository location may be broken if a new repository is created there.
 
 ## 6. Post-Transfer Technical Checklist
 
