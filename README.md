@@ -20,6 +20,18 @@
 
 ---
 
+## Migration Notice
+
+KORA moved into the lab.
+
+KORA started in Albert Kim's personal workshop. It now lives in its official Krako Labs home:
+
+https://github.com/Krako-Labs/KORA
+
+Same code. Same history. Bigger mission.
+
+For issues, discussions, pull requests, benchmarks, and community feedback, please use this repository.
+
 KORA is a standalone open-source execution control layer for AI systems. It structures requests into task graphs, runs deterministic work first, and escalates to model inference only when needed.
 
 KORA v0.1 is terminal-first and developer-oriented.
