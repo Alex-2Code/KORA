@@ -11,6 +11,7 @@ The documentation is organized by audience and use case so developers, contribut
 ## Start Here
 
 - [Main README](../README.md)
+- [Current v0.2.0-alpha release](https://github.com/Krako-Labs/KORA/releases/tag/v0.2.0-alpha)
 - [KORA Category Thesis](vision/2026-05-06-kora-category-thesis.md)
 - [KORA Project Source](context/KORA_PROJECT_SOURCE.md)
 - [KORA Claim Registry](claims/kora-claim-registry.md)
@@ -19,6 +20,36 @@ The documentation is organized by audience and use case so developers, contribut
 - [KORA OSS Operating System](ops/2026-05-06-kora-oss-operating-system.md)
 - [KORA GitHub Platform Setup Plan](ops/2026-05-06-kora-github-platform-setup-plan.md)
 
+## Current Benchmark Evidence Path
+
+Use this path for the current `v0.2.0-alpha` benchmark evidence and regeneration flow:
+
+1. Current workload: [`experiments/workloads/deterministic_heavy_v1_100.json`](../experiments/workloads/deterministic_heavy_v1_100.json)
+2. Workload generator: [`experiments/generate_workload.py`](../experiments/generate_workload.py)
+3. Benchmark runner: [`experiments/run_benchmark.py`](../experiments/run_benchmark.py)
+4. Summary generator: [`experiments/summarize_benchmark_results.py`](../experiments/summarize_benchmark_results.py)
+5. Artifact policy and regeneration commands: [`docs/reports/benchmark_artifact_policy.md`](reports/benchmark_artifact_policy.md)
+6. Raw artifact freeze decision: [`docs/reports/v0.2.0-alpha-raw-artifact-freeze-decision.md`](reports/v0.2.0-alpha-raw-artifact-freeze-decision.md)
+7. Current benchmark summary: [`docs/benchmarks/kora_benchmark_result_v1_100.md`](benchmarks/kora_benchmark_result_v1_100.md)
+8. Release/changelog context: [`CHANGELOG.md`](../CHANGELOG.md)
+9. Claim boundary source: [`docs/claims/kora-claim-registry.md`](claims/kora-claim-registry.md)
+
+Safe claim:
+
+> In a reproducible 100-task deterministic-heavy benchmark workload, KORA-controlled execution avoided 80 of 100 simulated model invocations versus a naive direct baseline.
+
+This evidence does not claim production cost reduction proof, real API-cost reduction proof, production benchmark proof, full runtime-integrated benchmark evidence, broad workload superiority proof, or energy reduction evidence.
+
+Raw benchmark JSON artifacts are reproducible outputs and are not frozen or committed for this alpha release.
+
+## Document Status Labels
+
+- **Current release evidence**: current release, benchmark, artifact, and claim-boundary docs for `v0.2.0-alpha`.
+- **Benchmark/artifact policy**: rules and commands for regenerating benchmark workloads, raw outputs, and generated summaries.
+- **Release preparation history**: readiness, merge, review, and release-prep reports preserved for auditability.
+- **EOD/SOD reports**: operating handoff records and dated continuity reports.
+- **Historical/background docs**: older benchmark notes, strategy, architecture, and context docs that may still be useful but are not the current evidence entry point.
+
 ## Documentation By Audience
 
 ### A. New Users And Developers
@@ -26,10 +57,11 @@ The documentation is organized by audience and use case so developers, contribut
 - [Main README](../README.md)
 - [Examples directory](../examples/)
 - [Good first issue candidates](good_first_issues.md)
-- [Technical preview results](technical_preview_results.md)
+- [Current benchmark evidence path](#current-benchmark-evidence-path)
+- [Technical preview results](technical_preview_results.md) - historical/background benchmark context
 - [Benchmark real app guide](benchmark-real-app.md)
-- [Benchmark overview](benchmark.md)
-- [Benchmark summaries](benchmarks/)
+- [Benchmark overview](benchmark.md) - historical/background benchmark note
+- [Benchmark summaries](benchmarks/) - current and historical benchmark summaries
 - [Experiments directory](../experiments/)
 
 ### B. Contributors And Community
@@ -66,9 +98,9 @@ The documentation is organized by audience and use case so developers, contribut
 
 - [Authorship and contribution policy](paper/2026-05-06-kora-authorship-and-contribution-policy.md)
 - [KORA Category Thesis](vision/2026-05-06-kora-category-thesis.md)
-- [Technical preview results](technical_preview_results.md)
-- [Benchmark summaries](benchmarks/)
-- [Benchmark artifact policy](reports/benchmark_artifact_policy.md)
+- [Technical preview results](technical_preview_results.md) - historical/background benchmark context
+- [Benchmark summaries](benchmarks/) - current and historical benchmark summaries
+- [Benchmark artifact policy](reports/benchmark_artifact_policy.md) - benchmark/artifact policy
 - [Research agenda](research-agenda.md)
 - [Whitepaper](whitepaper.md)
 
@@ -81,7 +113,8 @@ The documentation is organized by audience and use case so developers, contribut
 - [KORA OSS Operating System](ops/2026-05-06-kora-oss-operating-system.md)
 - [KORA GitHub Platform Setup Plan](ops/2026-05-06-kora-github-platform-setup-plan.md)
 - [v0.2.0-alpha EOD report](reports/kora_eod_2026-05-05_v0.2.0-alpha.md)
-- [Benchmark evidence summaries](benchmarks/)
+- [Current benchmark evidence path](#current-benchmark-evidence-path)
+- [Benchmark evidence summaries](benchmarks/) - current and historical benchmark summaries
 
 ### G. Internal Continuity And Handoff
 
