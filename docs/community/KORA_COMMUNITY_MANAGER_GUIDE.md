@@ -12,6 +12,8 @@ This guide helps KORA community managers handle GitHub Discussions, Issues, PR t
 
 It is an operations guide, not a technical proof document. Use it to route conversations, keep public language accurate, and escalate unclear or risky topics to maintainers.
 
+For channel-specific release copy and social/community announcement templates, use the [KORA Social Media Announcement Guide](KORA_SOCIAL_MEDIA_ANNOUNCEMENT_GUIDE.md).
+
 ## Current Project State
 
 - KORA `v0.3.0-alpha` is available as a GitHub prerelease.
