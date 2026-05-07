@@ -222,7 +222,67 @@ Structure is measurable only if telemetry is complete.
 
 ---
 
-## 13. Storage and Retention
+## 13. Current Public Counters
+
+These are the current counters new contributors are most likely to see in CLI output, sample telemetry reports, and benchmark docs.
+
+### Telemetry Summary Counters
+
+The `python3 -m kora telemetry --input <run.json>` command summarizes run or report JSON. The committed sample input is `docs/reports/sample_telemetry_input.json`.
+
+| Counter | Meaning |
+|---|---|
+| `ok` | Whether the summarized run/report completed successfully. |
+| `total_time_ms` | Total run/report duration in milliseconds, either read from the input or derived from event timings when available. |
+| `total_llm_calls` | Count of non-skipped adapter/model events in the summarized run/report, or the explicit top-level value if present. |
+| `tokens_in` | Input token count read from the input or summed from event usage fields. |
+| `tokens_out` | Output token count read from the input or summed from event usage fields. |
+| `events_ok` | Count of successful KORA events. |
+| `events_fail` | Count of failed KORA events. |
+| `events_skipped` | Count of events marked as skipped. |
+| `stage_counts` | Event counts grouped by stage, such as `DETERMINISTIC` or `ADAPTER`. |
+| `budget_breaches` | Count of top-level or event errors marked as budget breaches. |
+| `escalation_required` | Count of top-level or event errors marked `ESCALATE_REQUIRED`. |
+| `estimated_cost_usd` | Optional estimate from model and token counters when pricing data is available. This is not proof of real API billing. |
+
+### First-Run Demo Counters
+
+`python3 -m kora run direct_vs_kora -- --offline` prints a local offline mock comparison. It is useful for understanding output shape and routing behavior, but it is not production benchmark evidence.
+
+| Counter | Meaning |
+|---|---|
+| `llm_calls_direct_total` | Total simulated direct-path model calls across the offline demo cases. |
+| `llm_calls_kora_total` | Total simulated KORA-controlled model calls across the offline demo cases. |
+| `llm_calls_reduced_total` | Difference between the simulated direct-path and KORA-controlled call totals in the offline demo. |
+| `tokens_in_direct_total` | Simulated direct-path input token total in the offline demo. |
+| `tokens_in_kora_total` | Simulated KORA-controlled input token total in the offline demo. |
+| `tokens_out_direct_total` | Simulated direct-path output token total in the offline demo. |
+| `tokens_out_kora_total` | Simulated KORA-controlled output token total in the offline demo. |
+
+Offline demo counters are simulated local counters. They are not real API-cost or billing counters.
+
+### Benchmark Evidence Counters
+
+The current deterministic-heavy benchmark path is documented in `experiments/README.md` and `docs/reports/benchmark_artifact_policy.md`.
+
+| Counter | Meaning |
+|---|---|
+| `total tasks` | Number of tasks in the benchmark workload. |
+| `deterministic/no-model tasks` | Workload tasks marked as not requiring a model candidate. |
+| `fallback/model-candidate tasks` | Workload tasks marked as requiring a model candidate. |
+| `direct-baseline simulated model invocations` | Simulated model invocations for a naive direct baseline. |
+| `KORA-controlled simulated model invocations` | Simulated model invocations for the KORA-controlled benchmark mode. |
+| `avoided simulated model invocations` | Difference between direct-baseline and KORA-controlled simulated invocation counts. |
+| `avoided invocation rate` | Avoided simulated invocations divided by direct-baseline simulated invocations. |
+| `deterministic outputs checked` | Deterministic workload outputs compared with expected outputs. |
+| `mismatches` | Deterministic expected-output mismatches. |
+| `fallback/model-candidate skipped` | Fallback/model-candidate tasks skipped for deterministic output checking. |
+
+Benchmark invocation counters are simulated benchmark counters. They do not prove production cost reduction, real API-cost reduction, production benchmark performance, full runtime-integrated benchmark behavior, broad workload superiority, or energy reduction.
+
+---
+
+## 14. Storage and Retention
 
 Telemetry storage must:
 
@@ -235,7 +295,7 @@ Retention policy must balance audit needs and storage cost.
 
 ---
 
-## 14. Performance Implications
+## 15. Performance Implications
 
 Telemetry introduces overhead.
 

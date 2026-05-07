@@ -57,6 +57,7 @@ Raw benchmark JSON artifacts are reproducible outputs and are not frozen or comm
 
 - [Main README](../README.md)
 - [Examples directory](../examples/)
+- [Telemetry and observability counters](telemetry-and-observability.md#current-public-counters)
 - [Good first issue candidates](good_first_issues.md)
 - [Current benchmark evidence path](#current-benchmark-evidence-path)
 - [Technical preview results](technical_preview_results.md) - historical/background benchmark context
