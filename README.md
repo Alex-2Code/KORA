@@ -36,7 +36,7 @@ Want to contribute? Start with [CONTRIBUTING.md](CONTRIBUTING.md), browse [good 
 
 Start with the [KORA Documentation Index](docs/README.md) to find technical docs, benchmark evidence, claim guidance, community workflows, and operating docs.
 
-For current benchmark evidence and claim boundaries, see the [benchmark artifact policy](docs/reports/benchmark_artifact_policy.md), the [raw artifact freeze decision](docs/reports/v0.2.0-alpha-raw-artifact-freeze-decision.md), the [100-task benchmark summary](docs/benchmarks/kora_benchmark_result_v1_100.md), and the [claim registry](docs/claims/kora-claim-registry.md).
+For current benchmark evidence and claim boundaries, see the [changelog](CHANGELOG.md), [experiments regeneration guide](experiments/README.md), [benchmark artifact policy](docs/reports/benchmark_artifact_policy.md), [raw artifact freeze decision](docs/reports/v0.2.0-alpha-raw-artifact-freeze-decision.md), [100-task benchmark summary](docs/benchmarks/kora_benchmark_result_v1_100.md), and [claim registry](docs/claims/kora-claim-registry.md).
 
 ## What KORA Is
 

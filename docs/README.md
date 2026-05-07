@@ -28,11 +28,12 @@ Use this path for the current `v0.2.0-alpha` benchmark evidence and regeneration
 2. Workload generator: [`experiments/generate_workload.py`](../experiments/generate_workload.py)
 3. Benchmark runner: [`experiments/run_benchmark.py`](../experiments/run_benchmark.py)
 4. Summary generator: [`experiments/summarize_benchmark_results.py`](../experiments/summarize_benchmark_results.py)
-5. Artifact policy and regeneration commands: [`docs/reports/benchmark_artifact_policy.md`](reports/benchmark_artifact_policy.md)
-6. Raw artifact freeze decision: [`docs/reports/v0.2.0-alpha-raw-artifact-freeze-decision.md`](reports/v0.2.0-alpha-raw-artifact-freeze-decision.md)
-7. Current benchmark summary: [`docs/benchmarks/kora_benchmark_result_v1_100.md`](benchmarks/kora_benchmark_result_v1_100.md)
-8. Release/changelog context: [`CHANGELOG.md`](../CHANGELOG.md)
-9. Claim boundary source: [`docs/claims/kora-claim-registry.md`](claims/kora-claim-registry.md)
+5. Experiments regeneration guide: [`experiments/README.md`](../experiments/README.md)
+6. Artifact policy and regeneration commands: [`docs/reports/benchmark_artifact_policy.md`](reports/benchmark_artifact_policy.md)
+7. Raw artifact freeze decision: [`docs/reports/v0.2.0-alpha-raw-artifact-freeze-decision.md`](reports/v0.2.0-alpha-raw-artifact-freeze-decision.md)
+8. Current benchmark summary: [`docs/benchmarks/kora_benchmark_result_v1_100.md`](benchmarks/kora_benchmark_result_v1_100.md)
+9. Release/changelog context: [`CHANGELOG.md`](../CHANGELOG.md)
+10. Claim boundary source: [`docs/claims/kora-claim-registry.md`](claims/kora-claim-registry.md)
 
 Safe claim:
 

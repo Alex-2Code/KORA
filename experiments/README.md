@@ -95,6 +95,8 @@ Raw benchmark JSON artifacts are reproducible outputs and are not frozen or comm
 
 See:
 
+- [KORA documentation index](../docs/README.md)
+- [CHANGELOG.md](../CHANGELOG.md)
 - [Benchmark artifact policy](../docs/reports/benchmark_artifact_policy.md)
 - [v0.2.0-alpha raw artifact freeze decision](../docs/reports/v0.2.0-alpha-raw-artifact-freeze-decision.md)
 

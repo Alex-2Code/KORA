@@ -2,7 +2,16 @@
 
 ## v0.2.0-alpha benchmark evidence expansion
 
-Status: not yet released.
+Status: published prerelease.
+
+GitHub Release: https://github.com/Krako-Labs/KORA/releases/tag/v0.2.0-alpha
+
+Related docs:
+
+- [KORA Documentation Index](docs/README.md)
+- [Experiments regeneration guide](experiments/README.md)
+- [Benchmark artifact policy](docs/reports/benchmark_artifact_policy.md)
+- [Raw artifact freeze decision](docs/reports/v0.2.0-alpha-raw-artifact-freeze-decision.md)
 
 ### Benchmark evidence path
 
@@ -10,7 +19,7 @@ Status: not yet released.
 - Added automated Markdown summary generation from benchmark result JSON artifacts.
 - Added a raw benchmark artifact policy for ephemeral `/tmp` outputs, Markdown summaries, and future frozen evidence decisions.
 - Expanded correctness/error/fallback benchmark coverage for deterministic success, deterministic mismatch, fallback/model-candidate skip behavior, unsupported categories, malformed deterministic input, and stable `v1_100` counters.
-- Added draft release notes, readiness, merge-readiness, pre-merge review, and merge-candidate validation docs for `v0.2.0-alpha`.
+- Added release notes draft, readiness, merge-readiness, pre-merge review, merge-candidate validation, and raw artifact freeze decision docs for `v0.2.0-alpha`.
 
 ### Current reproducible benchmark counters
 
