@@ -89,6 +89,24 @@ python3 experiments/summarize_benchmark_results.py \
   --output /tmp/kora_deterministic_heavy_v1_100.summary.md
 ```
 
+## Initial Runtime-Path Harness
+
+The initial `v0.3.0-alpha` runtime-path benchmark harness runs the tracked deterministic-heavy workload through the KORA executor path with offline/mock behavior:
+
+```bash
+python3 -m kora run runtime_integrated_benchmark -- --offline
+```
+
+To write raw JSON for local inspection, use an explicit `/tmp` path:
+
+```bash
+python3 -m kora run runtime_integrated_benchmark -- \
+  --offline \
+  --json-out /tmp/kora_runtime_integrated_benchmark_v0_3_0.json
+```
+
+This harness is an initial runtime-integrated benchmark scaffold. It is not production benchmark evidence, does not call external APIs in offline mode, and does not change the current public claim boundary. Raw generated JSON should stay in `/tmp` or another ignored path unless a later release process explicitly selects frozen evidence.
+
 ## Artifact Policy
 
 Raw benchmark JSON artifacts are reproducible outputs and are not frozen or committed for `v0.2.0-alpha`.
