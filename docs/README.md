@@ -43,6 +43,8 @@ Future `v0.3.0-alpha` release-readiness checklist: [`docs/reports/v0.3.0-alpha-r
 
 Final `v0.3.0-alpha` docs and claim audit: [`docs/reports/v0.3.0-alpha-docs-claim-audit.md`](reports/v0.3.0-alpha-docs-claim-audit.md)
 
+Draft `v0.3.0-alpha` release validation packet: [`docs/reports/v0.3.0-alpha-release-validation-packet.md`](reports/v0.3.0-alpha-release-validation-packet.md)
+
 Initial runtime-path harness command:
 
 ```bash
