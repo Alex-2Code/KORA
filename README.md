@@ -30,7 +30,7 @@ Current published release: [`v0.2.0-alpha`](https://github.com/Krako-Labs/KORA/r
 
 KORA is still alpha / prerelease software. The `v0.2.0-alpha` release focuses on bounded deterministic-heavy benchmark evidence for the terminal-first developer surface. No release assets were uploaded, and no raw benchmark JSON artifacts were uploaded.
 
-Want to contribute? Start with [CONTRIBUTING.md](CONTRIBUTING.md), browse [good first issue candidates](docs/good_first_issues.md), and review [SECURITY.md](SECURITY.md), [GOVERNANCE.md](GOVERNANCE.md), and [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md).
+Want to contribute? Start with [CONTRIBUTING.md](CONTRIBUTING.md), browse [good first issue candidates](docs/good_first_issues.md), and review [SECURITY.md](SECURITY.md), [GOVERNANCE.md](GOVERNANCE.md), and [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md). Community moderators can use the [KORA community manager guide](docs/community/KORA_COMMUNITY_MANAGER_GUIDE.md).
 
 ## Documentation
 

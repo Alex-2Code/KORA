@@ -101,6 +101,7 @@ Raw benchmark JSON artifacts are reproducible outputs and are not frozen or comm
 - [AI-assisted contribution guide](community/2026-05-06-ai-assisted-contribution-guide.md)
 - [Albert-Sumanta GitHub sync](community/2026-05-06-albert-sumanta-github-sync.md)
 - [Community sync issue template](community/2026-05-06-community-sync-issue-template.md)
+- [KORA community manager guide](community/KORA_COMMUNITY_MANAGER_GUIDE.md)
 - [KORA OSS Operating System](ops/2026-05-06-kora-oss-operating-system.md)
 - [KORA GitHub Platform Setup Plan](ops/2026-05-06-kora-github-platform-setup-plan.md)
 - [Discussions and Wiki plan](ops/2026-05-06-kora-discussions-and-wiki-plan.md)
