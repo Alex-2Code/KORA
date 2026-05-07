@@ -41,6 +41,8 @@ Reviewer-facing runtime evidence flow: [`docs/reports/v0.3.0-alpha-runtime-evide
 
 Future `v0.3.0-alpha` release-readiness checklist: [`docs/reports/v0.3.0-alpha-release-readiness-checklist.md`](reports/v0.3.0-alpha-release-readiness-checklist.md)
 
+Final `v0.3.0-alpha` docs and claim audit: [`docs/reports/v0.3.0-alpha-docs-claim-audit.md`](reports/v0.3.0-alpha-docs-claim-audit.md)
+
 Initial runtime-path harness command:
 
 ```bash
