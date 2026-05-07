@@ -45,6 +45,8 @@ Final `v0.3.0-alpha` docs and claim audit: [`docs/reports/v0.3.0-alpha-docs-clai
 
 Draft `v0.3.0-alpha` release validation packet: [`docs/reports/v0.3.0-alpha-release-validation-packet.md`](reports/v0.3.0-alpha-release-validation-packet.md)
 
+`v0.3.0-alpha` release approval checkpoint: [`docs/reports/v0.3.0-alpha-release-approval-checkpoint.md`](reports/v0.3.0-alpha-release-approval-checkpoint.md)
+
 Initial runtime-path harness command:
 
 ```bash
