@@ -49,6 +49,8 @@ Final `v0.3.0-alpha` docs and claim audit: [`docs/reports/v0.3.0-alpha-docs-clai
 
 Post-release EOD report: [`docs/eod/kora_eod_2026_05_07_v0.3.0-alpha_release.md`](eod/kora_eod_2026_05_07_v0.3.0-alpha_release.md)
 
+Post-release cleanup plan: [`docs/reports/v0.3.0-alpha-post-release-cleanup-plan.md`](reports/v0.3.0-alpha-post-release-cleanup-plan.md)
+
 Initial runtime-path harness command:
 
 ```bash
