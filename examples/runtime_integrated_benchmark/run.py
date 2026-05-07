@@ -4,12 +4,14 @@ from __future__ import annotations
 
 import argparse
 import json
+from datetime import UTC, datetime
 from pathlib import Path
 from typing import Any
 
 from experiments.run_benchmark import load_workload
 from kora.executor import run_graph
 from kora.task_ir import TaskGraph, normalize_graph, validate_graph
+from kora.telemetry import summarize_run
 
 DEFAULT_WORKLOAD = Path("experiments/workloads/deterministic_heavy_v1_100.json")
 SAFE_CLAIM = (
@@ -200,6 +202,147 @@ def build_runtime_integrated_summary(
     return summary
 
 
+def _format_percent(value: Any) -> str:
+    if isinstance(value, int | float):
+        return f"{float(value) * 100:.0f}%"
+    return "n/a"
+
+
+def render_evidence_packet(
+    summary: dict[str, Any],
+    *,
+    generated_at: str | None = None,
+    runtime_json_command: str | None = None,
+    report_command: str | None = None,
+) -> str:
+    generated_at = generated_at or datetime.now(UTC).replace(microsecond=0).isoformat()
+    runtime_json_command = runtime_json_command or (
+        "python3 -m kora run runtime_integrated_benchmark -- "
+        "--offline --json-out /tmp/kora_runtime_integrated_benchmark.json"
+    )
+    report_command = report_command or (
+        "python3 examples/runtime_integrated_benchmark/report.py "
+        "--input /tmp/kora_runtime_integrated_benchmark.json "
+        "--md-out /tmp/kora_runtime_integrated_benchmark_report.md"
+    )
+    telemetry_summary = summarize_run(summary)
+    stage_counts = telemetry_summary.get("stage_counts", {})
+    if not isinstance(stage_counts, dict):
+        stage_counts = {}
+    stage_rows = [
+        f"| `{stage}` | `{int(count)}` |"
+        for stage, count in sorted(stage_counts.items())
+    ]
+    if not stage_rows:
+        stage_rows = ["| `(none)` | `0` |"]
+
+    lines = [
+        "# KORA v0.3.0-alpha initial runtime-path benchmark evidence packet",
+        "",
+        "Status: initial runtime-path benchmark harness output",
+        f"Generated at: `{generated_at}`",
+        "",
+        "## Source",
+        "",
+        "| Field | Value |",
+        "|---|---|",
+        f"| Benchmark | `{summary.get('benchmark_name', '')}` |",
+        f"| Mode | `{summary.get('mode', '')}` |",
+        f"| Workload | `{summary.get('workload_path', '')}` |",
+        f"| Offline/mock mode | `{summary.get('offline', False)}` |",
+        "",
+        "## Reproduction Commands",
+        "",
+        "```bash",
+        runtime_json_command,
+        report_command,
+        "```",
+        "",
+        "## Runtime Benchmark Counters",
+        "",
+        "| Metric | Value |",
+        "|---|---:|",
+        f"| Total tasks | `{summary.get('total_tasks')}` |",
+        f"| Deterministic route count | `{summary.get('deterministic_route_count')}` |",
+        (
+            "| Fallback/model-candidate route count | "
+            f"`{summary.get('fallback_or_model_candidate_route_count')}` |"
+        ),
+        (
+            "| Simulated baseline model invocations | "
+            f"`{summary.get('simulated_baseline_model_invocations')}` |"
+        ),
+        (
+            "| KORA-controlled model invocations | "
+            f"`{summary.get('kora_controlled_model_invocations')}` |"
+        ),
+        (
+            "| Avoided simulated model invocations | "
+            f"`{summary.get('avoided_simulated_model_invocations')}` |"
+        ),
+        (
+            "| Avoided simulated model invocation rate | "
+            f"`{_format_percent(summary.get('avoided_simulated_model_invocation_rate'))}` |"
+        ),
+        f"| Deterministic outputs checked | `{summary.get('deterministic_outputs_checked')}` |",
+        f"| Mismatch count | `{summary.get('mismatch_count')}` |",
+        f"| Runtime path execution status | `{summary.get('runtime_path_execution_status')}` |",
+        f"| Telemetry event count | `{summary.get('telemetry_event_count')}` |",
+        "",
+        "## Telemetry Summary",
+        "",
+        "| Metric | Value |",
+        "|---|---:|",
+        f"| Total LLM calls | `{telemetry_summary.get('total_llm_calls')}` |",
+        f"| Events OK | `{telemetry_summary.get('events_ok')}` |",
+        f"| Events failed | `{telemetry_summary.get('events_fail')}` |",
+        f"| Events skipped | `{telemetry_summary.get('events_skipped')}` |",
+        f"| Tokens in | `{telemetry_summary.get('tokens_in')}` |",
+        f"| Tokens out | `{telemetry_summary.get('tokens_out')}` |",
+        "",
+        "### Stage Counts",
+        "",
+        "| Stage | Count |",
+        "|---|---:|",
+        *stage_rows,
+        "",
+        "## Safe Current Claim",
+        "",
+        f"> {summary.get('safe_current_claim', SAFE_CLAIM)}",
+        "",
+        "## Claim Boundary",
+        "",
+        str(summary.get("claim_boundary", CLAIM_BOUNDARY)),
+        "",
+        "This packet does not claim production cost reduction proof, real API-cost reduction proof, "
+        "production benchmark proof, full runtime-integrated benchmark evidence, broad workload "
+        "superiority proof, or energy reduction evidence.",
+        "",
+        "Explicit non-claims:",
+        "",
+        "- This is not production benchmark evidence.",
+        "- This does not prove real API-cost reduction.",
+        "- This does not prove production cost reduction.",
+        "- This does not prove broad workload superiority.",
+        "- This does not prove energy reduction.",
+        "- This is not full runtime-integrated benchmark evidence.",
+        "",
+        "## Reproducibility Notes",
+        "",
+        "- The runtime benchmark runs in offline mode.",
+        "- The workload is the deterministic-heavy v1 100-task workload.",
+        "- No external API, network access, or API key is required.",
+        "- Generated outputs should be regenerated locally when reviewing evidence.",
+        "",
+        "## Artifact Policy",
+        "",
+        "Generated JSON and Markdown outputs are reproducible local outputs. Keep them in `/tmp` "
+        "or another ignored path unless a later review explicitly selects a frozen artifact.",
+        "",
+    ]
+    return "\n".join(lines)
+
+
 def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
     parser = argparse.ArgumentParser(
         description="Run the initial KORA runtime-integrated benchmark harness."
@@ -211,6 +354,7 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
     )
     parser.add_argument("--offline", action="store_true", help="Run with offline/mock behavior.")
     parser.add_argument("--json-out", help="Optional path for generated raw JSON output.")
+    parser.add_argument("--md-out", help="Optional path for generated Markdown evidence packet.")
     return parser.parse_args(argv)
 
 
@@ -220,11 +364,16 @@ def main(argv: list[str] | None = None) -> int:
         raise SystemExit("This harness currently requires --offline.")
 
     workload_path = Path(args.workload)
-    if not workload_path.is_absolute():
+    if not workload_path.exists() and not workload_path.is_absolute():
         workload_path = _repo_root() / workload_path
 
     json_out = Path(args.json_out) if args.json_out else None
     summary = build_runtime_integrated_summary(workload_path, offline=True, json_out=json_out)
+    if args.md_out:
+        md_out = Path(args.md_out)
+        md_out.parent.mkdir(parents=True, exist_ok=True)
+        md_out.write_text(render_evidence_packet(summary), encoding="utf-8")
+        summary["evidence_packet_path"] = str(md_out)
     printable = {key: value for key, value in summary.items() if key != "events"}
     print(json.dumps(printable, indent=2, sort_keys=True))
     return 0 if summary["ok"] else 1

@@ -105,7 +105,17 @@ python3 -m kora run runtime_integrated_benchmark -- \
   --json-out /tmp/kora_runtime_integrated_benchmark_v0_3_0.json
 ```
 
-This harness is an initial runtime-integrated benchmark scaffold. It is not production benchmark evidence, does not call external APIs in offline mode, and does not change the current public claim boundary. Raw generated JSON should stay in `/tmp` or another ignored path unless a later release process explicitly selects frozen evidence.
+To generate a local Markdown evidence packet from the saved runtime benchmark JSON, use the report generator:
+
+```bash
+python3 examples/runtime_integrated_benchmark/report.py \
+  --input /tmp/kora_runtime_integrated_benchmark_v0_3_0.json \
+  --md-out /tmp/kora_runtime_integrated_benchmark_v0_3_0.md
+```
+
+The harness can also write the Markdown packet during the runtime run with `--md-out`, but the separate report command is the reproducible evidence-packet path for reviewing an existing JSON run.
+
+This harness is an initial runtime-integrated benchmark scaffold. It is not production benchmark evidence, does not call external APIs in offline mode, and does not change the current public claim boundary. Raw generated JSON and generated Markdown evidence packets should stay in `/tmp` or another ignored path unless a later release process explicitly selects frozen evidence.
 
 ## Artifact Policy
 
