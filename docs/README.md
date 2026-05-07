@@ -51,6 +51,8 @@ Post-release EOD report: [`docs/eod/kora_eod_2026_05_07_v0.3.0-alpha_release.md`
 
 Post-release cleanup plan: [`docs/reports/v0.3.0-alpha-post-release-cleanup-plan.md`](reports/v0.3.0-alpha-post-release-cleanup-plan.md)
 
+`v0.3.1-alpha` roadmap: [`docs/planning/v0.3.1-alpha-roadmap.md`](planning/v0.3.1-alpha-roadmap.md)
+
 Initial runtime-path harness command:
 
 ```bash
