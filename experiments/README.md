@@ -117,6 +117,8 @@ The harness can also write the Markdown packet during the runtime run with `--md
 
 This harness is an initial runtime-integrated benchmark scaffold. It is not production benchmark evidence, does not call external APIs in offline mode, and does not change the current public claim boundary. Raw generated JSON and generated Markdown evidence packets should stay in `/tmp` or another ignored path unless a later release process explicitly selects frozen evidence.
 
+For reviewer-facing reproduction steps and expected counters, see the [v0.3.0-alpha runtime evidence reviewer guide](../docs/reports/v0.3.0-alpha-runtime-evidence-reviewer-guide.md).
+
 ## Artifact Policy
 
 Raw benchmark JSON artifacts are reproducible outputs and are not frozen or committed for `v0.2.0-alpha`.

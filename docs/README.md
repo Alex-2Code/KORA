@@ -37,6 +37,10 @@ Use this path for the current `v0.2.0-alpha` benchmark evidence and regeneration
 
 Next evidence architecture: [`docs/design/v0.3.0-runtime-integrated-benchmark-evidence-architecture.md`](design/v0.3.0-runtime-integrated-benchmark-evidence-architecture.md)
 
+Reviewer-facing runtime evidence flow: [`docs/reports/v0.3.0-alpha-runtime-evidence-reviewer-guide.md`](reports/v0.3.0-alpha-runtime-evidence-reviewer-guide.md)
+
+Future `v0.3.0-alpha` release-readiness checklist: [`docs/reports/v0.3.0-alpha-release-readiness-checklist.md`](reports/v0.3.0-alpha-release-readiness-checklist.md)
+
 Initial runtime-path harness command:
 
 ```bash
@@ -68,6 +72,7 @@ Raw benchmark JSON artifacts are reproducible outputs and are not frozen or comm
 - [Telemetry and observability counters](telemetry-and-observability.md#current-public-counters)
 - [Good first issue candidates](good_first_issues.md)
 - [Current benchmark evidence path](#current-benchmark-evidence-path)
+- [v0.3.0-alpha runtime evidence reviewer guide](reports/v0.3.0-alpha-runtime-evidence-reviewer-guide.md)
 - [Technical preview results](technical_preview_results.md) - historical/background benchmark context
 - [Benchmark real app guide](benchmark-real-app.md)
 - [Benchmark overview](benchmark.md) - historical/background benchmark note
@@ -128,6 +133,7 @@ Raw benchmark JSON artifacts are reproducible outputs and are not frozen or comm
 - [KORA GitHub Platform Setup Plan](ops/2026-05-06-kora-github-platform-setup-plan.md)
 - [v0.2.0-alpha EOD report](reports/kora_eod_2026-05-05_v0.2.0-alpha.md)
 - [Current benchmark evidence path](#current-benchmark-evidence-path)
+- [v0.3.0-alpha release-readiness checklist](reports/v0.3.0-alpha-release-readiness-checklist.md)
 - [Benchmark evidence summaries](benchmarks/) - current and historical benchmark summaries
 
 ### G. Internal Continuity And Handoff
