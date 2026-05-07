@@ -35,6 +35,8 @@ Use this path for the current `v0.2.0-alpha` benchmark evidence and regeneration
 9. Release/changelog context: [`CHANGELOG.md`](../CHANGELOG.md)
 10. Claim boundary source: [`docs/claims/kora-claim-registry.md`](claims/kora-claim-registry.md)
 
+Next evidence architecture: [`docs/design/v0.3.0-runtime-integrated-benchmark-evidence-architecture.md`](design/v0.3.0-runtime-integrated-benchmark-evidence-architecture.md)
+
 Safe claim:
 
 > In a reproducible 100-task deterministic-heavy benchmark workload, KORA-controlled execution avoided 80 of 100 simulated model invocations versus a naive direct baseline.
