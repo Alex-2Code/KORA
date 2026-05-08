@@ -254,6 +254,8 @@ Current implementation:
 - `ModelCallAdapter`: protocol for adapters that return measured model-call counters.
 - `DeterministicFakeModelCallAdapter`: deterministic local validation adapter for tests and harness development.
 - `BlockedModelCallAdapter`: fail-closed adapter for cases where real provider use has not been explicitly configured.
+
+The adapter selection skeleton currently supports `local_validation`, `blocked`, and `local_runtime_placeholder` kinds so future local model-call validation can add runtime adapters behind explicit opt-in.
 - `ModelCallSummary`: aggregate counter helper for validation reports.
 
 The deterministic local validation adapter is the only local implementation added at this stage. It requires no credentials, performs no external calls, and records provider/model as `local_validation` / `deterministic-local`.

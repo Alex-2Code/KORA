@@ -9,9 +9,11 @@ from typing import Any
 
 from kora.model_call import (
     DeterministicFakeModelCallAdapter,
+    LOCAL_VALIDATION_ADAPTER,
     ModelCallRequest,
     ModelCallResponse,
     ModelCallSummary,
+    select_model_call_adapter,
 )
 from kora.validation_report import render_local_validation_markdown
 
@@ -144,8 +146,8 @@ def build_customer_support_triage_fake_validation_summary(
 
     workload = load_workload(workload_path)
     requests = _requests(workload)
-    baseline_adapter = DeterministicFakeModelCallAdapter()
-    kora_adapter = DeterministicFakeModelCallAdapter()
+    baseline_adapter = select_model_call_adapter(LOCAL_VALIDATION_ADAPTER)
+    kora_adapter = select_model_call_adapter(LOCAL_VALIDATION_ADAPTER)
 
     baseline_responses = _run_direct_baseline(requests, baseline_adapter)
     (

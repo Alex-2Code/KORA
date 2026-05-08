@@ -6,6 +6,16 @@ import time
 from dataclasses import dataclass, field
 from typing import Any, Protocol
 
+LOCAL_VALIDATION_ADAPTER = "local_validation"
+BLOCKED_ADAPTER = "blocked"
+LOCAL_RUNTIME_PLACEHOLDER_ADAPTER = "local_runtime_placeholder"
+
+SUPPORTED_MODEL_CALL_ADAPTERS = (
+    LOCAL_VALIDATION_ADAPTER,
+    BLOCKED_ADAPTER,
+    LOCAL_RUNTIME_PLACEHOLDER_ADAPTER,
+)
+
 
 def _estimate_tokens(text: str) -> int:
     """Return a stable, conservative token estimate for local validation."""
@@ -47,7 +57,7 @@ class ModelCallAdapter(Protocol):
 class DeterministicFakeModelCallAdapter:
     """Local no-network adapter for deterministic validation tests."""
 
-    provider = "local_validation"
+    provider = LOCAL_VALIDATION_ADAPTER
     model = "deterministic-local"
 
     def call(self, request: ModelCallRequest) -> ModelCallResponse:
@@ -75,12 +85,44 @@ class DeterministicFakeModelCallAdapter:
 class BlockedModelCallAdapter:
     """Adapter that fails closed when real provider use is not configured."""
 
-    def call(self, request: ModelCallRequest) -> ModelCallResponse:
-        del request
-        raise RuntimeError(
+    def __init__(self, message: str | None = None) -> None:
+        self.message = message or (
             "Real model-call adapter is not configured. Use an explicit local "
             "or remote adapter in a validation harness."
         )
+
+    def call(self, request: ModelCallRequest) -> ModelCallResponse:
+        del request
+        raise RuntimeError(self.message)
+
+
+def available_model_call_adapters() -> list[str]:
+    """Return adapter kind labels supported by the selector."""
+
+    return list(SUPPORTED_MODEL_CALL_ADAPTERS)
+
+
+def select_model_call_adapter(kind: str | None = None) -> ModelCallAdapter:
+    """Select a provider-neutral model-call adapter by kind.
+
+    The current implemented runtime path is local no-network validation. Local
+    runtime adapters are intentionally fail-closed until explicitly implemented.
+    """
+
+    selected_kind = kind or LOCAL_VALIDATION_ADAPTER
+    if selected_kind == LOCAL_VALIDATION_ADAPTER:
+        return DeterministicFakeModelCallAdapter()
+    if selected_kind == BLOCKED_ADAPTER:
+        return BlockedModelCallAdapter()
+    if selected_kind == LOCAL_RUNTIME_PLACEHOLDER_ADAPTER:
+        return BlockedModelCallAdapter(
+            "Local runtime adapters are design-only and not implemented yet. "
+            "Use local_validation for local no-network validation; no provider "
+            "calls are attempted."
+        )
+
+    supported = ", ".join(SUPPORTED_MODEL_CALL_ADAPTERS)
+    raise ValueError(f"Unsupported model-call adapter kind {selected_kind!r}. Supported: {supported}")
 
 
 @dataclass(frozen=True)

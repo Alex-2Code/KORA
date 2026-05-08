@@ -110,6 +110,27 @@ Potential future environment variable names:
 
 These names are design placeholders only. They are not active requirements unless implemented in a later task.
 
+## Adapter Selection Skeleton
+
+KORA now includes a small adapter selection skeleton for local validation and future local runtime work.
+
+Current supported adapter kinds:
+
+- `local_validation`: returns the deterministic local validation adapter used by local/no-network examples.
+- `blocked`: returns a fail-closed adapter for unconfigured model-call paths.
+- `local_runtime_placeholder`: returns fail-closed behavior and documents that local runtime adapters are design-only for now.
+
+The `local_runtime_placeholder` adapter kind does not call Ollama, llama.cpp, vLLM, remote providers, local HTTP endpoints, or subprocess runtimes. It exists so future adapters can plug into the same selection path without changing the validation examples or claim boundaries.
+
+Future adapter kinds should keep the same behavior shape:
+
+- explicit adapter selection
+- clear provider/runtime label
+- clear model label
+- measured counters where available
+- fail-closed behavior when unconfigured
+- no silent fallback to remote providers
+
 ## Counters To Measure
 
 Future local model adapters should record:

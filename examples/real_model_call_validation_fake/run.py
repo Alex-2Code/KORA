@@ -15,9 +15,11 @@ from typing import Any, Literal
 
 from kora.model_call import (
     DeterministicFakeModelCallAdapter,
+    LOCAL_VALIDATION_ADAPTER,
     ModelCallRequest,
     ModelCallResponse,
     ModelCallSummary,
+    select_model_call_adapter,
 )
 from kora.validation_report import render_local_validation_markdown
 
@@ -176,8 +178,8 @@ def build_fake_model_call_validation_summary(
     if not offline:
         raise ValueError("real_model_call_validation_fake supports --offline only")
 
-    baseline_adapter = DeterministicFakeModelCallAdapter()
-    kora_adapter = DeterministicFakeModelCallAdapter()
+    baseline_adapter = select_model_call_adapter(LOCAL_VALIDATION_ADAPTER)
+    kora_adapter = select_model_call_adapter(LOCAL_VALIDATION_ADAPTER)
 
     baseline_responses = _run_direct_baseline(workload, baseline_adapter)
     (

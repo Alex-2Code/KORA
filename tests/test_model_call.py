@@ -3,10 +3,15 @@ import os
 import pytest
 
 from kora.model_call import (
+    BLOCKED_ADAPTER,
     BlockedModelCallAdapter,
     DeterministicFakeModelCallAdapter,
+    LOCAL_RUNTIME_PLACEHOLDER_ADAPTER,
+    LOCAL_VALIDATION_ADAPTER,
     ModelCallRequest,
     ModelCallSummary,
+    available_model_call_adapters,
+    select_model_call_adapter,
 )
 
 
@@ -115,3 +120,67 @@ def test_blocked_adapter_fails_closed() -> None:
 
     with pytest.raises(RuntimeError, match="Real model-call adapter is not configured"):
         adapter.call(ModelCallRequest(request_id="req-9", prompt="blocked"))
+
+
+def test_select_model_call_adapter_defaults_to_local_validation() -> None:
+    adapter = select_model_call_adapter()
+
+    assert isinstance(adapter, DeterministicFakeModelCallAdapter)
+
+
+def test_select_model_call_adapter_returns_local_validation_adapter() -> None:
+    adapter = select_model_call_adapter(LOCAL_VALIDATION_ADAPTER)
+
+    assert isinstance(adapter, DeterministicFakeModelCallAdapter)
+    response = adapter.call(ModelCallRequest(request_id="req-10", prompt="local validation"))
+    assert response.provider == "local_validation"
+    assert response.model == "deterministic-local"
+
+
+def test_select_model_call_adapter_returns_blocked_adapter() -> None:
+    adapter = select_model_call_adapter(BLOCKED_ADAPTER)
+
+    assert isinstance(adapter, BlockedModelCallAdapter)
+    with pytest.raises(RuntimeError, match="Real model-call adapter is not configured"):
+        adapter.call(ModelCallRequest(request_id="req-11", prompt="blocked"))
+
+
+def test_select_model_call_adapter_local_runtime_placeholder_fails_closed() -> None:
+    adapter = select_model_call_adapter(LOCAL_RUNTIME_PLACEHOLDER_ADAPTER)
+
+    assert isinstance(adapter, BlockedModelCallAdapter)
+    with pytest.raises(RuntimeError, match="Local runtime adapters are design-only"):
+        adapter.call(ModelCallRequest(request_id="req-12", prompt="placeholder"))
+
+
+def test_select_model_call_adapter_unknown_kind_raises_value_error() -> None:
+    with pytest.raises(ValueError, match="Unsupported model-call adapter kind"):
+        select_model_call_adapter("remote_provider")
+
+
+def test_available_model_call_adapters_lists_safe_kinds() -> None:
+    adapters = available_model_call_adapters()
+
+    assert LOCAL_VALIDATION_ADAPTER in adapters
+    assert BLOCKED_ADAPTER in adapters
+    assert LOCAL_RUNTIME_PLACEHOLDER_ADAPTER in adapters
+
+
+def test_select_model_call_adapter_requires_no_secrets_or_local_runtime(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    monkeypatch.delenv("OPENAI_API_KEY", raising=False)
+    monkeypatch.delenv("ANTHROPIC_API_KEY", raising=False)
+    monkeypatch.delenv("KORA_LOCAL_MODEL_RUNTIME", raising=False)
+    monkeypatch.delenv("KORA_LOCAL_MODEL_ENDPOINT", raising=False)
+    monkeypatch.delenv("KORA_LOCAL_MODEL_NAME", raising=False)
+
+    adapter = select_model_call_adapter(LOCAL_VALIDATION_ADAPTER)
+    response = adapter.call(ModelCallRequest(request_id="req-13", prompt="no runtime"))
+
+    assert response.model_calls == 1
+    assert "OPENAI_API_KEY" not in os.environ
+    assert "ANTHROPIC_API_KEY" not in os.environ
+    assert "KORA_LOCAL_MODEL_RUNTIME" not in os.environ
+    assert "KORA_LOCAL_MODEL_ENDPOINT" not in os.environ
+    assert "KORA_LOCAL_MODEL_NAME" not in os.environ
