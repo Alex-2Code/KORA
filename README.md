@@ -186,7 +186,7 @@ Not included in the alpha surface:
 KORA is not:
 
 - a chatbot
-- a desktop AI app
+- a desktop AI app (not yet)
 - a hosted chat-product alternative
 - a model serving engine
 - another agent wrapper that only forwards prompts to providers
