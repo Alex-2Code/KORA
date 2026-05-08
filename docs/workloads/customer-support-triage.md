@@ -25,7 +25,7 @@ It is:
 - not based on private customer data
 - not a production-cost claim
 - not a real API-cost claim
-- intended for future fake, local, or real model-call validation
+- intended for future local no-network, local model, or real model-call validation
 
 ## Routing Classes
 
@@ -211,9 +211,9 @@ For the 12-request synthetic workload, expected ideal routing is:
 
 These are workload-design expectations, not measured production results.
 
-## Fake Runtime Validation Example
+## Local Runtime Validation Example
 
-Run the no-network customer-support triage fake validation example:
+Run the local no-network customer-support triage validation example:
 
 ```bash
 python3 -m kora run customer_support_triage_fake_validation -- --offline
@@ -227,7 +227,7 @@ Expected counters for the current synthetic workload:
 - `avoided_model_calls`: 8
 - `avoided_model_call_rate`: 0.6667
 
-This example uses `DeterministicFakeModelCallAdapter` with synthetic data only. It is fake, local, and no-network validation for the routing and model-call counter path.
+This example uses a deterministic local validation adapter with synthetic data only. It is local/no-network validation for the routing and model-call counter path.
 
 It does not prove real provider validation, real API-cost reduction, production validation, production cost reduction, broad workload superiority, or energy reduction.
 
@@ -287,6 +287,6 @@ Not allowed:
 Next implementation work should:
 
 1. Implement the synthetic workload file as a runnable validation path.
-2. Wire the workload into `DeterministicFakeModelCallAdapter`.
+2. Wire the workload into the deterministic local validation adapter.
 3. Compare direct baseline and KORA-controlled routing.
 4. Emit a JSON summary and Markdown report.

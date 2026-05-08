@@ -1,4 +1,4 @@
-"""No-network customer-support triage fake validation example."""
+"""Local no-network customer-support triage validation example."""
 
 from __future__ import annotations
 
@@ -16,8 +16,8 @@ from kora.model_call import (
 
 DEFAULT_WORKLOAD = Path("experiments/workloads/customer_support_triage_synthetic_v1.json")
 CLAIM_BOUNDARY = (
-    "This customer-support triage validation example uses synthetic data and fake/local "
-    "no-network model calls. It is not real provider validation, real API-cost "
+    "This customer-support triage validation example uses synthetic data and local/"
+    "no-network model-call events. It is not real provider validation, real API-cost "
     "validation, production validation, production cost reduction proof, broad "
     "workload superiority proof, or energy reduction evidence."
 )
@@ -168,14 +168,14 @@ def build_customer_support_triage_fake_validation_summary(
 
     return {
         "ok": error_count == 0 and validation_fail_count == 0,
-        "mode": "customer_support_triage_fake_validation",
+        "mode": "customer_support_triage_local_validation",
         "offline": True,
         "workload_id": workload.get("workload_id"),
         "workload_path": str(workload_path),
         "privacy_class": workload.get("privacy_class"),
-        "adapter": "DeterministicFakeModelCallAdapter",
-        "provider": "fake",
-        "model": "deterministic-fake",
+        "adapter": "deterministic local validation adapter",
+        "provider": "local_validation",
+        "model": "deterministic-local",
         "total_requests": len(requests),
         "baseline_model_calls": baseline_summary.model_calls,
         "kora_model_calls": kora_summary.model_calls,
@@ -197,9 +197,9 @@ def build_customer_support_triage_fake_validation_summary(
         "claim_boundary": CLAIM_BOUNDARY,
         "notes": [
             "Synthetic customer-support triage workload only.",
-            "Direct baseline calls the fake adapter for every request.",
-            "KORA-controlled path validates deterministic routes without fake model calls.",
-            "Model-required routes call the fake adapter through the provider-neutral boundary.",
+            "Direct baseline records local validation model-call events for every request.",
+            "KORA-controlled path validates deterministic routes without local validation model-call events.",
+            "Model-required routes use the deterministic local validation adapter through the provider-neutral boundary.",
             "No external APIs, network access, provider credentials, raw prompts, or raw provider responses are used.",
         ],
     }
@@ -207,7 +207,7 @@ def build_customer_support_triage_fake_validation_summary(
 
 def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
     parser = argparse.ArgumentParser(
-        description="Run the no-network customer-support triage fake validation example."
+        description="Run the local no-network customer-support triage validation example."
     )
     parser.add_argument("--offline", action="store_true", help="required; run without network calls")
     parser.add_argument(

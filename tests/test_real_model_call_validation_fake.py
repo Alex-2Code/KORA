@@ -22,9 +22,9 @@ def test_fake_model_call_validation_summary_counts() -> None:
     summary = module.build_fake_model_call_validation_summary(offline=True)
 
     assert summary["ok"] is True
-    assert summary["mode"] == "fake_model_call_validation"
-    assert summary["provider"] == "fake"
-    assert summary["model"] == "deterministic-fake"
+    assert summary["mode"] == "local_no_network_model_call_validation"
+    assert summary["provider"] == "local_validation"
+    assert summary["model"] == "deterministic-local"
     assert summary["total_requests"] == 10
     assert summary["baseline_model_calls"] == 10
     assert summary["kora_model_calls"] == 4
@@ -91,6 +91,6 @@ def test_fake_model_call_validation_cli_runs() -> None:
     )
 
     assert completed.returncode == 0
-    assert '"mode": "fake_model_call_validation"' in completed.stdout
+    assert '"mode": "local_no_network_model_call_validation"' in completed.stdout
     assert '"baseline_model_calls": 10' in completed.stdout
     assert '"kora_model_calls": 4' in completed.stdout

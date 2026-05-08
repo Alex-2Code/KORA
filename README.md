@@ -94,9 +94,9 @@ See the [KORA validation roadmap](docs/benchmarks/validation-roadmap.md) for the
 
 See the [real model-call validation design](docs/benchmarks/real-model-call-validation-design.md) for the next measurement path.
 
-A no-network fake model-call validation example is available for testing the measured invocation counter path.
+KORA includes a local no-network validation path that measures model-call routing without requiring API keys or external providers.
 
-Customer-support triage fake validation is available as a no-network example.
+Customer-support triage local validation is available as a no-network example.
 
 ## Help Test KORA
 

@@ -52,8 +52,8 @@ def test_fake_adapter_provider_model_and_metadata_are_local_safe() -> None:
 
     response = adapter.call(request)
 
-    assert response.provider == "fake"
-    assert response.model == "deterministic-fake"
+    assert response.provider == "local_validation"
+    assert response.model == "deterministic-local"
     assert response.metadata["privacy_class"] == "synthetic"
     assert response.metadata["network"] == "none"
     assert response.metadata["deterministic"] is True

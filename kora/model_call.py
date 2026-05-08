@@ -47,8 +47,8 @@ class ModelCallAdapter(Protocol):
 class DeterministicFakeModelCallAdapter:
     """Local no-network adapter for deterministic validation tests."""
 
-    provider = "fake"
-    model = "deterministic-fake"
+    provider = "local_validation"
+    model = "deterministic-local"
 
     def call(self, request: ModelCallRequest) -> ModelCallResponse:
         start = time.perf_counter()

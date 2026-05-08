@@ -250,37 +250,41 @@ Current implementation:
 - `ModelCallRequest`: normalized request with `request_id`, `prompt`, metadata, and privacy class.
 - `ModelCallResponse`: normalized response with measured model-call count, latency, token counters where available, provider/model labels, and metadata.
 - `ModelCallAdapter`: protocol for adapters that return measured model-call counters.
-- `DeterministicFakeModelCallAdapter`: local, deterministic, no-network adapter for tests and harness development.
+- `DeterministicFakeModelCallAdapter`: deterministic local validation adapter for tests and harness development.
 - `BlockedModelCallAdapter`: fail-closed adapter for cases where real provider use has not been explicitly configured.
 - `ModelCallSummary`: aggregate counter helper for validation reports.
 
-The fake deterministic adapter is the only local implementation added at this stage. It requires no credentials, performs no external calls, and records provider/model as `fake` / `deterministic-fake`.
+The deterministic local validation adapter is the only local implementation added at this stage. It requires no credentials, performs no external calls, and records provider/model as `local_validation` / `deterministic-local`.
 
 Future local or remote provider adapters can plug into the same interface. Remote provider calls must use environment variables for configuration and must not commit secrets, raw prompts, raw responses, private user data, or proprietary datasets.
 
-## Fake Model-Call Runtime Example
+## Local No-Network Model-Call Runtime Example
 
-The first runtime validation example is a no-network fake model-call path:
+The first runtime validation example is a local no-network model-call path:
 
 ```bash
 python3 -m kora run real_model_call_validation_fake -- --offline
 ```
 
-This example uses `DeterministicFakeModelCallAdapter` with a synthetic 10-request workload. The direct baseline calls the fake adapter for every request. The KORA-controlled path handles deterministic routes without fake model calls and escalates only model-required routes through the provider-neutral adapter boundary.
+The command name is preserved for compatibility. The emitted mode/provider/model labels use local no-network validation terminology.
+
+This example uses the deterministic local validation adapter with a synthetic 10-request workload. The direct baseline records local validation model-call events for every request. The KORA-controlled path handles deterministic routes without local validation model-call events and escalates only model-required routes through the provider-neutral adapter boundary.
 
 The example validates model-call counter plumbing before real local or remote provider adapters are added. It requires no secrets, uses no network, emits aggregate counters only, and does not commit raw prompts or raw provider responses.
 
 Claim boundary: this is not real provider validation, real API-cost validation, production validation, production cost reduction proof, broad workload superiority proof, or energy reduction evidence.
 
-## Customer-Support Triage Fake Validation Example
+## Customer-Support Triage Local Validation Example
 
-The first application-oriented fake validation example uses the synthetic customer-support triage workload:
+The first application-oriented local validation example uses the synthetic customer-support triage workload:
 
 ```bash
 python3 -m kora run customer_support_triage_fake_validation -- --offline
 ```
 
-This extends fake/local validation from generic counter plumbing to a realistic support triage workload shape. It still uses `DeterministicFakeModelCallAdapter`, requires no secrets, makes no network calls, and emits aggregate counters only.
+The command name is preserved for compatibility. The emitted mode/provider/model labels use customer-support local validation terminology.
+
+This extends local/no-network validation from generic counter plumbing to a realistic support triage workload shape. It still uses the deterministic local validation adapter, requires no secrets, makes no network calls, and emits aggregate counters only.
 
 This is a step before local model or remote provider validation. It is not real provider validation, real API-cost validation, or production validation.
 

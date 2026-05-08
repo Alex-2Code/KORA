@@ -34,11 +34,11 @@ def test_customer_support_triage_fake_validation_summary_counts() -> None:
     summary = module.build_customer_support_triage_fake_validation_summary(offline=True)
 
     assert summary["ok"] is True
-    assert summary["mode"] == "customer_support_triage_fake_validation"
+    assert summary["mode"] == "customer_support_triage_local_validation"
     assert summary["workload_id"] == "customer_support_triage_synthetic_v1"
     assert summary["privacy_class"] == "synthetic"
-    assert summary["provider"] == "fake"
-    assert summary["model"] == "deterministic-fake"
+    assert summary["provider"] == "local_validation"
+    assert summary["model"] == "deterministic-local"
     assert summary["total_requests"] == 12
     assert summary["baseline_model_calls"] == 12
     assert summary["kora_model_calls"] == 4
@@ -104,6 +104,6 @@ def test_customer_support_triage_fake_validation_cli_runs() -> None:
     )
 
     assert completed.returncode == 0
-    assert '"mode": "customer_support_triage_fake_validation"' in completed.stdout
+    assert '"mode": "customer_support_triage_local_validation"' in completed.stdout
     assert '"baseline_model_calls": 12' in completed.stdout
     assert '"kora_model_calls": 4' in completed.stdout

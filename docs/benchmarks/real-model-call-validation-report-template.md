@@ -46,19 +46,19 @@ Sanitized environment details:
 - Token counter source:
 - Provider configuration source: environment variables only, if remote provider mode is used
 
-For the no-network fake validation example, use:
+For the local no-network validation example, use:
 
-- Mode: `fake_model_call_validation`
-- Provider/runtime: `fake`
-- Model: `deterministic-fake`
+- Mode: `local_no_network_model_call_validation`
+- Provider/runtime: `local_validation`
+- Model: `deterministic-local`
 - Cost summary: `N/A` unless a real provider with explicit pricing is configured later
 
-For the customer-support triage fake validation example, use:
+For the customer-support triage local validation example, use:
 
-- Mode: `customer_support_triage_fake_validation`
+- Mode: `customer_support_triage_local_validation`
 - Workload: `customer_support_triage_synthetic_v1`
-- Provider/runtime: `fake`
-- Model: `deterministic-fake`
+- Provider/runtime: `local_validation`
+- Model: `deterministic-local`
 - Cost summary: `N/A` unless a real provider with explicit pricing is configured later
 
 Do not include API keys, tokens, credentials, private hostnames, private dataset names, or raw provider response IDs unless explicitly approved.
