@@ -272,6 +272,8 @@ This example uses the deterministic local validation adapter with a synthetic 10
 
 The example validates model-call counter plumbing before real local or remote provider adapters are added. It requires no secrets, uses no network, emits aggregate counters only, and does not commit raw prompts or raw provider responses.
 
+The example can generate a reviewer-facing Markdown report from aggregate counters with `--report-md`. Generated reports are evidence packets for local/no-network review before real provider or production validation.
+
 Claim boundary: this is not real provider validation, real API-cost validation, production validation, production cost reduction proof, broad workload superiority proof, or energy reduction evidence.
 
 ## Customer-Support Triage Local Validation Example
@@ -285,6 +287,8 @@ python3 -m kora run customer_support_triage_fake_validation -- --offline
 The command name is preserved for compatibility. The emitted mode/provider/model labels use customer-support local validation terminology.
 
 This extends local/no-network validation from generic counter plumbing to a realistic support triage workload shape. It still uses the deterministic local validation adapter, requires no secrets, makes no network calls, and emits aggregate counters only.
+
+The example can generate a reviewer-facing Markdown report from aggregate counters with `--report-md`.
 
 This is a step before local model or remote provider validation. It is not real provider validation, real API-cost validation, or production validation.
 

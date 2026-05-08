@@ -98,6 +98,8 @@ KORA includes a local no-network validation path that measures model-call routin
 
 Customer-support triage local validation is available as a no-network example.
 
+Local no-network validation examples can generate Markdown reports with `--report-md`.
+
 ## Help Test KORA
 
 Good candidate workloads:
