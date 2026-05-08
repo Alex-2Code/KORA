@@ -69,7 +69,7 @@ Do-not-claim reminder:
 | Folder | Purpose | Current value | Overlap or duplication risks | Recommended future organization |
 |---|---|---|---|---|
 | `docs/ops` | Operating system, migration, GitHub setup, coordinator docs | High | Many dated ops docs need an index | Add `docs/ops/README.md` or global docs index |
-| `docs/context` | Source-of-truth operating context for ChatGPT/Codex/current state | High | Some overlap with ops and claims docs | Keep; link from docs index and internal handoff docs |
+| `docs/context` | Removed from public docs after public/private boundary audit | N/A | Internal operating context belongs in private internals | Do not restore local handoff context to public docs |
 | `docs/claims` | Public language and claim registry | High | Overlaps with non-claim sections in reports | Keep as canonical; reports should reference it later |
 | `docs/community` | Community workflow, roles, AI-assisted contribution | High | Overlaps with GitHub setup and open roles | Keep; create community index later |
 | `docs/paper` | Paper authorship and contribution policy | High | Paper source material also exists in root/docs research | Expand into paper index later |
@@ -110,9 +110,7 @@ EOD/SOD continuity:
 
 - `docs/eod/*`
 - `docs/reports/kora_eod_*`
-- `docs/context/KORA_CHATGPT_OPERATING_CONTEXT.md`
-- `docs/context/KORA_CODEX_OPERATING_CONTEXT.md`
-- `docs/context/KORA_CURRENT_STATE.md`
+- Former `docs/context/*` local handoff files, now private-only material
 
 Paper preparation:
 
@@ -124,7 +122,7 @@ Paper preparation:
 
 EIC/grant readiness:
 
-- `docs/context/*`
+- private-only operating context
 - `docs/claims/*`
 - `docs/ops/*`
 - `docs/strategy/*`
@@ -168,7 +166,7 @@ Migration docs:
 
 Context docs:
 
-- `docs/context/*`, category thesis, claim registry, and OSS operating docs overlap in project identity language. Risk: source-of-truth confusion unless indexed.
+- category thesis, claim registry, and OSS operating docs overlap in project identity language. Risk: source-of-truth confusion unless indexed.
 
 OSS operating docs:
 
@@ -186,7 +184,7 @@ Safe public docs:
 
 Internal-facing but acceptable in public repo:
 
-- ChatGPT/Codex operating context, EOD/SOD continuity docs, ops coordinator handbook, GitHub setup plan.
+- private operating context, historical continuity docs, ops coordinator handbook, GitHub setup plan.
 
 Should maybe move to internal/private repo later:
 
@@ -315,7 +313,7 @@ Priority 4: possible removal candidates, only after explicit approval.
 - Task 134: create docs index / navigation map if needed.
 - Task 135: safe docs link cleanup.
 - Task 136: repo-managed PR template and CODEOWNERS draft.
-- Task 137: Sumanta Community OS + LLM Promptbook.
+- Task 137: private community operations material.
 - Task 138: GitHub manual setup execution log.
 
 ## 13. Explicit Non-Actions

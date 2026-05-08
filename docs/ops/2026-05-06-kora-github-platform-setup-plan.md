@@ -109,7 +109,7 @@ Issue types:
 
 Owners:
 
-- Sumanta, ops coordinator, Albert for review-sensitive items.
+- maintainers and approved operators for review-sensitive items.
 
 Review cadence:
 

@@ -12,8 +12,6 @@ Most AI apps call the model too soon. KORA changes the default. Structure first.
 
 - [Main README](../README.md)
 - [Current v0.3.0-alpha prerelease](https://github.com/Krako-Labs/KORA/releases/tag/v0.3.0-alpha)
-- [KORA Project Source](context/KORA_PROJECT_SOURCE.md)
-- [KORA Current State](context/KORA_CURRENT_STATE.md)
 - [KORA Category Thesis](vision/2026-05-06-kora-category-thesis.md)
 
 ## Understand
@@ -112,7 +110,6 @@ Good candidate workloads:
 ## Maintainers And Operators
 
 - [KORA OSS Operating System](ops/2026-05-06-kora-oss-operating-system.md)
-- [Korean ops coordinator handbook](ops/2026-05-06-kora-ops-coordinator-handbook-ko.md)
 - [Manual GitHub setup checklist](ops/2026-05-06-kora-manual-github-setup-checklist.md)
 - [Repository hygiene audit](ops/2026-05-06-kora-repository-hygiene-audit.md)
 

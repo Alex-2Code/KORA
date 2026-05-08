@@ -222,7 +222,7 @@ User sees:
 • Send button  
 • Stop generation button  
 
-User experience resembles ChatGPT.
+User experience resembles a general chat-style interface.
 
 Differences:
 
@@ -438,4 +438,3 @@ Structure must remain visible.
 Simplicity must remain accessible.
 
 Execution transparency is the differentiator.
-
