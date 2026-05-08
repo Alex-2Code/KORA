@@ -10,7 +10,7 @@ Every token becomes latency, cost, and infrastructure pressure.
 
 KORA turns AI requests into structured execution paths before inference: task graphs, deterministic-first execution, validation, telemetry, and model escalation only when needed.
 
-![KORA execution control overview](docs/assets/kora-execution-control-overview.svg)
+![KORA execution control overview](docs/assets/kora-execution-control-overview.png)
 
 Before:
 
