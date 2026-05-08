@@ -80,7 +80,7 @@ For methodology, counters, artifact policy, and reproduction commands, see:
 ## What We Are Testing Next
 
 1. Runtime-integrated benchmark paths with real model calls
-2. Customer-support triage workloads
+2. [Customer-support triage workloads](docs/workloads/customer-support-triage.md)
 3. RAG answer-routing workloads
 4. Agent budget-guard workloads
 

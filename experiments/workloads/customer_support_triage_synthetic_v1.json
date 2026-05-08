@@ -1,0 +1,128 @@
+{
+  "workload_id": "customer_support_triage_synthetic_v1",
+  "description": "Synthetic customer-support triage workload draft for deterministic-first routing and conditional model escalation validation.",
+  "version": 1,
+  "privacy_class": "synthetic",
+  "requests": [
+    {
+      "request_id": "cst-001",
+      "input": "I need help resetting my password.",
+      "route_class": "deterministic_faq",
+      "expected_route": "deterministic",
+      "deterministic_handler": "faq.password_reset",
+      "validation_rule": "required_link_present",
+      "expected_response_type": "faq_instruction",
+      "notes": "Known FAQ intent."
+    },
+    {
+      "request_id": "cst-002",
+      "input": "Where can I read the refund policy?",
+      "route_class": "deterministic_faq",
+      "expected_route": "deterministic",
+      "deterministic_handler": "faq.refund_policy_link",
+      "validation_rule": "required_link_present",
+      "expected_response_type": "faq_link",
+      "notes": "Known policy-link request."
+    },
+    {
+      "request_id": "cst-003",
+      "input": "How do I check shipping status for ORDER-EXAMPLE-001?",
+      "route_class": "deterministic_faq",
+      "expected_route": "deterministic",
+      "deterministic_handler": "faq.shipping_status_instructions",
+      "validation_rule": "response_type_matches",
+      "expected_response_type": "faq_instruction",
+      "notes": "Synthetic order placeholder only."
+    },
+    {
+      "request_id": "cst-004",
+      "input": "How do I update the email address on my account?",
+      "route_class": "deterministic_faq",
+      "expected_route": "deterministic",
+      "deterministic_handler": "faq.account_email_change",
+      "validation_rule": "response_type_matches",
+      "expected_response_type": "faq_instruction",
+      "notes": "Known account settings flow."
+    },
+    {
+      "request_id": "cst-005",
+      "input": "Can I return an unopened item after 20 days?",
+      "route_class": "deterministic_policy",
+      "expected_route": "deterministic",
+      "deterministic_handler": "policy.standard_return_window",
+      "validation_rule": "policy_value_matches",
+      "expected_response_type": "policy_answer",
+      "notes": "Explicit policy table route."
+    },
+    {
+      "request_id": "cst-006",
+      "input": "Is a device covered by the standard warranty after 8 months?",
+      "route_class": "deterministic_policy",
+      "expected_route": "deterministic",
+      "deterministic_handler": "policy.warranty_eligibility",
+      "validation_rule": "policy_value_matches",
+      "expected_response_type": "policy_answer",
+      "notes": "Synthetic warranty rule example."
+    },
+    {
+      "request_id": "cst-007",
+      "input": "Please check order ORDER-EXAMPLE-002.",
+      "route_class": "structured_lookup",
+      "expected_route": "deterministic",
+      "deterministic_handler": "lookup.order_status_placeholder",
+      "validation_rule": "lookup_placeholder_present",
+      "expected_response_type": "lookup_placeholder",
+      "notes": "Lookup placeholder, not a real order."
+    },
+    {
+      "request_id": "cst-008",
+      "input": "Please find invoice INVOICE-EXAMPLE-003.",
+      "route_class": "structured_lookup",
+      "expected_route": "deterministic",
+      "deterministic_handler": "lookup.invoice_placeholder",
+      "validation_rule": "lookup_placeholder_present",
+      "expected_response_type": "lookup_placeholder",
+      "notes": "Lookup placeholder, not a real invoice."
+    },
+    {
+      "request_id": "cst-009",
+      "input": "I am upset about a delayed shipment and need a thoughtful response.",
+      "route_class": "model_required",
+      "expected_route": "model_required",
+      "deterministic_handler": null,
+      "validation_rule": "escalation_reason_present",
+      "expected_response_type": "model_escalation",
+      "notes": "Ambiguous complaint requiring nuanced response."
+    },
+    {
+      "request_id": "cst-010",
+      "input": "Can you make an exception to the return policy for a special situation?",
+      "route_class": "model_required",
+      "expected_route": "model_required",
+      "deterministic_handler": null,
+      "validation_rule": "escalation_reason_present",
+      "expected_response_type": "model_escalation",
+      "notes": "Policy exception request."
+    },
+    {
+      "request_id": "cst-011",
+      "input": "A customer is angry and asks to escalate a sensitive billing dispute.",
+      "route_class": "model_required",
+      "expected_route": "model_required",
+      "deterministic_handler": null,
+      "validation_rule": "escalation_reason_present",
+      "expected_response_type": "model_escalation",
+      "notes": "Sensitive escalation."
+    },
+    {
+      "request_id": "cst-012",
+      "input": "I need to cancel, change my plan, and ask about a missing package.",
+      "route_class": "model_required",
+      "expected_route": "model_required",
+      "deterministic_handler": null,
+      "validation_rule": "escalation_reason_present",
+      "expected_response_type": "model_escalation",
+      "notes": "Missing information and multi-intent request."
+    }
+  ]
+}

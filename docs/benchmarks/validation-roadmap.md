@@ -77,6 +77,10 @@ Example workload:
 
 Support tickets that include password reset requests, order-status questions, refund-policy questions, account-risk cases, and ambiguous cases requiring model escalation.
 
+Workload spec:
+
+- [Customer-support triage workload](../workloads/customer-support-triage.md)
+
 Counters to measure:
 
 - total requests
