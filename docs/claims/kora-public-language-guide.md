@@ -10,35 +10,35 @@ Use it with `docs/claims/kora-claim-registry.md` when drafting README copy, GitH
 
 README:
 
-> KORA is an open-source AI Execution Control Layer that structures AI requests into verifiable task graphs before escalating to expensive model inference.
+> Most AI apps call the model too soon. KORA turns AI requests into structured execution paths before inference.
 
 GitHub Discussions:
 
-> KORA helps developers explore deterministic-first execution, validation, fallback, and telemetry before model calls become the default path.
+> KORA helps developers put execution control before inference: task graphs, deterministic-first execution, validation, telemetry, and model escalation only when needed.
 
 X/Twitter:
 
-> KORA is building an AI Execution Control Layer: task graphs, deterministic routing, validation, fallback, and telemetry before unnecessary inference.
+> Most AI apps call the model too soon. KORA changes the default. Structure first. Inference second.
 
 LinkedIn:
 
-> KORA is an open-source infrastructure project for AI execution control. It structures requests into verifiable task graphs and escalates to model inference only when needed.
+> KORA is an open-source execution-control layer for AI workloads. It turns requests into task graphs, runs deterministic work first, validates the path, records telemetry, and escalates to a model only when needed.
 
 Telegram:
 
-> KORA is the open-source AI Execution Control Layer project. Use this repo for issues, discussions, PRs, benchmark feedback, and community coordination: https://github.com/Krako-Labs/KORA
+> KORA is open-source execution control for AI workloads. Clone the repo, run the alpha, inspect the path, and bring a workload: https://github.com/Krako-Labs/KORA
 
 Investor intro:
 
-> KORA is building the AI Execution Control Layer: infrastructure that structures AI requests into task graphs, routes deterministic work away from unnecessary model invocation, and preserves validation and telemetry before inference escalation.
+> KORA is building open-source execution control for AI workloads: infrastructure that turns requests into task graphs, routes deterministic work before model invocation, and preserves validation and telemetry before inference escalation.
 
 EIC/grant intro:
 
-> KORA is an open-source AI infrastructure project focused on execution control before inference escalation, with a bounded public benchmark evidence path and a roadmap toward runtime-integrated evaluation.
+> KORA is an open-source AI infrastructure project focused on execution control before inference escalation, with bounded public alpha evidence and a roadmap toward runtime-integrated real model-call evaluation.
 
 Partner intro:
 
-> KORA explores how AI systems can control execution before inference escalation through task graphs, deterministic routing, validation, fallback, and telemetry.
+> KORA explores how AI systems can control execution before inference escalation through task graphs, deterministic-first execution, validation, fallback, and telemetry.
 
 Paper intro:
 
@@ -50,11 +50,13 @@ Paper intro:
 
 > Same code, same history, bigger mission.
 
+Do not make Krako the main README narrative. In the KORA README, Krako belongs near the bottom in an Ecosystem / Related Projects section.
+
 ## Approved Benchmark Wording
 
 Short version:
 
-> In a reproducible 100-task deterministic-heavy benchmark workload, KORA-controlled execution avoided 80 of 100 simulated model invocations versus a naive direct baseline.
+> KORA reduced model invocations by 80% in a reproducible deterministic-heavy benchmark workload.
 
 Technical version:
 
@@ -62,25 +64,34 @@ Technical version:
 
 Social media version:
 
-> In KORA's reproducible 100-task deterministic-heavy benchmark, KORA-controlled execution avoided 80 of 100 simulated model invocations versus a naive direct baseline. This is simulated benchmark evidence, not a production claim.
+> KORA reduced model invocations by 80% in a reproducible deterministic-heavy benchmark workload. This is alpha benchmark evidence, not a production claim.
 
 Paper-safe version:
 
-> In the current deterministic-heavy benchmark workload, KORA-controlled execution avoids 80 of 100 simulated model invocations relative to a naive direct baseline, with 80 deterministic outputs checked and 0 mismatches.
+> KORA reduced model invocations by 80% in the current reproducible deterministic-heavy benchmark workload, with 80 deterministic outputs checked and 0 mismatches.
 
 Investor/EIC-safe version:
 
-> KORA's current public evidence is a reproducible simulated benchmark: in a 100-task deterministic-heavy workload, KORA-controlled execution avoided 80 of 100 simulated model invocations versus a naive direct baseline. The next evidence track is runtime-integrated evaluation.
+> KORA's current public evidence is a reproducible deterministic-heavy benchmark workload where model invocations were reduced by 80%. The next evidence track is runtime-integrated validation with real model calls.
 
 ## Prohibited Rewrites
 
 Do not rewrite:
 
+- "KORA reduced model invocations by 80% in a reproducible deterministic-heavy benchmark workload" as "KORA reduces production AI costs by 80%."
 - "80 of 100 simulated model invocations avoided" as "80% cost reduction."
 - "simulated model invocation" as "real API call."
 - "benchmark workload" as "production workload."
 - "interest" as "partnership."
 - "planned validation" as "validated."
+
+## Next Possible Claim
+
+Future conditional language after runtime-integrated real model-call validation:
+
+> KORA reduced measured model invocations by X% in a runtime-integrated benchmark using real model calls.
+
+Do not use this as a current claim. It requires merged evidence, documented methodology, validation commands, reviewed results, and claim-registry approval.
 
 ## Public Contributor Role Boundary Language
 
@@ -126,15 +137,16 @@ Forbidden unless actually accepted or published:
 You are writing public KORA content.
 
 Use these approved one-liners:
-- KORA is an AI Execution Control Layer that structures AI requests into verifiable task graphs before escalating to expensive model inference.
+- Most AI apps call the model too soon.
+- KORA is an open-source execution-control layer that turns AI requests into structured execution paths before inference.
 - KORA routes deterministic work away from unnecessary model invocation through task graphs, validation, fallback, and telemetry.
 
 Preserve this benchmark wording exactly unless asked to omit the benchmark:
-"In a reproducible 100-task deterministic-heavy benchmark workload, KORA-controlled execution avoided 80 of 100 simulated model invocations versus a naive direct baseline."
+"KORA reduced model invocations by 80% in a reproducible deterministic-heavy benchmark workload."
 
 Do not rewrite simulated benchmark evidence as production evidence, cost reduction, real API-cost reduction, energy reduction, partner validation, government validation, investor commitment, or publication proof.
 
-If a draft mentions numbers, partners, grants, investors, institutions, papers, or adoption, mark it for Albert review.
+If a draft mentions numbers, partners, grants, investors, institutions, papers, or adoption, mark it for maintainer review.
 
 If evidence is missing, write "needs review" instead of inventing support.
 ```

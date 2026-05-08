@@ -1,24 +1,27 @@
 # KORA Executive Summary
 
-KORA is an inference-first execution architecture.
+KORA is an open-source execution-control layer for AI workloads.
 
 It does not build larger models.  
-It restructures how models are invoked.
+It changes when and why models are invoked.
 
 ---
 
 ## The Core Problem
 
-Modern AI systems are inference-reflexive.
+Most AI apps call the model too soon.
 
-Every request triggers a model call.
+Every request becomes a prompt.
+Every prompt becomes tokens.
+Every token becomes latency, cost, and infrastructure pressure.
 
 This leads to:
 
+- Unnecessary model invocation
 - Unnecessary token usage
 - Latency unpredictability
 - Centralized infrastructure dependence
-- Weak cost governance
+- Weak execution governance
 
 The limitation is not model capability.
 
@@ -37,7 +40,9 @@ Most systems answer both by invoking a model.
 
 KORA answers the first structurally.
 
-Only necessary tasks reach inference.
+Structure first. Inference second.
+
+Only necessary tasks reach model escalation.
 
 ---
 
@@ -84,21 +89,21 @@ Structure precedes scale.
 
 ---
 
-## Economic Model
+## Measurement Model
 
 If:
 
 - P = proportion of deterministic work
-- C = cost per model invocation
+- M = model invocation pressure
 - O = structural overhead
 
 KORA is beneficial when:
 
-P * C > O
+P * M > O
 
 This inequality is measurable.
 
-Savings scale with structural visibility.
+This is a measurement frame, not a production cost-reduction claim.
 
 ---
 
@@ -112,7 +117,7 @@ As deterministic coverage increases:
 
 - Model load decreases
 - Latency variance decreases
-- Cost becomes predictable
+- Model invocation pressure becomes more inspectable
 
 Parallel deterministic execution further improves throughput.
 

@@ -20,7 +20,7 @@ Vision phrase:
 
 Approved category one-liner:
 
-> KORA is an AI Execution Control Layer that structures AI requests into verifiable task graphs before escalating to expensive model inference.
+> KORA is an open-source execution-control layer that turns AI requests into structured execution paths before inference.
 
 Approved technical one-liner:
 
@@ -28,13 +28,20 @@ Approved technical one-liner:
 
 Approved OSS one-liner:
 
-> KORA is an open-source infrastructure project for building inference-first AI systems.
+> KORA helps developers put structure before inference: task graphs, deterministic-first execution, validation, telemetry, and model escalation only when needed.
+
+Approved message spine:
+
+- Hook: Most AI apps call the model too soon.
+- Shift: KORA puts execution control before inference.
+- Mechanism: Task graphs. Deterministic-first execution. Validation before escalation. Telemetry around every path. Model calls only when needed.
+- Tagline: Structure first. Inference second.
 
 ## Current Approved Benchmark Claim
 
 Use exactly:
 
-> In a reproducible 100-task deterministic-heavy benchmark workload, KORA-controlled execution avoided 80 of 100 simulated model invocations versus a naive direct baseline.
+> KORA reduced model invocations by 80% in a reproducible deterministic-heavy benchmark workload.
 
 Supporting detail:
 
@@ -57,16 +64,16 @@ Supporting detail:
 | Claim | Status | Allowed wording | Forbidden wording | Required evidence before escalation | Approved channels |
 |---|---|---|---|---|---|
 | Category claim: KORA as AI Execution Control Layer | Approved | KORA is an AI Execution Control Layer. | KORA has already become the dominant execution-control standard. | Broader adoption evidence before dominance language. | README, docs, discussions, social, investor/EIC intro, partner intro |
-| vLLM analogy claim | Review required | KORA aims to become category-defining for execution control before unnecessary inference is invoked, similar to how vLLM became category-defining for LLM serving. | KORA is already the vLLM of execution control. | Adoption, deployment, and ecosystem evidence before stronger analogy. | Docs, investor/EIC drafts, partner drafts with Albert review |
-| v0.2.0-alpha release claim | Approved | KORA v0.2.0-alpha is a prerelease with bounded deterministic-heavy benchmark evidence. | v0.2.0-alpha proves broad operational impact. | Additional release evidence before expanded impact wording. | Releases, changelog, README, docs |
-| deterministic-heavy benchmark claim | Approved with exact wording | In a reproducible 100-task deterministic-heavy benchmark workload, KORA-controlled execution avoided 80 of 100 simulated model invocations versus a naive direct baseline. | KORA reduced real costs by 80%. | Runtime-integrated and real billing evidence before cost language. | README, docs, release notes, social with exact wording |
-| runtime-integrated benchmark claim | Not approved yet | Runtime-integrated benchmark evidence is planned. | KORA has full runtime-integrated benchmark proof. | Merged runtime-integrated benchmark, result artifacts, validation commands, reviewed report. | Internal roadmap until evidence exists |
+| vLLM analogy claim | Review required | KORA aims to become category-defining for execution control before unnecessary inference is invoked, similar to how vLLM became category-defining for LLM serving. | KORA is already the vLLM of execution control. | Adoption, deployment, and ecosystem evidence before stronger analogy. | Docs, investor/EIC drafts, partner drafts with maintainer review |
+| v0.3.0-alpha release claim | Approved | KORA v0.3.0-alpha is a prerelease with bounded deterministic-heavy benchmark evidence and an initial runtime-path evidence flow. | v0.3.0-alpha proves broad operational impact. | Additional release evidence before expanded impact wording. | Releases, changelog, README, docs |
+| deterministic-heavy benchmark claim | Approved with exact wording | KORA reduced model invocations by 80% in a reproducible deterministic-heavy benchmark workload. | KORA reduced real costs by 80%. | Runtime-integrated and real billing evidence before cost language. | README, docs, release notes, social with exact wording |
+| runtime-integrated benchmark claim | Not approved yet | Runtime-integrated benchmark evidence is planned. | KORA has full runtime-integrated benchmark proof. | Runtime-integrated benchmark with real model calls, result artifacts, validation commands, reviewed report. | Internal roadmap until evidence exists |
 | real application workload replay claim | Not approved yet | Real application workload replay is a future evidence track. | KORA has proven results on real application workloads. | Reproducible real workload replay, source path, validation, report. | Internal roadmap until evidence exists |
 | production cost reduction claim | Prohibited | Not currently supported. | KORA proves production cost reduction. | Production deployment evidence, baseline, billing data, methodology, review. | None until evidence exists |
 | real API cost reduction claim | Prohibited | Not currently supported. | KORA proves real API-cost reduction. | Real API usage data, billing methodology, baseline, review. | None until evidence exists |
 | cloud/data center validation claim | Prohibited unless documented | Exploratory infrastructure conversations may be tracked internally. | KORA is validated by cloud/data center partners. | Signed or documented validation, approved wording, source record. | Partner docs only after approval |
 | energy efficiency claim | Prohibited | Not currently supported. | KORA proves energy reduction. | Energy methodology, measurement, baseline, third-party review if needed. | None until evidence exists |
-| government/institution interest claim | Review required | Exploratory discussion or early interest, if true. | Government validation or government-approved KORA. | Written documentation and Albert approval. | Internal tracking or approved partner/EIC material |
+| government/institution interest claim | Review required | Exploratory discussion or early interest, if true. | Government validation or government-approved KORA. | Written documentation and maintainer approval. | Internal tracking or approved partner/EIC material |
 | partner/LOI claim | Review required | LOI candidate or partner discussion, if true. | Signed partnership unless actually signed. | Signed document or written record, approved wording. | Partner tracker, approved outreach |
 | community adoption claim | Review required | Early community feedback or initial contributors, if documented. | KORA has guaranteed adoption. | Public metrics, issue/discussion activity, contributor evidence. | Community updates with review if numeric |
 | paper/publication claim | Review required | Technical report in preparation. | Peer-reviewed proof or accepted paper unless accepted/published. | Accepted publication, DOI/proceedings link, paper artifact. | Paper roadmap, docs, investor/EIC drafts with review |
@@ -87,6 +94,14 @@ Forbidden:
 
 Do not claim:
 
+- KORA reduces production AI costs by 80%.
+- KORA reduces real API costs by 80%.
+- KORA reduces energy consumption by 80%.
+- KORA proves broad workload superiority.
+- KORA is validated in production.
+- KORA guarantees cost reduction.
+- KORA is formally government validated.
+- KORA has signed partner validation unless actually signed and documented.
 - production cost reduction proof
 - real API-cost reduction proof
 - production benchmark proof
@@ -100,9 +115,17 @@ Do not claim:
 - EIC approval or grant success
 - investor commitment unless documented
 
+## Next Possible Claim
+
+After runtime-integrated real model-call validation, KORA may be able to say:
+
+> KORA reduced measured model invocations by X% in a runtime-integrated benchmark using real model calls.
+
+This is a future conditional claim, not a current claim. It requires merged evidence, documented methodology, validation commands, reviewed results, and claim-registry approval.
+
 ## Channel Review Levels
 
-Level A: Safe to publish without Albert review.
+Level A: Safe to publish without maintainer review.
 
 Examples:
 
@@ -112,7 +135,7 @@ Examples:
 - Open-source contribution invitation.
 - "unpaid early contributor role" language.
 
-Level B: Requires Albert review.
+Level B: Requires maintainer review.
 
 Examples:
 
@@ -140,8 +163,8 @@ Examples:
 
 - Any LLM-generated KORA content must be checked against this registry.
 - LLMs must not invent evidence, partners, grants, investors, publications, or benchmark results.
-- LLM-generated content mentioning numbers, partners, grants, or papers requires Albert review.
-- If an LLM is uncertain whether a phrase is allowed, it should mark the phrase for Albert review instead of publishing it.
+- LLM-generated content mentioning numbers, partners, grants, or papers requires maintainer review.
+- If an LLM is uncertain whether a phrase is allowed, it should mark the phrase for maintainer review instead of publishing it.
 
 ## Update Policy
 

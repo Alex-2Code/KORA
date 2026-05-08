@@ -6,13 +6,13 @@ Date: 2026-05-04
 
 This document records the current simulated benchmark result for KORA's reproducible 100-task deterministic-heavy workload.
 
-This is a controlled benchmark artifact for the path toward v0.2.0-alpha. It is not a production benchmark, does not use real model calls, and does not measure real API cost.
+This is a controlled benchmark artifact for the current alpha evidence path. It is not a production benchmark, does not use real model calls, and does not measure real API cost.
 
 ## Repository Context
 
 | Item | Value |
 |---|---|
-| Public HEAD | `origin/main b7c555e0dfe0687cdf05177c03eacac0743079a5` |
+| Public HEAD at original benchmark recording | `origin/main b7c555e0dfe0687cdf05177c03eacac0743079a5` |
 | Generator | `experiments/generate_workload.py` |
 | Workload | `experiments/workloads/deterministic_heavy_v1_100.json` |
 | Benchmark runner | `experiments/run_benchmark.py` |
@@ -75,11 +75,15 @@ The committed workload was regenerated with the same seed, count, and benchmark 
 | Avoided model invocations | 80 |
 | Avoided invocation rate | 80% |
 
+## Approved Public Claim
+
+KORA reduced model invocations by 80% in a reproducible deterministic-heavy benchmark workload.
+
 ## Safe Interpretation
 
-In a reproducible 100-task deterministic-heavy benchmark workload, KORA-controlled execution avoided 80 of 100 simulated model invocations versus a naive direct baseline.
+This should be interpreted as a reproducible deterministic-heavy alpha benchmark result. The simulated baseline and KORA-controlled counters explain the measurement method: the direct baseline counted 100 simulated model invocations while the KORA-controlled path counted 20.
 
-This should be interpreted as a reproducible simulated benchmark result. It shows that the current generator, workload, and benchmark runner can produce a stable deterministic-heavy comparison suitable for further v0.2.0-alpha benchmark hardening.
+This evidence is suitable for alpha validation and further runtime-integrated testing. It is not production cost reduction proof or real API-cost reduction proof.
 
 ## Non-Claims
 
@@ -143,7 +147,7 @@ Current validation status:
 - The avoided invocation rate is based on workload metadata and simulated benchmark modes.
 - Correctness scoring against deterministic `expected_output` fields is not yet reported as a benchmark metric.
 
-## Next Steps Toward v0.2.0-alpha
+## Next Steps
 
 1. Add stronger correctness checks for deterministic tasks.
 2. Add benchmark summary generation from structured result JSON.

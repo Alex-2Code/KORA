@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="460" viewBox="0 0 1200 460" role="img" aria-labelledby="title desc">
+  <title id="title">KORA execution control overview</title>
+  <desc id="desc">A diagram comparing model-first execution with a KORA controlled execution path.</desc>
+  <rect width="1200" height="460" fill="#0b1220"/>
+  <text x="60" y="58" fill="#e5f6ff" font-family="Inter, Arial, sans-serif" font-size="28" font-weight="700">Most AI apps call the model too soon.</text>
+  <text x="60" y="92" fill="#8bdcf8" font-family="Inter, Arial, sans-serif" font-size="18">KORA turns requests into structured execution paths before inference.</text>
+  <g fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M140 178 H315 H490 H665" stroke="#64748b" stroke-width="4"/>
+    <path d="M645 166 L665 178 L645 190" stroke="#64748b" stroke-width="4"/>
+    <path d="M140 318 H315 H490 H665 H840 H1015" stroke="#22d3ee" stroke-width="4"/>
+    <path d="M995 306 L1015 318 L995 330" stroke="#22d3ee" stroke-width="4"/>
+  </g>
+  <g font-family="Inter, Arial, sans-serif" font-size="15" font-weight="700" text-anchor="middle">
+    <text x="90" y="184" fill="#cbd5e1">Before</text>
+    <text x="90" y="324" fill="#cbd5e1">After</text>
+  </g>
+  <g font-family="Inter, Arial, sans-serif" font-size="16" font-weight="600" text-anchor="middle">
+    <g fill="#111827" stroke="#94a3b8" stroke-width="2">
+      <rect x="120" y="140" width="120" height="76" rx="8"/>
+      <rect x="295" y="140" width="120" height="76" rx="8"/>
+      <rect x="470" y="140" width="120" height="76" rx="8"/>
+      <rect x="645" y="140" width="120" height="76" rx="8"/>
+    </g>
+    <text x="180" y="184" fill="#e5e7eb">request</text>
+    <text x="355" y="184" fill="#e5e7eb">prompt</text>
+    <text x="530" y="184" fill="#fbbf24">model</text>
+    <text x="705" y="184" fill="#e5e7eb">output</text>
+    <g fill="#082f49" stroke="#22d3ee" stroke-width="2">
+      <rect x="120" y="280" width="120" height="76" rx="8"/>
+      <rect x="285" y="280" width="140" height="76" rx="8"/>
+      <rect x="460" y="280" width="150" height="76" rx="8"/>
+      <rect x="645" y="280" width="130" height="76" rx="8"/>
+      <rect x="810" y="280" width="150" height="76" rx="8" stroke="#f59e0b"/>
+      <rect x="995" y="280" width="130" height="76" rx="8"/>
+    </g>
+    <text x="180" y="324" fill="#ecfeff">request</text>
+    <text x="355" y="324" fill="#ecfeff">task graph</text>
+    <text x="535" y="314" fill="#ecfeff">deterministic</text>
+    <text x="535" y="336" fill="#ecfeff">path</text>
+    <text x="710" y="324" fill="#ecfeff">validation</text>
+    <text x="885" y="314" fill="#fff7ed">model</text>
+    <text x="885" y="336" fill="#fff7ed">escalation</text>
+    <text x="1060" y="324" fill="#ecfeff">telemetry</text>
+  </g>
+  <text x="60" y="420" fill="#e5f6ff" font-family="Inter, Arial, sans-serif" font-size="22" font-weight="700">Structure first. Inference second.</text>
+</svg>

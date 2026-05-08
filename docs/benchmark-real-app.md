@@ -128,4 +128,4 @@ Example snippet:
 - savings_usd: 0.00001665
 - savings_percent: 11.2462%
 
-KORA reduced estimated cost by ~11.25% in this long-request run mainly by reducing output tokens.
+This single long-request run showed lower estimated cost because output tokens were lower. Treat this as exploratory local-run telemetry, not a production cost-reduction claim or real API-cost reduction proof.

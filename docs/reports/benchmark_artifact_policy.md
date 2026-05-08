@@ -29,7 +29,7 @@ Frozen raw artifacts should be intentionally named and reviewed. They should not
 
 Current safe claim:
 
-> In a reproducible 100-task deterministic-heavy benchmark workload, KORA-controlled execution avoided 80 of 100 simulated model invocations versus a naive direct baseline.
+> KORA reduced model invocations by 80% in a reproducible deterministic-heavy benchmark workload.
 
 Forbidden claims:
 
@@ -40,7 +40,7 @@ Forbidden claims:
 - broad workload superiority
 - energy reduction evidence
 
-Benchmark summaries must state that the current evidence is reproducible benchmark evidence from simulated benchmark artifacts, not production cost/API/energy proof.
+Benchmark summaries may explain simulated baseline counters in methodology sections. Public headline claims should use the approved claim above and must not present the evidence as production cost/API/energy proof.
 
 ## Regeneration Guide
 

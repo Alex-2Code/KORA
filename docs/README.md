@@ -4,23 +4,45 @@
 
 This is the starting point for navigating KORA documentation.
 
-KORA is an AI Execution Control Layer / Inference OS for AI systems. It structures requests into task graphs, runs deterministic work first, validates outputs, and escalates to model inference only when needed.
+KORA is an open-source execution-control layer that turns AI requests into structured execution paths before inference.
 
-The documentation is organized by audience and use case so developers, contributors, operators, paper readers, EIC/grant reviewers, investors, and partners can find the right files without relying on repository history.
+Most AI apps call the model too soon. KORA changes the default. Structure first. Inference second.
 
-## Start Here
+## Start
 
 - [Main README](../README.md)
 - [Current v0.3.0-alpha prerelease](https://github.com/Krako-Labs/KORA/releases/tag/v0.3.0-alpha)
-- [KORA Category Thesis](vision/2026-05-06-kora-category-thesis.md)
 - [KORA Project Source](context/KORA_PROJECT_SOURCE.md)
+- [KORA Current State](context/KORA_CURRENT_STATE.md)
+- [KORA Category Thesis](vision/2026-05-06-kora-category-thesis.md)
+
+## Understand
+
 - [KORA Claim Registry](claims/kora-claim-registry.md)
 - [KORA Public Language Guide](claims/kora-public-language-guide.md)
-- [KORA Current State](context/KORA_CURRENT_STATE.md)
-- [KORA OSS Operating System](ops/2026-05-06-kora-oss-operating-system.md)
-- [KORA GitHub Platform Setup Plan](ops/2026-05-06-kora-github-platform-setup-plan.md)
+- [Telemetry and observability counters](telemetry-and-observability.md#current-public-counters)
+- [Testing and validation strategy](testing-and-validation-strategy.md)
+- [Research agenda](research-agenda.md)
+- [Whitepaper](whitepaper.md)
 
-## Current Benchmark Evidence Path
+## Run
+
+- [Examples directory](../examples/)
+- [Experiments regeneration guide](../experiments/README.md)
+- [Benchmark real app guide](benchmark-real-app.md)
+- [Benchmark overview](benchmark.md)
+- [Good first issue candidates](good_first_issues.md)
+
+Core local commands:
+
+```bash
+python3 -m kora --help
+python3 -m kora examples list
+python3 -m kora run direct_vs_kora -- --offline
+python3 -m kora run runtime_integrated_benchmark -- --offline
+```
+
+## Inspect Evidence
 
 Use this path for the current `v0.3.0-alpha` prerelease runtime evidence and regeneration flow:
 
@@ -28,70 +50,48 @@ Use this path for the current `v0.3.0-alpha` prerelease runtime evidence and reg
 2. Workload generator: [`experiments/generate_workload.py`](../experiments/generate_workload.py)
 3. Benchmark runner: [`experiments/run_benchmark.py`](../experiments/run_benchmark.py)
 4. Summary generator: [`experiments/summarize_benchmark_results.py`](../experiments/summarize_benchmark_results.py)
-5. Experiments regeneration guide: [`experiments/README.md`](../experiments/README.md)
-6. Artifact policy and regeneration commands: [`docs/reports/benchmark_artifact_policy.md`](reports/benchmark_artifact_policy.md)
-7. Raw artifact freeze decision: [`docs/reports/v0.2.0-alpha-raw-artifact-freeze-decision.md`](reports/v0.2.0-alpha-raw-artifact-freeze-decision.md)
+5. Runtime benchmark example: [`examples/runtime_integrated_benchmark`](../examples/runtime_integrated_benchmark)
+6. Runtime evidence reviewer guide: [`docs/reports/v0.3.0-alpha-runtime-evidence-reviewer-guide.md`](reports/v0.3.0-alpha-runtime-evidence-reviewer-guide.md)
+7. Artifact policy and regeneration commands: [`docs/reports/benchmark_artifact_policy.md`](reports/benchmark_artifact_policy.md)
 8. Current benchmark summary: [`docs/benchmarks/kora_benchmark_result_v1_100.md`](benchmarks/kora_benchmark_result_v1_100.md)
-9. Release/changelog context: [`CHANGELOG.md`](../CHANGELOG.md)
+9. Validation roadmap: [`docs/benchmarks/validation-roadmap.md`](benchmarks/validation-roadmap.md)
 10. Claim boundary source: [`docs/claims/kora-claim-registry.md`](claims/kora-claim-registry.md)
 
-Next evidence architecture: [`docs/design/v0.3.0-runtime-integrated-benchmark-evidence-architecture.md`](design/v0.3.0-runtime-integrated-benchmark-evidence-architecture.md)
+Current approved public claim:
 
-Reviewer-facing runtime evidence flow: [`docs/reports/v0.3.0-alpha-runtime-evidence-reviewer-guide.md`](reports/v0.3.0-alpha-runtime-evidence-reviewer-guide.md)
-
-`v0.3.0-alpha` release-readiness checklist: [`docs/reports/v0.3.0-alpha-release-readiness-checklist.md`](reports/v0.3.0-alpha-release-readiness-checklist.md)
-
-Final `v0.3.0-alpha` docs and claim audit: [`docs/reports/v0.3.0-alpha-docs-claim-audit.md`](reports/v0.3.0-alpha-docs-claim-audit.md)
-
-`v0.3.0-alpha` release validation packet: [`docs/reports/v0.3.0-alpha-release-validation-packet.md`](reports/v0.3.0-alpha-release-validation-packet.md)
-
-`v0.3.0-alpha` release approval checkpoint: [`docs/reports/v0.3.0-alpha-release-approval-checkpoint.md`](reports/v0.3.0-alpha-release-approval-checkpoint.md)
-
-Post-release EOD report: [`docs/eod/kora_eod_2026_05_07_v0.3.0-alpha_release.md`](eod/kora_eod_2026_05_07_v0.3.0-alpha_release.md)
-
-Post-release cleanup plan: [`docs/reports/v0.3.0-alpha-post-release-cleanup-plan.md`](reports/v0.3.0-alpha-post-release-cleanup-plan.md)
-
-`v0.3.1-alpha` roadmap: [`docs/planning/v0.3.1-alpha-roadmap.md`](planning/v0.3.1-alpha-roadmap.md)
-
-Initial runtime-path harness command:
-
-```bash
-python3 -m kora run runtime_integrated_benchmark -- --offline
-```
-
-Safe claim:
-
-> In a reproducible 100-task deterministic-heavy benchmark workload, KORA-controlled execution avoided 80 of 100 simulated model invocations versus a naive direct baseline.
+> KORA reduced model invocations by 80% in a reproducible deterministic-heavy benchmark workload.
 
 This evidence does not claim production cost reduction proof, real API-cost reduction proof, production benchmark proof, full runtime-integrated benchmark evidence, broad workload superiority proof, or energy reduction evidence.
 
 Raw benchmark JSON artifacts are reproducible outputs and are not frozen or committed for this alpha release.
 
-## Document Status Labels
+Additional evidence and release docs:
 
-- **Current release evidence**: current release, benchmark, artifact, and claim-boundary docs for `v0.2.0-alpha`.
-- **Benchmark/artifact policy**: rules and commands for regenerating benchmark workloads, raw outputs, and generated summaries.
-- **Release preparation history**: readiness, merge, review, and release-prep reports preserved for auditability.
-- **EOD/SOD reports**: operating handoff records and dated continuity reports.
-- **Historical/background docs**: older benchmark notes, strategy, architecture, and context docs that may still be useful but are not the current evidence entry point.
+- [v0.3.0 runtime-integrated benchmark architecture](design/v0.3.0-runtime-integrated-benchmark-evidence-architecture.md)
+- [v0.3.0-alpha release-readiness checklist](reports/v0.3.0-alpha-release-readiness-checklist.md)
+- [v0.3.0-alpha docs and claim audit](reports/v0.3.0-alpha-docs-claim-audit.md)
+- [v0.3.0-alpha release validation packet](reports/v0.3.0-alpha-release-validation-packet.md)
+- [v0.3.0-alpha release approval checkpoint](reports/v0.3.0-alpha-release-approval-checkpoint.md)
+- [v0.3.0-alpha post-release EOD report](eod/kora_eod_2026_05_07_v0.3.0-alpha_release.md)
+- [v0.3.0-alpha post-release cleanup plan](reports/v0.3.0-alpha-post-release-cleanup-plan.md)
+- [v0.3.1-alpha roadmap](planning/v0.3.1-alpha-roadmap.md)
 
-## Documentation By Audience
+## Help Test
 
-### A. New Users And Developers
+- [Help Test KORA](community/help-test-kora.md)
+- [KORA validation roadmap](benchmarks/validation-roadmap.md)
+- [KORA social media announcement guide](community/KORA_SOCIAL_MEDIA_ANNOUNCEMENT_GUIDE.md)
+- [KORA community manager guide](community/KORA_COMMUNITY_MANAGER_GUIDE.md)
 
-- [Main README](../README.md)
-- [Examples directory](../examples/)
-- [Telemetry and observability counters](telemetry-and-observability.md#current-public-counters)
-- [Good first issue candidates](good_first_issues.md)
-- [Current benchmark evidence path](#current-benchmark-evidence-path)
-- [v0.3.0-alpha runtime evidence reviewer guide](reports/v0.3.0-alpha-runtime-evidence-reviewer-guide.md)
-- [Technical preview results](technical_preview_results.md) - historical/background benchmark context
-- [Benchmark real app guide](benchmark-real-app.md)
-- [Benchmark overview](benchmark.md) - historical/background benchmark note
-- [Benchmark summaries](benchmarks/) - current and historical benchmark summaries
-- [Experiments directory](../experiments/)
+Good candidate workloads:
 
-### B. Contributors And Community
+- customer-support triage
+- repetitive RAG workflows
+- agent workflows with budget or escalation rules
+- deterministic-heavy backend workflows
+- LLM apps with high repeated request patterns
+
+## Contribute
 
 - [Canonical governance document](../GOVERNANCE.md)
 - [Contributing guide](../CONTRIBUTING.md)
@@ -101,70 +101,19 @@ Raw benchmark JSON artifacts are reproducible outputs and are not frozen or comm
 - [AI-assisted contribution guide](community/2026-05-06-ai-assisted-contribution-guide.md)
 - [Albert-Sumanta GitHub sync](community/2026-05-06-albert-sumanta-github-sync.md)
 - [Community sync issue template](community/2026-05-06-community-sync-issue-template.md)
-- [KORA community manager guide](community/KORA_COMMUNITY_MANAGER_GUIDE.md)
-- [KORA social media announcement guide](community/KORA_SOCIAL_MEDIA_ANNOUNCEMENT_GUIDE.md)
 - [KORA OSS Operating System](ops/2026-05-06-kora-oss-operating-system.md)
 - [KORA GitHub Platform Setup Plan](ops/2026-05-06-kora-github-platform-setup-plan.md)
 - [Discussions and Wiki plan](ops/2026-05-06-kora-discussions-and-wiki-plan.md)
 - [Label taxonomy](ops/2026-05-06-kora-label-taxonomy.md)
 
-### C. Operators And Maintainers
+## Maintainers And Operators
 
 - [KORA OSS Operating System](ops/2026-05-06-kora-oss-operating-system.md)
 - [Korean ops coordinator handbook](ops/2026-05-06-kora-ops-coordinator-handbook-ko.md)
-- [GitHub platform setup plan](ops/2026-05-06-kora-github-platform-setup-plan.md)
 - [Manual GitHub setup checklist](ops/2026-05-06-kora-manual-github-setup-checklist.md)
 - [Repository hygiene audit](ops/2026-05-06-kora-repository-hygiene-audit.md)
-- [KORA Project Source](context/KORA_PROJECT_SOURCE.md)
 - [KORA ChatGPT Operating Context](context/KORA_CHATGPT_OPERATING_CONTEXT.md)
 - [KORA Codex Operating Context](context/KORA_CODEX_OPERATING_CONTEXT.md)
-- [KORA Current State](context/KORA_CURRENT_STATE.md)
-
-### D. Claims, Public Language, And Communications
-
-- [KORA Claim Registry](claims/kora-claim-registry.md)
-- [KORA Public Language Guide](claims/kora-public-language-guide.md)
-- [KORA Category Thesis](vision/2026-05-06-kora-category-thesis.md)
-- [Repository migration checklist](ops/2026-05-06-kora-repo-migration-checklist.md)
-
-### E. Paper And Research
-
-- [Authorship and contribution policy](paper/2026-05-06-kora-authorship-and-contribution-policy.md)
-- [KORA Category Thesis](vision/2026-05-06-kora-category-thesis.md)
-- [Technical preview results](technical_preview_results.md) - historical/background benchmark context
-- [Benchmark summaries](benchmarks/) - current and historical benchmark summaries
-- [Benchmark artifact policy](reports/benchmark_artifact_policy.md) - benchmark/artifact policy
-- [Research agenda](research-agenda.md)
-- [Whitepaper](whitepaper.md)
-
-### F. EIC, Investor, Partner, And Grant Readiness
-
-- [KORA Category Thesis](vision/2026-05-06-kora-category-thesis.md)
-- [KORA Project Source](context/KORA_PROJECT_SOURCE.md)
-- [KORA Claim Registry](claims/kora-claim-registry.md)
-- [Repository migration checklist](ops/2026-05-06-kora-repo-migration-checklist.md)
-- [KORA OSS Operating System](ops/2026-05-06-kora-oss-operating-system.md)
-- [KORA GitHub Platform Setup Plan](ops/2026-05-06-kora-github-platform-setup-plan.md)
-- [v0.2.0-alpha EOD report](reports/kora_eod_2026-05-05_v0.2.0-alpha.md)
-- [Current benchmark evidence path](#current-benchmark-evidence-path)
-- [v0.3.0-alpha release-readiness checklist](reports/v0.3.0-alpha-release-readiness-checklist.md)
-- [Benchmark evidence summaries](benchmarks/) - current and historical benchmark summaries
-
-### G. Internal Continuity And Handoff
-
-- [KORA_PROJECT_SOURCE.md](context/KORA_PROJECT_SOURCE.md)
-- [KORA_CHATGPT_OPERATING_CONTEXT.md](context/KORA_CHATGPT_OPERATING_CONTEXT.md)
-- [KORA_CODEX_OPERATING_CONTEXT.md](context/KORA_CODEX_OPERATING_CONTEXT.md)
-- [KORA_CURRENT_STATE.md](context/KORA_CURRENT_STATE.md)
-- [EOD reports](eod/)
-- [v0.3.0-alpha post-release EOD report](eod/kora_eod_2026_05_07_v0.3.0-alpha_release.md)
-- [Release and readiness reports](reports/)
-
-## Evidence Preservation Note
-
-Older reports, EOD documents, benchmark summaries, and migration docs may look historical, but they should not be deleted casually. They preserve release, benchmark, paper, EIC/grant, investor, and operating evidence.
-
-Use the [repository hygiene audit](ops/2026-05-06-kora-repository-hygiene-audit.md) before any cleanup.
 
 ## Public / Private Boundary Note
 
@@ -172,13 +121,8 @@ Most docs in this repository are public-facing unless marked internal.
 
 Internal EOD/SOD prompts are operating artifacts. They should not contain private credentials, personal data, private partner notes, unpublished investor conversations, or other sensitive information.
 
-## Next Cleanup Steps
+## Evidence Preservation Note
 
-Start with the [repository hygiene audit](ops/2026-05-06-kora-repository-hygiene-audit.md).
+Older reports, EOD documents, benchmark summaries, and migration docs may look historical, but they should not be deleted casually. They preserve release, benchmark, paper, EIC/grant, investor, and operating evidence.
 
-Future cleanup should proceed in this order:
-
-1. Audit first.
-2. Add safe links and indexes.
-3. Request explicit approval before moving, renaming, or removing files.
-4. Preserve release and benchmark evidence throughout cleanup.
+Use the [repository hygiene audit](ops/2026-05-06-kora-repository-hygiene-audit.md) before any cleanup.

@@ -16,15 +16,17 @@ For channel-specific release copy and social/community announcement templates, u
 
 ## Social Launch Focus
 
-For the `v0.3.0-alpha` launch, start with the [KORA Social Media Announcement Guide](KORA_SOCIAL_MEDIA_ANNOUNCEMENT_GUIDE.md). It gives Sumanta ready-to-use launch hooks, post drafts, and reusable image-generation prompt samples.
+For the `v0.3.0-alpha` launch, start with the [KORA Social Media Announcement Guide](KORA_SOCIAL_MEDIA_ANNOUNCEMENT_GUIDE.md). It gives public-safe message examples, benchmark boundaries, and technical visual placeholder guidance.
 
 The main social emphasis should be:
 
-- short attention hooks that make developers stop scrolling
-- the `80 of 100 simulated model invocations` avoided benchmark point
-- the reproducible local evidence flow
+- Hook: Most AI apps call the model too soon.
+- Shift: KORA puts execution control before inference.
+- Mechanism: task graphs, deterministic-first execution, validation before escalation, telemetry around every path, and model calls only when needed.
+- Evidence: KORA reduced model invocations by 80% in a reproducible deterministic-heavy benchmark workload.
+- Next validation: real model-call runtime paths, support triage, RAG routing, and agent budget-guard workloads.
+- CTA: Clone the repo. Run the alpha. Inspect the path. Bring a workload.
 - the release URL: https://github.com/Krako-Labs/KORA/releases/tag/v0.3.0-alpha
-- LinkedIn first, then X/Twitter, Telegram/Discord, and GitHub Discussions
 
 Keep this section focused on launch momentum. Use the rest of this guide for moderation, issue triage, claim-boundary review, and maintainer escalation.
 
@@ -40,7 +42,7 @@ Keep this section focused on launch momentum. Use the rest of this guide for mod
 
 Use this wording when describing the current bounded benchmark result:
 
-> In a reproducible 100-task deterministic-heavy benchmark workload, KORA-controlled execution avoided 80 of 100 simulated model invocations versus a naive direct baseline.
+> KORA reduced model invocations by 80% in a reproducible deterministic-heavy benchmark workload.
 
 Do not strengthen, generalize, or shorten this claim in a way that removes the workload boundary.
 
@@ -53,6 +55,8 @@ Community managers may use these phrases:
 - KORA provides a reproducible local evidence-generation flow.
 - KORA includes JSON output, Markdown evidence packet generation, and telemetry summary commands.
 - KORA's current evidence is bounded to a deterministic-heavy 100-task benchmark workload.
+- KORA is expanding validation across real model-call paths, support triage, RAG routing, and agent budget-guard workloads.
+- Developers can clone the repo, run the alpha, inspect the path, and bring a workload.
 - KORA does not upload raw benchmark artifacts as release assets.
 - The current benchmark flow is a non-production benchmark scaffold.
 
@@ -67,7 +71,7 @@ Do not state or imply:
 - broad workload superiority proof
 - energy reduction evidence
 - formal government validation
-- signed partner validation
+- signed partner validation unless actually signed and documented
 - guaranteed adoption or funding
 
 Escalate to maintainers if a user asks for wording that would imply any of these claims.
@@ -177,7 +181,7 @@ Thanks for checking out KORA. The best starting points are the README, the docs 
 
 The current bounded benchmark claim is:
 
-> In a reproducible 100-task deterministic-heavy benchmark workload, KORA-controlled execution avoided 80 of 100 simulated model invocations versus a naive direct baseline.
+> KORA reduced model invocations by 80% in a reproducible deterministic-heavy benchmark workload.
 
 Please share the exact command you ran, your Python version, whether you used `--offline`, and the counters you saw for total tasks, deterministic routes, fallback/model-candidate routes, avoided simulated model invocations, mismatch count, and telemetry event count.
 
@@ -201,7 +205,11 @@ This now has enough detail to track as an Issue. Please include the command, env
 
 KORA `v0.3.0-alpha` is available as a GitHub prerelease: https://github.com/Krako-Labs/KORA/releases/tag/v0.3.0-alpha
 
-This prerelease includes an initial runtime-path benchmark harness, a reproducible local evidence-generation flow, Markdown evidence packet generation, and telemetry-connected summary commands. In a reproducible 100-task deterministic-heavy benchmark workload, KORA-controlled execution avoided 80 of 100 simulated model invocations versus a naive direct baseline.
+Most AI apps call the model too soon. KORA puts execution control before inference through task graphs, deterministic-first execution, validation before escalation, telemetry around every path, and model calls only when needed.
+
+KORA reduced model invocations by 80% in a reproducible deterministic-heavy benchmark workload.
+
+This prerelease includes an initial runtime-path benchmark harness, a reproducible local evidence-generation flow, Markdown evidence packet generation, and telemetry-connected summary commands.
 
 This is bounded prerelease evidence. It does not claim production cost reduction proof, real API-cost reduction proof, production benchmark proof, full runtime-integrated benchmark evidence, broad workload superiority proof, energy reduction evidence, formal government validation, signed partner validation, or guaranteed adoption or funding.
 
@@ -252,7 +260,7 @@ This prerelease adds an initial runtime-path benchmark harness, a reproducible l
 
 Current bounded benchmark claim:
 
-> In a reproducible 100-task deterministic-heavy benchmark workload, KORA-controlled execution avoided 80 of 100 simulated model invocations versus a naive direct baseline.
+> KORA reduced model invocations by 80% in a reproducible deterministic-heavy benchmark workload.
 
 This prerelease does not claim production cost reduction proof, real API-cost reduction proof, production benchmark proof, full runtime-integrated benchmark evidence, broad workload superiority proof, energy reduction evidence, formal government validation, signed partner validation, or guaranteed adoption or funding.
 

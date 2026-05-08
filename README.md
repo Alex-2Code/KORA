@@ -1,57 +1,127 @@
-<p align="center">
-  <img src="assets/KORA_Img_Text_logo.png" alt="KORA Logo" width="330" />
-</p>
+# KORA
 
-<br>
+Open-source execution control for AI workloads.
 
-<h1 align="center">KORA</h1>
+Most AI apps call the model too soon.
 
-<p align="center"><strong>Open-source execution control for AI systems</strong></p>
-<p align="center">Structure first. Inference second.</p>
+Every request becomes a prompt.
+Every prompt becomes tokens.
+Every token becomes latency, cost, and infrastructure pressure.
 
-<p align="center">
-  <img alt="Deterministic-first" src="https://img.shields.io/badge/Deterministic--first-0f766e?style=flat-square" />
-  <img alt="Task graphs" src="https://img.shields.io/badge/Task-graphs-1d4ed8?style=flat-square" />
-  <img alt="Execution control" src="https://img.shields.io/badge/Execution-control-111827?style=flat-square" />
-  <img alt="Schema validation" src="https://img.shields.io/badge/Schema-validation-7c3aed?style=flat-square" />
-  <img alt="Telemetry" src="https://img.shields.io/badge/Telemetry-observability-475569?style=flat-square" />
-  <img alt="Terminal first" src="https://img.shields.io/badge/Terminal-first-374151?style=flat-square" />
-</p>
+KORA turns AI requests into structured execution paths before inference: task graphs, deterministic-first execution, validation, telemetry, and model escalation only when needed.
 
----
+![KORA execution control overview](docs/assets/kora-execution-control-overview.svg)
 
-KORA is a standalone open-source execution control layer for AI systems. It structures requests into task graphs, runs deterministic work first, and escalates to model inference only when needed.
+Before:
 
-> Repository note: KORA has moved into its official Krako Labs home at https://github.com/Krako-Labs/KORA. Same code, same history, bigger mission.
+```text
+request -> prompt -> model -> output
+```
 
-## Current Release
+After:
 
-Current published release: [`v0.2.0-alpha`](https://github.com/Krako-Labs/KORA/releases/tag/v0.2.0-alpha).
+```text
+request -> task graph -> deterministic path -> validation -> model escalation -> telemetry
+```
 
-KORA is still alpha / prerelease software. The `v0.2.0-alpha` release focuses on bounded deterministic-heavy benchmark evidence for the terminal-first developer surface. No release assets were uploaded, and no raw benchmark JSON artifacts were uploaded.
+Structure first. Inference second.
 
-Want to contribute? Start with [CONTRIBUTING.md](CONTRIBUTING.md), browse [good first issue candidates](docs/good_first_issues.md), and review [SECURITY.md](SECURITY.md), [GOVERNANCE.md](GOVERNANCE.md), and [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md). Community moderators can use the [KORA community manager guide](docs/community/KORA_COMMUNITY_MANAGER_GUIDE.md).
+## 3-Minute Local Run
+
+For local development in this repository:
+
+```bash
+python3 -m venv .venv
+source .venv/bin/activate
+python3 -m pip install -e ".[dev]"
+```
+
+Run the CLI and first offline demo:
+
+```bash
+python3 -m kora --help
+python3 -m kora examples list
+python3 -m kora run direct_vs_kora -- --offline
+```
+
+Inspect the output to see how KORA changes a direct model-first path into a controlled execution path.
+
+## What KORA Does
+
+KORA sits between an AI request and a model call.
+
+It helps developers:
+
+- turn requests into explicit task graphs
+- run deterministic work before inference
+- validate outputs before escalation
+- make model calls conditional instead of default
+- record telemetry around each execution path
+- compare direct model-first execution against controlled execution
+
+KORA does not try to make models smarter. It controls when, why, and how they are used.
+
+## Current Alpha Evidence
+
+KORA reduced model invocations by 80% in a reproducible deterministic-heavy benchmark workload.
+
+![KORA benchmark evidence card](docs/assets/kora-benchmark-evidence-card.svg)
+
+This result is based on the current deterministic-heavy alpha benchmark and should not be interpreted as a universal production cost-reduction claim.
+
+For methodology, counters, artifact policy, and reproduction commands, see:
+
+- [Runtime evidence reviewer guide](docs/reports/v0.3.0-alpha-runtime-evidence-reviewer-guide.md)
+- [Benchmark artifact policy](docs/reports/benchmark_artifact_policy.md)
+- [Benchmark result summary](docs/benchmarks/kora_benchmark_result_v1_100.md)
+- [Claim registry](docs/claims/kora-claim-registry.md)
+- [Validation roadmap](docs/benchmarks/validation-roadmap.md)
+
+## What We Are Testing Next
+
+1. Runtime-integrated benchmark paths with real model calls
+2. Customer-support triage workloads
+3. RAG answer-routing workloads
+4. Agent budget-guard workloads
+
+We are looking for early developers and AI app teams who want to test KORA against real workloads.
+
+See the [KORA validation roadmap](docs/benchmarks/validation-roadmap.md) for the measurement plan.
+
+## Help Test KORA
+
+Good candidate workloads:
+
+- customer-support triage
+- repetitive RAG workflows
+- agent workflows with budget or escalation rules
+- deterministic-heavy backend workflows
+- LLM apps with high repeated request patterns
+
+To participate, open a GitHub Discussion or contact the project maintainers.
+
+TODO: Add the canonical GitHub Discussions URL and maintainer contact route once they are finalized.
+
+See [Help Test KORA](docs/community/help-test-kora.md) for the workload submission template.
 
 ## Documentation
 
-Start with the [KORA Documentation Index](docs/README.md) to find technical docs, benchmark evidence, claim guidance, community workflows, and operating docs.
+Start with the [KORA Documentation Index](docs/README.md) for the developer path:
 
-For current benchmark evidence and claim boundaries, see the [changelog](CHANGELOG.md), [experiments regeneration guide](experiments/README.md), [benchmark artifact policy](docs/reports/benchmark_artifact_policy.md), [raw artifact freeze decision](docs/reports/v0.2.0-alpha-raw-artifact-freeze-decision.md), [100-task benchmark summary](docs/benchmarks/kora_benchmark_result_v1_100.md), and [claim registry](docs/claims/kora-claim-registry.md).
+- Start
+- Understand
+- Run
+- Inspect evidence
+- Help test
+- Contribute
 
-## What KORA Is
+Useful entry points:
 
-KORA sits between a request and a model call.
-
-Instead of treating every request as an immediate prompt-to-model operation, KORA turns execution into a structured path:
-
-- decompose work into task graphs
-- run deterministic tasks first
-- enforce budgets and stage boundaries
-- validate outputs against explicit structure
-- escalate to model inference only when deterministic execution is insufficient
-- record telemetry for inspection and replay
-
-KORA provides execution control before model invocation.
+- [Examples directory](examples/)
+- [Telemetry and observability counters](docs/telemetry-and-observability.md)
+- [Public language guide](docs/claims/kora-public-language-guide.md)
+- [Community manager guide](docs/community/KORA_COMMUNITY_MANAGER_GUIDE.md)
+- [Contributing guide](CONTRIBUTING.md)
 
 ## Install
 
@@ -67,144 +137,41 @@ Homebrew install path:
 brew install kora
 ```
 
-For local development in this repository:
+For the current repository alpha, use the editable local install in the [3-Minute Local Run](#3-minute-local-run).
 
-```bash
-python3 -m venv .venv
-source .venv/bin/activate
-python3 -m pip install -e ".[dev]"
-```
-
-## Quickstart
-
-For local development in this repository, after installing with `python3 -m pip install -e ".[dev]"`, use:
-
-```bash
-python3 -m kora --help
-python3 -m kora examples list
-python3 -m kora run hello_kora
-python3 -m kora run retry_demo
-python3 -m kora run direct_vs_kora -- --offline
-```
-
-Use `--offline` for the reproducible first-run demo path without OpenAI credentials.
-
-Expected first-run shape:
-
-- `hello_kora` completes with JSON containing `status: "ok"` and `message: "hello from kora"`. It shows the basic deterministic graph path.
-- `retry_demo` completes with `final_output.status: "ok"`, `message: "recovered"`, and an `event_count` greater than one. It shows retry/recovery behavior without changing the public CLI.
-- `direct_vs_kora -- --offline` prints `Running direct_vs_kora in offline mock mode`, then a local direct-vs-KORA comparison with simulated call counters such as `llm_calls_direct_total`, `llm_calls_kora_total`, and `llm_calls_reduced_total`.
-
-The offline comparison uses mock local behavior and does not call external APIs. Treat it as a first-run demonstration, not production benchmark evidence. For benchmark evidence and regeneration policy, see [experiments/README.md](experiments/README.md) and [benchmark_artifact_policy.md](docs/reports/benchmark_artifact_policy.md).
-
-If KORA is installed as a command-line package, the equivalent commands are:
-
-```bash
-kora --help
-kora examples list
-kora run hello_kora
-kora run retry_demo
-kora run direct_vs_kora -- --offline
-```
-
-Online variant:
-
-```bash
-kora run direct_vs_kora
-```
+## Current Examples
 
 Current examples available in this repository:
 
-- examples/hello_kora
-- examples/direct_vs_kora
-- examples/retry_demo
-- examples/real_workload_harness
-- examples/stress_test
+- `examples/hello_kora`
+- `examples/direct_vs_kora`
+- `examples/retry_demo`
+- `examples/real_workload_harness`
+- `examples/stress_test`
+- `examples/runtime_integrated_benchmark`
 
-`telemetry` can be run immediately with the committed sample input at `docs/reports/sample_telemetry_input.json`, or with a JSON artifact generated by a prior run or report flow. Counter definitions are in [telemetry-and-observability.md](docs/telemetry-and-observability.md#current-public-counters).
-After the first-run flow and telemetry summary, see `docs/benchmark-real-app.md` for the next-step benchmark/report path via `real_workload_harness`.
+Use `--offline` for reproducible first-run paths without OpenAI credentials.
 
-## Benchmark Evidence
+## Alpha Scope
 
-Safe claim:
-
-> In a reproducible 100-task deterministic-heavy benchmark workload, KORA-controlled execution avoided 80 of 100 simulated model invocations versus a naive direct baseline.
-
-Current `v0.2.0-alpha` counters:
-
-| Metric | Value |
-|---|---:|
-| Total tasks | `100` |
-| Direct-baseline simulated model invocations | `100` |
-| KORA-controlled simulated model invocations | `20` |
-| Avoided simulated model invocations | `80` |
-| Avoided invocation rate | `80%` |
-| Deterministic outputs checked | `80` |
-| Mismatches | `0` |
-| Fallback/model-candidate skipped | `20` |
-
-The tracked workload is `experiments/workloads/deterministic_heavy_v1_100.json`. Regeneration uses `experiments/generate_workload.py`, `experiments/run_benchmark.py`, and `experiments/summarize_benchmark_results.py`; commands are documented in [benchmark_artifact_policy.md](docs/reports/benchmark_artifact_policy.md).
-
-Raw benchmark JSON artifacts are reproducible outputs and are not frozen or committed for this alpha release. See the [raw artifact freeze decision](docs/reports/v0.2.0-alpha-raw-artifact-freeze-decision.md).
-
-This evidence does not claim production cost reduction proof, real API-cost reduction proof, production benchmark proof, full runtime-integrated benchmark evidence, broad workload superiority proof, or energy reduction evidence.
-
-## What KORA Does
-
-KORA structures requests before inference.
-
-In practice, that means:
-
-- separating deterministic work from inference work
-- making model invocation conditional instead of default
-- enforcing validation and retry boundaries around uncertain steps
-- exposing telemetry so execution can be measured, compared, and debugged
-
-KORA does not try to make models smarter. It controls when, why, and how they are used.
-
-## Why KORA Exists
-
-Many AI applications still default to a simple pattern:
-
-`request -> prompt -> model -> output`
-
-That pattern is easy to start with, but it makes several problems harder to control:
-
-- unnecessary model calls
-- unstable latency envelopes
-- weak execution visibility
-- fragile output handling
-- limited separation between deterministic logic and probabilistic logic
-
-KORA exists to make execution structure explicit. If part of a request can be handled deterministically, it should be handled deterministically first. Inference should be an escalation path, not the baseline.
-
-## Included in the Alpha Surface
+Included in the alpha surface:
 
 - execution-layer primitives for structured AI workloads
 - task graph and scheduler foundations
 - deterministic-first execution and verification components
 - telemetry summarization and reporting
-- repository examples covering direct-vs-structured execution, retries, and stress behavior
+- repository examples covering direct-vs-structured execution, retries, stress behavior, and runtime evidence flow
 - terminal-first developer workflow
 
-## Not Included in the Alpha Surface
+Not included in the alpha surface:
 
 - GUI-first product
-- KORA Studio in the main release
 - chatbot interface
 - desktop AI app
 - model hosting or model serving engine
-
-## Who KORA Is For
-
-KORA is for developers and researchers building AI systems that need stronger execution control.
-
-Typical users include:
-
-- engineers who want deterministic preprocessing and validation before model calls
-- teams comparing direct inference against structured execution
-- developers who need telemetry and bounded execution semantics
-- researchers exploring decomposition, verification, and escalation strategies
+- production cost-reduction proof
+- real API-cost reduction proof
+- energy reduction evidence
 
 ## What KORA Is Not
 
@@ -215,21 +182,26 @@ KORA is not:
 - a ChatGPT alternative
 - a model serving engine
 - another agent wrapper that only forwards prompts to providers
-- a dependent layer inside another platform
 
-KORA is a standalone open-source execution control layer.
+KORA is a standalone open-source execution-control layer for AI workloads.
 
-## Roadmap
+## Contribute
 
-Near-term alpha work:
+Want to contribute? Start with:
 
-- stabilize the terminal CLI around init, run, examples, and trace flows
-- expand example coverage around structured execution patterns
-- improve packaging and distribution for standard developer install paths
-- deepen documentation for task graphs, execution semantics, and telemetry inspection
-- continue benchmark and validation work for deterministic-first execution
+- [CONTRIBUTING.md](CONTRIBUTING.md)
+- [Good first issue candidates](docs/good_first_issues.md)
+- [SECURITY.md](SECURITY.md)
+- [GOVERNANCE.md](GOVERNANCE.md)
+- [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md)
 
-Future work may include KORA Studio, but it is outside the main alpha CLI release surface.
+## Ecosystem
+
+KORA is part of the broader Krako infrastructure.
+
+Related repository:
+
+- Krako 2.0: TBD
 
 ## License
 
