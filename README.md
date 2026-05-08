@@ -65,7 +65,7 @@ KORA does not try to make models smarter. It controls when, why, and how they ar
 
 KORA reduced model invocations by 80% in a reproducible deterministic-heavy benchmark workload.
 
-![KORA benchmark evidence card](docs/assets/kora-benchmark-evidence-card.svg)
+![KORA benchmark evidence card](docs/assets/kora-benchmark-evidence-card.png)
 
 This result is based on the current deterministic-heavy alpha benchmark and should not be interpreted as a universal production cost-reduction claim.
 
@@ -86,7 +86,7 @@ For methodology, counters, artifact policy, and reproduction commands, see:
 
 We are looking for early developers and AI app teams who want to test KORA against real workloads.
 
-![KORA validation roadmap](docs/assets/kora-validation-roadmap.svg)
+![KORA validation roadmap](docs/assets/kora-validation-roadmap.png)
 
 KORA validation roadmap.
 
@@ -106,7 +106,7 @@ To participate, open a GitHub Discussion or contact the project maintainers.
 
 TODO: Add the canonical GitHub Discussions URL and maintainer contact route once they are finalized.
 
-![KORA help-test flow](docs/assets/kora-help-test-flow.svg)
+![KORA help-test flow](docs/assets/kora-help-test-flow.png)
 
 How to help test KORA with a real workload.
 
