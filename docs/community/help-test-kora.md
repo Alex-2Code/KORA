@@ -27,6 +27,8 @@ The goal is to measure when structure, deterministic execution, validation, and 
 
 ![KORA help-test flow](../assets/kora-help-test-flow.svg)
 
+How to help test KORA with a real workload.
+
 ## Good Candidate Workloads
 
 - customer-support triage
@@ -93,4 +95,3 @@ Do not expect:
 - formal government validation
 - signed partner validation unless actually signed and documented
 - guaranteed adoption, funding, or support commitments
-

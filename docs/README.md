@@ -18,6 +18,10 @@ Most AI apps call the model too soon. KORA changes the default. Structure first.
 
 ## Understand
 
+![KORA control layer architecture](assets/kora-control-layer-architecture.svg)
+
+KORA control layer architecture.
+
 - [KORA Claim Registry](claims/kora-claim-registry.md)
 - [KORA Public Language Guide](claims/kora-public-language-guide.md)
 - [Telemetry and observability counters](telemetry-and-observability.md#current-public-counters)

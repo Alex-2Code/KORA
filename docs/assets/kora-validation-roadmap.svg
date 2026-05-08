@@ -1,36 +1,61 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="420" viewBox="0 0 1200 420" role="img" aria-labelledby="title desc">
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="520" viewBox="0 0 1280 520" role="img" aria-labelledby="title desc">
   <title id="title">KORA validation roadmap</title>
-  <desc id="desc">A roadmap from current alpha evidence to real model-call validation and workload-specific tests.</desc>
-  <rect width="1200" height="420" fill="#f8fafc"/>
-  <text x="56" y="58" fill="#0f172a" font-family="Inter, Arial, sans-serif" font-size="30" font-weight="700">KORA Validation Roadmap</text>
-  <text x="56" y="90" fill="#475569" font-family="Inter, Arial, sans-serif" font-size="17">Current alpha evidence moves toward real model-call and workload-specific validation.</text>
-  <g fill="none" stroke="#0891b2" stroke-width="4" stroke-linecap="round">
-    <path d="M170 222 H1000"/>
-    <path d="M980 210 L1000 222 L980 234"/>
+  <desc id="desc">A technical roadmap from current alpha benchmark evidence to real model-call runtime validation, customer-support triage, RAG answer routing, and agent budget guard workloads.</desc>
+  <defs>
+    <filter id="shadow" x="-10%" y="-20%" width="120%" height="140%">
+      <feDropShadow dx="0" dy="10" stdDeviation="12" flood-color="#020617" flood-opacity="0.35"/>
+    </filter>
+    <linearGradient id="panel" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0f1f33"/>
+      <stop offset="1" stop-color="#0a1322"/>
+    </linearGradient>
+  </defs>
+  <rect width="1280" height="520" fill="#08111f"/>
+  <path d="M0 420 C220 350 330 470 540 390 C780 300 930 360 1280 250 L1280 520 L0 520 Z" fill="#0b1b2d" opacity="0.8"/>
+  <text x="64" y="70" fill="#e6f6ff" font-family="Inter, Arial, sans-serif" font-size="34" font-weight="800">KORA Validation Roadmap</text>
+  <text x="64" y="105" fill="#8bdcf8" font-family="Inter, Arial, sans-serif" font-size="17">From current alpha benchmark evidence toward real workload testing.</text>
+  <g fill="none" stroke="#22d3ee" stroke-width="5" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M170 288 H1078"/>
+    <path d="M1052 272 L1078 288 L1052 304"/>
+  </g>
+  <g font-family="Inter, Arial, sans-serif" text-anchor="middle" filter="url(#shadow)">
+    <g fill="url(#panel)" stroke="#1f9fc1" stroke-width="2">
+      <rect x="58" y="185" width="196" height="156" rx="10"/>
+      <rect x="294" y="155" width="196" height="186" rx="10" stroke="#f59e0b"/>
+      <rect x="530" y="185" width="196" height="156" rx="10"/>
+      <rect x="766" y="185" width="196" height="156" rx="10"/>
+      <rect x="1002" y="185" width="196" height="156" rx="10"/>
+    </g>
+    <circle cx="156" cy="288" r="9" fill="#22d3ee"/>
+    <circle cx="392" cy="288" r="10" fill="#f59e0b"/>
+    <circle cx="628" cy="288" r="9" fill="#22d3ee"/>
+    <circle cx="864" cy="288" r="9" fill="#22d3ee"/>
+    <circle cx="1100" cy="288" r="9" fill="#22d3ee"/>
   </g>
   <g font-family="Inter, Arial, sans-serif" text-anchor="middle">
-    <g fill="#ffffff" stroke="#0891b2" stroke-width="2">
-      <rect x="70" y="150" width="180" height="144" rx="8"/>
-      <rect x="290" y="150" width="180" height="144" rx="8"/>
-      <rect x="510" y="150" width="180" height="144" rx="8"/>
-      <rect x="730" y="150" width="180" height="144" rx="8"/>
-      <rect x="950" y="150" width="180" height="144" rx="8"/>
-    </g>
-    <text x="160" y="196" fill="#0f172a" font-size="17" font-weight="700">Current alpha</text>
-    <text x="160" y="226" fill="#475569" font-size="14">deterministic-heavy</text>
-    <text x="160" y="248" fill="#475569" font-size="14">benchmark</text>
-    <text x="380" y="190" fill="#0f172a" font-size="17" font-weight="700">Real model-call</text>
-    <text x="380" y="220" fill="#475569" font-size="14">runtime-integrated</text>
-    <text x="380" y="242" fill="#475569" font-size="14">paths</text>
-    <text x="600" y="196" fill="#0f172a" font-size="17" font-weight="700">Support triage</text>
-    <text x="600" y="226" fill="#475569" font-size="14">repetitive support</text>
-    <text x="600" y="248" fill="#475569" font-size="14">routing</text>
-    <text x="820" y="196" fill="#0f172a" font-size="17" font-weight="700">RAG routing</text>
-    <text x="820" y="226" fill="#475569" font-size="14">answer and refusal</text>
-    <text x="820" y="248" fill="#475569" font-size="14">paths</text>
-    <text x="1040" y="190" fill="#0f172a" font-size="17" font-weight="700">Agent budget</text>
-    <text x="1040" y="220" fill="#475569" font-size="14">guardrails and</text>
-    <text x="1040" y="242" fill="#475569" font-size="14">escalation</text>
+    <text x="156" y="225" fill="#e6f6ff" font-size="18" font-weight="800">Current Alpha</text>
+    <text x="156" y="251" fill="#e6f6ff" font-size="18" font-weight="800">Benchmark</text>
+    <text x="156" y="318" fill="#9fb6c9" font-size="13">deterministic-heavy</text>
+    <text x="156" y="337" fill="#9fb6c9" font-size="13">evidence baseline</text>
+    <text x="392" y="202" fill="#fff7ed" font-size="18" font-weight="800">Real Model-Call</text>
+    <text x="392" y="228" fill="#fff7ed" font-size="18" font-weight="800">Runtime Path</text>
+    <text x="392" y="318" fill="#fed7aa" font-size="13">conditional escalation</text>
+    <text x="392" y="337" fill="#fed7aa" font-size="13">with measured calls</text>
+    <text x="628" y="225" fill="#e6f6ff" font-size="18" font-weight="800">Customer-Support</text>
+    <text x="628" y="251" fill="#e6f6ff" font-size="18" font-weight="800">Triage</text>
+    <text x="628" y="318" fill="#9fb6c9" font-size="13">policy and routing</text>
+    <text x="628" y="337" fill="#9fb6c9" font-size="13">workloads</text>
+    <text x="864" y="225" fill="#e6f6ff" font-size="18" font-weight="800">RAG Answer</text>
+    <text x="864" y="251" fill="#e6f6ff" font-size="18" font-weight="800">Routing</text>
+    <text x="864" y="318" fill="#9fb6c9" font-size="13">source-backed paths</text>
+    <text x="864" y="337" fill="#9fb6c9" font-size="13">and escalation</text>
+    <text x="1100" y="225" fill="#e6f6ff" font-size="18" font-weight="800">Agent Budget</text>
+    <text x="1100" y="251" fill="#e6f6ff" font-size="18" font-weight="800">Guard</text>
+    <text x="1100" y="318" fill="#9fb6c9" font-size="13">retry and budget</text>
+    <text x="1100" y="337" fill="#9fb6c9" font-size="13">boundaries</text>
   </g>
-  <text x="56" y="360" fill="#0f172a" font-family="Inter, Arial, sans-serif" font-size="20" font-weight="700">Measure: requests, model calls, avoided calls, latency, tokens, cost where applicable, fallbacks, errors, validation.</text>
+  <g font-family="Inter, Arial, sans-serif" font-size="14">
+    <rect x="64" y="425" width="1152" height="44" rx="8" fill="#0f1f33" stroke="#17334d"/>
+    <text x="86" y="453" fill="#b9d7e8">Measure: total requests, baseline calls, KORA-controlled calls, avoided calls, latency, tokens, fallback count, error count, validation result.</text>
+  </g>
 </svg>

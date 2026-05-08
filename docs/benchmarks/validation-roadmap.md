@@ -12,6 +12,8 @@ The validation roadmap turns that message into measurable evidence. Each target 
 
 ![KORA validation roadmap](../assets/kora-validation-roadmap.svg)
 
+KORA validation roadmap.
+
 ## Current Alpha Evidence
 
 The current approved public claim is:

@@ -86,6 +86,10 @@ For methodology, counters, artifact policy, and reproduction commands, see:
 
 We are looking for early developers and AI app teams who want to test KORA against real workloads.
 
+![KORA validation roadmap](docs/assets/kora-validation-roadmap.svg)
+
+KORA validation roadmap.
+
 See the [KORA validation roadmap](docs/benchmarks/validation-roadmap.md) for the measurement plan.
 
 ## Help Test KORA
@@ -101,6 +105,10 @@ Good candidate workloads:
 To participate, open a GitHub Discussion or contact the project maintainers.
 
 TODO: Add the canonical GitHub Discussions URL and maintainer contact route once they are finalized.
+
+![KORA help-test flow](docs/assets/kora-help-test-flow.svg)
+
+How to help test KORA with a real workload.
 
 See [Help Test KORA](docs/community/help-test-kora.md) for the workload submission template.
 
