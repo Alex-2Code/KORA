@@ -63,6 +63,17 @@ For the customer-support triage local validation example, use:
 
 Do not include API keys, tokens, credentials, private hostnames, private dataset names, or raw provider response IDs unless explicitly approved.
 
+## Generated Local Validation Reports
+
+Local no-network validation examples can generate reviewer-facing Markdown reports from aggregate counters:
+
+```bash
+python3 -m kora run customer_support_triage_fake_validation -- --offline --report-md /tmp/kora_customer_support_validation.md
+python3 -m kora run real_model_call_validation_fake -- --offline --report-md /tmp/kora_local_validation.md
+```
+
+Write generated reports to `/tmp` or another local output path unless the report is intentionally selected for review. Generated reports should not include secrets, raw provider responses, private data, production data, or raw prompts.
+
 ## Commands
 
 ```bash

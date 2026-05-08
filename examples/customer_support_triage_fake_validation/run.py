@@ -13,6 +13,7 @@ from kora.model_call import (
     ModelCallResponse,
     ModelCallSummary,
 )
+from kora.validation_report import render_local_validation_markdown
 
 DEFAULT_WORKLOAD = Path("experiments/workloads/customer_support_triage_synthetic_v1.json")
 CLAIM_BOUNDARY = (
@@ -194,6 +195,7 @@ def build_customer_support_triage_fake_validation_summary(
         "latency_total_ms": kora_summary.latency_total_ms,
         "raw_prompts_emitted": False,
         "raw_responses_emitted": False,
+        "command": "python3 -m kora run customer_support_triage_fake_validation -- --offline",
         "claim_boundary": CLAIM_BOUNDARY,
         "notes": [
             "Synthetic customer-support triage workload only.",
@@ -215,6 +217,11 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
         default=str(DEFAULT_WORKLOAD),
         help="Path to customer-support triage workload JSON.",
     )
+    parser.add_argument(
+        "--report-md",
+        default=None,
+        help="Optional path for a generated Markdown report.",
+    )
     return parser.parse_args(argv)
 
 
@@ -227,6 +234,10 @@ def main(argv: list[str] | None = None) -> int:
         offline=True,
         workload_path=Path(args.workload),
     )
+    if args.report_md:
+        report_path = Path(args.report_md)
+        report_path.parent.mkdir(parents=True, exist_ok=True)
+        report_path.write_text(render_local_validation_markdown(summary), encoding="utf-8")
     print(json.dumps(summary, indent=2, sort_keys=True))
     return 0 if summary["ok"] else 1
 

@@ -10,6 +10,7 @@ from __future__ import annotations
 import argparse
 import json
 from dataclasses import dataclass
+from pathlib import Path
 from typing import Any, Literal
 
 from kora.model_call import (
@@ -18,6 +19,7 @@ from kora.model_call import (
     ModelCallResponse,
     ModelCallSummary,
 )
+from kora.validation_report import render_local_validation_markdown
 
 Route = Literal["deterministic", "model_required"]
 
@@ -223,6 +225,7 @@ def build_fake_model_call_validation_summary(
         "privacy_class": "synthetic",
         "raw_prompts_emitted": False,
         "raw_responses_emitted": False,
+        "command": "python3 -m kora run real_model_call_validation_fake -- --offline",
         "claim_boundary": CLAIM_BOUNDARY,
         "notes": [
             "Synthetic workload only.",
@@ -239,6 +242,11 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
         description="Run the local no-network model-call validation example."
     )
     parser.add_argument("--offline", action="store_true", help="required; run without network calls")
+    parser.add_argument(
+        "--report-md",
+        default=None,
+        help="Optional path for a generated Markdown report.",
+    )
     return parser.parse_args(argv)
 
 
@@ -248,6 +256,10 @@ def main(argv: list[str] | None = None) -> int:
         raise SystemExit("real_model_call_validation_fake requires --offline.")
 
     summary = build_fake_model_call_validation_summary(offline=True)
+    if args.report_md:
+        report_path = Path(args.report_md)
+        report_path.parent.mkdir(parents=True, exist_ok=True)
+        report_path.write_text(render_local_validation_markdown(summary), encoding="utf-8")
     print(json.dumps(summary, indent=2, sort_keys=True))
     return 0 if summary["ok"] else 1
 

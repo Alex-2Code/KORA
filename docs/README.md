@@ -48,6 +48,7 @@ python3 -m kora run runtime_integrated_benchmark -- --offline
 ```
 
 Some example command names are compatibility-preserving. The local validation examples emit public-facing `local_validation` provider labels.
+Use `--report-md /tmp/kora_validation.md` with local validation examples to generate reviewer-facing Markdown reports from aggregate counters.
 
 ## Inspect Evidence
 
