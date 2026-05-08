@@ -274,6 +274,8 @@ The example validates model-call counter plumbing before real local or remote pr
 
 The example can generate a reviewer-facing Markdown report from aggregate counters with `--report-md`. Generated reports are evidence packets for local/no-network review before real provider or production validation.
 
+For a reviewer-facing walkthrough, see the [local no-network validation reviewer packet](local-validation-reviewer-packet.md).
+
 Claim boundary: this is not real provider validation, real API-cost validation, production validation, production cost reduction proof, broad workload superiority proof, or energy reduction evidence.
 
 ## Customer-Support Triage Local Validation Example

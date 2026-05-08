@@ -74,6 +74,8 @@ python3 -m kora run real_model_call_validation_fake -- --offline --report-md /tm
 
 Write generated reports to `/tmp` or another local output path unless the report is intentionally selected for review. Generated reports should not include secrets, raw provider responses, private data, production data, or raw prompts.
 
+For the recommended reviewer-facing walkthrough, see the [local no-network validation reviewer packet](local-validation-reviewer-packet.md).
+
 ## Commands
 
 ```bash

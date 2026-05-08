@@ -65,10 +65,11 @@ Use this path for the current `v0.3.0-alpha` prerelease runtime evidence and reg
 9. Validation roadmap: [`docs/benchmarks/validation-roadmap.md`](benchmarks/validation-roadmap.md)
 10. Real model-call validation design: [`docs/benchmarks/real-model-call-validation-design.md`](benchmarks/real-model-call-validation-design.md)
 11. Real model-call validation report template: [`docs/benchmarks/real-model-call-validation-report-template.md`](benchmarks/real-model-call-validation-report-template.md)
-12. Local no-network model-call validation example: [`examples/real_model_call_validation_fake`](../examples/real_model_call_validation_fake)
-13. Customer-support triage local validation example: [`examples/customer_support_triage_fake_validation`](../examples/customer_support_triage_fake_validation)
-14. Customer-support triage workload spec: [`docs/workloads/customer-support-triage.md`](workloads/customer-support-triage.md)
-15. Claim boundary source: [`docs/claims/kora-claim-registry.md`](claims/kora-claim-registry.md)
+12. Local validation reviewer packet: [`docs/benchmarks/local-validation-reviewer-packet.md`](benchmarks/local-validation-reviewer-packet.md)
+13. Local no-network model-call validation example: [`examples/real_model_call_validation_fake`](../examples/real_model_call_validation_fake)
+14. Customer-support triage local validation example: [`examples/customer_support_triage_fake_validation`](../examples/customer_support_triage_fake_validation)
+15. Customer-support triage workload spec: [`docs/workloads/customer-support-triage.md`](workloads/customer-support-triage.md)
+16. Claim boundary source: [`docs/claims/kora-claim-registry.md`](claims/kora-claim-registry.md)
 
 Current approved public claim:
 
