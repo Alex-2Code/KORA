@@ -94,6 +94,8 @@ See the [KORA validation roadmap](docs/benchmarks/validation-roadmap.md) for the
 
 See the [real model-call validation design](docs/benchmarks/real-model-call-validation-design.md) for the next measurement path.
 
+A no-network fake model-call validation example is available for testing the measured invocation counter path.
+
 ## Help Test KORA
 
 Good candidate workloads:

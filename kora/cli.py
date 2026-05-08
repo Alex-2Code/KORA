@@ -31,6 +31,7 @@ def _example_descriptions() -> dict[str, str]:
         "retry_demo": "retry/recovery flow example",
         "direct_vs_kora": "direct call vs KORA-controlled path",
         "real_workload_harness": "benchmark/report flow example",
+        "real_model_call_validation_fake": "no-network fake model-call validation example",
         "runtime_integrated_benchmark": "initial runtime-path benchmark harness",
         "stress_test": "repeated-run stress harness",
     }

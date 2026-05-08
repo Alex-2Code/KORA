@@ -258,6 +258,20 @@ The fake deterministic adapter is the only local implementation added at this st
 
 Future local or remote provider adapters can plug into the same interface. Remote provider calls must use environment variables for configuration and must not commit secrets, raw prompts, raw responses, private user data, or proprietary datasets.
 
+## Fake Model-Call Runtime Example
+
+The first runtime validation example is a no-network fake model-call path:
+
+```bash
+python3 -m kora run real_model_call_validation_fake -- --offline
+```
+
+This example uses `DeterministicFakeModelCallAdapter` with a synthetic 10-request workload. The direct baseline calls the fake adapter for every request. The KORA-controlled path handles deterministic routes without fake model calls and escalates only model-required routes through the provider-neutral adapter boundary.
+
+The example validates model-call counter plumbing before real local or remote provider adapters are added. It requires no secrets, uses no network, emits aggregate counters only, and does not commit raw prompts or raw provider responses.
+
+Claim boundary: this is not real provider validation, real API-cost validation, production validation, production cost reduction proof, broad workload superiority proof, or energy reduction evidence.
+
 ## Telemetry Output
 
 Real model-call validation should emit sanitized artifacts only.
