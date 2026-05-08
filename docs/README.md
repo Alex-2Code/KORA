@@ -40,6 +40,7 @@ Core local commands:
 ```bash
 python3 -m kora --help
 python3 -m kora examples list
+python3 -m kora run real_model_call_validation_fake -- --offline
 python3 -m kora run direct_vs_kora -- --offline
 python3 -m kora run runtime_integrated_benchmark -- --offline
 ```
@@ -59,7 +60,8 @@ Use this path for the current `v0.3.0-alpha` prerelease runtime evidence and reg
 9. Validation roadmap: [`docs/benchmarks/validation-roadmap.md`](benchmarks/validation-roadmap.md)
 10. Real model-call validation design: [`docs/benchmarks/real-model-call-validation-design.md`](benchmarks/real-model-call-validation-design.md)
 11. Real model-call validation report template: [`docs/benchmarks/real-model-call-validation-report-template.md`](benchmarks/real-model-call-validation-report-template.md)
-12. Claim boundary source: [`docs/claims/kora-claim-registry.md`](claims/kora-claim-registry.md)
+12. Fake model-call validation example: [`examples/real_model_call_validation_fake`](../examples/real_model_call_validation_fake)
+13. Claim boundary source: [`docs/claims/kora-claim-registry.md`](claims/kora-claim-registry.md)
 
 Current approved public claim:
 

@@ -46,6 +46,13 @@ Sanitized environment details:
 - Token counter source:
 - Provider configuration source: environment variables only, if remote provider mode is used
 
+For the no-network fake validation example, use:
+
+- Mode: `fake_model_call_validation`
+- Provider/runtime: `fake`
+- Model: `deterministic-fake`
+- Cost summary: `N/A` unless a real provider with explicit pricing is configured later
+
 Do not include API keys, tokens, credentials, private hostnames, private dataset names, or raw provider response IDs unless explicitly approved.
 
 ## Commands
