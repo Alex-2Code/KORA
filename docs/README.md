@@ -112,11 +112,11 @@ Good candidate workloads:
 - [Manual GitHub setup checklist](ops/2026-05-06-kora-manual-github-setup-checklist.md)
 - [Repository hygiene audit](ops/2026-05-06-kora-repository-hygiene-audit.md)
 
-## Public / Private Boundary Note
+## Public Documentation Boundary Note
 
-Most docs in this repository are public-facing unless marked internal.
+Public KORA documentation should read as normal open-source project documentation.
 
-Internal EOD/SOD prompts are operating artifacts. They should not contain private credentials, personal data, private partner notes, unpublished investor conversations, or other sensitive information.
+Do not place private credentials, personal data, unpublished partner notes, or internal operating material in public docs.
 
 ## Evidence Preservation Note
 
