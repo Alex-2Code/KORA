@@ -41,6 +41,7 @@ Core local commands:
 ```bash
 python3 -m kora --help
 python3 -m kora examples list
+python3 -m kora run customer_support_triage_fake_validation -- --offline
 python3 -m kora run real_model_call_validation_fake -- --offline
 python3 -m kora run direct_vs_kora -- --offline
 python3 -m kora run runtime_integrated_benchmark -- --offline
@@ -62,8 +63,9 @@ Use this path for the current `v0.3.0-alpha` prerelease runtime evidence and reg
 10. Real model-call validation design: [`docs/benchmarks/real-model-call-validation-design.md`](benchmarks/real-model-call-validation-design.md)
 11. Real model-call validation report template: [`docs/benchmarks/real-model-call-validation-report-template.md`](benchmarks/real-model-call-validation-report-template.md)
 12. Fake model-call validation example: [`examples/real_model_call_validation_fake`](../examples/real_model_call_validation_fake)
-13. Customer-support triage workload spec: [`docs/workloads/customer-support-triage.md`](workloads/customer-support-triage.md)
-14. Claim boundary source: [`docs/claims/kora-claim-registry.md`](claims/kora-claim-registry.md)
+13. Customer-support triage fake validation example: [`examples/customer_support_triage_fake_validation`](../examples/customer_support_triage_fake_validation)
+14. Customer-support triage workload spec: [`docs/workloads/customer-support-triage.md`](workloads/customer-support-triage.md)
+15. Claim boundary source: [`docs/claims/kora-claim-registry.md`](claims/kora-claim-registry.md)
 
 Current approved public claim:
 

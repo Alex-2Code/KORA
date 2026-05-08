@@ -53,6 +53,14 @@ For the no-network fake validation example, use:
 - Model: `deterministic-fake`
 - Cost summary: `N/A` unless a real provider with explicit pricing is configured later
 
+For the customer-support triage fake validation example, use:
+
+- Mode: `customer_support_triage_fake_validation`
+- Workload: `customer_support_triage_synthetic_v1`
+- Provider/runtime: `fake`
+- Model: `deterministic-fake`
+- Cost summary: `N/A` unless a real provider with explicit pricing is configured later
+
 Do not include API keys, tokens, credentials, private hostnames, private dataset names, or raw provider response IDs unless explicitly approved.
 
 ## Commands

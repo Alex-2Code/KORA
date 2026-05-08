@@ -96,6 +96,8 @@ See the [real model-call validation design](docs/benchmarks/real-model-call-vali
 
 A no-network fake model-call validation example is available for testing the measured invocation counter path.
 
+Customer-support triage fake validation is available as a no-network example.
+
 ## Help Test KORA
 
 Good candidate workloads:

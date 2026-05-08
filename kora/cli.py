@@ -29,6 +29,7 @@ def _example_descriptions() -> dict[str, str]:
     return {
         "hello_kora": "basic deterministic hello-world graph",
         "retry_demo": "retry/recovery flow example",
+        "customer_support_triage_fake_validation": "customer-support triage fake validation example",
         "direct_vs_kora": "direct call vs KORA-controlled path",
         "real_workload_harness": "benchmark/report flow example",
         "real_model_call_validation_fake": "no-network fake model-call validation example",

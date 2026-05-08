@@ -272,6 +272,18 @@ The example validates model-call counter plumbing before real local or remote pr
 
 Claim boundary: this is not real provider validation, real API-cost validation, production validation, production cost reduction proof, broad workload superiority proof, or energy reduction evidence.
 
+## Customer-Support Triage Fake Validation Example
+
+The first application-oriented fake validation example uses the synthetic customer-support triage workload:
+
+```bash
+python3 -m kora run customer_support_triage_fake_validation -- --offline
+```
+
+This extends fake/local validation from generic counter plumbing to a realistic support triage workload shape. It still uses `DeterministicFakeModelCallAdapter`, requires no secrets, makes no network calls, and emits aggregate counters only.
+
+This is a step before local model or remote provider validation. It is not real provider validation, real API-cost validation, or production validation.
+
 ## Telemetry Output
 
 Real model-call validation should emit sanitized artifacts only.

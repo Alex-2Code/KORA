@@ -211,6 +211,26 @@ For the 12-request synthetic workload, expected ideal routing is:
 
 These are workload-design expectations, not measured production results.
 
+## Fake Runtime Validation Example
+
+Run the no-network customer-support triage fake validation example:
+
+```bash
+python3 -m kora run customer_support_triage_fake_validation -- --offline
+```
+
+Expected counters for the current synthetic workload:
+
+- `total_requests`: 12
+- `baseline_model_calls`: 12
+- `kora_model_calls`: 4
+- `avoided_model_calls`: 8
+- `avoided_model_call_rate`: 0.6667
+
+This example uses `DeterministicFakeModelCallAdapter` with synthetic data only. It is fake, local, and no-network validation for the routing and model-call counter path.
+
+It does not prove real provider validation, real API-cost reduction, production validation, production cost reduction, broad workload superiority, or energy reduction.
+
 ## Validation Rules
 
 Example validation rules:
