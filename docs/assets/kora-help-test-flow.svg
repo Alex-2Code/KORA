@@ -1,56 +1,114 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="460" viewBox="0 0 1280 460" role="img" aria-labelledby="title desc">
-  <title id="title">KORA help-test flow</title>
-  <desc id="desc">A six-step workflow for external developers to bring a workload, identify deterministic paths, define escalation rules, run KORA, inspect telemetry, and share results.</desc>
+<svg xmlns="http://www.w3.org/2000/svg" width="1920" height="1080" viewBox="0 0 1920 1080" role="img" aria-labelledby="title desc">
+  <title id="title">How To Help Test KORA</title>
+  <desc id="desc">Six-step KORA workload testing workflow with sanitized workload warning.</desc>
   <defs>
-    <filter id="shadow" x="-10%" y="-20%" width="120%" height="140%">
-      <feDropShadow dx="0" dy="8" stdDeviation="10" flood-color="#020617" flood-opacity="0.22"/>
+    <radialGradient id="bg" cx="50%" cy="48%" r="64%">
+      <stop offset="0" stop-color="#071A2F"/>
+      <stop offset="0.58" stop-color="#04111F"/>
+      <stop offset="1" stop-color="#020B18"/>
+    </radialGradient>
+    <filter id="cyanGlow" x="-40%" y="-40%" width="180%" height="180%">
+      <feGaussianBlur stdDeviation="3.5" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
     </filter>
+    <filter id="amberGlow" x="-40%" y="-40%" width="180%" height="180%">
+      <feGaussianBlur stdDeviation="4" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <marker id="arrowCyan" markerWidth="14" markerHeight="14" refX="10" refY="7" orient="auto">
+      <path d="M2 2 L10 7 L2 12" fill="none" stroke="#25D9E6" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+    </marker>
+    <style>
+      .font { font-family: "IBM Plex Mono", "JetBrains Mono", "Roboto Mono", Menlo, Consolas, monospace; }
+      .title { fill: #F4F7FB; font-size: 68px; font-weight: 800; letter-spacing: 1px; }
+      .subtitle { fill: #5BE7F2; font-size: 30px; }
+      .card { fill: #071629; stroke: #25D9E6; stroke-width: 2.4; }
+      .cardAmber { fill: #071629; stroke: #F5B82E; stroke-width: 2.5; }
+      .cyan { fill: #5BE7F2; stroke: #25D9E6; }
+      .amber { fill: #F5B82E; stroke: #F5B82E; }
+      .white { fill: #F4F7FB; }
+      .muted { fill: #A8B3C7; }
+      .line { stroke: #25D9E6; stroke-width: 2.4; fill: none; }
+      .lineAmber { stroke: #F5B82E; stroke-width: 2.4; fill: none; }
+    </style>
   </defs>
-  <rect width="1280" height="460" fill="#f8fafc"/>
-  <text x="58" y="62" fill="#0f172a" font-family="Inter, Arial, sans-serif" font-size="32" font-weight="800">How To Help Test KORA</text>
-  <text x="58" y="96" fill="#475569" font-family="Inter, Arial, sans-serif" font-size="17">Bring a sanitized workload and inspect the execution path.</text>
-  <g fill="none" stroke="#0891b2" stroke-width="4" stroke-linecap="round" stroke-linejoin="round">
-    <path d="M160 240 H1120"/>
-    <path d="M1095 224 L1120 240 L1095 256"/>
-  </g>
-  <g filter="url(#shadow)">
-    <rect x="50" y="160" width="160" height="160" rx="10" fill="#ffffff" stroke="#0891b2" stroke-width="2"/>
-    <rect x="250" y="160" width="160" height="160" rx="10" fill="#ffffff" stroke="#0891b2" stroke-width="2"/>
-    <rect x="450" y="145" width="160" height="175" rx="10" fill="#fff7ed" stroke="#f59e0b" stroke-width="2.5"/>
-    <rect x="650" y="160" width="160" height="160" rx="10" fill="#ffffff" stroke="#0891b2" stroke-width="2"/>
-    <rect x="850" y="160" width="160" height="160" rx="10" fill="#ffffff" stroke="#0891b2" stroke-width="2"/>
-    <rect x="1050" y="160" width="160" height="160" rx="10" fill="#ffffff" stroke="#0891b2" stroke-width="2"/>
-  </g>
-  <g font-family="Inter, Arial, sans-serif" text-anchor="middle">
-    <g fill="#0891b2" font-size="14" font-weight="800">
-      <text x="130" y="190">01</text>
-      <text x="330" y="190">02</text>
-      <text x="730" y="190">04</text>
-      <text x="930" y="190">05</text>
-      <text x="1130" y="190">06</text>
+  <rect width="1920" height="1080" fill="url(#bg)"/>
+  <rect x="142" y="334" width="1636" height="485" rx="10" fill="#020B18" opacity="0.24"/>
+  <text x="960" y="208" class="font title" text-anchor="middle">How To Help Test KORA</text>
+  <text x="960" y="270" class="font subtitle" text-anchor="middle">Bring a sanitized workload and inspect the execution path</text>
+
+  <g class="font" filter="url(#cyanGlow)">
+    <g transform="translate(208 342)">
+      <rect class="card" width="205" height="442" rx="17"/>
+      <path class="line" d="M62 42 h55 l32 32 v114 h-87z M117 42 v32 h32 M78 82 h30 M78 112 h55 M78 142 h55 M78 172 h55"/>
+      <path class="line" d="M20 192 h165"/>
+      <text x="102.5" y="247" class="cyan" font-size="27" text-anchor="middle">01</text>
+      <text x="102.5" y="294" class="white" font-size="27" font-weight="700" text-anchor="middle">Bring a</text>
+      <text x="102.5" y="331" class="white" font-size="27" font-weight="700" text-anchor="middle">Workload</text>
+      <text x="102.5" y="394" class="muted" font-size="16" text-anchor="middle">sanitized inputs</text>
     </g>
-    <text x="530" y="176" fill="#b45309" font-size="14" font-weight="800">03</text>
-    <text x="130" y="224" fill="#0f172a" font-size="17" font-weight="800">Bring a</text>
-    <text x="130" y="248" fill="#0f172a" font-size="17" font-weight="800">Workload</text>
-    <text x="130" y="286" fill="#64748b" font-size="13">sanitized inputs</text>
-    <text x="330" y="216" fill="#0f172a" font-size="17" font-weight="800">Identify</text>
-    <text x="330" y="240" fill="#0f172a" font-size="17" font-weight="800">Deterministic</text>
-    <text x="330" y="264" fill="#0f172a" font-size="17" font-weight="800">Paths</text>
-    <text x="330" y="296" fill="#64748b" font-size="13">rules and repeats</text>
-    <text x="530" y="210" fill="#92400e" font-size="17" font-weight="800">Define</text>
-    <text x="530" y="234" fill="#92400e" font-size="17" font-weight="800">Escalation</text>
-    <text x="530" y="258" fill="#92400e" font-size="17" font-weight="800">Rules</text>
-    <text x="530" y="296" fill="#b45309" font-size="13">when model calls are needed</text>
-    <text x="730" y="224" fill="#0f172a" font-size="17" font-weight="800">Run</text>
-    <text x="730" y="248" fill="#0f172a" font-size="17" font-weight="800">KORA</text>
-    <text x="730" y="286" fill="#64748b" font-size="13">local runtime path</text>
-    <text x="930" y="224" fill="#0f172a" font-size="17" font-weight="800">Inspect</text>
-    <text x="930" y="248" fill="#0f172a" font-size="17" font-weight="800">Telemetry</text>
-    <text x="930" y="286" fill="#64748b" font-size="13">counters and events</text>
-    <text x="1130" y="224" fill="#0f172a" font-size="17" font-weight="800">Share</text>
-    <text x="1130" y="248" fill="#0f172a" font-size="17" font-weight="800">Results</text>
-    <text x="1130" y="286" fill="#64748b" font-size="13">reviewed evidence</text>
+    <path d="M419 476 h34" class="line" marker-end="url(#arrowCyan)"/>
+    <g transform="translate(467 342)">
+      <rect class="card" width="205" height="442" rx="17"/>
+      <circle cx="58" cy="74" r="13" class="line"/><circle cx="119" cy="60" r="13" class="line"/><circle cx="58" cy="126" r="13" class="line"/><circle cx="154" cy="126" r="13" class="line"/>
+      <path class="line" d="M70 70 L107 62 M58 87 v26 M71 126 h46 M119 73 v30 M119 103 h34 v12"/>
+      <path class="line" stroke-dasharray="9 8" d="M80 126 h52"/>
+      <path class="line" d="M20 192 h165"/>
+      <text x="102.5" y="247" class="cyan" font-size="27" text-anchor="middle">02</text>
+      <text x="102.5" y="294" class="white" font-size="27" font-weight="700" text-anchor="middle">Identify</text>
+      <text x="102.5" y="331" class="white" font-size="27" font-weight="700" text-anchor="middle">Deterministic</text>
+      <text x="102.5" y="368" class="white" font-size="27" font-weight="700" text-anchor="middle">Paths</text>
+      <text x="102.5" y="409" class="muted" font-size="16" text-anchor="middle">rules and repeats</text>
+    </g>
+    <path d="M678 476 h34" class="line" marker-end="url(#arrowCyan)"/>
+    <g transform="translate(720 342)" filter="url(#amberGlow)">
+      <rect class="cardAmber" width="220" height="442" rx="17"/>
+      <path class="lineAmber" d="M82 48 h74 v110 h-74z M105 48 q0 -18 16 -18 q16 0 16 18 M93 84 l12 12 l24 -28 M93 119 l12 12 l24 -28 M93 154 l12 12 l24 -28"/>
+      <path class="lineAmber" d="M148 136 l31 55 h-62z M148 154 v17 M148 181 v3"/>
+      <path class="lineAmber" d="M20 192 h180"/>
+      <text x="110" y="247" class="amber" font-size="27" text-anchor="middle">03</text>
+      <text x="110" y="294" class="white" font-size="27" font-weight="700" text-anchor="middle">Define</text>
+      <text x="110" y="331" class="white" font-size="27" font-weight="700" text-anchor="middle">Escalation</text>
+      <text x="110" y="368" class="white" font-size="27" font-weight="700" text-anchor="middle">Rules</text>
+      <text x="110" y="409" fill="#F5B82E" font-size="13" text-anchor="middle">when model calls are needed</text>
+    </g>
+    <path d="M946 476 h34" class="line" marker-end="url(#arrowCyan)"/>
+    <g transform="translate(990 342)">
+      <rect class="card" width="205" height="442" rx="17"/>
+      <rect x="40" y="50" width="120" height="104" rx="6" class="line"/><path class="line" d="M40 74 h120 M55 62 h4 M70 62 h4 M85 62 h4 M64 94 l20 22 l-20 22 M94 139 h24"/>
+      <path class="line" d="M20 192 h165"/>
+      <text x="102.5" y="247" class="cyan" font-size="27" text-anchor="middle">04</text>
+      <text x="102.5" y="294" class="white" font-size="27" font-weight="700" text-anchor="middle">Run</text>
+      <text x="102.5" y="331" class="white" font-size="27" font-weight="700" text-anchor="middle">KORA</text>
+      <text x="102.5" y="394" class="muted" font-size="16" text-anchor="middle">local runtime path</text>
+    </g>
+    <path d="M1201 476 h34" class="line" marker-end="url(#arrowCyan)"/>
+    <g transform="translate(1248 342)">
+      <rect class="card" width="205" height="442" rx="17"/>
+      <path class="line" d="M42 155 h132 M50 155 v-56 h16 v56 M85 155 v-84 h16 v84 M120 155 v-49 h16 v49 M155 155 v-112 h16 v112"/>
+      <path class="line" d="M50 93 l36 -31 l36 21 l48 -60"/><circle cx="50" cy="93" r="6" class="line"/><circle cx="86" cy="62" r="6" class="line"/><circle cx="122" cy="83" r="6" class="line"/><circle cx="170" cy="23" r="6" class="line"/>
+      <path class="line" d="M20 192 h165"/>
+      <text x="102.5" y="247" class="cyan" font-size="27" text-anchor="middle">05</text>
+      <text x="102.5" y="294" class="white" font-size="27" font-weight="700" text-anchor="middle">Inspect</text>
+      <text x="102.5" y="331" class="white" font-size="27" font-weight="700" text-anchor="middle">Telemetry</text>
+      <text x="102.5" y="394" class="muted" font-size="16" text-anchor="middle">counters and events</text>
+    </g>
+    <path d="M1459 476 h34" class="line" marker-end="url(#arrowCyan)"/>
+    <g transform="translate(1506 342)">
+      <rect class="card" width="205" height="442" rx="17"/>
+      <path class="line" d="M50 42 h55 l32 32 v114 h-87z M105 42 v32 h32 M66 82 h30 M66 112 h55 M66 142 h48"/>
+      <circle cx="132" cy="128" r="8" class="line"/><circle cx="166" cy="106" r="8" class="line"/><circle cx="166" cy="154" r="8" class="line"/><path class="line" d="M139 124 l20 -13 M139 132 l20 17"/>
+      <path class="line" d="M20 192 h165"/>
+      <text x="102.5" y="247" class="cyan" font-size="27" text-anchor="middle">06</text>
+      <text x="102.5" y="294" class="white" font-size="27" font-weight="700" text-anchor="middle">Share</text>
+      <text x="102.5" y="331" class="white" font-size="27" font-weight="700" text-anchor="middle">Results</text>
+      <text x="102.5" y="394" class="muted" font-size="16" text-anchor="middle">reviewed evidence</text>
+    </g>
   </g>
-  <rect x="58" y="370" width="1164" height="44" rx="8" fill="#e0f2fe" stroke="#bae6fd"/>
-  <text x="82" y="398" fill="#0f172a" font-family="Inter, Arial, sans-serif" font-size="14">Do not share secrets, API keys, private user data, or proprietary datasets in public channels.</text>
+
+  <g class="font" filter="url(#cyanGlow)">
+    <rect x="207" y="848" width="1506" height="89" rx="12" fill="#071629" stroke="#25D9E6" stroke-width="2.2"/>
+    <path d="M258 874 l18 8 v20 q0 21 -18 30 q-18 -9 -18 -30 v-20z M258 887 v20 M258 918 v3" fill="none" stroke="#25D9E6" stroke-width="2.2"/>
+    <text x="296" y="902" fill="#5BE7F2" font-size="24">Do not share secrets, API keys, private user data, or proprietary datasets in public channels</text>
+  </g>
 </svg>

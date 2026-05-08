@@ -1,46 +1,148 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="460" viewBox="0 0 1200 460" role="img" aria-labelledby="title desc">
-  <title id="title">KORA execution control overview</title>
-  <desc id="desc">A diagram comparing model-first execution with a KORA controlled execution path.</desc>
-  <rect width="1200" height="460" fill="#0b1220"/>
-  <text x="60" y="58" fill="#e5f6ff" font-family="Inter, Arial, sans-serif" font-size="28" font-weight="700">Most AI apps call the model too soon.</text>
-  <text x="60" y="92" fill="#8bdcf8" font-family="Inter, Arial, sans-serif" font-size="18">KORA turns requests into structured execution paths before inference.</text>
-  <g fill="none" stroke-linecap="round" stroke-linejoin="round">
-    <path d="M140 178 H315 H490 H665" stroke="#64748b" stroke-width="4"/>
-    <path d="M645 166 L665 178 L645 190" stroke="#64748b" stroke-width="4"/>
-    <path d="M140 318 H315 H490 H665 H840 H1015" stroke="#22d3ee" stroke-width="4"/>
-    <path d="M995 306 L1015 318 L995 330" stroke="#22d3ee" stroke-width="4"/>
-  </g>
-  <g font-family="Inter, Arial, sans-serif" font-size="15" font-weight="700" text-anchor="middle">
-    <text x="90" y="184" fill="#cbd5e1">Before</text>
-    <text x="90" y="324" fill="#cbd5e1">After</text>
-  </g>
-  <g font-family="Inter, Arial, sans-serif" font-size="16" font-weight="600" text-anchor="middle">
-    <g fill="#111827" stroke="#94a3b8" stroke-width="2">
-      <rect x="120" y="140" width="120" height="76" rx="8"/>
-      <rect x="295" y="140" width="120" height="76" rx="8"/>
-      <rect x="470" y="140" width="120" height="76" rx="8"/>
-      <rect x="645" y="140" width="120" height="76" rx="8"/>
+<svg xmlns="http://www.w3.org/2000/svg" width="1920" height="1080" viewBox="0 0 1920 1080" role="img" aria-labelledby="title desc">
+  <title id="title">Most AI apps call the model too soon.</title>
+  <desc id="desc">Before model-first path and after KORA structured execution with deterministic and escalation branches.</desc>
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="48%" r="65%">
+      <stop offset="0" stop-color="#071A2F"/><stop offset="0.62" stop-color="#04111F"/><stop offset="1" stop-color="#020B18"/>
+    </radialGradient>
+    <filter id="cyanGlow" x="-40%" y="-40%" width="180%" height="180%"><feGaussianBlur stdDeviation="3" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+    <filter id="amberGlow" x="-40%" y="-40%" width="180%" height="180%"><feGaussianBlur stdDeviation="4" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+    <marker id="arrowCyan" markerWidth="14" markerHeight="14" refX="10" refY="7" orient="auto"><path d="M2 2 L10 7 L2 12" fill="none" stroke="#25D9E6" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></marker>
+    <marker id="arrowAmber" markerWidth="14" markerHeight="14" refX="10" refY="7" orient="auto"><path d="M2 2 L10 7 L2 12" fill="none" stroke="#F5B82E" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></marker>
+    <style>
+      .font { font-family: "IBM Plex Mono", "JetBrains Mono", "Roboto Mono", Menlo, Consolas, monospace; }
+      .title { fill: #F4F7FB; font-size: 64px; font-weight: 800; }
+      .subtitle { fill: #5BE7F2; font-size: 30px; }
+      .cyanBox { fill: #071629; stroke: #25D9E6; stroke-width: 2.3; }
+      .amberBox { fill: #071629; stroke: #F5B82E; stroke-width: 2.3; }
+      .control { fill: #071629; stroke: #25D9E6; stroke-width: 2.2; }
+      .cyan { fill: #5BE7F2; stroke: #25D9E6; }
+      .amber { fill: #F5B82E; stroke: #F5B82E; }
+      .white { fill: #F4F7FB; }
+      .muted { fill: #A8B3C7; }
+      .line { stroke: #25D9E6; stroke-width: 2.8; fill: none; }
+      .lineAmber { stroke: #F5B82E; stroke-width: 2.8; fill: none; }
+    </style>
+  </defs>
+  <rect width="1920" height="1080" fill="url(#bg)"/>
+  <text x="960" y="98" class="font title" text-anchor="middle">Most AI apps call the model too soon.</text>
+  <text x="960" y="160" class="font subtitle" text-anchor="middle">KORA routes requests through structured execution before inference.</text>
+
+  <g class="font" filter="url(#cyanGlow)">
+    <text x="206" y="257" class="muted" font-size="28" font-weight="800">Before</text>
+    <g transform="translate(208 289)">
+      <rect width="304" height="120" rx="12" class="cyanBox"/>
+      <path d="M44 26 h36 l24 24 v56 h-60z M80 26 v24 h24 M58 56 h20 M58 76 h38 M58 96 h32" class="line"/>
+      <text x="132" y="70" class="white" font-size="23">Request</text>
     </g>
-    <text x="180" y="184" fill="#e5e7eb">request</text>
-    <text x="355" y="184" fill="#e5e7eb">prompt</text>
-    <text x="530" y="184" fill="#fbbf24">model</text>
-    <text x="705" y="184" fill="#e5e7eb">output</text>
-    <g fill="#082f49" stroke="#22d3ee" stroke-width="2">
-      <rect x="120" y="280" width="120" height="76" rx="8"/>
-      <rect x="285" y="280" width="140" height="76" rx="8"/>
-      <rect x="460" y="280" width="150" height="76" rx="8"/>
-      <rect x="645" y="280" width="130" height="76" rx="8"/>
-      <rect x="810" y="280" width="150" height="76" rx="8" stroke="#f59e0b"/>
-      <rect x="995" y="280" width="130" height="76" rx="8"/>
+    <path d="M526 349 h64" class="line" marker-end="url(#arrowCyan)"/>
+    <g transform="translate(608 289)">
+      <rect width="310" height="120" rx="12" class="cyanBox"/>
+      <path d="M45 34 h60 q8 0 8 8 v35 q0 8 -8 8 h-31 l-24 24 v-24 h-5 q-8 0 -8 -8 v-35 q0 -8 8 -8z M58 55 h5 M76 55 h5 M94 55 h5" class="line"/>
+      <text x="132" y="70" class="white" font-size="23">Prompt</text>
     </g>
-    <text x="180" y="324" fill="#ecfeff">request</text>
-    <text x="355" y="324" fill="#ecfeff">task graph</text>
-    <text x="535" y="314" fill="#ecfeff">deterministic</text>
-    <text x="535" y="336" fill="#ecfeff">path</text>
-    <text x="710" y="324" fill="#ecfeff">validation</text>
-    <text x="885" y="314" fill="#fff7ed">model</text>
-    <text x="885" y="336" fill="#fff7ed">escalation</text>
-    <text x="1060" y="324" fill="#ecfeff">telemetry</text>
+    <path d="M932 349 h64" class="line" marker-end="url(#arrowCyan)"/>
+    <g transform="translate(1009 289)">
+      <rect width="310" height="120" rx="12" class="cyanBox"/>
+      <path d="M88 26 l31 18 v36 l-31 18 l-31 -18 v-36z M57 44 l31 18 l31 -18 M88 62 v36" class="line"/>
+      <text x="152" y="70" class="white" font-size="23">Model</text>
+    </g>
+    <path d="M1333 349 h64" class="line" marker-end="url(#arrowCyan)"/>
+    <g transform="translate(1408 289)">
+      <rect width="304" height="120" rx="12" class="cyanBox"/>
+      <path d="M44 26 h36 l24 24 v56 h-60z M80 26 v24 h24 M58 56 h20 M58 76 h38 M58 96 h32" class="line"/>
+      <text x="132" y="70" class="white" font-size="23">Output</text>
+    </g>
+    <path d="M186 486 H1742" stroke="#25D9E6" stroke-width="2.5" stroke-dasharray="2 8" opacity="0.9"/>
   </g>
-  <text x="60" y="420" fill="#e5f6ff" font-family="Inter, Arial, sans-serif" font-size="22" font-weight="700">Structure first. Inference second.</text>
+
+  <g class="font">
+    <text x="208" y="585" fill="#F5B82E" font-size="28" font-weight="800">After</text>
+    <g filter="url(#cyanGlow)">
+      <g transform="translate(208 667)">
+        <rect width="188" height="108" rx="10" class="cyanBox"/>
+        <path d="M25 27 h35 l22 22 v50 h-57z M60 27 v22 h22 M38 56 h20 M38 75 h35 M38 94 h28" class="line"/>
+        <text x="86" y="64" class="white" font-size="21">Request</text>
+      </g>
+      <path d="M400 721 h33" class="line" marker-end="url(#arrowCyan)"/>
+      <g transform="translate(442 591)">
+        <rect width="468" height="258" rx="12" class="control"/>
+        <text x="234" y="632" transform="translate(0 -591)" fill="#5BE7F2" font-size="23" font-weight="700" text-anchor="middle">KORA Control Layer</text>
+        <g transform="translate(23 74)">
+          <rect width="175" height="145" rx="10" class="cyanBox"/>
+          <circle cx="62" cy="43" r="10" class="line"/><circle cx="105" cy="29" r="10" class="line"/><circle cx="62" cy="87" r="10" class="line"/><circle cx="142" cy="86" r="10" class="line"/>
+          <path d="M71 40 l24 -8 M62 53 v24 M74 87 h45 M105 39 v25 M105 64 h35 v12" class="line" stroke-dasharray="8 7"/>
+          <text x="88" y="120" class="white" font-size="19" text-anchor="middle">Task Graph</text>
+        </g>
+        <path d="M214 147 h55" class="line" marker-end="url(#arrowCyan)"/>
+        <g transform="translate(248 74)">
+          <rect width="190" height="145" rx="10" class="cyanBox"/>
+          <path d="M95 29 l39 15 v39 q0 28 -39 45 q-39 -17 -39 -45 v-39z M77 75 l14 14 l29 -37" class="line"/>
+          <text x="95" y="120" class="white" font-size="18" text-anchor="middle">Validation / Policy</text>
+        </g>
+      </g>
+      <path d="M910 721 h38" class="line"/>
+      <circle cx="948" cy="721" r="8" fill="#071629" stroke="#25D9E6" stroke-width="2.8"/>
+      <text x="1010" y="580" fill="#5BE7F2" font-size="23" font-weight="700">Deterministic Path (Preferred)</text>
+      <path d="M948 721 v-38 q0 -42 42 -42 h16" class="line" marker-end="url(#arrowCyan)"/>
+      <g transform="translate(1009 596)">
+        <rect width="247" height="89" rx="9" class="cyanBox"/>
+        <path d="M32 26 h41 v41 h-41z M25 36 h14 M25 57 h14 M66 36 h14 M66 57 h14 M43 19 v14 M62 19 v14 M43 60 v14 M62 60 v14" class="line"/>
+        <text x="106" y="40" class="white" font-size="20">CPU / Rules</text>
+        <text x="106" y="67" class="white" font-size="20">/ Cache</text>
+      </g>
+      <path d="M1262 640 h34" class="line" marker-end="url(#arrowCyan)"/>
+      <g transform="translate(1299 596)">
+        <rect width="203" height="89" rx="9" class="cyanBox"/>
+        <path d="M26 25 h40 a5 5 0 0 1 0 10 h-40 a5 5 0 0 1 0 -10z M26 44 h40 a5 5 0 0 1 0 10 h-40 a5 5 0 0 1 0 -10z M26 63 h40 a5 5 0 0 1 0 10 h-40 a5 5 0 0 1 0 -10z" class="line"/>
+        <text x="76" y="40" class="white" font-size="20">Structured</text>
+        <text x="76" y="67" class="white" font-size="20">Handler</text>
+      </g>
+      <path d="M1508 640 h30" class="line" marker-end="url(#arrowCyan)"/>
+      <g transform="translate(1540 596)">
+        <rect width="174" height="89" rx="9" class="cyanBox"/>
+        <circle cx="39" cy="45" r="22" class="line"/><path d="M29 45 l9 10 l18 -22" class="line"/>
+        <text x="76" y="40" class="white" font-size="19">Verified</text>
+        <text x="76" y="67" class="white" font-size="19">Output</text>
+      </g>
+    </g>
+
+    <g filter="url(#amberGlow)">
+      <text x="1010" y="745" fill="#F5B82E" font-size="22" font-weight="700">Model Escalation (Only When Needed)</text>
+      <path d="M948 721 v38 q0 42 42 42 h16" class="lineAmber" marker-end="url(#arrowAmber)"/>
+      <circle cx="948" cy="721" r="8" fill="#071629" stroke="#F5B82E" stroke-width="2.8"/>
+      <g transform="translate(1009 766)">
+        <rect width="247" height="90" rx="9" class="amberBox"/>
+        <path d="M48 21 l34 58 h-68z M48 39 v21 M48 70 v3" class="lineAmber"/>
+        <text x="104" y="42" class="white" font-size="20">Model</text>
+        <text x="104" y="69" class="white" font-size="20">Escalation</text>
+      </g>
+      <path d="M1262 811 h34" class="lineAmber" marker-end="url(#arrowAmber)"/>
+      <g transform="translate(1299 766)">
+        <rect width="203" height="90" rx="9" class="amberBox"/>
+        <path d="M44 22 q22 4 22 24 q0 20 -22 24 q-22 -4 -22 -24 q0 -20 22 -24z M44 25 v44 M31 36 h-10 M31 56 h-10 M57 36 h10 M57 56 h10" class="lineAmber"/>
+        <text x="85" y="42" class="white" font-size="19">LLM only</text>
+        <text x="85" y="69" class="white" font-size="19">when needed</text>
+      </g>
+      <path d="M1508 811 h30" class="lineAmber" marker-end="url(#arrowAmber)"/>
+      <g transform="translate(1540 766)">
+        <rect width="174" height="90" rx="9" class="amberBox"/>
+        <path d="M30 23 h34 l22 22 v45 h-56z M64 23 v22 h22 M43 52 h21 M43 69 h30" class="lineAmber"/>
+        <text x="100" y="57" class="white" font-size="20">Output</text>
+      </g>
+    </g>
+  </g>
+
+  <g class="font" filter="url(#cyanGlow)">
+    <rect x="258" y="920" width="1425" height="91" rx="12" fill="#071629" stroke="#25D9E6" stroke-width="2" stroke-dasharray="7 8"/>
+    <path d="M304 979 h80 M316 979 v-23 h10 v23 M334 979 v-35 h10 v35 M352 979 v-50 h10 v50 M370 979 v-68 h10 v68" class="line"/>
+    <text x="407" y="977" fill="#5BE7F2" font-size="24">Telemetry</text>
+    <path d="M562 943 v45" stroke="#25455B" stroke-width="2"/>
+    <text x="596" y="977" class="muted" font-size="21">Observability across all execution paths</text>
+    <path d="M664 920 V858" stroke="#25D9E6" stroke-width="2.2" stroke-dasharray="7 8"/>
+    <path d="M1124 920 V858" stroke="#25D9E6" stroke-width="2.2" stroke-dasharray="7 8"/>
+    <path d="M1402 920 V858" stroke="#25D9E6" stroke-width="2.2" stroke-dasharray="7 8"/>
+    <path d="M1626 920 V858" stroke="#25D9E6" stroke-width="2.2" stroke-dasharray="7 8"/>
+    <text x="960" y="1042" fill="#F4F7FB" font-size="25" font-weight="700" text-anchor="middle">Structure first. Inference second.</text>
+  </g>
 </svg>

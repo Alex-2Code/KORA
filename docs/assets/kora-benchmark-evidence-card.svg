@@ -1,26 +1,60 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="430" viewBox="0 0 1280 430" role="img" aria-labelledby="title desc">
-  <title id="title">KORA benchmark evidence card</title>
-  <desc id="desc">A technical benchmark evidence card showing 100 tasks, 80 model invocations avoided, 20 model-candidate path tasks, and 0 deterministic mismatches.</desc>
-  <rect width="1280" height="430" fill="#08111f"/>
-  <text x="64" y="66" fill="#e6f6ff" font-family="Inter, Arial, sans-serif" font-size="34" font-weight="800">Current Alpha Evidence</text>
-  <text x="64" y="100" fill="#8bdcf8" font-family="Inter, Arial, sans-serif" font-size="17">Reproducible deterministic-heavy benchmark workload.</text>
-  <g font-family="Inter, Arial, sans-serif" text-anchor="middle">
-    <rect x="66" y="150" width="250" height="150" rx="12" fill="#0f1f33" stroke="#22d3ee" stroke-width="2"/>
-    <rect x="366" y="150" width="250" height="150" rx="12" fill="#0f1f33" stroke="#22d3ee" stroke-width="2"/>
-    <rect x="666" y="150" width="250" height="150" rx="12" fill="#2a1805" stroke="#f59e0b" stroke-width="2"/>
-    <rect x="966" y="150" width="250" height="150" rx="12" fill="#0f1f33" stroke="#22d3ee" stroke-width="2"/>
-    <text x="191" y="218" fill="#e6f6ff" font-size="56" font-weight="900">100</text>
-    <text x="191" y="255" fill="#b9d7e8" font-size="16" font-weight="700">tasks</text>
-    <text x="491" y="218" fill="#e6f6ff" font-size="56" font-weight="900">80</text>
-    <text x="491" y="250" fill="#b9d7e8" font-size="15" font-weight="700">model invocations</text>
-    <text x="491" y="272" fill="#b9d7e8" font-size="15" font-weight="700">avoided</text>
-    <text x="791" y="218" fill="#fff7ed" font-size="56" font-weight="900">20</text>
-    <text x="791" y="250" fill="#fed7aa" font-size="15" font-weight="700">model-candidate</text>
-    <text x="791" y="272" fill="#fed7aa" font-size="15" font-weight="700">or escalation path</text>
-    <text x="1091" y="218" fill="#e6f6ff" font-size="56" font-weight="900">0</text>
-    <text x="1091" y="250" fill="#b9d7e8" font-size="15" font-weight="700">deterministic</text>
-    <text x="1091" y="272" fill="#b9d7e8" font-size="15" font-weight="700">mismatches</text>
+<svg xmlns="http://www.w3.org/2000/svg" width="1920" height="1080" viewBox="0 0 1920 1080" role="img" aria-labelledby="title desc">
+  <title id="title">Current Alpha Evidence</title>
+  <desc id="desc">Current alpha benchmark evidence with four metric cards and claim boundary.</desc>
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="48%" r="64%">
+      <stop offset="0" stop-color="#071A2F"/><stop offset="0.6" stop-color="#04111F"/><stop offset="1" stop-color="#020B18"/>
+    </radialGradient>
+    <filter id="cyanGlow" x="-40%" y="-40%" width="180%" height="180%"><feGaussianBlur stdDeviation="3.5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+    <filter id="amberGlow" x="-40%" y="-40%" width="180%" height="180%"><feGaussianBlur stdDeviation="4.5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+    <style>
+      .font { font-family: "IBM Plex Mono", "JetBrains Mono", "Roboto Mono", Menlo, Consolas, monospace; }
+      .title { fill: #F4F7FB; font-size: 68px; font-weight: 800; }
+      .subtitle { fill: #5BE7F2; font-size: 30px; }
+      .card { fill: #071629; stroke: #25D9E6; stroke-width: 2.5; }
+      .amberCard { fill: #071629; stroke: #F5B82E; stroke-width: 2.7; }
+      .cyan { fill: #5BE7F2; stroke: #25D9E6; }
+      .amber { fill: #F5B82E; stroke: #F5B82E; }
+      .muted { fill: #A8B3C7; }
+    </style>
+  </defs>
+  <rect width="1920" height="1080" fill="url(#bg)"/>
+  <rect x="135" y="355" width="1650" height="385" rx="10" fill="#020B18" opacity="0.25"/>
+  <text x="960" y="208" class="font title" text-anchor="middle">Current Alpha Evidence</text>
+  <text x="960" y="270" class="font subtitle" text-anchor="middle">Reproducible deterministic-heavy benchmark workload</text>
+  <g class="font" filter="url(#cyanGlow)">
+    <g transform="translate(206 371)">
+      <rect class="card" width="356" height="355" rx="18"/>
+      <text x="178" y="526" transform="translate(0 -370)" class="cyan" font-size="118" font-weight="800" text-anchor="middle">100</text>
+      <path d="M34 199 h288" class="cyan" stroke-width="2.4"/>
+      <text x="178" y="258" fill="#5BE7F2" font-size="26" font-weight="700" text-anchor="middle">tasks</text>
+    </g>
+    <g transform="translate(590 371)">
+      <rect class="card" width="356" height="355" rx="18"/>
+      <text x="178" y="156" class="cyan" font-size="118" font-weight="800" text-anchor="middle">80</text>
+      <path d="M34 199 h288" class="cyan" stroke-width="2.4"/>
+      <text x="178" y="258" fill="#5BE7F2" font-size="24" font-weight="700" text-anchor="middle">model invocations</text>
+      <text x="178" y="296" fill="#5BE7F2" font-size="24" font-weight="700" text-anchor="middle">avoided</text>
+    </g>
+    <g transform="translate(974 371)" filter="url(#amberGlow)">
+      <rect class="amberCard" width="356" height="355" rx="18"/>
+      <text x="178" y="156" class="amber" font-size="118" font-weight="800" text-anchor="middle">20</text>
+      <path d="M34 199 h288" class="amber" stroke-width="2.4"/>
+      <text x="178" y="258" fill="#F5B82E" font-size="23" font-weight="700" text-anchor="middle">model-candidate path</text>
+    </g>
+    <g transform="translate(1358 371)">
+      <rect class="card" width="356" height="355" rx="18"/>
+      <text x="178" y="156" class="cyan" font-size="118" font-weight="800" text-anchor="middle">0</text>
+      <path d="M34 199 h288" class="cyan" stroke-width="2.4"/>
+      <text x="178" y="258" fill="#5BE7F2" font-size="24" font-weight="700" text-anchor="middle">deterministic</text>
+      <text x="178" y="296" fill="#5BE7F2" font-size="24" font-weight="700" text-anchor="middle">mismatches</text>
+    </g>
   </g>
-  <rect x="64" y="346" width="1152" height="44" rx="8" fill="#0f1f33" stroke="#17334d"/>
-  <text x="86" y="374" fill="#cbd5e1" font-family="Inter, Arial, sans-serif" font-size="14">Boundary: alpha benchmark evidence, not production cost reduction, real API-cost reduction, energy reduction, or production validation.</text>
+  <g class="font" filter="url(#cyanGlow)">
+    <rect x="207" y="798" width="1506" height="114" rx="9" fill="#071629" stroke="#25D9E6" stroke-width="2.2"/>
+    <text x="242" y="853" fill="#25D9E6" font-size="42" font-weight="700">&gt;_</text>
+    <path d="M316 811 v88" stroke="#25455B" stroke-width="2" stroke-dasharray="4 7"/>
+    <text x="342" y="848" fill="#5BE7F2" font-size="23">Boundary: alpha benchmark evidence, not production cost reduction, real API-cost reduction,</text>
+    <text x="342" y="880" fill="#5BE7F2" font-size="23">energy reduction, or production validation.</text>
+  </g>
 </svg>
