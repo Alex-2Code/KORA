@@ -123,7 +123,7 @@ KORA Studio launches a local web UI.
 
 User experience:
 
-• Chat-style interface (similar to ChatGPT)  
+• Chat-style interface
 • Local-only processing  
 • Model selection dropdown  
 • Budget configuration  

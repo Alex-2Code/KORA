@@ -17,8 +17,7 @@ Primary source:
 | Folder path | Purpose | Audience | Evidence value | Cleanup risk | Recommended next action |
 |---|---|---|---|---|---|
 | `docs/claims` | Canonical claim registry and public language | maintainers, community, public writers, investors/EIC/partners | High | Low if treated as canonical | Link from README, reports, community docs |
-| `docs/context` | Project source-of-truth and ChatGPT/Codex continuity | maintainers, operators, internal handoff | High | Medium if public/private boundary is unclear | Add internal-facing note if needed; link from docs index |
-| `docs/community` | Community workflow, open roles, AI-assisted contribution | contributors, Sumanta, operators | High | Low/medium due overlap with ops docs | Add community index later |
+| `docs/community` | Public-safe community workflow, open roles, and AI-assisted contribution guidance | contributors and maintainers | High | Low/medium due overlap with ops docs | Add community index later |
 | `docs/ops` | Operating system, migration, GitHub setup, audits | maintainers, operators | High | Medium due many dated docs | Add ops index later; keep dated history |
 | `docs/paper` | Paper authorship and contribution policy | researchers, contributors, paper readers | High | Low now; likely to grow | Add paper index before more paper docs |
 | `docs/benchmarks` | Benchmark summaries and workload plans | developers, researchers, reviewers | High | Medium due overlap with reports/experiments README | Add benchmark index and canonical evidence path |
@@ -87,5 +86,5 @@ Primary source:
 
 - Task 135: add README link to docs index and safe cross-links.
 - Task 136: create PR template and CODEOWNERS draft.
-- Task 137: Sumanta Community OS + LLM Promptbook.
+- Task 137: private community operations material.
 - Task 138: GitHub manual setup execution log.

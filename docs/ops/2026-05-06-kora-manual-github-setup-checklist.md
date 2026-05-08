@@ -13,7 +13,7 @@ Date: `2026-05-06`
 - [ ] Create milestones.
 - [ ] Review branch protection.
 - [ ] Review collaborator permissions.
-- [ ] Add Sumanta permission later.
+- [ ] Add any approved collaborator permissions later.
 - [ ] Add Korean ops coordinator permission later if applicable.
 
 ## Recommended First Milestones

@@ -4,7 +4,7 @@ Date: `2026-05-06`
 
 ## Purpose
 
-Labels make KORA issues and PRs navigable for contributors, operators, Sumanta, the Korean ops coordinator, and future maintainers.
+Labels make KORA issues and PRs navigable for contributors, operators, and future maintainers.
 
 Labels should help route work quickly without turning triage into a heavy process.
 

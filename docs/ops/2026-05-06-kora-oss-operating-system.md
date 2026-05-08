@@ -43,11 +43,11 @@ vLLM may be used as an analogy for category ambition, but KORA must not claim it
 |---|---|---|---|---|
 | CORE | Technical owner | Code, tests, examples, architecture docs | Issues, PRs, Actions, Projects, Milestones | Technical review; claim-sensitive docs require Albert review |
 | PAPER | Research owner | Technical reports, benchmark reports, authorship policy | Issues, Discussions, PRs, docs/paper | Albert review for claims, authorship, and evidence wording |
-| EIC | Narrative owner | Grant-ready summaries, evidence packets, roadmap docs | Issues, Projects, docs/context, docs/claims | Albert review required |
-| INVESTOR | Narrative owner | Intro language, evidence summaries, category thesis | docs/claims, docs/context, Issues | Albert review required |
+| EIC | Narrative owner | Grant-ready summaries, evidence packets, roadmap docs | Issues, Projects, docs/claims | Review required |
+| INVESTOR | Narrative owner | Intro language, evidence summaries, category thesis | docs/claims, Issues | Review required |
 | PARTNER | Ecosystem owner | Lead notes, use cases, pilot candidates, LOI candidates | Issues, Discussions, Projects | Albert review for external wording |
 | COMMUNITY | Community owner | Discussions, open roles, weekly sync issues, feedback summaries | Issues, Discussions, Projects, docs/community | Claim-sensitive content requires Albert review |
-| OPS | Operations owner | Weekly reports, board hygiene, EOD/SOD artifacts | Projects, Issues, docs/ops, docs/context | Keep internal/private boundaries clear |
+| OPS | Operations owner | Weekly reports and board hygiene | Projects, Issues, docs/ops | Keep internal/private boundaries clear |
 
 ## GitHub Projects Model
 

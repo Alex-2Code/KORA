@@ -73,7 +73,7 @@ Manual GitHub steps for Albert:
 6. After transfer, open https://github.com/Krako-Labs/KORA.
 7. Confirm the repository, releases, tags, issues, pull requests, and settings are present.
 
-Do not ask Codex to perform the repository transfer.
+Do not automate the repository transfer from local tooling.
 
 Expected target URL after transfer:
 
@@ -134,7 +134,7 @@ python3 -m kora run direct_vs_kora -- --offline
   - `claim-boundary`
   - `runtime-evidence`
 - Add issue templates for bug reports, documentation improvements, benchmark/evidence requests, and community questions.
-- Add Sumanta with the appropriate organization and repository permissions.
+- Add approved collaborators with the appropriate organization and repository permissions.
 - Protect `main` if appropriate:
   - require pull requests before merge
   - require status checks once CI is configured
@@ -175,6 +175,6 @@ Communication boundaries:
 ## 9. Recommended Next Tasks
 
 - Task 125: update repo URLs and remote references after migration.
-- Task 126: create Albert-Sumanta GitHub sync setup.
+- Task 126: create early GitHub coordination setup.
 - Task 127: create KORA Claim Registry.
-- Task 128: create Sumanta Community OS and LLM operating manual.
+- Task 128: create private community operations material.
