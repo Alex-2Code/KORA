@@ -21,6 +21,7 @@ Current relevant public surfaces:
 - `examples/runtime_integrated_benchmark/`
 - `experiments/workloads/deterministic_heavy_v1_100.json`
 - `experiments/run_benchmark.py`
+- `kora/model_call.py`
 - `kora/adapters/base.py`
 - `kora/adapters/mock.py`
 - `kora/adapters/openai_adapter.py`
@@ -239,6 +240,23 @@ Every validation run should report:
 - `measured_cost`, only if provider billing data is explicitly supplied later
 
 Cost counters must not be used to claim real API-cost reduction unless billing data, methodology, baseline, and claim language are separately reviewed.
+
+## Provider-Neutral Adapter Interface
+
+KORA uses a provider-neutral adapter boundary for model-call measurement in future validation harnesses.
+
+Current implementation:
+
+- `ModelCallRequest`: normalized request with `request_id`, `prompt`, metadata, and privacy class.
+- `ModelCallResponse`: normalized response with measured model-call count, latency, token counters where available, provider/model labels, and metadata.
+- `ModelCallAdapter`: protocol for adapters that return measured model-call counters.
+- `DeterministicFakeModelCallAdapter`: local, deterministic, no-network adapter for tests and harness development.
+- `BlockedModelCallAdapter`: fail-closed adapter for cases where real provider use has not been explicitly configured.
+- `ModelCallSummary`: aggregate counter helper for validation reports.
+
+The fake deterministic adapter is the only local implementation added at this stage. It requires no credentials, performs no external calls, and records provider/model as `fake` / `deterministic-fake`.
+
+Future local or remote provider adapters can plug into the same interface. Remote provider calls must use environment variables for configuration and must not commit secrets, raw prompts, raw responses, private user data, or proprietary datasets.
 
 ## Telemetry Output
 

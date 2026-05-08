@@ -41,6 +41,9 @@ Sanitized environment details:
 - Python version:
 - Operating system:
 - Adapter mode:
+- Adapter:
+- Model-call counter source:
+- Token counter source:
 - Provider configuration source: environment variables only, if remote provider mode is used
 
 Do not include API keys, tokens, credentials, private hostnames, private dataset names, or raw provider response IDs unless explicitly approved.
