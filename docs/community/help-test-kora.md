@@ -37,6 +37,8 @@ How to help test KORA with a real workload.
 - deterministic-heavy backend workflows
 - LLM apps with high repeated request patterns
 
+See the [customer-support triage workload spec](../workloads/customer-support-triage.md) for a synthetic example of deterministic-first routing and conditional model escalation.
+
 Good candidates usually have at least one of these properties:
 
 - some requests can be classified without a model

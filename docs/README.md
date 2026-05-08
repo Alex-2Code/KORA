@@ -33,6 +33,7 @@ KORA control layer architecture.
 - [Experiments regeneration guide](../experiments/README.md)
 - [Benchmark real app guide](benchmark-real-app.md)
 - [Benchmark overview](benchmark.md)
+- [Customer-support triage workload spec](workloads/customer-support-triage.md)
 - [Good first issue candidates](good_first_issues.md)
 
 Core local commands:
@@ -61,7 +62,8 @@ Use this path for the current `v0.3.0-alpha` prerelease runtime evidence and reg
 10. Real model-call validation design: [`docs/benchmarks/real-model-call-validation-design.md`](benchmarks/real-model-call-validation-design.md)
 11. Real model-call validation report template: [`docs/benchmarks/real-model-call-validation-report-template.md`](benchmarks/real-model-call-validation-report-template.md)
 12. Fake model-call validation example: [`examples/real_model_call_validation_fake`](../examples/real_model_call_validation_fake)
-13. Claim boundary source: [`docs/claims/kora-claim-registry.md`](claims/kora-claim-registry.md)
+13. Customer-support triage workload spec: [`docs/workloads/customer-support-triage.md`](workloads/customer-support-triage.md)
+14. Claim boundary source: [`docs/claims/kora-claim-registry.md`](claims/kora-claim-registry.md)
 
 Current approved public claim:
 
