@@ -37,6 +37,11 @@ Purpose:
 
 Test KORA-controlled execution against a baseline that uses real model calls under a documented runtime path.
 
+Design and reporting:
+
+- [Real model-call validation design](real-model-call-validation-design.md)
+- [Real model-call validation report template](real-model-call-validation-report-template.md)
+
 Example workload:
 
 A mixed set of deterministic requests, simple classification requests, and model-required reasoning requests executed with a real model provider in a controlled environment.

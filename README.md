@@ -92,6 +92,8 @@ KORA validation roadmap.
 
 See the [KORA validation roadmap](docs/benchmarks/validation-roadmap.md) for the measurement plan.
 
+See the [real model-call validation design](docs/benchmarks/real-model-call-validation-design.md) for the next measurement path.
+
 ## Help Test KORA
 
 Good candidate workloads:
