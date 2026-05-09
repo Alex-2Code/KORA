@@ -15,9 +15,11 @@ from typing import Any, Literal
 
 from kora.model_call import (
     DeterministicFakeModelCallAdapter,
+    DeterministicLocalRuntimeModelCallAdapter,
     LOCAL_VALIDATION_ADAPTER,
     ModelCallRequest,
     ModelCallResponse,
+    ModelCallAdapter,
     ModelCallSummary,
     available_model_call_adapters,
     select_model_call_adapter,
@@ -107,7 +109,7 @@ WORKLOAD: tuple[SyntheticRequest, ...] = (
 )
 
 
-def _select_validation_adapter(kind: str) -> DeterministicFakeModelCallAdapter:
+def _select_validation_adapter(kind: str) -> ModelCallAdapter:
     adapter = select_model_call_adapter(kind)
     if kind != LOCAL_VALIDATION_ADAPTER:
         adapter.call(
@@ -118,7 +120,10 @@ def _select_validation_adapter(kind: str) -> DeterministicFakeModelCallAdapter:
                 metadata={"purpose": "adapter_selection_check"},
             )
         )
-    if not isinstance(adapter, DeterministicFakeModelCallAdapter):
+    if not isinstance(
+        adapter,
+        (DeterministicFakeModelCallAdapter, DeterministicLocalRuntimeModelCallAdapter),
+    ):
         supported = ", ".join(available_model_call_adapters())
         raise ValueError(f"Unsupported validation adapter {kind!r}. Supported: {supported}")
     return adapter
@@ -135,7 +140,7 @@ def _model_request(item: SyntheticRequest) -> ModelCallRequest:
 
 def _run_direct_baseline(
     workload: tuple[SyntheticRequest, ...],
-    adapter: DeterministicFakeModelCallAdapter,
+    adapter: ModelCallAdapter,
 ) -> list[ModelCallResponse]:
     return [adapter.call(_model_request(item)) for item in workload]
 
@@ -148,7 +153,7 @@ def _run_deterministic_handler(item: SyntheticRequest) -> str:
 
 def _run_kora_controlled_path(
     workload: tuple[SyntheticRequest, ...],
-    adapter: DeterministicFakeModelCallAdapter,
+    adapter: ModelCallAdapter,
 ) -> tuple[list[ModelCallResponse], int, int, int, int, int]:
     model_responses: list[ModelCallResponse] = []
     deterministic_routes = 0
@@ -224,9 +229,9 @@ def build_fake_model_call_validation_summary(
         "ok": error_count == 0 and validation_fail_count == 0,
         "mode": "local_no_network_model_call_validation",
         "offline": True,
-        "adapter": "deterministic local validation adapter",
-        "provider": "local_validation",
-        "model": "deterministic-local",
+        "adapter": baseline_responses[0].metadata.get("adapter", adapter_kind),
+        "provider": baseline_responses[0].provider,
+        "model": baseline_responses[0].model,
         "total_requests": total_requests,
         "baseline_model_calls": baseline_summary.model_calls,
         "kora_model_calls": kora_summary.model_calls,
@@ -250,9 +255,9 @@ def build_fake_model_call_validation_summary(
         "claim_boundary": CLAIM_BOUNDARY,
         "notes": [
             "Synthetic workload only.",
-            "Direct baseline records local validation model-call events for every request.",
-            "KORA-controlled path handles deterministic routes without local validation model-call events.",
-            "Model-required routes use the deterministic local validation adapter through the provider-neutral boundary.",
+            "Direct baseline records selected local adapter model-call events for every request.",
+            "KORA-controlled path handles deterministic routes without selected local adapter model-call events.",
+            "Model-required routes use the selected local adapter through the provider-neutral boundary.",
             "No external APIs, network access, provider credentials, raw prompts, or raw provider responses are used.",
         ],
     }

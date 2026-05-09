@@ -7,12 +7,14 @@ from dataclasses import dataclass, field
 from typing import Any, Protocol
 
 LOCAL_VALIDATION_ADAPTER = "local_validation"
+LOCAL_RUNTIME_ADAPTER = "local_runtime"
 BLOCKED_ADAPTER = "blocked"
 LOCAL_RUNTIME_PLACEHOLDER_ADAPTER = "local_runtime_placeholder"
 LOCAL_RUNTIME_NOT_CONFIGURED_MODEL = "local-runtime-not-configured"
 
 SUPPORTED_MODEL_CALL_ADAPTERS = (
     LOCAL_VALIDATION_ADAPTER,
+    LOCAL_RUNTIME_ADAPTER,
     BLOCKED_ADAPTER,
     LOCAL_RUNTIME_PLACEHOLDER_ADAPTER,
 )
@@ -95,6 +97,35 @@ class DeterministicFakeModelCallAdapter:
         )
 
 
+class DeterministicLocalRuntimeModelCallAdapter:
+    """Explicit opt-in local runtime stub with deterministic in-process behavior."""
+
+    provider = LOCAL_RUNTIME_ADAPTER
+    model = "deterministic-local-runtime"
+
+    def call(self, request: ModelCallRequest) -> ModelCallResponse:
+        start = time.perf_counter()
+        output = f"local_runtime:{request.request_id}:{request.prompt.strip()[:80]}"
+        latency_ms = (time.perf_counter() - start) * 1000.0
+        return ModelCallResponse(
+            request_id=request.request_id,
+            output=output,
+            model_calls=1,
+            latency_ms=latency_ms,
+            input_tokens=_estimate_tokens(request.prompt),
+            output_tokens=_estimate_tokens(output),
+            provider=self.provider,
+            model=self.model,
+            metadata={
+                "privacy_class": request.privacy_class,
+                "adapter": self.provider,
+                "network": "none",
+                "runtime": "in_process_stub",
+                "deterministic": True,
+            },
+        )
+
+
 class BlockedModelCallAdapter:
     """Adapter that fails closed when real provider use is not configured."""
 
@@ -140,13 +171,15 @@ def available_model_call_adapters() -> list[str]:
 def select_model_call_adapter(kind: str | None = None) -> ModelCallAdapter:
     """Select a provider-neutral model-call adapter by kind.
 
-    The current implemented runtime path is local no-network validation. Local
-    runtime adapters are intentionally fail-closed until explicitly implemented.
+    The default path is local no-network validation. The concrete local runtime
+    path is an explicit opt-in deterministic in-process adapter.
     """
 
     selected_kind = kind or LOCAL_VALIDATION_ADAPTER
     if selected_kind == LOCAL_VALIDATION_ADAPTER:
         return DeterministicFakeModelCallAdapter()
+    if selected_kind == LOCAL_RUNTIME_ADAPTER:
+        return DeterministicLocalRuntimeModelCallAdapter()
     if selected_kind == BLOCKED_ADAPTER:
         return BlockedModelCallAdapter()
     if selected_kind == LOCAL_RUNTIME_PLACEHOLDER_ADAPTER:

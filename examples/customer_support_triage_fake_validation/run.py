@@ -9,9 +9,11 @@ from typing import Any
 
 from kora.model_call import (
     DeterministicFakeModelCallAdapter,
+    DeterministicLocalRuntimeModelCallAdapter,
     LOCAL_VALIDATION_ADAPTER,
     ModelCallRequest,
     ModelCallResponse,
+    ModelCallAdapter,
     ModelCallSummary,
     available_model_call_adapters,
     select_model_call_adapter,
@@ -42,7 +44,7 @@ def load_workload(path: Path = DEFAULT_WORKLOAD) -> dict[str, Any]:
     return json.loads(workload_path.read_text(encoding="utf-8"))
 
 
-def _select_validation_adapter(kind: str) -> DeterministicFakeModelCallAdapter:
+def _select_validation_adapter(kind: str) -> ModelCallAdapter:
     adapter = select_model_call_adapter(kind)
     if kind != LOCAL_VALIDATION_ADAPTER:
         adapter.call(
@@ -53,7 +55,10 @@ def _select_validation_adapter(kind: str) -> DeterministicFakeModelCallAdapter:
                 metadata={"purpose": "adapter_selection_check"},
             )
         )
-    if not isinstance(adapter, DeterministicFakeModelCallAdapter):
+    if not isinstance(
+        adapter,
+        (DeterministicFakeModelCallAdapter, DeterministicLocalRuntimeModelCallAdapter),
+    ):
         supported = ", ".join(available_model_call_adapters())
         raise ValueError(f"Unsupported validation adapter {kind!r}. Supported: {supported}")
     return adapter
@@ -81,7 +86,7 @@ def _model_request(item: dict[str, Any]) -> ModelCallRequest:
 
 def _run_direct_baseline(
     requests: list[dict[str, Any]],
-    adapter: DeterministicFakeModelCallAdapter,
+    adapter: ModelCallAdapter,
 ) -> list[ModelCallResponse]:
     return [adapter.call(_model_request(item)) for item in requests]
 
@@ -107,7 +112,7 @@ def _validate_model_required_route(item: dict[str, Any], response: ModelCallResp
 
 def _run_kora_controlled_path(
     requests: list[dict[str, Any]],
-    adapter: DeterministicFakeModelCallAdapter,
+    adapter: ModelCallAdapter,
 ) -> tuple[list[ModelCallResponse], int, int, int, int, int, int]:
     model_responses: list[ModelCallResponse] = []
     deterministic_routes = 0
@@ -195,9 +200,9 @@ def build_customer_support_triage_fake_validation_summary(
         "workload_id": workload.get("workload_id"),
         "workload_path": str(workload_path),
         "privacy_class": workload.get("privacy_class"),
-        "adapter": "deterministic local validation adapter",
-        "provider": "local_validation",
-        "model": "deterministic-local",
+        "adapter": baseline_responses[0].metadata.get("adapter", adapter_kind),
+        "provider": baseline_responses[0].provider,
+        "model": baseline_responses[0].model,
         "total_requests": len(requests),
         "baseline_model_calls": baseline_summary.model_calls,
         "kora_model_calls": kora_summary.model_calls,
@@ -220,9 +225,9 @@ def build_customer_support_triage_fake_validation_summary(
         "claim_boundary": CLAIM_BOUNDARY,
         "notes": [
             "Synthetic customer-support triage workload only.",
-            "Direct baseline records local validation model-call events for every request.",
-            "KORA-controlled path validates deterministic routes without local validation model-call events.",
-            "Model-required routes use the deterministic local validation adapter through the provider-neutral boundary.",
+            "Direct baseline records selected local adapter model-call events for every request.",
+            "KORA-controlled path validates deterministic routes without selected local adapter model-call events.",
+            "Model-required routes use the selected local adapter through the provider-neutral boundary.",
             "No external APIs, network access, provider credentials, raw prompts, or raw provider responses are used.",
         ],
     }

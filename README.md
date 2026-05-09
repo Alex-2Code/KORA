@@ -100,7 +100,7 @@ Customer-support triage local validation is available as a no-network example.
 
 Local no-network validation examples can generate Markdown reports with `--report-md`.
 
-Local no-network validation examples support `--adapter local_validation`.
+Local no-network validation examples support `--adapter local_validation` by default and explicit `--adapter local_runtime` for the deterministic in-process local runtime stub.
 
 Reviewer packet: [local no-network validation](docs/benchmarks/local-validation-reviewer-packet.md).
 

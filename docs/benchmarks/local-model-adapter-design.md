@@ -117,10 +117,13 @@ KORA now includes a small adapter selection skeleton for local validation and fu
 Current supported adapter kinds:
 
 - `local_validation`: returns the deterministic local validation adapter used by local/no-network examples.
+- `local_runtime`: returns an explicit opt-in deterministic in-process local runtime stub for local/no-network validation.
 - `blocked`: returns a fail-closed adapter for unconfigured model-call paths.
 - `local_runtime_placeholder`: returns fail-closed behavior and documents that local runtime adapters are design-only for now.
 
-The local validation examples expose an explicit `--adapter` option for the current safe adapter kinds. Real local runtime adapters remain unimplemented and fail closed through `local_runtime_placeholder`.
+The local validation examples expose an explicit `--adapter` option for the current safe adapter kinds. The `local_runtime` adapter is a concrete local/no-network runtime stub: it runs in process, uses deterministic output, records aggregate counters, and does not call local HTTP endpoints, subprocess runtimes, remote providers, provider APIs, or external model downloads. The default remains `local_validation`.
+
+`local_runtime_placeholder` remains design-only and fail-closed for unsupported runtime paths.
 
 Reviewer-facing reproduction commands, no-network baseline counters, and fail-closed adapter checks are listed in the [local no-network validation reviewer packet](local-validation-reviewer-packet.md).
 
@@ -139,7 +142,7 @@ The skeleton reserves the future local runtime adapter boundary while failing cl
 - does not require any local runtime installation for tests or examples
 - raises a clear error stating that local runtime adapters are not implemented yet and that no provider call was attempted
 
-Current runnable validation remains local/no-network validation through the deterministic local validation adapter. Future local runtime work can replace the fail-closed placeholder with a concrete adapter behind explicit opt-in.
+Current runnable validation remains local/no-network validation through the deterministic local validation adapter by default. The `local_runtime` adapter provides an explicit opt-in local runtime stub for exercising the same boundary without external runtime calls. Future runtime-specific adapters can extend the same selection path without replacing the fail-closed placeholder.
 
 Future adapter kinds should keep the same behavior shape:
 

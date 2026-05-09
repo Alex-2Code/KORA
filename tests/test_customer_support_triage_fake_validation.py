@@ -67,6 +67,22 @@ def test_customer_support_triage_fake_validation_explicit_local_validation_count
     assert summary["avoided_model_calls"] == 8
 
 
+def test_customer_support_triage_fake_validation_explicit_local_runtime_counts() -> None:
+    module = _load_example_module()
+
+    summary = module.build_customer_support_triage_fake_validation_summary(
+        offline=True,
+        adapter_kind="local_runtime",
+    )
+
+    assert summary["provider"] == "local_runtime"
+    assert summary["model"] == "deterministic-local-runtime"
+    assert summary["baseline_model_calls"] == 12
+    assert summary["kora_model_calls"] == 4
+    assert summary["avoided_model_calls"] == 8
+    assert summary["validation_pass_count"] == 12
+
+
 def test_customer_support_triage_fake_validation_requires_no_provider_environment(
     monkeypatch,
 ) -> None:
@@ -179,6 +195,37 @@ def test_customer_support_triage_fake_validation_report_with_explicit_adapter(
     assert "local_validation" in report
 
 
+def test_customer_support_triage_fake_validation_report_with_local_runtime_adapter(
+    tmp_path: Path,
+) -> None:
+    report_path = tmp_path / "customer_support_local_runtime.md"
+
+    completed = subprocess.run(
+        [
+            sys.executable,
+            "-m",
+            "kora",
+            "run",
+            "customer_support_triage_fake_validation",
+            "--",
+            "--offline",
+            "--adapter",
+            "local_runtime",
+            "--report-md",
+            str(report_path),
+        ],
+        check=False,
+        capture_output=True,
+        text=True,
+    )
+
+    assert completed.returncode == 0
+    assert report_path.exists()
+    report = report_path.read_text(encoding="utf-8")
+    assert "customer_support_triage_local_validation" in report
+    assert "local_runtime" in report
+
+
 def test_customer_support_triage_fake_validation_blocked_adapter_fails_closed(
     tmp_path: Path,
 ) -> None:
@@ -261,6 +308,7 @@ def test_customer_support_triage_fake_validation_unknown_adapter_lists_available
     assert completed.returncode != 0
     assert "invalid choice" in completed.stderr
     assert "local_validation" in completed.stderr
+    assert "local_runtime" in completed.stderr
     assert "blocked" in completed.stderr
     assert "local_runtime_placeholder" in completed.stderr
 
@@ -284,5 +332,6 @@ def test_customer_support_triage_fake_validation_help_lists_available_adapter_ki
     assert completed.returncode == 0
     assert "--adapter" in completed.stdout
     assert "local_validation" in completed.stdout
+    assert "local_runtime" in completed.stdout
     assert "blocked" in completed.stdout
     assert "local_runtime_placeholder" in completed.stdout

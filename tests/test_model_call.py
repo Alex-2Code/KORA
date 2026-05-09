@@ -7,6 +7,8 @@ from kora.model_call import (
     BlockedLocalRuntimeModelCallAdapter,
     BlockedModelCallAdapter,
     DeterministicFakeModelCallAdapter,
+    DeterministicLocalRuntimeModelCallAdapter,
+    LOCAL_RUNTIME_ADAPTER,
     LOCAL_RUNTIME_PLACEHOLDER_ADAPTER,
     LOCAL_VALIDATION_ADAPTER,
     LocalRuntimeAdapterConfig,
@@ -77,6 +79,45 @@ def test_fake_adapter_requires_no_secrets_or_environment(monkeypatch: pytest.Mon
     assert response.model_calls == 1
     assert "OPENAI_API_KEY" not in os.environ
     assert "ANTHROPIC_API_KEY" not in os.environ
+
+
+def test_local_runtime_adapter_returns_deterministic_response() -> None:
+    adapter = DeterministicLocalRuntimeModelCallAdapter()
+    request = ModelCallRequest(request_id="req-local-1", prompt="Classify this request")
+
+    first = adapter.call(request)
+    second = adapter.call(request)
+
+    assert first.output == second.output
+    assert first.output == "local_runtime:req-local-1:Classify this request"
+    assert first.model_calls == 1
+    assert first.provider == LOCAL_RUNTIME_ADAPTER
+    assert first.model == "deterministic-local-runtime"
+    assert first.metadata["network"] == "none"
+    assert first.metadata["runtime"] == "in_process_stub"
+    assert first.metadata["deterministic"] is True
+
+
+def test_local_runtime_adapter_requires_no_secrets_or_environment(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    monkeypatch.delenv("OPENAI_API_KEY", raising=False)
+    monkeypatch.delenv("ANTHROPIC_API_KEY", raising=False)
+    monkeypatch.delenv("KORA_LOCAL_MODEL_RUNTIME", raising=False)
+    monkeypatch.delenv("KORA_LOCAL_MODEL_ENDPOINT", raising=False)
+    monkeypatch.delenv("KORA_LOCAL_MODEL_NAME", raising=False)
+
+    response = DeterministicLocalRuntimeModelCallAdapter().call(
+        ModelCallRequest(request_id="req-local-2", prompt="local runtime only")
+    )
+
+    assert response.model_calls == 1
+    assert response.provider == LOCAL_RUNTIME_ADAPTER
+    assert "OPENAI_API_KEY" not in os.environ
+    assert "ANTHROPIC_API_KEY" not in os.environ
+    assert "KORA_LOCAL_MODEL_RUNTIME" not in os.environ
+    assert "KORA_LOCAL_MODEL_ENDPOINT" not in os.environ
+    assert "KORA_LOCAL_MODEL_NAME" not in os.environ
 
 
 def test_model_call_summary_aggregates_counters() -> None:
@@ -191,6 +232,15 @@ def test_select_model_call_adapter_returns_local_validation_adapter() -> None:
     assert response.model == "deterministic-local"
 
 
+def test_select_model_call_adapter_returns_local_runtime_adapter() -> None:
+    adapter = select_model_call_adapter(LOCAL_RUNTIME_ADAPTER)
+
+    assert isinstance(adapter, DeterministicLocalRuntimeModelCallAdapter)
+    response = adapter.call(ModelCallRequest(request_id="req-local-3", prompt="local runtime"))
+    assert response.provider == LOCAL_RUNTIME_ADAPTER
+    assert response.model == "deterministic-local-runtime"
+
+
 def test_select_model_call_adapter_returns_blocked_adapter() -> None:
     adapter = select_model_call_adapter(BLOCKED_ADAPTER)
 
@@ -216,6 +266,7 @@ def test_available_model_call_adapters_lists_safe_kinds() -> None:
     adapters = available_model_call_adapters()
 
     assert LOCAL_VALIDATION_ADAPTER in adapters
+    assert LOCAL_RUNTIME_ADAPTER in adapters
     assert BLOCKED_ADAPTER in adapters
     assert LOCAL_RUNTIME_PLACEHOLDER_ADAPTER in adapters
 
@@ -233,6 +284,27 @@ def test_select_model_call_adapter_requires_no_secrets_or_local_runtime(
     response = adapter.call(ModelCallRequest(request_id="req-13", prompt="no runtime"))
 
     assert response.model_calls == 1
+    assert "OPENAI_API_KEY" not in os.environ
+    assert "ANTHROPIC_API_KEY" not in os.environ
+    assert "KORA_LOCAL_MODEL_RUNTIME" not in os.environ
+    assert "KORA_LOCAL_MODEL_ENDPOINT" not in os.environ
+    assert "KORA_LOCAL_MODEL_NAME" not in os.environ
+
+
+def test_local_runtime_adapter_requires_no_secrets_or_local_runtime(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    monkeypatch.delenv("OPENAI_API_KEY", raising=False)
+    monkeypatch.delenv("ANTHROPIC_API_KEY", raising=False)
+    monkeypatch.delenv("KORA_LOCAL_MODEL_RUNTIME", raising=False)
+    monkeypatch.delenv("KORA_LOCAL_MODEL_ENDPOINT", raising=False)
+    monkeypatch.delenv("KORA_LOCAL_MODEL_NAME", raising=False)
+
+    adapter = select_model_call_adapter(LOCAL_RUNTIME_ADAPTER)
+    response = adapter.call(ModelCallRequest(request_id="req-local-4", prompt="no runtime"))
+
+    assert response.model_calls == 1
+    assert response.metadata["runtime"] == "in_process_stub"
     assert "OPENAI_API_KEY" not in os.environ
     assert "ANTHROPIC_API_KEY" not in os.environ
     assert "KORA_LOCAL_MODEL_RUNTIME" not in os.environ

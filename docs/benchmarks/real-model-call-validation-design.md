@@ -285,6 +285,8 @@ For a reviewer-facing walkthrough, see the [local no-network validation reviewer
 
 The reviewer packet includes adapter-selection commands, no-network baseline counters, fail-closed adapter checks, and the local Markdown report generation path for synthetic workloads.
 
+The local validation examples also support explicit `--adapter local_runtime` selection. That adapter is a deterministic in-process local/no-network runtime stub; it is not a real provider integration and does not call local HTTP endpoints, subprocess runtimes, remote providers, provider APIs, or external model downloads.
+
 Claim boundary: this is not real provider validation, real API-cost validation, production validation, production cost reduction proof, broad workload superiority proof, or energy reduction evidence.
 
 ## Customer-Support Triage Local Validation Example

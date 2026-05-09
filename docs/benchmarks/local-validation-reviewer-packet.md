@@ -58,6 +58,8 @@ python3 -m kora run runtime_integrated_benchmark -- --offline
 
 python3 -m kora run real_model_call_validation_fake -- --offline --adapter local_validation
 python3 -m kora run customer_support_triage_fake_validation -- --offline --adapter local_validation
+python3 -m kora run real_model_call_validation_fake -- --offline --adapter local_runtime
+python3 -m kora run customer_support_triage_fake_validation -- --offline --adapter local_runtime
 
 python3 -m kora run customer_support_triage_fake_validation -- --offline --report-md /tmp/kora_customer_support_validation.md
 ```
@@ -92,6 +94,13 @@ python3 -m kora run real_model_call_validation_fake -- --offline --adapter local
 python3 -m kora run customer_support_triage_fake_validation -- --offline --adapter local_validation
 ```
 
+The `local_runtime` adapter is an explicit opt-in local/no-network runtime stub. It uses deterministic in-process behavior, records the same aggregate counter shape as `local_validation`, and does not call local HTTP endpoints, subprocess runtimes, remote providers, provider APIs, or external model downloads.
+
+```bash
+python3 -m kora run real_model_call_validation_fake -- --offline --adapter local_runtime
+python3 -m kora run customer_support_triage_fake_validation -- --offline --adapter local_runtime
+```
+
 The `blocked` and `local_runtime_placeholder` adapter kinds are fail-closed safety paths. `blocked` represents an unconfigured model-call path. `local_runtime_placeholder` is design-only, makes no runtime calls, and does not contact local HTTP endpoints, subprocess runtimes, remote providers, or provider APIs.
 
 Fail-closed checks:
@@ -124,6 +133,11 @@ Expected labels:
 - `provider`: `local_validation`
 - `model`: `deterministic-local`
 
+With explicit `--adapter local_runtime`, the expected counters are the same and the labels are:
+
+- `provider`: `local_runtime`
+- `model`: `deterministic-local-runtime`
+
 ## Expected Customer-Support Triage Counters
 
 For `customer_support_triage_fake_validation`, expected counters are:
@@ -142,6 +156,11 @@ Expected labels:
 
 - `provider`: `local_validation`
 - `model`: `deterministic-local`
+
+With explicit `--adapter local_runtime`, the expected counters are the same and the labels are:
+
+- `provider`: `local_runtime`
+- `model`: `deterministic-local-runtime`
 
 ## How To Read The Counters
 
