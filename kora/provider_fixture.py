@@ -56,6 +56,7 @@ class ProviderFixtureDryRunContract:
         """Return aggregate report fields safe for reviewer-facing summaries."""
 
         return {
+            "fixture_contract_status": "passed",
             "fixture_version": self.fixture_version,
             "provider_label": self.provider_label,
             "model_label": self.model_label,

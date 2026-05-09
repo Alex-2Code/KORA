@@ -36,6 +36,7 @@ def _summary() -> dict[str, object]:
         "production_benchmark_evidence": False,
         "energy_evidence": False,
         "provider_fixture_dry_run_contract": {
+            "fixture_contract_status": "passed",
             "fixture_version": "0.1",
             "provider_label": "local_validation",
             "model_label": "deterministic-local",
@@ -99,6 +100,9 @@ def test_render_local_validation_markdown_includes_report_packet_fields() -> Non
     assert "- Baseline candidate events: `12`" in markdown
     assert "- KORA routed events: `4`" in markdown
     assert "- Avoided model-call events: `8`" in markdown
+    assert "- Fixture contract status: `passed`" in markdown
+    assert "- No network: `yes`" in markdown
+    assert "- No provider call: `yes`" in markdown
     assert "- Provider attempted events: `0`" in markdown
 
 
