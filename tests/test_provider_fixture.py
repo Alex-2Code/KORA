@@ -139,6 +139,7 @@ def test_provider_fixture_report_fields_are_aggregate_and_safe() -> None:
 
     report_fields = contract.report_fields()
 
+    assert report_fields["fixture_contract_status"] == "passed"
     assert report_fields["provider_label"] == "example-provider"
     assert report_fields["provider_attempted_events"] == 0
     assert report_fields["contains_real_provider_response"] is False

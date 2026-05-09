@@ -246,6 +246,27 @@ def test_customer_support_triage_fake_validation_report_with_local_runtime_adapt
     assert "- Provider attempted events: `0`" in report
 
 
+def test_customer_support_triage_report_fixture_validation_failure_fails_closed(
+    monkeypatch,
+) -> None:
+    module = _load_example_module()
+
+    def fail_validation(_fixture):
+        raise ValueError("fixture validation failed closed")
+
+    monkeypatch.setattr(module, "validate_provider_fixture", fail_validation)
+
+    try:
+        module.build_customer_support_triage_fake_validation_summary(
+            offline=True,
+            adapter_kind="local_runtime",
+        )
+    except ValueError as exc:
+        assert "fixture validation failed closed" in str(exc)
+    else:
+        raise AssertionError("expected fixture validation failure")
+
+
 def test_customer_support_triage_fake_validation_blocked_adapter_fails_closed(
     tmp_path: Path,
 ) -> None:

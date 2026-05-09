@@ -152,7 +152,12 @@ def render_local_validation_markdown(summary: dict[str, Any]) -> str:
     if isinstance(provider_fixture, dict):
         lines.extend(
             [
-                _summary_line("Status", "available"),
+                _summary_line(
+                    "Fixture contract status",
+                    provider_fixture.get("fixture_contract_status", "passed"),
+                ),
+                _summary_line("Fixture version", provider_fixture.get("fixture_version")),
+                _summary_line("Request id", provider_fixture.get("request_id")),
                 _summary_line("Mode", provider_fixture.get("mode")),
                 _summary_line("Provider label", provider_fixture.get("provider_label")),
                 _summary_line("Model label", provider_fixture.get("model_label")),

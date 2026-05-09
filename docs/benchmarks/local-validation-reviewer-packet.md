@@ -97,6 +97,7 @@ Generated local/no-network reports are organized to separate:
 
 For successful local/no-network validation reports, provider fixture dry-run contract status is expected to show:
 
+- `fixture_contract_status`: `passed`
 - `mode`: `dry_run`
 - `no_network`: `true`
 - `no_provider_call`: `true`
@@ -106,6 +107,8 @@ For successful local/no-network validation reports, provider fixture dry-run con
 - `provider_attempted_events`: `0`
 
 This contract status is a local dry-run report field. It is not a provider request, provider response, credential check, network call, or real-provider validation.
+
+If fixture validation fails, report generation must stop rather than writing a misleading success report.
 
 ## Adapter Selection
 
