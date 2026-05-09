@@ -122,6 +122,21 @@ Current supported adapter kinds:
 
 The `local_runtime_placeholder` adapter kind does not call Ollama, llama.cpp, vLLM, remote providers, local HTTP endpoints, or subprocess runtimes. It exists so future adapters can plug into the same selection path without changing the validation examples or claim boundaries.
 
+## Blocked Local Runtime Adapter Skeleton
+
+KORA includes an explicit blocked local runtime adapter skeleton for the `local_runtime_placeholder` kind.
+
+The skeleton reserves the future local runtime adapter boundary while failing closed by design. It:
+
+- accepts an inert local runtime configuration object for future runtime, model, endpoint, command, timeout, and metadata fields
+- does not read environment variables automatically
+- does not validate configuration by contacting a runtime
+- does not call Ollama, llama.cpp, vLLM, local HTTP endpoints, subprocess runtimes, or remote providers
+- does not require any local runtime installation for tests or examples
+- raises a clear error stating that local runtime adapters are not implemented yet and that no provider call was attempted
+
+Current runnable validation remains local/no-network validation through the deterministic local validation adapter. Future local runtime work can replace the fail-closed placeholder with a concrete adapter behind explicit opt-in.
+
 Future adapter kinds should keep the same behavior shape:
 
 - explicit adapter selection

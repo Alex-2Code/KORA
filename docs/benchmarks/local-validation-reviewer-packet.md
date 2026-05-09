@@ -148,4 +148,6 @@ Not allowed:
 
 The next step after this packet is a local model adapter or remote provider adapter using the same reporting structure, while preserving privacy and claim boundaries.
 
+The reviewer packet commands still use local/no-network validation. Local runtime adapters remain design-only and fail-closed until a concrete adapter is implemented and validated.
+
 See the [local model adapter design](local-model-adapter-design.md) for the next local runtime pathway after local/no-network validation.

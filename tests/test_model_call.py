@@ -4,10 +4,12 @@ import pytest
 
 from kora.model_call import (
     BLOCKED_ADAPTER,
+    BlockedLocalRuntimeModelCallAdapter,
     BlockedModelCallAdapter,
     DeterministicFakeModelCallAdapter,
     LOCAL_RUNTIME_PLACEHOLDER_ADAPTER,
     LOCAL_VALIDATION_ADAPTER,
+    LocalRuntimeAdapterConfig,
     ModelCallRequest,
     ModelCallSummary,
     available_model_call_adapters,
@@ -122,6 +124,58 @@ def test_blocked_adapter_fails_closed() -> None:
         adapter.call(ModelCallRequest(request_id="req-9", prompt="blocked"))
 
 
+def test_local_runtime_config_can_be_created_with_defaults() -> None:
+    config = LocalRuntimeAdapterConfig()
+
+    assert config.runtime == ""
+    assert config.model is None
+    assert config.endpoint is None
+    assert config.command is None
+    assert config.timeout_s is None
+    assert config.metadata == {}
+
+
+def test_local_runtime_config_metadata_default_is_not_shared() -> None:
+    first = LocalRuntimeAdapterConfig()
+    second = LocalRuntimeAdapterConfig()
+
+    first.metadata["runtime"] = "example"
+
+    assert second.metadata == {}
+
+
+def test_blocked_local_runtime_adapter_fails_closed_without_prompt_leak() -> None:
+    adapter = BlockedLocalRuntimeModelCallAdapter()
+    raw_prompt = "do not include this raw synthetic prompt"
+
+    with pytest.raises(RuntimeError) as exc_info:
+        adapter.call(ModelCallRequest(request_id="req-local-runtime", prompt=raw_prompt))
+
+    message = str(exc_info.value)
+    assert "Local runtime adapters are not implemented yet" in message
+    assert "No provider call was attempted" in message
+    assert "local_validation" in message
+    assert raw_prompt not in message
+
+
+def test_blocked_local_runtime_adapter_accepts_inert_config() -> None:
+    config = LocalRuntimeAdapterConfig(
+        runtime="ollama",
+        model="example-local-model",
+        endpoint="http://127.0.0.1:11434",
+        command="example-local-runtime",
+        timeout_s=5.0,
+        metadata={"purpose": "test-only placeholder"},
+    )
+    adapter = BlockedLocalRuntimeModelCallAdapter(config=config)
+
+    assert adapter.config == config
+    assert adapter.provider == LOCAL_RUNTIME_PLACEHOLDER_ADAPTER
+    assert adapter.model == "local-runtime-not-configured"
+    with pytest.raises(RuntimeError, match="No provider call was attempted"):
+        adapter.call(ModelCallRequest(request_id="req-local-runtime-config", prompt="blocked"))
+
+
 def test_select_model_call_adapter_defaults_to_local_validation() -> None:
     adapter = select_model_call_adapter()
 
@@ -148,8 +202,8 @@ def test_select_model_call_adapter_returns_blocked_adapter() -> None:
 def test_select_model_call_adapter_local_runtime_placeholder_fails_closed() -> None:
     adapter = select_model_call_adapter(LOCAL_RUNTIME_PLACEHOLDER_ADAPTER)
 
-    assert isinstance(adapter, BlockedModelCallAdapter)
-    with pytest.raises(RuntimeError, match="Local runtime adapters are design-only"):
+    assert isinstance(adapter, BlockedLocalRuntimeModelCallAdapter)
+    with pytest.raises(RuntimeError, match="Local runtime adapters are not implemented yet"):
         adapter.call(ModelCallRequest(request_id="req-12", prompt="placeholder"))
 
 
@@ -179,6 +233,25 @@ def test_select_model_call_adapter_requires_no_secrets_or_local_runtime(
     response = adapter.call(ModelCallRequest(request_id="req-13", prompt="no runtime"))
 
     assert response.model_calls == 1
+    assert "OPENAI_API_KEY" not in os.environ
+    assert "ANTHROPIC_API_KEY" not in os.environ
+    assert "KORA_LOCAL_MODEL_RUNTIME" not in os.environ
+    assert "KORA_LOCAL_MODEL_ENDPOINT" not in os.environ
+    assert "KORA_LOCAL_MODEL_NAME" not in os.environ
+
+
+def test_local_runtime_placeholder_requires_no_secrets_or_local_runtime(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    monkeypatch.delenv("OPENAI_API_KEY", raising=False)
+    monkeypatch.delenv("ANTHROPIC_API_KEY", raising=False)
+    monkeypatch.delenv("KORA_LOCAL_MODEL_RUNTIME", raising=False)
+    monkeypatch.delenv("KORA_LOCAL_MODEL_ENDPOINT", raising=False)
+    monkeypatch.delenv("KORA_LOCAL_MODEL_NAME", raising=False)
+
+    adapter = select_model_call_adapter(LOCAL_RUNTIME_PLACEHOLDER_ADAPTER)
+
+    assert isinstance(adapter, BlockedLocalRuntimeModelCallAdapter)
     assert "OPENAI_API_KEY" not in os.environ
     assert "ANTHROPIC_API_KEY" not in os.environ
     assert "KORA_LOCAL_MODEL_RUNTIME" not in os.environ

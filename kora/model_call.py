@@ -9,6 +9,7 @@ from typing import Any, Protocol
 LOCAL_VALIDATION_ADAPTER = "local_validation"
 BLOCKED_ADAPTER = "blocked"
 LOCAL_RUNTIME_PLACEHOLDER_ADAPTER = "local_runtime_placeholder"
+LOCAL_RUNTIME_NOT_CONFIGURED_MODEL = "local-runtime-not-configured"
 
 SUPPORTED_MODEL_CALL_ADAPTERS = (
     LOCAL_VALIDATION_ADAPTER,
@@ -44,6 +45,18 @@ class ModelCallResponse:
     output_tokens: int | None
     provider: str | None
     model: str | None
+    metadata: dict[str, Any] = field(default_factory=dict)
+
+
+@dataclass(frozen=True)
+class LocalRuntimeAdapterConfig:
+    """Inert future local runtime configuration for fail-closed adapters."""
+
+    runtime: str = ""
+    model: str | None = None
+    endpoint: str | None = None
+    command: str | None = None
+    timeout_s: float | None = None
     metadata: dict[str, Any] = field(default_factory=dict)
 
 
@@ -96,6 +109,28 @@ class BlockedModelCallAdapter:
         raise RuntimeError(self.message)
 
 
+class BlockedLocalRuntimeModelCallAdapter:
+    """Fail-closed skeleton for future local runtime adapters."""
+
+    provider = LOCAL_RUNTIME_PLACEHOLDER_ADAPTER
+    model = LOCAL_RUNTIME_NOT_CONFIGURED_MODEL
+
+    def __init__(
+        self,
+        config: LocalRuntimeAdapterConfig | None = None,
+        message: str | None = None,
+    ) -> None:
+        self.config = config or LocalRuntimeAdapterConfig()
+        self.message = message or (
+            "Local runtime adapters are not implemented yet. No provider call "
+            "was attempted. Use local_validation for local/no-network validation."
+        )
+
+    def call(self, request: ModelCallRequest) -> ModelCallResponse:
+        del request
+        raise RuntimeError(self.message)
+
+
 def available_model_call_adapters() -> list[str]:
     """Return adapter kind labels supported by the selector."""
 
@@ -115,11 +150,7 @@ def select_model_call_adapter(kind: str | None = None) -> ModelCallAdapter:
     if selected_kind == BLOCKED_ADAPTER:
         return BlockedModelCallAdapter()
     if selected_kind == LOCAL_RUNTIME_PLACEHOLDER_ADAPTER:
-        return BlockedModelCallAdapter(
-            "Local runtime adapters are design-only and not implemented yet. "
-            "Use local_validation for local no-network validation; no provider "
-            "calls are attempted."
-        )
+        return BlockedLocalRuntimeModelCallAdapter()
 
     supported = ", ".join(SUPPORTED_MODEL_CALL_ADAPTERS)
     raise ValueError(f"Unsupported model-call adapter kind {selected_kind!r}. Supported: {supported}")
