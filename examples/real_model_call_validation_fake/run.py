@@ -10,6 +10,7 @@ from __future__ import annotations
 import argparse
 import json
 from dataclasses import dataclass
+from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any, Literal
 
@@ -24,6 +25,7 @@ from kora.model_call import (
     available_model_call_adapters,
     select_model_call_adapter,
 )
+from kora.provider_fixture import validate_provider_fixture
 from kora.validation_report import render_local_validation_markdown
 
 Route = Literal["deterministic", "model_required"]
@@ -193,6 +195,42 @@ def _run_kora_controlled_path(
     )
 
 
+def _generated_at() -> str:
+    return datetime.now(timezone.utc).replace(microsecond=0).isoformat().replace("+00:00", "Z")
+
+
+def _provider_fixture_contract_fields(
+    *,
+    provider_label: str,
+    model_label: str,
+    baseline_candidate_events: int,
+    kora_routed_events: int,
+    avoided_model_call_events: int,
+) -> dict[str, Any]:
+    fixture = {
+        "fixture_version": "0.1",
+        "provider_label": provider_label,
+        "model_label": model_label,
+        "mode": "dry_run",
+        "request_id": "real_model_call_local_validation_report",
+        "baseline_candidate_events": baseline_candidate_events,
+        "kora_routed_events": kora_routed_events,
+        "avoided_model_call_events": avoided_model_call_events,
+        "provider_attempted_events": 0,
+        "provider_blocked_events": 0,
+        "no_network": True,
+        "no_provider_call": True,
+        "contains_real_provider_response": False,
+        "contains_customer_data": False,
+        "contains_secret_material": False,
+        "notes": [
+            "Generated from aggregate local/no-network validation counters.",
+            "No provider request, provider response, credential, or customer data is included.",
+        ],
+    }
+    return validate_provider_fixture(fixture).report_fields()
+
+
 def build_fake_model_call_validation_summary(
     *,
     offline: bool = True,
@@ -224,14 +262,21 @@ def build_fake_model_call_validation_summary(
         if baseline_summary.model_calls
         else 0.0
     )
+    provider_label = baseline_responses[0].provider
+    model_label = baseline_responses[0].model
 
     return {
+        "report_type": "local_no_network_validation_packet",
+        "generated_at": _generated_at(),
         "ok": error_count == 0 and validation_fail_count == 0,
         "mode": "local_no_network_model_call_validation",
         "offline": True,
+        "no_network": True,
+        "no_provider_call": True,
+        "fail_closed_status": "not_applicable_successful_local_adapter",
         "adapter": baseline_responses[0].metadata.get("adapter", adapter_kind),
-        "provider": baseline_responses[0].provider,
-        "model": baseline_responses[0].model,
+        "provider": provider_label,
+        "model": model_label,
         "total_requests": total_requests,
         "baseline_model_calls": baseline_summary.model_calls,
         "kora_model_calls": kora_summary.model_calls,
@@ -251,7 +296,20 @@ def build_fake_model_call_validation_summary(
         "privacy_class": "synthetic",
         "raw_prompts_emitted": False,
         "raw_responses_emitted": False,
-        "command": "python3 -m kora run real_model_call_validation_fake -- --offline",
+        "api_cost_evidence": False,
+        "production_benchmark_evidence": False,
+        "energy_evidence": False,
+        "provider_fixture_dry_run_contract": _provider_fixture_contract_fields(
+            provider_label=provider_label,
+            model_label=model_label,
+            baseline_candidate_events=baseline_summary.model_calls,
+            kora_routed_events=kora_summary.model_calls,
+            avoided_model_call_events=avoided_model_calls,
+        ),
+        "command": (
+            "python3 -m kora run real_model_call_validation_fake -- "
+            f"--offline --adapter {adapter_kind}"
+        ),
         "claim_boundary": CLAIM_BOUNDARY,
         "notes": [
             "Synthetic workload only.",

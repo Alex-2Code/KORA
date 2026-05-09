@@ -79,11 +79,33 @@ Observed local/no-network baseline examples from the current reviewer pass:
 python3 -m kora run real_model_call_validation_fake -- --offline --report-md /tmp/kora_local_validation.md
 
 python3 -m kora run customer_support_triage_fake_validation -- --offline --report-md /tmp/kora_customer_support_validation.md
+
+python3 -m kora run customer_support_triage_fake_validation -- --offline --adapter local_runtime --report-md /tmp/kora_customer_support_local_runtime.md
 ```
 
 Reports are written only when `--report-md` is provided. Use `/tmp` or another local output path for generated artifacts unless a report is intentionally selected for review.
 
 Generated reports are not committed by default. They contain aggregate counters and boundary language. They do not contain raw prompts, raw provider responses, secrets, or private data.
+
+Generated local/no-network reports are organized to separate:
+
+- report metadata, including report type, generated timestamp, adapter kind, provider label, model label, offline status, no-network status, and fail-closed status
+- aggregate synthetic evidence, including baseline candidate events, KORA-routed model-call events, and avoided model-call events
+- adapter-selection result, including the selected local/no-network adapter and labels
+- provider fixture dry-run contract status, using aggregate metadata only
+- safety boundaries, interpretation, and explicit non-claims
+
+For successful local/no-network validation reports, provider fixture dry-run contract status is expected to show:
+
+- `mode`: `dry_run`
+- `no_network`: `true`
+- `no_provider_call`: `true`
+- `contains_real_provider_response`: `false`
+- `contains_customer_data`: `false`
+- `contains_secret_material`: `false`
+- `provider_attempted_events`: `0`
+
+This contract status is a local dry-run report field. It is not a provider request, provider response, credential check, network call, or real-provider validation.
 
 ## Adapter Selection
 

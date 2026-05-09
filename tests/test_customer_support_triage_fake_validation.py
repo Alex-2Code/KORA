@@ -193,6 +193,20 @@ def test_customer_support_triage_fake_validation_report_with_explicit_adapter(
     report = report_path.read_text(encoding="utf-8")
     assert "customer_support_triage_local_validation" in report
     assert "local_validation" in report
+    assert "## Report Metadata" in report
+    assert "## Adapter Selection Result" in report
+    assert "## Provider Fixture Dry-Run Contract" in report
+    assert "## Explicit Non-Claims" in report
+    assert "- Adapter kind: `local_validation`" in report
+    assert "- Local/no-network status: `yes`" in report
+    assert "- Baseline candidate events: `12`" in report
+    assert "- KORA routed events: `4`" in report
+    assert "- Avoided model-call events: `8`" in report
+    assert "no production cost reduction proof" in report
+    assert "no real API-cost reduction proof" in report
+    assert "no energy reduction evidence" in report
+    assert "real API cost reduction" not in report
+    assert "production cost reduction proof." not in report
 
 
 def test_customer_support_triage_fake_validation_report_with_local_runtime_adapter(
@@ -224,6 +238,12 @@ def test_customer_support_triage_fake_validation_report_with_local_runtime_adapt
     report = report_path.read_text(encoding="utf-8")
     assert "customer_support_triage_local_validation" in report
     assert "local_runtime" in report
+    assert "- Adapter kind: `local_runtime`" in report
+    assert "- Provider label: `local_runtime`" in report
+    assert "- Model label: `deterministic-local-runtime`" in report
+    assert "- No network: `yes`" in report
+    assert "- No provider call: `yes`" in report
+    assert "- Provider attempted events: `0`" in report
 
 
 def test_customer_support_triage_fake_validation_blocked_adapter_fails_closed(
