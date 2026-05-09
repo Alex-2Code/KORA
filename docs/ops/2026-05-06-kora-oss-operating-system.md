@@ -187,11 +187,11 @@ Route evidence into GitHub:
 - Weekly metrics snapshot.
 - Weekly Albert review queue.
 - Monthly OSS report.
-- EOD/SOD internal context flow.
+- Private operating handoff flow.
 
 ## Public / Private Boundary
 
 - Public repo docs are public-facing unless clearly marked internal.
 - Personal data and resumes should not be posted in public issues.
 - Partner or government interest should not be overstated.
-- Internal EOD/SOD prompts are internal operating artifacts.
+- Private operating handoff artifacts are not public documentation.

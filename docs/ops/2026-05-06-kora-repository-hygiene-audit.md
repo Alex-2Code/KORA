@@ -192,7 +192,7 @@ Should maybe move to internal/private repo later:
 
 Should be clearly marked internal-only:
 
-- future EOD/SOD prompts that include private strategy, names, contact details, or unpublished partner/investor details.
+- future private handoff artifacts that include private strategy, names, contact details, or unpublished partner/investor details.
 
 Should not include personal/private data:
 

@@ -157,10 +157,6 @@ python3 -m kora run runtime_integrated_benchmark -- --offline
 
 Implement an explicit adapter-selection CLI option for local validation examples, keeping the default local/no-network path unchanged and keeping local runtime placeholders fail-closed.
 
-## Next ChatGPT SOD prompt
+## Next Technical Work
 
-Use `docs/context/KORA_NEXT_CHATGPT_SOD_PROMPT.md` as the next planning handoff. Ask for one Codex task at a time and preserve the public claim boundary.
-
-## Next Codex SOD prompt
-
-Use `docs/context/KORA_NEXT_CODEX_SOD_PROMPT.md` as the next implementation handoff. The suggested next task is an explicit adapter-selection CLI option.
+The next public technical step is an explicit adapter-selection CLI option for local validation examples, while preserving the current local/no-network default path and fail-closed local runtime placeholders.
