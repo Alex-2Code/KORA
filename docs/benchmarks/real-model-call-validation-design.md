@@ -88,6 +88,8 @@ See the [local model adapter design](local-model-adapter-design.md) for the prov
 
 See the [real provider adapter design](real-provider-adapter-design.md) for the design-only future provider boundary. That packet does not implement provider calls, credential handling, network calls, or provider dependencies.
 
+See the [real provider test harness design](real-provider-test-harness-design.md) for the dry-run fixture and reporting contract that should precede any future provider implementation.
+
 Properties:
 
 - records measured local model invocation count

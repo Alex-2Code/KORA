@@ -110,6 +110,8 @@ Local model adapter design: [provider-neutral local runtime path](docs/benchmark
 
 Real provider adapter design-only packet: [future provider boundary](docs/benchmarks/real-provider-adapter-design.md).
 
+Real provider test harness design-only packet: [dry-run provider validation contract](docs/benchmarks/real-provider-test-harness-design.md).
+
 ## Help Test KORA
 
 Good candidate workloads:

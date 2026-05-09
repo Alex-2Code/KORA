@@ -6,6 +6,8 @@ This packet defines how future real provider adapters may integrate with KORA's 
 
 This is a design-only document. It does not implement real provider calls, network calls, HTTP clients, provider credential handling, subprocess runtimes, external model downloads, provider dependencies, or benchmark artifacts.
 
+For the dry-run-first validation contract that should precede any future real provider implementation, see the [real provider test harness design](real-provider-test-harness-design.md).
+
 ## Current Default
 
 KORA's current validation paths remain local/no-network by default.
@@ -160,6 +162,8 @@ Before any real provider implementation is added, the test plan should cover:
 - fail-closed paths do not write misleading success reports
 - provider-specific tests are skipped unless explicitly enabled in a controlled environment
 - safety scans detect newly introduced network, subprocess, provider SDK, or credential-handling code
+
+The [real provider test harness design](real-provider-test-harness-design.md) defines a dry-run fixture and reporting contract for this pre-implementation stage.
 
 ## Evidence Boundary
 

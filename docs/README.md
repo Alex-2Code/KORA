@@ -67,10 +67,12 @@ Use this path for the current `v0.3.0-alpha` prerelease runtime evidence and reg
 11. Real model-call validation report template: [`docs/benchmarks/real-model-call-validation-report-template.md`](benchmarks/real-model-call-validation-report-template.md)
 12. Local validation reviewer packet: [`docs/benchmarks/local-validation-reviewer-packet.md`](benchmarks/local-validation-reviewer-packet.md)
 13. Local model adapter design: [`docs/benchmarks/local-model-adapter-design.md`](benchmarks/local-model-adapter-design.md)
-14. Local no-network model-call validation example: [`examples/real_model_call_validation_fake`](../examples/real_model_call_validation_fake)
-15. Customer-support triage local validation example: [`examples/customer_support_triage_fake_validation`](../examples/customer_support_triage_fake_validation)
-16. Customer-support triage workload spec: [`docs/workloads/customer-support-triage.md`](workloads/customer-support-triage.md)
-17. Claim boundary source: [`docs/claims/kora-claim-registry.md`](claims/kora-claim-registry.md)
+14. Real provider adapter design: [`docs/benchmarks/real-provider-adapter-design.md`](benchmarks/real-provider-adapter-design.md)
+15. Real provider test harness design: [`docs/benchmarks/real-provider-test-harness-design.md`](benchmarks/real-provider-test-harness-design.md)
+16. Local no-network model-call validation example: [`examples/real_model_call_validation_fake`](../examples/real_model_call_validation_fake)
+17. Customer-support triage local validation example: [`examples/customer_support_triage_fake_validation`](../examples/customer_support_triage_fake_validation)
+18. Customer-support triage workload spec: [`docs/workloads/customer-support-triage.md`](workloads/customer-support-triage.md)
+19. Claim boundary source: [`docs/claims/kora-claim-registry.md`](claims/kora-claim-registry.md)
 
 Current approved public claim:
 
