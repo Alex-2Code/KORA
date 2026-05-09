@@ -221,8 +221,10 @@ Safe interpretation of this packet:
 
 ## Next Validation Step
 
-The next step after this packet is a local model adapter or remote provider adapter using the same reporting structure, while preserving privacy and claim boundaries.
+The next step after this packet is real provider adapter design, followed later by any implementation behind explicit opt-in, using the same reporting structure while preserving privacy and claim boundaries.
 
-The reviewer packet commands still use local/no-network validation. Local runtime adapters remain design-only and fail-closed until a concrete adapter is implemented and validated.
+The reviewer packet commands still use local/no-network validation. The `local_runtime` adapter is an explicit deterministic in-process local/no-network stub. The `local_runtime_placeholder` adapter remains design-only and fail-closed for unsupported runtime paths.
 
 See the [local model adapter design](local-model-adapter-design.md) for the next local runtime pathway after local/no-network validation.
+
+See the [real provider adapter design](real-provider-adapter-design.md) for the future provider boundary. It is design-only and does not implement provider calls, credential handling, network calls, or provider dependencies.

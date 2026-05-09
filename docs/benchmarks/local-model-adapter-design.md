@@ -127,6 +127,8 @@ The local validation examples expose an explicit `--adapter` option for the curr
 
 Reviewer-facing reproduction commands, no-network baseline counters, and fail-closed adapter checks are listed in the [local no-network validation reviewer packet](local-validation-reviewer-packet.md).
 
+Future real provider adapters are covered separately in the [real provider adapter design](real-provider-adapter-design.md). That packet is design-only and does not add provider calls, credential handling, network calls, or provider dependencies.
+
 The `local_runtime_placeholder` adapter kind does not call Ollama, llama.cpp, vLLM, remote providers, local HTTP endpoints, or subprocess runtimes. It exists so future adapters can plug into the same selection path without changing the validation examples or claim boundaries.
 
 ## Blocked Local Runtime Adapter Skeleton

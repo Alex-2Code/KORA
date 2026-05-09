@@ -108,6 +108,8 @@ The reviewer packet includes the no-network baseline checklist, adapter-selectio
 
 Local model adapter design: [provider-neutral local runtime path](docs/benchmarks/local-model-adapter-design.md).
 
+Real provider adapter design-only packet: [future provider boundary](docs/benchmarks/real-provider-adapter-design.md).
+
 ## Help Test KORA
 
 Good candidate workloads:

@@ -86,6 +86,8 @@ Local model-call mode should run through a local runtime or local provider abstr
 
 See the [local model adapter design](local-model-adapter-design.md) for the provider-neutral local runtime pathway and configuration principles.
 
+See the [real provider adapter design](real-provider-adapter-design.md) for the design-only future provider boundary. That packet does not implement provider calls, credential handling, network calls, or provider dependencies.
+
 Properties:
 
 - records measured local model invocation count
@@ -253,11 +255,13 @@ Current implementation:
 - `ModelCallResponse`: normalized response with measured model-call count, latency, token counters where available, provider/model labels, and metadata.
 - `ModelCallAdapter`: protocol for adapters that return measured model-call counters.
 - `DeterministicFakeModelCallAdapter`: deterministic local validation adapter for tests and harness development.
+- `DeterministicLocalRuntimeModelCallAdapter`: explicit opt-in deterministic in-process local runtime stub for local/no-network validation.
 - `BlockedModelCallAdapter`: fail-closed adapter for cases where real provider use has not been explicitly configured.
 - `ModelCallSummary`: aggregate counter helper for validation reports.
 
-The adapter selection skeleton currently supports `local_validation`, `blocked`, and `local_runtime_placeholder` kinds so future local model-call validation can add runtime adapters behind explicit opt-in.
-The `local_runtime_placeholder` kind is fail-closed until a concrete local runtime adapter is implemented and validated.
+The adapter selection skeleton currently supports `local_validation`, `local_runtime`, `blocked`, and `local_runtime_placeholder` kinds so future validation can add provider adapters behind explicit opt-in.
+The `local_runtime` kind is a deterministic in-process local/no-network stub. The `local_runtime_placeholder` kind remains fail-closed for unsupported runtime paths.
+Future real provider adapters are design-only and should follow the [real provider adapter design](real-provider-adapter-design.md) before implementation.
 
 The local/no-network validation examples expose explicit `--adapter` selection. `local_validation` preserves the current deterministic validation path, while `blocked` and `local_runtime_placeholder` fail closed before validation runs.
 
