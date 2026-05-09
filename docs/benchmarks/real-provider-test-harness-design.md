@@ -296,6 +296,8 @@ Before any future real-provider validation, reports should include:
 
 Reports should not include cost fields in dry-run mode. If cost fields are added in a later real-provider task, estimated and measured values must be separated and claim-reviewed.
 
+Current local/no-network validation reports include a provider fixture dry-run contract status section for reviewer visibility. That section is aggregate metadata only. It records values such as `mode=dry_run`, `no_network=true`, `no_provider_call=true`, `provider_attempted_events=0`, and prohibited-content flags set to false. It does not include provider requests, provider responses, credentials, customer data, raw prompts, network calls, or provider execution.
+
 ## Future CI Test Plan
 
 Future CI tests can validate the dry-run contract without provider access:
