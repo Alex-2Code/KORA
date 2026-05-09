@@ -120,6 +120,8 @@ Current supported adapter kinds:
 - `blocked`: returns a fail-closed adapter for unconfigured model-call paths.
 - `local_runtime_placeholder`: returns fail-closed behavior and documents that local runtime adapters are design-only for now.
 
+The local validation examples expose an explicit `--adapter` option for the current safe adapter kinds. Real local runtime adapters remain unimplemented and fail closed through `local_runtime_placeholder`.
+
 The `local_runtime_placeholder` adapter kind does not call Ollama, llama.cpp, vLLM, remote providers, local HTTP endpoints, or subprocess runtimes. It exists so future adapters can plug into the same selection path without changing the validation examples or claim boundaries.
 
 ## Blocked Local Runtime Adapter Skeleton

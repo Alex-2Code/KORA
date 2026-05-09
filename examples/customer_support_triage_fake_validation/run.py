@@ -13,6 +13,7 @@ from kora.model_call import (
     ModelCallRequest,
     ModelCallResponse,
     ModelCallSummary,
+    available_model_call_adapters,
     select_model_call_adapter,
 )
 from kora.validation_report import render_local_validation_markdown
@@ -39,6 +40,23 @@ def _resolve_workload_path(path: Path) -> Path:
 def load_workload(path: Path = DEFAULT_WORKLOAD) -> dict[str, Any]:
     workload_path = _resolve_workload_path(path)
     return json.loads(workload_path.read_text(encoding="utf-8"))
+
+
+def _select_validation_adapter(kind: str) -> DeterministicFakeModelCallAdapter:
+    adapter = select_model_call_adapter(kind)
+    if kind != LOCAL_VALIDATION_ADAPTER:
+        adapter.call(
+            ModelCallRequest(
+                request_id="adapter-selection-check",
+                prompt="",
+                privacy_class="synthetic",
+                metadata={"purpose": "adapter_selection_check"},
+            )
+        )
+    if not isinstance(adapter, DeterministicFakeModelCallAdapter):
+        supported = ", ".join(available_model_call_adapters())
+        raise ValueError(f"Unsupported validation adapter {kind!r}. Supported: {supported}")
+    return adapter
 
 
 def _requests(workload: dict[str, Any]) -> list[dict[str, Any]]:
@@ -139,6 +157,7 @@ def _run_kora_controlled_path(
 def build_customer_support_triage_fake_validation_summary(
     *,
     offline: bool = True,
+    adapter_kind: str = LOCAL_VALIDATION_ADAPTER,
     workload_path: Path = DEFAULT_WORKLOAD,
 ) -> dict[str, Any]:
     if not offline:
@@ -146,8 +165,8 @@ def build_customer_support_triage_fake_validation_summary(
 
     workload = load_workload(workload_path)
     requests = _requests(workload)
-    baseline_adapter = select_model_call_adapter(LOCAL_VALIDATION_ADAPTER)
-    kora_adapter = select_model_call_adapter(LOCAL_VALIDATION_ADAPTER)
+    baseline_adapter = _select_validation_adapter(adapter_kind)
+    kora_adapter = _select_validation_adapter(adapter_kind)
 
     baseline_responses = _run_direct_baseline(requests, baseline_adapter)
     (
@@ -224,6 +243,12 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
         default=None,
         help="Optional path for a generated Markdown report.",
     )
+    parser.add_argument(
+        "--adapter",
+        default=LOCAL_VALIDATION_ADAPTER,
+        choices=available_model_call_adapters(),
+        help="Model-call adapter kind for local validation.",
+    )
     return parser.parse_args(argv)
 
 
@@ -232,10 +257,14 @@ def main(argv: list[str] | None = None) -> int:
     if not args.offline:
         raise SystemExit("customer_support_triage_fake_validation requires --offline.")
 
-    summary = build_customer_support_triage_fake_validation_summary(
-        offline=True,
-        workload_path=Path(args.workload),
-    )
+    try:
+        summary = build_customer_support_triage_fake_validation_summary(
+            offline=True,
+            adapter_kind=args.adapter,
+            workload_path=Path(args.workload),
+        )
+    except (RuntimeError, ValueError) as exc:
+        raise SystemExit(str(exc)) from exc
     if args.report_md:
         report_path = Path(args.report_md)
         report_path.parent.mkdir(parents=True, exist_ok=True)

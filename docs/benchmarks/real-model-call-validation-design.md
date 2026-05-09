@@ -259,6 +259,8 @@ Current implementation:
 The adapter selection skeleton currently supports `local_validation`, `blocked`, and `local_runtime_placeholder` kinds so future local model-call validation can add runtime adapters behind explicit opt-in.
 The `local_runtime_placeholder` kind is fail-closed until a concrete local runtime adapter is implemented and validated.
 
+The local/no-network validation examples expose explicit `--adapter` selection. `local_validation` preserves the current deterministic validation path, while `blocked` and `local_runtime_placeholder` fail closed before validation runs.
+
 The deterministic local validation adapter is the only local implementation added at this stage. It requires no credentials, performs no external calls, and records provider/model as `local_validation` / `deterministic-local`.
 
 Future local or remote provider adapters can plug into the same interface. Remote provider calls must use environment variables for configuration and must not commit secrets, raw prompts, raw responses, private user data, or proprietary datasets.

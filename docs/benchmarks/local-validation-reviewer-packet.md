@@ -56,6 +56,17 @@ Reports are written only when `--report-md` is provided. Use `/tmp` or another l
 
 Generated reports are not committed by default. They contain aggregate counters and boundary language. They do not contain raw prompts, raw provider responses, secrets, or private data.
 
+## Adapter Selection
+
+The local validation examples default to the `local_validation` adapter.
+
+```bash
+python3 -m kora run real_model_call_validation_fake -- --offline --adapter local_validation
+python3 -m kora run customer_support_triage_fake_validation -- --offline --adapter local_validation
+```
+
+The `blocked` and `local_runtime_placeholder` adapter kinds are fail-closed safety paths. `blocked` represents an unconfigured model-call path. `local_runtime_placeholder` is design-only, makes no runtime calls, and does not contact local HTTP endpoints, subprocess runtimes, remote providers, or provider APIs.
+
 ## Expected Generic Local Validation Counters
 
 For `real_model_call_validation_fake`, expected counters are:
