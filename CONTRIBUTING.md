@@ -19,6 +19,7 @@ Start here when orienting yourself:
 - [SECURITY.md](SECURITY.md): supported reporting path for security issues.
 - [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md): community expectations.
 - [GOVERNANCE.md](GOVERNANCE.md): project governance expectations.
+- [docs/community/contact-and-discussion-routes.md](docs/community/contact-and-discussion-routes.md): current route guidance for questions, workload proposals, bugs, security issues, and PRs.
 - [.github/ISSUE_TEMPLATE/](.github/ISSUE_TEMPLATE/): issue templates.
 - [.github/pull_request_template.md](.github/pull_request_template.md): pull request checklist.
 
@@ -80,6 +81,8 @@ Avoid starting with large runtime changes, new public commands, broad refactors,
 ## Finding a first contribution
 
 Use the [contributor pathway](docs/community/contributor-pathway.md) to choose the right route for questions, bugs, PRs, and workload proposals.
+
+For current route guidance, see [contact and discussion routes](docs/community/contact-and-discussion-routes.md).
 
 For candidate tasks that maintainers may later convert into GitHub issues, see [good first issue candidates](docs/community/good-first-issue-candidates.md).
 

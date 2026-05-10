@@ -32,7 +32,7 @@ KORA is an open-source execution-control layer for AI workloads. The best early 
 - Security issues: follow [SECURITY.md](../../SECURITY.md).
 - PRs: small, scoped pull requests.
 
-TODO: Canonical GitHub Discussions/contact route is still being finalized.
+For current route guidance, see [Contact and Discussion Routes](contact-and-discussion-routes.md).
 
 ## Good First Contribution Areas
 

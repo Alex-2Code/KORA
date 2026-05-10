@@ -6,6 +6,8 @@ This template helps developers propose workloads for KORA validation.
 
 Good workload proposals explain where deterministic routing, validation rules, escalation rules, or budget controls may avoid unnecessary model-call events while preserving correctness and safety.
 
+For route guidance, see [Contact and Discussion Routes](contact-and-discussion-routes.md). Workload proposals can use the issue template now; GitHub Discussions are the recommended route once enabled.
+
 ## Before You Submit
 
 Use synthetic or sanitized data only.

@@ -122,9 +122,7 @@ Good candidate workloads:
 - deterministic-heavy backend workflows
 - LLM apps with high repeated request patterns
 
-To participate, open a GitHub Discussion or contact the project maintainers.
-
-TODO: Add the canonical GitHub Discussions URL and maintainer contact route once they are finalized.
+To participate, follow the [contact and discussion routes](docs/community/contact-and-discussion-routes.md).
 
 ![KORA help-test flow](docs/assets/kora-help-test-flow.png)
 
@@ -148,6 +146,7 @@ Useful entry points:
 - [Examples directory](examples/)
 - [Telemetry and observability counters](docs/telemetry-and-observability.md)
 - [Public language guide](docs/claims/kora-public-language-guide.md)
+- [Contact and discussion routes](docs/community/contact-and-discussion-routes.md)
 - [Community manager guide](docs/community/KORA_COMMUNITY_MANAGER_GUIDE.md)
 - [Contributing guide](CONTRIBUTING.md)
 
@@ -218,6 +217,7 @@ KORA is a standalone open-source execution-control layer for AI workloads.
 Want to contribute? Start with:
 
 - [Contributor pathway](docs/community/contributor-pathway.md)
+- [Contact and discussion routes](docs/community/contact-and-discussion-routes.md)
 - [CONTRIBUTING.md](CONTRIBUTING.md)
 - [Good first issue candidates](docs/good_first_issues.md)
 - [SECURITY.md](SECURITY.md)

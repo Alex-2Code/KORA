@@ -55,3 +55,5 @@ Choose one:
 This proposal does not establish production validation, production cost reduction, real API-cost reduction, broad workload superiority, or energy reduction.
 
 See the [workload proposal template](../../docs/community/workload-proposal-template.md) and [SECURITY.md](../../SECURITY.md) before adding sensitive details.
+
+For route guidance, see [contact and discussion routes](../../docs/community/contact-and-discussion-routes.md).

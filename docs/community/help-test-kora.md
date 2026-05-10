@@ -51,6 +51,8 @@ Good candidates usually have at least one of these properties:
 
 Use this template for early discussion. Keep it sanitized.
 
+For where to propose workloads or ask questions, see [Contact and Discussion Routes](contact-and-discussion-routes.md).
+
 ```text
 Workload type:
 
@@ -79,9 +81,7 @@ Private or sanitized workloads are acceptable for early discussion. Public bench
 2. Run the alpha locally.
 3. Inspect the execution path and telemetry.
 4. Prepare a sanitized workload description using the template above.
-5. Open a GitHub Discussion or contact the project maintainers.
-
-TODO: Add the canonical GitHub Discussions URL and maintainer contact route once they are finalized.
+5. Follow the current route in [Contact and Discussion Routes](contact-and-discussion-routes.md).
 
 ## What Not To Expect Yet
 
