@@ -120,11 +120,14 @@ Additional evidence and release docs:
 
 ## Paper Preparation
 
+- [KORA first paper draft v0](paper/kora-first-paper-draft-v0.md)
 - [KORA first paper outline](paper/kora-first-paper-outline.md)
 - [KORA first paper evidence summary](paper/kora-first-paper-evidence-summary.md)
 - [KORA first paper figures and tables](paper/kora-first-paper-figures-and-tables.md)
 - [KORA first paper claim boundary](paper/kora-first-paper-claim-boundary.md)
 - [KORA first paper missing evidence checklist](paper/kora-first-paper-missing-evidence-checklist.md)
+- [KORA first paper section status](paper/kora-first-paper-section-status.md)
+- [KORA first paper reviewer questions](paper/kora-first-paper-reviewer-questions.md)
 
 ## Help Test
 

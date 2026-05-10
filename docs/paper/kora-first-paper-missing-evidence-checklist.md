@@ -16,6 +16,14 @@
 - Repeated runs.
 - Qualitative examples of deterministic route classes.
 
+## Draft v0 Next Evidence Priorities
+
+- Clean command transcript.
+- Latency p50/p95.
+- Expanded 100-request customer-support workload.
+- Local model runtime validation.
+- Repeated runs.
+
 ## Not Needed For First Paper
 
 - OpenAI/Claude API cost validation.
