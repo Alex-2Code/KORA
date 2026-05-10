@@ -24,6 +24,16 @@
 - Local model runtime validation.
 - Repeated runs.
 
+## Priority after manuscript v0.1
+
+- Clean command transcript.
+- Latency p50/p95.
+- Expanded 100-request customer-support workload.
+- Local model runtime validation.
+- Repeated runs.
+- Figure generation.
+- Bibliography/references.
+
 ## Not Needed For First Paper
 
 - OpenAI/Claude API cost validation.

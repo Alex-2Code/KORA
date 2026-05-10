@@ -13,3 +13,4 @@
 | Limitations | Draft v0 | Claim boundary doc, missing evidence checklist | Review against final claims before submission |
 | Future Work | Draft v0 | Missing evidence checklist, validation roadmap | Prioritize local runtime and expanded workload evidence |
 | Conclusion | Draft v0 | Paper outline and evidence summary | Tighten after full draft review |
+| Manuscript v0.1 | Draft created | Draft v0, evidence summary, reviewer questions, claim boundary doc | Needs figure polish, references, latency evidence, expanded workload |
