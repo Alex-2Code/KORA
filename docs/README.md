@@ -103,6 +103,14 @@ Additional evidence and release docs:
 - [v0.3.0-alpha post-release cleanup plan](reports/v0.3.0-alpha-post-release-cleanup-plan.md)
 - [v0.3.1-alpha roadmap](planning/v0.3.1-alpha-roadmap.md)
 
+## Paper Preparation
+
+- [KORA first paper outline](paper/kora-first-paper-outline.md)
+- [KORA first paper evidence summary](paper/kora-first-paper-evidence-summary.md)
+- [KORA first paper figures and tables](paper/kora-first-paper-figures-and-tables.md)
+- [KORA first paper claim boundary](paper/kora-first-paper-claim-boundary.md)
+- [KORA first paper missing evidence checklist](paper/kora-first-paper-missing-evidence-checklist.md)
+
 ## Help Test
 
 - [Help Test KORA](community/help-test-kora.md)
