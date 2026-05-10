@@ -2,7 +2,7 @@
 
 ## Architecture Status
 
-This is a planning architecture. KORA Studio is not implemented yet.
+This is a planning architecture. The full KORA Studio runtime is not implemented yet. An initial local server skeleton exists for preview/status endpoints only.
 
 ## Components
 
@@ -16,6 +16,8 @@ Responsibilities:
 - pass local configuration
 
 ### Local Studio Server
+
+Skeleton status: a preview localhost-only server skeleton exposes `/health`, `/status`, and `/` endpoints. It does not implement the full Studio runtime, browser launch, model runtime integration, Ollama calls, or provider calls.
 
 Responsibilities:
 

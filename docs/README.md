@@ -43,6 +43,7 @@ KORA Studio is future planning only. It is not implemented yet.
 - [KORA Studio fixtures plan](kora-studio/fixtures-plan.md)
 - [KORA Studio fixture schema reference](kora-studio/fixture-schema-reference.md)
 - CLI skeleton: `python3 -m kora studio`
+- Local server skeleton: `python3 -m kora studio --serve`
 
 ## Run
 
