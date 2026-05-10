@@ -10,6 +10,7 @@ import sys
 from pathlib import Path
 
 from kora.cost_model import compute_savings
+from kora.studio_status import get_studio_status, render_studio_status_text
 from kora.telemetry import load_json, render_markdown_report, summarize_run
 
 
@@ -137,6 +138,15 @@ def main(argv: list[str] | None = None) -> int:
     run_parser.add_argument("example", help="example name under examples/")
     run_parser.add_argument("example_args", nargs=argparse.REMAINDER, help="arguments passed to the example")
 
+    studio_parser = subparsers.add_parser(
+        "studio",
+        help="show KORA Studio planning/preview status",
+        description="Show KORA Studio planning/preview status. This command does not start a server, open a browser, or call a model runtime.",
+    )
+    studio_parser.add_argument("--status", action="store_true", help="show planning/preview status")
+    studio_parser.add_argument("--no-browser", action="store_true", help="accepted for future compatibility; no browser is launched")
+    studio_parser.add_argument("--open-browser", action="store_true", help="accepted for future compatibility; browser launch is not implemented yet")
+
     telemetry_parser = subparsers.add_parser("telemetry", help="summarize a run JSON file")
     telemetry_parser.add_argument("--input", required=True, help="path to run/report JSON")
     telemetry_parser.add_argument("--json-out", help="output path for telemetry JSON")
@@ -156,6 +166,11 @@ def main(argv: list[str] | None = None) -> int:
         if extra_args and extra_args[0] == "--":
             extra_args = extra_args[1:]
         return _run_example(args.example, extra_args)
+
+    if args.command == "studio":
+        status = get_studio_status()
+        print(render_studio_status_text(status), end="")
+        return 0
 
     if args.command == "telemetry":
         input_path = Path(args.input)

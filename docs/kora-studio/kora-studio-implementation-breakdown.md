@@ -41,6 +41,8 @@ No code required.
 
 ## Phase 1 — CLI Launch Skeleton
 
+Status: Initial CLI skeleton is available through `python3 -m kora studio`. It prints planning/preview status only; it does not start a server, open a browser, call a model runtime, or call a provider.
+
 Goal: Add a `kora studio` command that starts a placeholder local server or prints clear next-step status.
 
 Scope:

@@ -61,6 +61,16 @@ KORA Studio docs in public KORA should describe technical design, local validati
 
 KORA Studio planning does not create new benchmark claims. It should only visualize already generated validation counters and claim-safe reports.
 
+## CLI Skeleton
+
+A minimal planning/preview CLI skeleton is available:
+
+```bash
+python3 -m kora studio
+```
+
+The command prints the current KORA Studio status and links to the Studio docs and fixtures. It does not start a server, open a browser, call a model runtime, call a provider, or require API keys. The next implementation phases are tracked in the [KORA Studio implementation breakdown](kora-studio-implementation-breakdown.md).
+
 ## Implementation Planning
 
 - [KORA Studio implementation breakdown](kora-studio-implementation-breakdown.md)
