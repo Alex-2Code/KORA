@@ -34,6 +34,15 @@
 - Figure generation.
 - Bibliography/references.
 
+## References and figures needed
+
+- Verified related work references.
+- Figure 1 architecture.
+- Figure 2 execution-control layer.
+- Figure 3 benchmark result.
+- Figure 4 customer-support routing.
+- Table finalization.
+
 ## Not Needed For First Paper
 
 - OpenAI/Claude API cost validation.
