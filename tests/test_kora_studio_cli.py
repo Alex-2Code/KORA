@@ -33,6 +33,9 @@ def test_kora_studio_help_works() -> None:
     assert "planning/preview status" in completed.stdout
     assert "--no-browser" in completed.stdout
     assert "--open-browser" in completed.stdout
+    assert "--serve" in completed.stdout
+    assert "--host" in completed.stdout
+    assert "--port" in completed.stdout
 
 
 def test_kora_studio_status_command_is_safe_noop() -> None:
@@ -42,7 +45,8 @@ def test_kora_studio_status_command_is_safe_noop() -> None:
     assert "KORA Studio is in planning/preview mode." in completed.stdout
     assert APPROVED_BOOST_MESSAGE in completed.stdout
     assert TECHNICAL_EXPLANATION in completed.stdout
-    assert "No local server is started yet." in completed.stdout
+    assert "Server skeleton: available with python3 -m kora studio --serve." in completed.stdout
+    assert "no local server is started yet." in completed.stdout
     assert "Provider calls: disabled. No provider calls are made." in completed.stdout
     assert "API keys: not required." in completed.stdout
     assert "Docs: docs/kora-studio/README.md" in completed.stdout
@@ -55,7 +59,8 @@ def test_kora_studio_inert_browser_flags_do_not_launch_browser() -> None:
 
     assert completed.returncode == 0
     assert "Browser launch: not implemented yet." in completed.stdout
-    assert "No local server is started yet." in completed.stdout
+    assert "Server skeleton: available with python3 -m kora studio --serve." in completed.stdout
+    assert "no local server is started yet." in completed.stdout
 
 
 def test_get_studio_status_is_planning_skeleton() -> None:
@@ -64,6 +69,8 @@ def test_get_studio_status_is_planning_skeleton() -> None:
     assert status["status"] == "planning"
     assert status["implementation"] == "cli_skeleton"
     assert status["server_available"] is False
+    assert status["server_skeleton_available"] is True
+    assert status["server_skeleton_command"] == "python3 -m kora studio --serve"
     assert status["browser_launch_available"] is False
     assert status["provider_calls_enabled"] is False
     assert status["local_runtime_required"] is False
@@ -76,6 +83,15 @@ def test_render_studio_status_text_includes_boundaries() -> None:
     text = render_studio_status_text(get_studio_status())
 
     assert text.endswith("\n")
-    assert "CLI skeleton only" in text
+    assert "CLI skeleton" in text
+    assert "local server skeleton" in text
     assert "No provider calls are made" in text
     assert "Local runtime: not required" in text
+
+
+def test_kora_studio_rejects_non_localhost_serve_host() -> None:
+    completed = _run_kora_studio("--serve", "--host", "0.0.0.0")
+
+    assert completed.returncode == 2
+    assert "local-only" in completed.stderr
+    assert completed.stdout == ""

@@ -71,6 +71,27 @@ python3 -m kora studio
 
 The command prints the current KORA Studio status and links to the Studio docs and fixtures. It does not start a server, open a browser, call a model runtime, call a provider, or require API keys. The next implementation phases are tracked in the [KORA Studio implementation breakdown](kora-studio-implementation-breakdown.md).
 
+## Local Server Skeleton
+
+A preview local-only server skeleton is available behind an explicit flag:
+
+```bash
+python3 -m kora studio --serve
+```
+
+Status:
+
+- preview/local-only skeleton
+- default host: `127.0.0.1`
+- default port: `8765`
+- endpoints: `/health`, `/status`, `/`
+- no browser launch yet
+- no Ollama calls
+- no provider calls
+- no API keys required
+
+The server skeleton is not the full KORA Studio runtime or frontend. It exists to define the local server boundary for future Studio implementation work.
+
 ## Implementation Planning
 
 - [KORA Studio implementation breakdown](kora-studio-implementation-breakdown.md)

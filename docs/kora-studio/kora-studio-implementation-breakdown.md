@@ -61,6 +61,8 @@ Acceptance criteria:
 
 ## Phase 2 — Local Studio Server Skeleton
 
+Status: Initial local server skeleton is available through `python3 -m kora studio --serve`. It exposes preview `/health`, `/status`, and `/` endpoints on localhost only. It does not include the full frontend, runtime integration, model calls, browser launch, Ollama calls, or provider calls.
+
 Goal: Create a local-only server boundary.
 
 Scope:
