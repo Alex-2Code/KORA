@@ -14,3 +14,7 @@
 | Future Work | Draft v0 | Missing evidence checklist, validation roadmap | Prioritize local runtime and expanded workload evidence |
 | Conclusion | Draft v0 | Paper outline and evidence summary | Tighten after full draft review |
 | Manuscript v0.1 | Draft created | Draft v0, evidence summary, reviewer questions, claim boundary doc | Needs figure polish, references, latency evidence, expanded workload |
+| Figure specs | Draft created | Figures and tables packet, manuscript v0.1 | Convert specs into final paper figures |
+| Related work map | Draft created | Manuscript discussion and reviewer questions | Collect and verify references |
+| Table specs | Draft created | Evidence summary, claim boundary doc | Finalize tables after command transcript and repeated runs |
+| Submission readiness | Draft created | Manuscript review checklist, missing evidence checklist | Complete references, figures, transcript, and final claim review |

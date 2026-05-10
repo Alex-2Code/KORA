@@ -1,5 +1,10 @@
 # KORA First Paper Figures and Tables
 
+## Detailed Specifications
+
+- [KORA first paper figure specifications](kora-first-paper-figure-specs.md)
+- [KORA first paper table specifications](kora-first-paper-table-specs.md)
+
 ## Figure 1 - Model-First vs KORA-Controlled Execution
 
 Describe the contrast between a model-first path and a KORA-controlled path.
