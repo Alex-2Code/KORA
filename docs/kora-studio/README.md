@@ -26,7 +26,7 @@ The first MVP should focus on:
 - local runtime detection
 - Ollama-first model selection
 - Standard Mode vs KORA Boost
-- ChatGPT-like project chat
+- project-based chat
 - execution path visibility
 - model-call counters
 - local validation report viewer
