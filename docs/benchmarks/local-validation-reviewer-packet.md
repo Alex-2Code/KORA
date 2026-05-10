@@ -26,6 +26,14 @@ This packet is not:
 - energy-reduction evidence
 - broad workload superiority proof
 
+## Glossary
+
+### Local no-network validation
+
+Local no-network validation is a KORA validation mode that runs without external providers, API keys, private data, or network calls. It uses deterministic local validation paths to measure model-call routing behavior in synthetic workloads.
+
+This mode is useful for testing KORA's routing, counters, reports, and validation flow before adding local model runtimes or real provider adapters.
+
 ## Prerequisites
 
 - A Python environment that can run the KORA test suite and CLI.
