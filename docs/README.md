@@ -37,6 +37,10 @@ KORA Studio is future planning only. It is not implemented yet.
 - [KORA Studio architecture](kora-studio/kora-studio-architecture.md)
 - [KORA Boost copy system](kora-studio/kora-boost-copy-system.md)
 - [KORA Studio UI composition](kora-studio/kora-studio-ui-composition.md)
+- [KORA Studio implementation breakdown](kora-studio/kora-studio-implementation-breakdown.md)
+- [KORA Studio report viewer requirements](kora-studio/report-viewer-requirements.md)
+- [KORA Studio dashboard counter schema](kora-studio/dashboard-counter-schema.md)
+- [KORA Studio fixtures plan](kora-studio/fixtures-plan.md)
 
 ## Run
 

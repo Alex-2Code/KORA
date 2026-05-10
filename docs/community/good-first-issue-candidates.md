@@ -230,6 +230,8 @@ Estimated size: medium.
 
 Use the [KORA Studio planning docs](../kora-studio/README.md) as the starting point for these candidates. The current planning packet includes the [v0.1 product spec](../kora-studio/kora-studio-v0-1-product-spec.md), [MVP user flow](../kora-studio/kora-studio-mvp-user-flow.md), [architecture plan](../kora-studio/kora-studio-architecture.md), [KORA Boost copy system](../kora-studio/kora-boost-copy-system.md), and [UI composition guide](../kora-studio/kora-studio-ui-composition.md).
 
+Use the [implementation breakdown](../kora-studio/kora-studio-implementation-breakdown.md), [report viewer requirements](../kora-studio/report-viewer-requirements.md), [dashboard counter schema](../kora-studio/dashboard-counter-schema.md), and [fixtures plan](../kora-studio/fixtures-plan.md) to split future KORA Studio work into small reviewed issues. Do not create issues until maintainers explicitly approve them.
+
 ### Draft KORA Studio MVP user flow
 
 Goal: Describe a small user flow for inspecting local validation reports.

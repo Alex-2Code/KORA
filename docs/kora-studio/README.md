@@ -60,3 +60,10 @@ KORA Studio docs in public KORA should describe technical design, local validati
 ## Claim Boundary
 
 KORA Studio planning does not create new benchmark claims. It should only visualize already generated validation counters and claim-safe reports.
+
+## Implementation Planning
+
+- [KORA Studio implementation breakdown](kora-studio-implementation-breakdown.md)
+- [Report viewer requirements](report-viewer-requirements.md)
+- [Dashboard counter schema](dashboard-counter-schema.md)
+- [Fixtures plan](fixtures-plan.md)
