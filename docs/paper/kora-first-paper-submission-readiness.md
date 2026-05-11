@@ -6,6 +6,8 @@ Manuscript v0.1 exists but is not submission-ready.
 
 The current paper track has a thesis, an initial manuscript, claim-boundary docs, reviewer questions, evidence summaries, and local/no-network validation context. It still needs verified references, final figures, finalized tables, and a clean reproduction transcript before arXiv or workshop-style release.
 
+The reference scaffold now exists, but verified references are still pending. No fake citations or unverified BibTeX entries have been added.
+
 ## Ready
 
 - Thesis.
@@ -16,10 +18,12 @@ The current paper track has a thesis, an initial manuscript, claim-boundary docs
 - Reviewer questions.
 - Manuscript review checklist.
 - Figure and table planning docs.
+- Reference scaffold.
 
 ## Needed Before arXiv / Workshop Submission
 
 - References collected and verified.
+- Verified bibliography entries.
 - Figure drafts created.
 - Tables finalized.
 - Clean command transcript captured.
