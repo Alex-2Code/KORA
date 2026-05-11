@@ -94,6 +94,17 @@ Prefer small PRs. A good first PR usually changes one concern, touches a small n
 
 Include tests or docs when they are relevant. Avoid bundling unrelated changes such as documentation cleanup, runtime behavior, formatting, and benchmark wording in the same PR.
 
+## Documentation PR Checklist
+
+For documentation-only PRs:
+
+- Keep the PR small.
+- Touch one document or one topic.
+- Do not add secrets or private data.
+- Do not change benchmark claims.
+- Do not add production-cost, real API-cost, energy, or production-validation claims.
+- Mention the changed file in the PR description.
+
 ## Review Expectations
 
 Reviewers will expect:
