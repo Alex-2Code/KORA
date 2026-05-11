@@ -33,11 +33,13 @@
 - Repeated runs.
 - Figure generation.
 - Bibliography/references.
-- Verified references and bibliography.
+- Manuscript citation integration.
+- Final verified bibliography.
 
 ## References and figures needed
 
-- Verified related work references.
+- Additional verified related work references.
+- Manuscript citation integration for verified references.
 - Verified bibliography entries.
 - Figure 1 architecture.
 - Figure 2 execution-control layer.
@@ -52,6 +54,15 @@
 - Energy measurement.
 - Hosted KORA Studio.
 - Real customer data.
+
+## References and bibliography status
+
+First verified reference pass:
+
+- 10 references partially collected across the target related-work categories.
+- Verified references recorded in the reference tracker.
+- Manuscript citation integration still pending.
+- Final bibliography and BibTeX still pending.
 
 ## Follow-Up Papers / Technical Reports
 

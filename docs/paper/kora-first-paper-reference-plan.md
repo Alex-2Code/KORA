@@ -13,6 +13,18 @@ This document defines reference targets and verification status for the first KO
 - Record verification status for each candidate reference.
 - Do not overstate similarity, difference, or superiority.
 
+## Progress Notes
+
+### Verification Pass 1
+
+Completed on 2026-05-11.
+
+- Verified references collected: 10.
+- Categories covered: LLM serving and inference systems, agent/tool routing and orchestration, deterministic/programmatic AI workflows, caching and retrieval-augmented generation, workflow orchestration / DAG systems, benchmarking and reproducibility, local model runtime systems, and systems artifact evaluation practices.
+- Remaining gaps: additional agent/tool-use references, semantic-cache references, reproducibility-methodology references, official Ollama or other local-runtime references, and target-venue artifact evaluation guidance.
+- Bibliography status: BibTeX not added in this pass; final bibliography remains pending.
+- Manuscript status: no manuscript citation integration in this pass.
+
 ## Reference Categories
 
 ### 1. LLM serving and inference systems
@@ -31,7 +43,7 @@ Target count:
 
 Verification status:
 
-Pending.
+Partially verified. See [KORA first paper reference tracker](kora-first-paper-reference-tracker.md).
 
 ### 2. Agent/tool routing and orchestration
 
@@ -49,7 +61,7 @@ Target count:
 
 Verification status:
 
-Pending.
+Partially verified. See [KORA first paper reference tracker](kora-first-paper-reference-tracker.md).
 
 ### 3. Deterministic/programmatic AI workflows
 
@@ -67,7 +79,7 @@ Target count:
 
 Verification status:
 
-Pending.
+Partially verified. See [KORA first paper reference tracker](kora-first-paper-reference-tracker.md).
 
 ### 4. Caching and retrieval-augmented generation
 
@@ -85,7 +97,7 @@ Target count:
 
 Verification status:
 
-Pending.
+Partially verified. See [KORA first paper reference tracker](kora-first-paper-reference-tracker.md).
 
 ### 5. Workflow orchestration / DAG systems
 
@@ -103,7 +115,7 @@ Target count:
 
 Verification status:
 
-Pending.
+Partially verified. See [KORA first paper reference tracker](kora-first-paper-reference-tracker.md).
 
 ### 6. Benchmarking and reproducibility
 
@@ -121,7 +133,7 @@ Target count:
 
 Verification status:
 
-Pending.
+Partially verified. See [KORA first paper reference tracker](kora-first-paper-reference-tracker.md).
 
 ### 7. Local model runtime systems
 
@@ -139,7 +151,7 @@ Target count:
 
 Verification status:
 
-Pending.
+Partially verified. See [KORA first paper reference tracker](kora-first-paper-reference-tracker.md).
 
 ### 8. Systems papers with artifact evaluation practices
 
@@ -157,27 +169,27 @@ Target count:
 
 Verification status:
 
-Pending.
+Partially verified. See [KORA first paper reference tracker](kora-first-paper-reference-tracker.md).
 
 ## Candidate Reference Slots
 
 | Slot | Category | Candidate / target | Source type | Why needed | Verification status | Notes |
 |---|---|---|---|---|---|---|
-| R01 | LLM serving and inference systems | To verify: vLLM paper or official technical report | Paper or official technical report | Background on LLM serving efficiency and inference systems | Pending | Do not cite until title, authors, year, and source are verified. |
-| R02 | LLM serving and inference systems | To verify: LLM serving scheduler or batching system paper | Paper | Background for serving optimization context | Pending | Avoid implying KORA outperforms serving systems. |
-| R03 | LLM serving and inference systems | To verify: official inference runtime documentation | Official docs | Stable project context for inference runtime behavior | Pending | Use only if docs are stable and relevant. |
-| R04 | Agent/tool routing and orchestration | To verify: LangChain/LangGraph routing docs or paper if applicable | Official docs or paper | Context for tool routing and graph-based agent execution | Pending | Position KORA as deterministic-first execution control, not a general agent framework. |
-| R05 | Agent/tool routing and orchestration | To verify: agent tool-use or planner reference | Paper or technical report | Context for model-centered tool routing | Pending | Do not overstate similarity. |
-| R06 | Deterministic/programmatic AI workflows | To verify: structured output or programmatic AI workflow reference | Paper, docs, or technical report | Support discussion of structured and deterministic work around model systems | Pending | Must not support unsupported production claims. |
-| R07 | Deterministic/programmatic AI workflows | To verify: validation or guardrail workflow reference | Paper, docs, or technical report | Context for validation boundaries | Pending | Verify scope before use. |
-| R08 | Caching and retrieval-augmented generation | To verify: RAG survey or foundational RAG paper | Paper or survey | Establish RAG background and contrast with KORA | Pending | Avoid claiming KORA replaces RAG. |
-| R09 | Caching and retrieval-augmented generation | To verify: semantic caching or LLM cache reference | Paper, docs, or technical report | Distinguish cache reuse from pre-inference execution control | Pending | Use only if relevant to model-call avoidance discussion. |
-| R10 | Workflow orchestration / DAG systems | To verify: Ray / workflow orchestration system paper or docs | Paper or official docs | Context for task graphs, orchestration, and distributed execution | Pending | Do not claim KORA is a distributed workflow engine. |
-| R11 | Workflow orchestration / DAG systems | To verify: DAG workflow system reference | Paper or official docs | Background for explicit execution paths | Pending | Verify current project/source status. |
-| R12 | Benchmarking and reproducibility | To verify: benchmark reproducibility reference | Paper, guideline, or technical report | Support reproducible evaluation framing | Pending | Use for methodology, not as evidence of KORA results. |
-| R13 | Benchmarking and reproducibility | To verify: synthetic workload evaluation reference | Paper or technical report | Context for local/no-network synthetic workload design | Pending | Keep claim language narrow. |
-| R14 | Local model runtime systems | To verify: local model runtime official docs or technical report | Official docs or technical report | Context for future local model validation | Pending | Future-work context only unless evidence exists. |
-| R15 | Systems papers with artifact evaluation practices | To verify: artifact evaluation / reproducibility references | Guideline, paper, or official docs | Support artifact and reproduction discipline | Pending | Prefer official artifact-evaluation guidance. |
+| R01 | LLM serving and inference systems | vLLM / PagedAttention paper | Paper | Background on LLM serving efficiency and inference systems | Verified in pass 1 | See tracker for verified citation and source URL. |
+| R02 | LLM serving and inference systems | MLPerf Inference Benchmark | Paper | Background for serving benchmark methodology and comparability | Verified in pass 1 | See tracker for verified citation and source URL. |
+| R03 | LLM serving and inference systems | ONNX Runtime official documentation | Official docs | Stable project context for inference runtime behavior | Verified in pass 1 | Use only as runtime background; do not imply current KORA integration. |
+| R04 | Agent/tool routing and orchestration | LangGraph official documentation | Official docs | Context for graph-based agent execution | Verified in pass 1 | Position KORA as deterministic-first execution control, not a general agent framework. |
+| R05 | Deterministic/programmatic AI workflows | DSPy paper | Paper | Support discussion of programmatic LM workflows | Verified in pass 1 | Avoid presenting DSPy as deterministic-first model-call avoidance. |
+| R06 | Caching and retrieval-augmented generation | RAG foundational paper | Paper | Establish RAG background and contrast with KORA | Verified in pass 1 | Avoid claiming KORA replaces RAG. |
+| R07 | Workflow orchestration / DAG systems | Apache Airflow DAG docs | Official docs | Background for explicit execution paths and workflow vocabulary | Verified in pass 1 | Do not claim KORA is a general-purpose workflow scheduler. |
+| R08 | Workflow orchestration / DAG systems | Snakemake workflow engine paper | Paper / DOI-backed metadata | Background for reproducible workflow systems | Verified in pass 1 | Use as workflow/reproducible-pipeline context only. |
+| R09 | Local model runtime systems | llama.cpp official repository | Official repository | Context for future local model runtime work | Verified in pass 1 | Future-work context only unless KORA local runtime evidence exists. |
+| R10 | Systems papers with artifact evaluation practices | ACM Artifact Review and Badging | Official policy | Support artifact and reproduction discipline | Verified in pass 1 | Use for artifact-practice framing, not as validation of KORA results. |
+| R11 | Agent/tool routing and orchestration | Additional agent tool-use or planner reference | Paper or technical report | Context for model-centered tool routing | Pending | Do not overstate similarity. |
+| R12 | Caching and retrieval-augmented generation | Semantic caching or LLM cache reference | Paper, docs, or technical report | Distinguish cache reuse from pre-inference execution control | Pending | Use only if relevant to model-call avoidance discussion. |
+| R13 | Benchmarking and reproducibility | Synthetic workload evaluation reference | Paper or technical report | Context for local/no-network synthetic workload design | Pending | Keep claim language narrow. |
+| R14 | Local model runtime systems | Ollama or another local runtime official source | Official docs or technical report | Context for future local model validation | Pending | Future-work context only unless evidence exists. |
+| R15 | Systems papers with artifact evaluation practices | Venue-specific artifact evaluation guidance | Guideline or official docs | Support artifact and reproduction discipline | Pending | Prefer target-venue guidance after venue selection. |
 
 ## Next Verification Procedure
 

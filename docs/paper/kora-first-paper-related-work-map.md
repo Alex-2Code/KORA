@@ -74,3 +74,17 @@ Use this category to justify local/no-network validation, aggregate counter repo
 - Do not add fake citations.
 - Do not invent paper titles.
 - Do not cite sources without verifying later.
+
+## Verification Pass 1 Mapping
+
+The first verified reference pass collected 10 citation candidates:
+
+- LLM serving and inference systems: vLLM/PagedAttention, MLPerf Inference, ONNX Runtime.
+- Agent/tool routing and orchestration: LangGraph official docs.
+- Programmatic / deterministic AI workflows: DSPy.
+- Caching and retrieval-augmented generation: RAG foundational paper.
+- Workflow orchestration and DAG execution: Apache Airflow DAG docs, Snakemake.
+- Evaluation and reproducibility: MLPerf Inference, ACM Artifact Review and Badging.
+- Local model runtime systems: llama.cpp official repository.
+
+These references are candidates for manuscript integration. They should not be used to support production, API-cost, energy, or broad workload superiority claims.
