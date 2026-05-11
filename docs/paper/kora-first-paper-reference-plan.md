@@ -87,6 +87,16 @@ Completed on 2026-05-11.
 - Remaining gaps: deterministic-heavy synthetic workload construction references specific to model-call routing systems, final target-venue guidance, final citation style, and bibliography normalization.
 - Bibliography status: BibTeX not added in this pass; final citation style and bibliography normalization remain pending.
 
+### Citation Style Decision
+
+Completed on 2026-05-11.
+
+- Citation style decision document created.
+- Stable `[Rxx]` label strategy selected for the working manuscript and paper planning docs.
+- Tracker-first bibliography normalization selected before BibTeX generation.
+- Next step: metadata audit and normalized bibliography table for `[R01]` through `[R24]`.
+- BibTeX remains pending until metadata audit is complete.
+
 ## Reference Categories
 
 ### 1. LLM serving and inference systems

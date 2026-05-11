@@ -17,6 +17,8 @@ This audit covers:
 
 It does not add BibTeX, final citation style, manuscript-integrated citations beyond the current manuscript, or new evidence claims.
 
+The working citation style strategy is recorded in [KORA First Paper Citation Style Decision](kora-first-paper-citation-style-decision.md). Stable `[Rxx]` labels remain the working style until metadata audit, bibliography normalization, and any later venue-specific conversion are complete.
+
 ## Citation Inventory
 
 | ID | Reference topic | Appears in manuscript | Appears in References section | Tracker status | Action |
@@ -331,5 +333,5 @@ Manuscript integration status:
 ## Next Step
 
 - Decide whether selected `[R19]` through `[R24]` references should be integrated into a future benchmark-methodology section.
-- Select final citation style before final bibliography normalization and BibTeX preparation.
+- Run metadata audit for `[R01]` through `[R24]` before final bibliography normalization and BibTeX preparation.
 - Manuscript v0.3 still requires final bibliography and claim-audit review before any submission-readiness claim.

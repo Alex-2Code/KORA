@@ -90,6 +90,14 @@ Benchmark-construction verification pass:
 - They do not provide production benchmark evidence for KORA.
 - Final citation style, final bibliography normalization, and BibTeX remain pending.
 
+Citation style decision:
+
+- Working citation style selected: stable `[Rxx]` labels.
+- Metadata audit for `[R01]` through `[R24]` is still pending.
+- Normalized bibliography table is still pending.
+- BibTeX is still pending.
+- Paper is still not submission-ready.
+
 ## Follow-Up Papers / Technical Reports
 
 - OpenAI/Claude API cost reduction technical report.
