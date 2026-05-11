@@ -94,7 +94,7 @@ The server skeleton is not the full KORA Studio runtime or frontend. It exists t
 
 ## Static Preview Page
 
-The local server root serves a static preview page:
+The local server root serves a static UI prototype v0.1:
 
 ```bash
 python3 -m kora studio --serve
@@ -106,7 +106,7 @@ Open locally:
 http://127.0.0.1:8765/
 ```
 
-The page is preview-only. It uses embedded HTML/CSS, does not auto-launch a browser, does not call Ollama or providers, does not require API keys, and does not use a frontend framework yet.
+The page shows local status cards, endpoint references, a static workflow preview, and explicit limitations. It uses embedded HTML/CSS, does not auto-launch a browser, does not call Ollama or providers, does not connect a model/runtime, does not require API keys, and does not use a frontend framework yet.
 
 ## Implementation Planning
 

@@ -101,6 +101,7 @@ def render_studio_placeholder_html(status: dict[str, Any]) -> str:
       --bg: #071014;
       --panel: #0d1b22;
       --panel-2: #10242d;
+      --panel-3: #0a171d;
       --text: #edf7fa;
       --muted: #9fb3bd;
       --cyan: #32d1e6;
@@ -117,16 +118,22 @@ def render_studio_placeholder_html(status: dict[str, Any]) -> str:
       line-height: 1.5;
     }}
     main {{
-      width: min(1040px, calc(100% - 40px));
+      width: min(1120px, calc(100% - 40px));
       margin: 0 auto;
-      padding: 48px 0;
+      padding: 42px 0 34px;
+    }}
+    header {{
+      border: 1px solid var(--line);
+      background: linear-gradient(180deg, var(--panel), var(--panel-2));
+      border-radius: 8px;
+      padding: 28px;
     }}
     .topline {{
       display: flex;
       align-items: center;
       justify-content: space-between;
       gap: 16px;
-      margin-bottom: 32px;
+      margin-bottom: 22px;
     }}
     .badge {{
       display: inline-flex;
@@ -137,10 +144,11 @@ def render_studio_placeholder_html(status: dict[str, Any]) -> str:
       padding: 6px 12px;
       font-size: 13px;
       font-weight: 700;
+      white-space: nowrap;
     }}
     h1 {{
-      margin: 0 0 12px;
-      font-size: clamp(34px, 6vw, 64px);
+      margin: 0 0 8px;
+      font-size: clamp(34px, 6vw, 58px);
       letter-spacing: 0;
       line-height: 1.05;
     }}
@@ -149,12 +157,25 @@ def render_studio_placeholder_html(status: dict[str, Any]) -> str:
       font-size: 20px;
       letter-spacing: 0;
     }}
+    h3 {{
+      margin: 0 0 6px;
+      font-size: 15px;
+      letter-spacing: 0;
+    }}
     p {{ margin: 0; }}
-    .hero {{
+    a {{ color: var(--cyan); }}
+    code {{
+      color: var(--amber);
+      background: #071014;
       border: 1px solid var(--line);
-      background: linear-gradient(180deg, var(--panel), var(--panel-2));
-      border-radius: 8px;
-      padding: 28px;
+      border-radius: 6px;
+      padding: 2px 6px;
+      overflow-wrap: anywhere;
+    }}
+    .subtitle {{
+      color: var(--muted);
+      font-size: 17px;
+      max-width: 760px;
     }}
     .boost {{
       color: var(--cyan);
@@ -164,7 +185,7 @@ def render_studio_placeholder_html(status: dict[str, Any]) -> str:
     }}
     .technical {{
       color: var(--muted);
-      max-width: 760px;
+      max-width: 820px;
       margin-top: 10px;
       font-size: 16px;
     }}
@@ -172,13 +193,42 @@ def render_studio_placeholder_html(status: dict[str, Any]) -> str:
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
       gap: 16px;
-      margin-top: 20px;
+      margin-top: 18px;
     }}
-    section {{
+    section, .card {{
       border: 1px solid var(--line);
       background: var(--panel);
       border-radius: 8px;
-      padding: 20px;
+      padding: 18px;
+    }}
+    .status-card {{
+      min-height: 118px;
+      background: var(--panel-3);
+    }}
+    .status-card p {{ color: var(--muted); }}
+    .status-value {{
+      color: var(--green);
+      font-weight: 800;
+      margin-top: 8px;
+    }}
+    .status-value.disabled {{ color: var(--amber); }}
+    .workflow {{
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 12px;
+    }}
+    .step {{
+      border: 1px solid var(--line);
+      background: var(--panel-3);
+      border-radius: 8px;
+      padding: 14px;
+      min-height: 130px;
+    }}
+    .step-number {{
+      color: var(--cyan);
+      font-size: 13px;
+      font-weight: 800;
+      margin-bottom: 8px;
     }}
     ul {{
       margin: 0;
@@ -186,72 +236,91 @@ def render_studio_placeholder_html(status: dict[str, Any]) -> str:
       color: var(--muted);
     }}
     li + li {{ margin-top: 8px; }}
-    code {{
-      color: var(--amber);
-      background: #071014;
-      border: 1px solid var(--line);
-      border-radius: 6px;
-      padding: 2px 6px;
-      overflow-wrap: anywhere;
+    .section-stack {{
+      display: grid;
+      gap: 18px;
+      margin-top: 18px;
     }}
-    a {{ color: var(--cyan); }}
-    .status-list strong {{ color: var(--text); }}
+    .footer {{
+      color: var(--muted);
+      border-top: 1px solid var(--line);
+      margin-top: 22px;
+      padding-top: 16px;
+      font-size: 14px;
+    }}
+    @media (max-width: 760px) {{
+      main {{ width: min(100% - 24px, 1120px); padding-top: 24px; }}
+      header {{ padding: 20px; }}
+      .topline {{ align-items: flex-start; flex-direction: column; }}
+      .workflow {{ grid-template-columns: 1fr; }}
+    }}
   </style>
 </head>
 <body>
   <main>
-    <div class=\"topline\">
-      <strong>KORA Studio</strong>
-      <span class=\"badge\">Preview / Local-only</span>
-    </div>
-    <div class=\"hero\">
+    <header>
+      <div class=\"topline\">
+        <strong>Local v0.1 Skeleton</strong>
+        <span class=\"badge\">Preview / Local-only</span>
+      </div>
       <h1>KORA Studio</h1>
+      <p class=\"subtitle\">A static prototype for deterministic-first local workflow exploration.</p>
       <p class=\"boost\">{boost_message}</p>
-      <p class=\"technical\">This is a local placeholder page for the KORA Studio v0.1 skeleton. {boost_explanation}</p>
-    </div>
-    <div class=\"grid\">
+      <p class=\"technical\">{boost_explanation}</p>
+    </header>
+
+    <section aria-label=\"Status Cards\" style=\"margin-top: 18px;\">
+      <h2>Status Cards</h2>
+      <div class=\"grid\">
+        <div class=\"status-card card\"><h3>Server</h3><p class=\"status-value\">Server: local</p><p>Bound to the local Studio skeleton.</p></div>
+        <div class=\"status-card card\"><h3>Provider Calls</h3><p class=\"status-value disabled\">Provider calls: disabled</p><p>No remote provider requests are made.</p></div>
+        <div class=\"status-card card\"><h3>Model Runtime</h3><p class=\"status-value disabled\">Model/runtime integration: not connected</p><p>Future runtime work is represented only as a placeholder.</p></div>
+        <div class=\"status-card card\"><h3>Browser Launch</h3><p class=\"status-value disabled\">Browser launch: disabled</p><p>The CLI does not open a browser automatically.</p></div>
+        <div class=\"status-card card\"><h3>Ollama</h3><p class=\"status-value disabled\">Ollama integration: not connected</p><p>No Ollama detection or model calls happen here.</p></div>
+      </div>
+    </section>
+
+    <div class=\"section-stack\">
       <section>
-        <h2>Current Status</h2>
-        <ul class=\"status-list\">
-          <li><strong>Local server skeleton</strong></li>
-          <li>Deterministic-first local workflow exploration</li>
+        <h2>Endpoint Panel</h2>
+        <div class=\"grid\">
+          <div class=\"card\"><h3><a href=\"/health\">/health</a></h3><p>Returns local health status JSON for the preview server.</p></div>
+          <div class=\"card\"><h3><a href=\"/status\">/status</a></h3><p>Returns local preview status, KORA Boost copy, docs paths, and fixture paths.</p></div>
+        </div>
+      </section>
+
+      <section>
+        <h2>Workflow Preview</h2>
+        <div class=\"workflow\">
+          <div class=\"step\"><p class=\"step-number\">01</p><h3>Request</h3><p>Static sample request enters the Studio skeleton.</p></div>
+          <div class=\"step\"><p class=\"step-number\">02</p><h3>Deterministic checks</h3><p>Fast-path checks are shown as UI planning only.</p></div>
+          <div class=\"step\"><p class=\"step-number\">03</p><h3>Local status</h3><p>Local server, fixtures, and endpoint status remain visible.</p></div>
+          <div class=\"step\"><p class=\"step-number\">04</p><h3>Future runtime integration placeholder</h3><p>Placeholder only; no runtime execution occurs on this page.</p></div>
+        </div>
+      </section>
+
+      <section>
+        <h2>Limitations Panel</h2>
+        <ul>
           <li>No full frontend yet</li>
-          <li>No browser launch yet</li>
           <li>No provider calls</li>
           <li>No model/runtime integration yet</li>
+          <li>No browser launch</li>
           <li>No Ollama integration</li>
-          <li>No API keys required</li>
           <li>No production/API-cost/energy claims</li>
         </ul>
       </section>
-      <section>
-        <h2>What Works Today</h2>
-        <ul>
-          <li>CLI status</li>
-          <li>localhost server skeleton</li>
-          <li>health/status endpoints</li>
-          <li>fixture-backed planning data</li>
-        </ul>
-      </section>
-      <section>
-        <h2>Coming Next</h2>
-        <ul>
-          <li>report viewer</li>
-          <li>counter dashboard</li>
-          <li>project chat shell</li>
-          <li>Ollama detection</li>
-        </ul>
-      </section>
+
       <section>
         <h2>Local References</h2>
         <ul>
-          <li><a href=\"/health\">/health</a></li>
-          <li><a href=\"/status\">/status</a></li>
           <li><code>{docs_path}</code></li>
           <li><code>{fixtures_path}</code></li>
         </ul>
       </section>
     </div>
+
+    <p class=\"footer\">Local-only skeleton. Claim-safe local preview; counters and claims remain limited to documented validation artifacts.</p>
   </main>
 </body>
 </html>
