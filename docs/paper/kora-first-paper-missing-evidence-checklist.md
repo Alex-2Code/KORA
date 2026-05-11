@@ -94,7 +94,8 @@ Citation style decision:
 
 - Working citation style selected: stable `[Rxx]` labels.
 - Metadata audit v0.1 for `[R01]` through `[R24]` has been created.
-- Normalized bibliography table is still pending.
+- Normalized bibliography table v0.1 has been created.
+- High-risk metadata gap resolution is still pending.
 - BibTeX is still pending.
 - Final claim/citation audit is still pending.
 - Paper is still not submission-ready.

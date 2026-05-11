@@ -108,6 +108,17 @@ Completed on 2026-05-11.
 - No manuscript changes were made.
 - Next step: normalized bibliography table for `[R01]` through `[R24]`.
 
+### Normalized Bibliography v0.1
+
+Completed on 2026-05-11.
+
+- Normalized bibliography v0.1 created for `[R01]` through `[R24]`.
+- The table preserves stable `[Rxx]` labels and marks unresolved fields explicitly.
+- No new references were added.
+- No BibTeX was generated.
+- No manuscript changes were made.
+- Next step: high-risk metadata gap resolution before BibTeX preparation.
+
 ## Reference Categories
 
 ### 1. LLM serving and inference systems

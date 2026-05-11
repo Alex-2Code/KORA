@@ -38,3 +38,15 @@ Status:
 - No BibTeX was generated.
 - Next step: create a normalized bibliography table for `[R01]` through `[R24]` from verified tracker and audit fields.
 - BibTeX remains pending until normalized fields are verified.
+
+## Normalized Bibliography Status
+
+[KORA First Paper Normalized Bibliography v0.1](kora-first-paper-normalized-bibliography-v0-1.md) represents `[R01]` through `[R24]` in a structured bibliography table.
+
+Status:
+
+- Stable `[Rxx]` labels remain unchanged.
+- No new references were added.
+- No BibTeX was generated.
+- High-risk metadata gap resolution remains pending.
+- BibTeX remains pending until normalized fields and high-risk gaps are resolved.

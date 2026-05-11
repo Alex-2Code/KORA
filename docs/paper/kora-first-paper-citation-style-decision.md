@@ -13,8 +13,9 @@ It is a planning and traceability document. It does not generate BibTeX, finaliz
 - References `[R14]` through `[R18]` are tracker/audit-only, optional, or deferred.
 - References `[R19]` through `[R24]` are tracker/audit-only methodology/background references.
 - BibTeX remains pending.
-- Final bibliography normalization remains pending.
-- Metadata audit remains pending.
+- Metadata audit v0.1 exists.
+- Normalized bibliography v0.1 exists.
+- High-risk metadata gap resolution remains pending.
 - The paper remains not submission-ready.
 
 ## Style Decision
@@ -91,7 +92,7 @@ Normalization rules:
 
 ## Next Steps
 
-1. Run a metadata audit for `[R01]` through `[R24]`.
-2. Update the normalized bibliography table from audited tracker records.
-3. Prepare BibTeX only after metadata audit is complete.
+1. Resolve high-risk metadata gaps for `[R01]` through `[R24]`.
+2. Prepare BibTeX only after normalized bibliography fields and high-risk gaps are verified.
+3. Run final bibliography and claim audit.
 4. Create manuscript v0.4 only after bibliography and claim audit are stable.
