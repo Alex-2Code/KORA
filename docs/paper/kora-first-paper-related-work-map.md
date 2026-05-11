@@ -4,6 +4,12 @@
 
 This document maps reference categories needed before submission. It does not add citations yet. References should be collected, verified, and added later with accurate BibTeX or venue metadata.
 
+Reference scaffold docs:
+
+- [KORA first paper reference plan](kora-first-paper-reference-plan.md)
+- [KORA first paper reference tracker](kora-first-paper-reference-tracker.md)
+- [KORA first paper bibliography notes](kora-first-paper-bibliography-notes.md)
+
 ## Related Work Categories
 
 ### LLM Serving and Inference Systems

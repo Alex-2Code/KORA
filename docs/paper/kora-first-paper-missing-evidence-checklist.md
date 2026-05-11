@@ -33,10 +33,12 @@
 - Repeated runs.
 - Figure generation.
 - Bibliography/references.
+- Verified references and bibliography.
 
 ## References and figures needed
 
 - Verified related work references.
+- Verified bibliography entries.
 - Figure 1 architecture.
 - Figure 2 execution-control layer.
 - Figure 3 benchmark result.
