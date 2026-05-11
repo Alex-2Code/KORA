@@ -89,6 +89,52 @@ Contact or GitHub handle, optional:
 GitHub handle only; no private contact details required.
 ```
 
+## Synthetic RAG Routing Example
+
+```text
+Workload name:
+Synthetic policy-answer routing
+
+Workload type:
+RAG answer routing and validation
+
+Current model/API/local runtime used, if any:
+None for the proposal. The first pass should use local synthetic fixtures only.
+
+Approximate request volume:
+20 synthetic questions split between source-backed answers and ambiguous queries.
+
+Deterministic/repetitive request types:
+- Questions that match one approved source paragraph exactly.
+- Questions that ask for a known policy value already present in a source.
+- Questions that can be answered by returning a source title and section key.
+
+Model-required request types:
+- Ambiguous questions that match multiple source sections.
+- Questions with missing source coverage.
+- Questions that require a short explanation of why escalation is needed.
+
+Validation rules:
+- source_present
+- source_section_matches
+- answer_uses_approved_source
+- escalation_reason_present
+- no_private_data_emitted
+
+Expected outputs/properties:
+- Source-backed questions include the selected source key.
+- Ambiguous or unsupported questions include an escalation reason.
+- Aggregate counters separate deterministic source-backed routes from
+  model-required routes.
+
+Privacy class:
+synthetic
+
+Can results be public?
+Yes, if all source snippets and questions are synthetic and reports contain only
+aggregate counters and claim-safe language.
+```
+
 ## Claim Boundary
 
 Accepted workloads do not automatically imply production validation, production cost reduction, real API-cost reduction, broad workload superiority, or energy reduction.
