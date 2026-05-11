@@ -50,3 +50,14 @@ Status:
 - No BibTeX was generated.
 - High-risk metadata gap resolution remains pending.
 - BibTeX remains pending until normalized fields and high-risk gaps are resolved.
+
+## Metadata Gap Resolution Status
+
+[KORA First Paper Metadata Gap Resolution v0.1](kora-first-paper-metadata-gap-resolution-v0-1.md) classifies high-risk entries before BibTeX preparation.
+
+Status:
+
+- High-risk entries are classified by remaining blocker: author-list normalization, venue/status normalization, docs/repo style, artifact guidance style, or target-venue deferral.
+- No new references were added.
+- No BibTeX was generated.
+- BibTeX remains pending until ready records are selected from verified normalized fields.

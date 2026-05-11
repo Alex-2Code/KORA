@@ -119,6 +119,17 @@ Completed on 2026-05-11.
 - No manuscript changes were made.
 - Next step: high-risk metadata gap resolution before BibTeX preparation.
 
+### Metadata Gap Resolution v0.1
+
+Completed on 2026-05-12.
+
+- Metadata gap resolution v0.1 created for high-risk entries from `[R01]` through `[R24]`.
+- Official docs/repos, artifact guidance pages, author-list handling, and venue/status normalization blockers are classified.
+- No new references were added.
+- No BibTeX was generated.
+- No manuscript changes were made.
+- Next step: preliminary BibTeX preparation for ready records only, with blocked records deferred until their metadata/style gaps are resolved.
+
 ## Reference Categories
 
 ### 1. LLM serving and inference systems
