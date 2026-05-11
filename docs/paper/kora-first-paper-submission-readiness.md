@@ -20,6 +20,8 @@ The citation style decision exists. The working strategy keeps stable [Rxx] labe
 
 Metadata audit v0.1 exists for [R01] through [R24]. It checks metadata completeness and source traceability before normalized bibliography work. Normalized bibliography entries and BibTeX are still pending.
 
+Normalized bibliography v0.1 exists for [R01] through [R24]. High-risk metadata gaps and BibTeX are still pending.
+
 ## Ready
 
 - Thesis.
@@ -38,6 +40,7 @@ Metadata audit v0.1 exists for [R01] through [R24]. It checks metadata completen
 - Benchmark-construction reference verification pass.
 - Citation style decision.
 - Metadata audit v0.1.
+- Normalized bibliography v0.1.
 - Citation audit v0.1.
 - Manuscript v0.3 reference integration plan.
 
@@ -46,7 +49,7 @@ Metadata audit v0.1 exists for [R01] through [R24]. It checks metadata completen
 - More references collected and verified.
 - Decide whether selected benchmark-construction references should be integrated if the evaluation-methodology section is expanded.
 - More direct deterministic-heavy synthetic workload construction references if needed.
-- Normalized bibliography table for [R01] through [R24].
+- High-risk metadata gap resolution for [R01] through [R24].
 - Final bibliography entries normalized.
 - BibTeX preparation after metadata audit.
 - Final citation audit review completed.
@@ -76,6 +79,6 @@ These are suggested formats only. This document does not claim acceptance, endor
 
 ## Reference Status
 
-The first verified reference pass is complete, manuscript v0.2 integrates the first-pass verified references as preliminary citation labels and a preliminary references section, citation audit v0.1 exists, additional reference verification pass 2 has added 8 verified tracker entries, manuscript v0.3 integrates [R11], [R12], and [R13] as preliminary related-work references, the benchmark-construction reference pass has added [R19] through [R24] as tracker/audit entries, the working citation style decision selects stable [Rxx] labels, and metadata audit v0.1 exists. The paper is still not submission-ready because [R14] through [R18] remain optional/deferred or tracker/audit-only, [R19] through [R24] are not yet integrated into manuscript methodology, more direct deterministic-heavy synthetic workload references may still be needed, production benchmark evidence is still not available, final normalized bibliography entries are pending, and BibTeX has not been added.
+The first verified reference pass is complete, manuscript v0.2 integrates the first-pass verified references as preliminary citation labels and a preliminary references section, citation audit v0.1 exists, additional reference verification pass 2 has added 8 verified tracker entries, manuscript v0.3 integrates [R11], [R12], and [R13] as preliminary related-work references, the benchmark-construction reference pass has added [R19] through [R24] as tracker/audit entries, the working citation style decision selects stable [Rxx] labels, metadata audit v0.1 exists, and normalized bibliography v0.1 exists. The paper is still not submission-ready because [R14] through [R18] remain optional/deferred or tracker/audit-only, [R19] through [R24] are not yet integrated into manuscript methodology, more direct deterministic-heavy synthetic workload references may still be needed, production benchmark evidence is still not available, high-risk metadata gaps remain, and BibTeX has not been added.
 
 No fake citations were added. Future citation work should use only verified tracker entries and should not support production, API-cost, energy, production-validation, broad superiority, or cited-system superiority claims.

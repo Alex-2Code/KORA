@@ -158,6 +158,19 @@ Status:
 - Normalized bibliography table work is the next bibliography step.
 - The paper remains not submission-ready.
 
+## Normalized Bibliography v0.1
+
+[KORA First Paper Normalized Bibliography v0.1](kora-first-paper-normalized-bibliography-v0-1.md) has been created.
+
+Status:
+
+- References `[R01]` through `[R24]` are represented in the normalized table.
+- High-risk metadata gaps remain for author-list handling, venue/status normalization, official docs/repos access-date treatment, and artifact/evaluation guidance style.
+- No BibTeX was added.
+- No manuscript changes were made.
+- The next bibliography step is high-risk metadata gap resolution.
+- The paper remains not submission-ready.
+
 ## Claim Boundary
 
 No citation should be used to support unsupported production, API-cost, or energy claims.
