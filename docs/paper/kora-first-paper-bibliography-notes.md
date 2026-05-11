@@ -199,6 +199,18 @@ Status:
 - Final BibTeX key normalization and venue-specific field style remain pending.
 - The paper remains not submission-ready.
 
+## Ready-Subset BibTeX Key Normalization
+
+BibTeX key normalization is complete for the ready subset in [KORA First Paper Preliminary BibTeX v0.1](kora-first-paper-preliminary-bibtex-v0-1.md).
+
+Status:
+
+- Normalized ready-subset keys cover only `[R01]`, `[R06]`, `[R08]`, `[R11]`, `[R14]`, `[R21]`, and `[R24]`.
+- Existing author/year/topic keys were kept because their author, year, and topic metadata are verified in the public bibliography records.
+- Blocked records remain excluded from BibTeX.
+- Next step: resolve blocked metadata/style records or run a final BibTeX audit before any manuscript update.
+- The paper remains not submission-ready.
+
 ## Claim Boundary
 
 No citation should be used to support unsupported production, API-cost, or energy claims.

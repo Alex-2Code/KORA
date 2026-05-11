@@ -81,6 +81,7 @@ Normalization rules:
 - BibTeX can be generated in a later task only from normalized tracker records.
 - Generated BibTeX must remain traceable to verified source URLs or DOI records.
 - Preliminary BibTeX v0.1 covers only `[R01]`, `[R06]`, `[R08]`, `[R11]`, `[R14]`, `[R21]`, and `[R24]`.
+- Ready-subset BibTeX keys are normalized using verified author/year/topic metadata.
 - Stable `[Rxx]` labels remain canonical during audit.
 - Final venue-specific conversion remains deferred.
 

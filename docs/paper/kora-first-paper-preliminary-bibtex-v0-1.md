@@ -43,6 +43,20 @@ Blocked records are excluded. Manuscript v0.3 is unchanged. The paper remains no
 
 No ready-subset record was moved back to blocked in this pass.
 
+## BibTeX Key Normalization
+
+| ID | Topic | Previous key | Normalized key | Key status | Reason |
+|---|---|---|---|---|---|
+| `[R01]` | vLLM / PagedAttention | `kwon2023pagedattention` | `kwon2023pagedattention` | normalized | First author, year, and topic are verified in the normalized bibliography and tracker; key is readable and collision-resistant enough for the current ready subset. |
+| `[R06]` | Retrieval-Augmented Generation | `lewis2020rag` | `lewis2020rag` | normalized | First author, year, and RAG topic are verified; key is concise and stable. |
+| `[R08]` | Snakemake | `koster2012snakemake` | `koster2012snakemake` | normalized | First author, year, and topic are verified from DOI-backed metadata; key is clear and stable. |
+| `[R11]` | ReAct | `yao2023react` | `yao2023react` | normalized | First author, year, and topic are verified from the recorded arXiv/DOI metadata; key is clear and stable. |
+| `[R14]` | GPTCache | `bang2023gptcache` | `bang2023gptcache` | normalized | Sole author, year, and topic are verified from ACL Anthology metadata; key is clear and stable. |
+| `[R21]` | SWE-bench | `jimenez2024swebench` | `jimenez2024swebench` | normalized | First author, year, and benchmark topic are verified; key avoids punctuation while preserving the SWE-bench topic. |
+| `[R24]` | CheckList | `ribeiro2020checklist` | `ribeiro2020checklist` | normalized | First author, year, and CheckList topic are verified from ACL Anthology metadata; key is clear and stable. |
+
+All ready-subset keys already followed the selected author/year/topic pattern and were kept unchanged. Final venue key review may still adjust capitalization, punctuation, or venue-specific style, but no blocked record receives a BibTeX key in this pass.
+
 ## Preliminary BibTeX Entries
 
 ```bibtex
