@@ -23,6 +23,8 @@ Reference metadata readiness is recorded in [KORA First Paper Reference Metadata
 
 Normalized bibliography planning is recorded in [KORA First Paper Normalized Bibliography v0.1](kora-first-paper-normalized-bibliography-v0-1.md). That table does not generate BibTeX and does not change manuscript claim support.
 
+Metadata gap resolution is recorded in [KORA First Paper Metadata Gap Resolution v0.1](kora-first-paper-metadata-gap-resolution-v0-1.md). That document classifies high-risk metadata blockers before BibTeX and does not change manuscript claim support.
+
 ## Citation Inventory
 
 | ID | Reference topic | Appears in manuscript | Appears in References section | Tracker status | Action |
@@ -337,5 +339,5 @@ Manuscript integration status:
 ## Next Step
 
 - Decide whether selected `[R19]` through `[R24]` references should be integrated into a future benchmark-methodology section.
-- Resolve high-risk metadata gaps identified by metadata audit v0.1 and normalized bibliography v0.1.
+- Use metadata gap resolution v0.1 to prepare preliminary BibTeX only for ready records and defer blocked records until metadata/style gaps are resolved.
 - Manuscript v0.3 still requires final bibliography and claim-audit review before any submission-readiness claim.

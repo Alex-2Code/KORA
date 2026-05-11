@@ -15,7 +15,8 @@ It is a planning and traceability document. It does not generate BibTeX, finaliz
 - BibTeX remains pending.
 - Metadata audit v0.1 exists.
 - Normalized bibliography v0.1 exists.
-- High-risk metadata gap resolution remains pending.
+- Metadata gap resolution v0.1 exists at the planning/classification level.
+- Some metadata/style blockers remain before BibTeX.
 - The paper remains not submission-ready.
 
 ## Style Decision
@@ -26,7 +27,7 @@ Working strategy:
 
 - Keep stable `[Rxx]` labels in manuscript text and paper planning docs.
 - Normalize bibliography records in the reference tracker before generating BibTeX.
-- Generate BibTeX only after the metadata audit is complete.
+- Generate BibTeX only after the metadata audit, normalized bibliography, and metadata gap classification are complete.
 - Convert to a venue-specific citation style later if a target venue or report format requires it.
 
 Rationale:
@@ -70,7 +71,7 @@ Normalization rules:
 
 ## BibTeX Rules
 
-- Do not add BibTeX until the metadata audit is complete.
+- Do not add BibTeX until metadata audit, normalized bibliography, and metadata gap classification are complete.
 - Do not add fake BibTeX.
 - Do not infer venues.
 - Do not infer authors.
@@ -92,7 +93,7 @@ Normalization rules:
 
 ## Next Steps
 
-1. Resolve high-risk metadata gaps for `[R01]` through `[R24]`.
-2. Prepare BibTeX only after normalized bibliography fields and high-risk gaps are verified.
+1. Prepare preliminary BibTeX only for records classified as ready after a final normalized-record check.
+2. Defer blocked records until author-list, venue/status, docs/repo style, or venue-guidance style gaps are resolved.
 3. Run final bibliography and claim audit.
 4. Create manuscript v0.4 only after bibliography and claim audit are stable.

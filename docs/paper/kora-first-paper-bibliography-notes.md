@@ -139,9 +139,9 @@ The working citation style has been selected in [KORA First Paper Citation Style
 Status:
 
 - Stable `[Rxx]` labels remain the working manuscript citation strategy.
-- Metadata audit for `[R01]` through `[R24]` is the next bibliography task.
-- BibTeX remains pending until the metadata audit is complete.
-- Final bibliography normalization remains pending.
+- Metadata audit v0.1, normalized bibliography v0.1, and metadata gap resolution v0.1 exist.
+- BibTeX remains pending until ready records receive a final normalized-record check.
+- Final bibliography and claim audit remain pending.
 - Venue-specific conversion remains possible after a target venue or report format is chosen.
 
 ## Metadata Audit v0.1
@@ -169,6 +169,22 @@ Status:
 - No BibTeX was added.
 - No manuscript changes were made.
 - The next bibliography step is high-risk metadata gap resolution.
+- The paper remains not submission-ready.
+
+## Metadata Gap Resolution v0.1
+
+[KORA First Paper Metadata Gap Resolution v0.1](kora-first-paper-metadata-gap-resolution-v0-1.md) has been created.
+
+Status:
+
+- High-risk metadata entries are classified by remaining blocker.
+- Official docs and repositories remain blocked on docs/repo style and access-date formatting.
+- Artifact guidance remains blocked on policy or venue-guidance style decisions.
+- `[R02]`, `[R19]`, `[R20]`, `[R22]`, and `[R23]` still need author-list handling before BibTeX.
+- `[R02]`, `[R05]`, `[R12]`, `[R13]`, and `[R16]` still need venue/status normalization before BibTeX.
+- No BibTeX was added.
+- No manuscript changes were made.
+- The next bibliography step is preliminary BibTeX preparation only for ready records, or a final metadata check for blocked records.
 - The paper remains not submission-ready.
 
 ## Claim Boundary
