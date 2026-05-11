@@ -144,6 +144,20 @@ Status:
 - Final bibliography normalization remains pending.
 - Venue-specific conversion remains possible after a target venue or report format is chosen.
 
+## Metadata Audit v0.1
+
+[KORA First Paper Reference Metadata Audit v0.1](kora-first-paper-reference-metadata-audit-v0-1.md) has been created.
+
+Status:
+
+- References `[R01]` through `[R24]` were reviewed for metadata completeness and traceability.
+- The audit separates paper references, official docs/repos, official artifact guidance, and benchmark-methodology references.
+- The audit identifies high-risk metadata items before BibTeX, including official docs/repos, artifact guidance pages, author-list handling, and venue/status normalization.
+- No BibTeX was added.
+- No manuscript changes were made.
+- Normalized bibliography table work is the next bibliography step.
+- The paper remains not submission-ready.
+
 ## Claim Boundary
 
 No citation should be used to support unsupported production, API-cost, or energy claims.

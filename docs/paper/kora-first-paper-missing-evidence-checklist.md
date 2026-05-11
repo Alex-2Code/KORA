@@ -93,9 +93,10 @@ Benchmark-construction verification pass:
 Citation style decision:
 
 - Working citation style selected: stable `[Rxx]` labels.
-- Metadata audit for `[R01]` through `[R24]` is still pending.
+- Metadata audit v0.1 for `[R01]` through `[R24]` has been created.
 - Normalized bibliography table is still pending.
 - BibTeX is still pending.
+- Final claim/citation audit is still pending.
 - Paper is still not submission-ready.
 
 ## Follow-Up Papers / Technical Reports

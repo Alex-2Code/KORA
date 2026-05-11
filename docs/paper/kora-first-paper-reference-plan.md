@@ -97,6 +97,17 @@ Completed on 2026-05-11.
 - Next step: metadata audit and normalized bibliography table for `[R01]` through `[R24]`.
 - BibTeX remains pending until metadata audit is complete.
 
+### Metadata Audit v0.1
+
+Completed on 2026-05-11.
+
+- Metadata audit v0.1 created for `[R01]` through `[R24]`.
+- The audit checks title, author or organization owner, year/date, URL/DOI, source type, and venue/status readiness.
+- No new references were added.
+- No BibTeX was generated.
+- No manuscript changes were made.
+- Next step: normalized bibliography table for `[R01]` through `[R24]`.
+
 ## Reference Categories
 
 ### 1. LLM serving and inference systems

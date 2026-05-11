@@ -26,3 +26,15 @@
 | R22 | Benchmarking and reproducibility | Xiao Liu et al. "AgentBench: Evaluating LLMs as Agents." ICLR 2024; arXiv:2308.03688. | https://arxiv.org/abs/2308.03688; https://doi.org/10.48550/arXiv.2308.03688 | verified | Future evaluation methodology / agent benchmark context | Verified from arXiv title, author lead, submission/revision dates, ICLR 2024 publication note, and DOI. Useful as agent-benchmark background only. Do not use to claim KORA outperforms agent systems. |
 | R23 | Benchmarking and reproducibility | Douwe Kiela et al. "Dynabench: Rethinking Benchmarking in NLP." NAACL 2021; arXiv:2104.14337. | https://arxiv.org/abs/2104.14337; https://doi.org/10.48550/arXiv.2104.14337 | verified | Future evaluation methodology / dynamic benchmark context | Verified from arXiv title, author lead, submission date, NAACL 2021 comment, and DOI. Useful for benchmark design and dynamic evaluation context. Do not use as KORA production evidence. |
 | R24 | Benchmarking and reproducibility | Marco Tulio Ribeiro, Tongshuang Wu, Carlos Guestrin, and Sameer Singh. "Beyond Accuracy: Behavioral Testing of NLP Models with CheckList." Proceedings of the 58th Annual Meeting of the Association for Computational Linguistics, pages 4902-4912, 2020. | https://aclanthology.org/2020.acl-main.442/; https://doi.org/10.18653/v1/2020.acl-main.442 | verified | Future evaluation methodology / behavioral test design context | Verified from ACL Anthology title, authors, venue, pages, year, URL, and DOI. Useful for behavior-oriented evaluation design. Do not use to imply KORA has completed broad behavioral testing. |
+
+## Metadata Audit Status
+
+[KORA First Paper Reference Metadata Audit v0.1](kora-first-paper-reference-metadata-audit-v0-1.md) audits `[R01]` through `[R24]` for metadata completeness and source traceability before normalized bibliography work.
+
+Status:
+
+- Stable `[Rxx]` labels remain unchanged.
+- No new references were added in the metadata audit.
+- No BibTeX was generated.
+- Next step: create a normalized bibliography table for `[R01]` through `[R24]` from verified tracker and audit fields.
+- BibTeX remains pending until normalized fields are verified.
