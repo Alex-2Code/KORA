@@ -44,6 +44,17 @@ Completed on 2026-05-11.
 - Claim-support mapping added for related-work context and the KORA 80/100 benchmark result.
 - Bibliography normalization and citation style selection remain pending.
 
+### Verification Pass 2
+
+Completed on 2026-05-11.
+
+- Additional verified references collected: 8.
+- New verified labels: `[R11]` through `[R18]`.
+- Categories covered: agent/tool-use and agentic workflows, program-aided language-model workflows, semantic caching, local model runtime systems, reproducibility programs/checklists, and venue-specific artifact evaluation guidance.
+- Manuscript integration deferred; references are tracker/audit entries only until a later manuscript pass.
+- Remaining gaps: synthetic workload and benchmark-construction references, optional additional semantic-cache references, and final target-venue citation/artifact guidance.
+- Bibliography status: BibTeX not added in this pass; final citation style and bibliography normalization remain pending.
+
 ## Reference Categories
 
 ### 1. LLM serving and inference systems
@@ -204,11 +215,15 @@ Partially verified. See [KORA first paper reference tracker](kora-first-paper-re
 | R08 | Workflow orchestration / DAG systems | Snakemake workflow engine paper | Paper / DOI-backed metadata | Background for reproducible workflow systems | Verified in pass 1 | Use as workflow/reproducible-pipeline context only. |
 | R09 | Local model runtime systems | llama.cpp official repository | Official repository | Context for future local model runtime work | Verified in pass 1 | Future-work context only unless KORA local runtime evidence exists. |
 | R10 | Systems papers with artifact evaluation practices | ACM Artifact Review and Badging | Official policy | Support artifact and reproduction discipline | Verified in pass 1 | Use for artifact-practice framing, not as validation of KORA results. |
-| R11 | Agent/tool routing and orchestration | Additional agent tool-use or planner reference | Paper or technical report | Context for model-centered tool routing | Pending | Do not overstate similarity. |
-| R12 | Caching and retrieval-augmented generation | Semantic caching or LLM cache reference | Paper, docs, or technical report | Distinguish cache reuse from pre-inference execution control | Pending | Use only if relevant to model-call avoidance discussion. |
-| R13 | Benchmarking and reproducibility | Synthetic workload evaluation reference | Paper or technical report | Context for local/no-network synthetic workload design | Pending | Keep claim language narrow. |
-| R14 | Local model runtime systems | Ollama or another local runtime official source | Official docs or technical report | Context for future local model validation | Pending | Future-work context only unless evidence exists. |
-| R15 | Systems papers with artifact evaluation practices | Venue-specific artifact evaluation guidance | Guideline or official docs | Support artifact and reproduction discipline | Pending | Prefer target-venue guidance after venue selection. |
+| R11 | Agent/tool routing and orchestration | ReAct | Paper | Context for reasoning/action and tool-use patterns | Verified in pass 2 | Use as agent/tool-use background only. |
+| R12 | Agent/tool routing and orchestration | Toolformer | Paper | Context for model-centered API/tool-use training | Verified in pass 2 | Do not imply KORA uses Toolformer-style training. |
+| R13 | Deterministic/programmatic AI workflows | PAL | Paper | Context for program-aided model workflows | Verified in pass 2 | Do not present as KORA model-call avoidance evidence. |
+| R14 | Caching and retrieval-augmented generation | GPTCache | Paper / ACL Anthology | Distinguish semantic cache reuse from pre-inference execution control | Verified in pass 2 | Do not use to support KORA production cost or API-cost claims. |
+| R15 | Local model runtime systems | Ollama official docs and repository | Official docs / repository | Context for future local model validation | Verified in pass 2 | Future-work context only unless KORA Ollama evidence exists. |
+| R16 | Benchmarking and reproducibility | NeurIPS reproducibility program report | Paper | Context for reproducibility programs and checklist discipline | Verified in pass 2 | Do not imply KORA has venue reproducibility approval. |
+| R17 | Systems papers with artifact evaluation practices | USENIX NSDI artifact guidance | Official venue guidance | Support artifact and reproduction discipline | Verified in pass 2 | Does not imply KORA artifact approval. |
+| R18 | Systems papers with artifact evaluation practices | MLSys artifact evaluation guidance | Official venue guidance | Support ML/systems artifact appendix expectations | Verified in pass 2 | Does not imply KORA artifact approval. |
+| R19 | Benchmarking and reproducibility | Synthetic workload evaluation reference | Paper or technical report | Context for local/no-network synthetic workload design | Pending | Keep claim language narrow. |
 
 ## Next Verification Procedure
 

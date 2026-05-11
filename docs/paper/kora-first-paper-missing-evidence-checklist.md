@@ -67,13 +67,18 @@ First verified reference pass:
 - Citation audit v0.1 created.
 - Final citation format, final bibliography, and BibTeX still pending.
 
+Additional reference verification pass 2:
+
+- 8 additional references verified and recorded as `[R11]` through `[R18]`.
+- Agent/tool-use, semantic caching, local-runtime, reproducibility-program, and venue artifact-guidance coverage improved.
+- Manuscript integration for `[R11]` through `[R18]` is still pending.
+- Final citation style, final bibliography, and BibTeX still pending.
+
 Additional reference categories still pending:
 
-- Agent/tool-use references.
-- Semantic caching references if the manuscript discusses caching in more detail.
-- Synthetic workload reproducibility references.
-- Local runtime references beyond the current preliminary context.
-- Venue-specific artifact guidance.
+- Synthetic workload and benchmark-construction references.
+- Optional additional semantic caching references if the manuscript discusses caching in more detail.
+- Target-venue-specific citation and artifact guidance after venue selection.
 
 ## Follow-Up Papers / Technical Reports
 
