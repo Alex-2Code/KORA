@@ -134,7 +134,15 @@ Decide whether selected `[R19]` through `[R24]` references should be integrated 
 
 ## Citation Style
 
-Citation style is TBD and should be selected after the target venue or report format is chosen.
+The working citation style has been selected in [KORA First Paper Citation Style Decision](kora-first-paper-citation-style-decision.md).
+
+Status:
+
+- Stable `[Rxx]` labels remain the working manuscript citation strategy.
+- Metadata audit for `[R01]` through `[R24]` is the next bibliography task.
+- BibTeX remains pending until the metadata audit is complete.
+- Final bibliography normalization remains pending.
+- Venue-specific conversion remains possible after a target venue or report format is chosen.
 
 ## Claim Boundary
 
