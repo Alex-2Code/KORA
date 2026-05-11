@@ -63,7 +63,17 @@ Completed on 2026-05-11.
 - References `[R11]` through `[R18]` mapped to candidate manuscript sections and integration decisions.
 - Selected references will be integrated later based on the plan.
 - Remaining gaps: synthetic workload / benchmark-construction references and final target-venue citation/artifact guidance.
-- Manuscript v0.3 has not been created.
+- At plan creation time, manuscript v0.3 had not yet been created.
+- BibTeX and final citation style remain pending.
+
+### Manuscript Integration Pass 2
+
+Completed on 2026-05-11.
+
+- Manuscript v0.3 created.
+- References `[R11]`, `[R12]`, and `[R13]` integrated into v0.3 as agent/tool-use and programmatic workflow background.
+- References `[R14]` through `[R18]` remain optional, deferred, or tracker/audit-only according to the v0.3 integration plan.
+- Remaining gaps: synthetic workload / benchmark-construction references and final target-venue citation/artifact guidance.
 - BibTeX and final citation style remain pending.
 
 ## Reference Categories

@@ -71,7 +71,8 @@ Additional reference verification pass 2:
 
 - 8 additional references verified and recorded as `[R11]` through `[R18]`.
 - Agent/tool-use, semantic caching, local-runtime, reproducibility-program, and venue artifact-guidance coverage improved.
-- Manuscript integration for `[R11]` through `[R18]` is planned but not complete.
+- Manuscript integration for `[R11]` through `[R13]` is complete in manuscript v0.3.
+- `[R14]` through `[R18]` remain optional/deferred or tracker/audit-only.
 - Final citation style, final bibliography, and BibTeX still pending.
 
 Additional reference categories still pending:
@@ -79,7 +80,7 @@ Additional reference categories still pending:
 - Synthetic workload and benchmark-construction references.
 - Optional additional semantic caching references if the manuscript discusses caching in more detail.
 - Target-venue-specific citation and artifact guidance after venue selection.
-- Manuscript v0.3 creation after reference integration decisions are accepted.
+- Final citation style and BibTeX.
 
 ## Follow-Up Papers / Technical Reports
 

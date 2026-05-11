@@ -86,6 +86,19 @@ Status:
 - Final citation style remains pending.
 - Synthetic workload / benchmark-construction references remain pending.
 
+## Manuscript v0.3 Integration
+
+[KORA First Paper Manuscript v0.3](kora-first-paper-manuscript-v0-3.md) has been created.
+
+Status:
+
+- `[R11]`, `[R12]`, and `[R13]` are integrated into manuscript v0.3 as agent/tool-use and programmatic workflow background.
+- `[R14]` through `[R18]` remain tracker/audit-only, optional, or deferred according to the v0.3 integration plan.
+- BibTeX remains pending.
+- Final citation style remains pending.
+- Final bibliography normalization remains pending.
+- Synthetic workload / benchmark-construction references remain pending.
+
 ## Target Citation Areas
 
 - LLM serving and inference systems.

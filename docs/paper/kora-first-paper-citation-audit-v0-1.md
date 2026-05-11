@@ -2,13 +2,14 @@
 
 ## Purpose
 
-This audit checks reference consistency, citation safety, and claim boundaries for manuscript v0.2. It is a bibliography-readiness document, not a final bibliography and not a submission-readiness claim.
+This audit checks reference consistency, citation safety, and claim boundaries for manuscript v0.2 and the selected manuscript v0.3 integration of [R11], [R12], and [R13]. It is a bibliography-readiness document, not a final bibliography and not a submission-readiness claim.
 
 ## Scope
 
 This audit covers:
 
 - manuscript v0.2
+- manuscript v0.3 selected reference integration
 - references [R01] through [R18]
 - preliminary references section
 - related work framing
@@ -30,9 +31,9 @@ It does not add BibTeX, final citation style, manuscript-integrated citations be
 | [R08] | Snakemake | Yes | Yes | verified | normalize later |
 | [R09] | llama.cpp | Yes | Yes | verified | needs citation style decision |
 | [R10] | ACM Artifact Review and Badging | Yes | Yes | verified | needs citation style decision |
-| [R11] | ReAct | No, future integration | No, future integration | verified | needs manuscript integration decision |
-| [R12] | Toolformer | No, future integration | No, future integration | verified | needs manuscript integration decision |
-| [R13] | PAL | No, future integration | No, future integration | verified | needs manuscript integration decision |
+| [R11] | ReAct | Yes, in manuscript v0.3 | Yes, in manuscript v0.3 | verified | normalize later |
+| [R12] | Toolformer | Yes, in manuscript v0.3 | Yes, in manuscript v0.3 | verified | normalize later |
+| [R13] | PAL | Yes, in manuscript v0.3 | Yes, in manuscript v0.3 | verified | normalize later |
 | [R14] | GPTCache | No, future integration | No, future integration | verified | needs manuscript integration decision |
 | [R15] | Ollama docs/repository | No, future integration | No, future integration | verified | needs manuscript integration decision |
 | [R16] | NeurIPS reproducibility program report | No, future integration | No, future integration | verified | needs manuscript integration decision |
@@ -178,7 +179,7 @@ It does not add BibTeX, final citation style, manuscript-integrated citations be
 | Local runtime context | [R03], [R09] | Future-work context for local model/runtime systems | Does not support current local runtime validation evidence. |
 | Benchmarking/reproducibility context | [R02] | Benchmark-methodology background | Does not support KORA production benchmark proof. |
 | Artifact evaluation context | [R10] | Artifact-practice and transparency background | Does not indicate formal artifact evaluation approval. |
-| Additional agent/tool-use context | [R11], [R12], [R13] | Future manuscript background on reasoning/action, API/tool-use, and program-aided execution | Does not support KORA outperforming agent or tool-use systems. |
+| Additional agent/tool-use context | [R11], [R12], [R13] | Manuscript v0.3 background on reasoning/action, API/tool-use, and program-aided execution | Does not support KORA outperforming agent or tool-use systems. |
 | Semantic caching context | [R14] | Future manuscript background on cache reuse for LLM applications | Does not support KORA production cost or real API-cost claims. |
 | Additional local runtime context | [R15] | Future manuscript background for local runtime systems | Does not support current KORA Ollama integration evidence. |
 | Additional reproducibility context | [R16] | Future manuscript background on reproducibility programs and checklists | Does not make KORA submission-ready or formally reproducible by venue standards. |
@@ -228,12 +229,27 @@ Categories still missing:
 
 Manuscript integration status:
 
-- References [R11] through [R18] are verified tracker entries only in this pass.
-- They are not yet integrated into manuscript v0.2 text or the manuscript References section.
-- They should be integrated only in a later manuscript pass that preserves claim boundaries and final citation-style decisions.
+- References [R11] through [R18] were verified tracker entries only in this pass.
+- References [R11], [R12], and [R13] were later integrated into manuscript v0.3 text and its preliminary References section.
+- References [R14] through [R18] remain tracker/audit-only, optional, or deferred according to the v0.3 integration plan.
+- This does not complete final citation style, BibTeX, or final bibliography normalization.
+
+## Manuscript v0.3 Integration Status
+
+Manuscript v0.3 integrates selected pass-2 references.
+
+Status:
+
+- [R11] ReAct appears in manuscript v0.3 related work and the preliminary References section.
+- [R12] Toolformer appears in manuscript v0.3 related work and the preliminary References section.
+- [R13] PAL appears in manuscript v0.3 related work and the preliminary References section.
+- [R14] through [R18] remain tracker/audit-only, optional, or deferred.
+- Final citation audit is not complete.
+- BibTeX remains pending.
+- Final citation style remains pending.
 
 ## Next Step
 
-- Task 317B or later: review and merge the additional reference pass if safe.
-- Task 318 or later: select final citation style or perform a narrow manuscript integration pass for [R11] through [R18].
-- Manuscript v0.3 only after bibliography and claim audit are stable.
+- Task 319B or later: review manuscript v0.3 if safe.
+- Later: select final citation style or verify synthetic workload / benchmark-construction references.
+- Manuscript v0.3 still requires final bibliography and claim-audit review before any submission-readiness claim.

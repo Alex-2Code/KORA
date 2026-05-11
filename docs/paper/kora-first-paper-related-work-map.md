@@ -124,3 +124,9 @@ Summary:
 - Integrate `[R11]`, `[R12]`, and `[R13]` if v0.3 expands agent/tool-use and programmatic workflow related work.
 - Keep `[R14]`, `[R15]`, and `[R16]` optional unless caching, local runtime, or reproducibility sections expand.
 - Defer `[R17]` and `[R18]` until target venue or artifact package planning.
+
+## Manuscript v0.3 Integration Status
+
+Manuscript v0.3 now integrates `[R11]`, `[R12]`, and `[R13]` as related-work background for agent/tool-use and program-aided language-model workflows.
+
+`[R14]` through `[R18]` remain tracker/audit-only, optional, or deferred. They should not be used to support production, API-cost, energy, broad superiority, artifact approval, or submission-readiness claims.

@@ -2,9 +2,9 @@
 
 ## Current Status
 
-Manuscript v0.2 exists but is not submission-ready.
+Manuscript v0.3 exists but is not submission-ready.
 
-The current paper track has a thesis, manuscript v0.2, claim-boundary docs, reviewer questions, evidence summaries, and local/no-network validation context. It still needs final bibliography normalization, final figures, finalized tables, and a clean reproduction transcript before arXiv or workshop-style release.
+The current paper track has a thesis, manuscript v0.3, claim-boundary docs, reviewer questions, evidence summaries, and local/no-network validation context. It still needs final bibliography normalization, final figures, finalized tables, and a clean reproduction transcript before arXiv or workshop-style release.
 
 The reference scaffold now exists, and the first verified reference pass has collected 10 citation candidates across the major related-work categories. Manuscript v0.2 integrates those verified references as preliminary citation labels. No fake citations or unverified BibTeX entries have been added.
 
@@ -12,13 +12,14 @@ Citation audit v0.1 exists and maps preliminary references to manuscript use, tr
 
 Additional reference verification pass 2 has collected 8 more verified references for remaining bibliography gaps. These references are recorded in the tracker and audit, but manuscript integration is deferred.
 
-Manuscript v0.3 reference integration planning now exists for [R11] through [R18]. Manuscript v0.3 has not been created.
+Manuscript v0.3 reference integration planning exists for [R11] through [R18]. Manuscript v0.3 has been created with [R11], [R12], and [R13] integrated. [R14] through [R18] remain optional, deferred, or tracker/audit-only according to the integration plan.
 
 ## Ready
 
 - Thesis.
 - Initial manuscript skeleton.
 - Manuscript v0.2 with first verified reference integration.
+- Manuscript v0.3 with selected [R11] through [R13] integration.
 - Deterministic-heavy benchmark evidence.
 - Customer-support local/no-network validation evidence.
 - Claim boundary docs.
@@ -34,7 +35,7 @@ Manuscript v0.3 reference integration planning now exists for [R11] through [R18
 ## Needed Before arXiv / Workshop Submission
 
 - More references collected and verified.
-- Manuscript v0.3 created if the selected reference integration plan is accepted.
+- Synthetic workload / benchmark-construction references collected if the evaluation-methodology section is expanded.
 - Final citation style selected.
 - Final bibliography entries normalized.
 - Final citation audit review completed.
@@ -64,6 +65,6 @@ These are suggested formats only. This document does not claim acceptance, endor
 
 ## Reference Status
 
-The first verified reference pass is complete, manuscript v0.2 integrates the first-pass verified references as preliminary citation labels and a preliminary references section, citation audit v0.1 exists, additional reference verification pass 2 has added 8 verified tracker entries, and a manuscript v0.3 reference integration plan exists. The paper is still not submission-ready because manuscript v0.3 has not been created, the new references are not yet integrated into the manuscript, the final bibliography style is not selected, final normalized bibliography entries are pending, and BibTeX has not been added.
+The first verified reference pass is complete, manuscript v0.2 integrates the first-pass verified references as preliminary citation labels and a preliminary references section, citation audit v0.1 exists, additional reference verification pass 2 has added 8 verified tracker entries, and manuscript v0.3 integrates [R11], [R12], and [R13] as preliminary related-work references. The paper is still not submission-ready because [R14] through [R18] remain optional/deferred or tracker/audit-only, synthetic workload / benchmark-construction references remain pending, the final bibliography style is not selected, final normalized bibliography entries are pending, and BibTeX has not been added.
 
 No fake citations were added. Future citation work should use only verified tracker entries and should not support production, API-cost, energy, production-validation, broad superiority, or cited-system superiority claims.
