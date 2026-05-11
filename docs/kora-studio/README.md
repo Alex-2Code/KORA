@@ -2,7 +2,7 @@
 
 ## Status
 
-KORA Studio is a future planning area. It is not implemented yet.
+KORA Studio is an early local implementation and planning area. It is not a complete product, hosted service, or production-ready workflow yet.
 
 ## Planning Scope
 
