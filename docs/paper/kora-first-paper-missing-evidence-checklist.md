@@ -96,7 +96,9 @@ Citation style decision:
 - Metadata audit v0.1 for `[R01]` through `[R24]` has been created.
 - Normalized bibliography table v0.1 has been created.
 - High-risk metadata gap resolution v0.1 has been created at the planning/classification level.
-- BibTeX is still pending.
+- Preliminary BibTeX v0.1 exists only for ready records `[R01]`, `[R06]`, `[R08]`, `[R11]`, `[R14]`, `[R21]`, `[R24]`.
+- Full BibTeX remains incomplete because blocked records are still excluded.
+- Blocked metadata/style records remain unresolved.
 - Final claim/citation audit is still pending.
 - Paper is still not submission-ready.
 

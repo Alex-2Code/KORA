@@ -187,6 +187,18 @@ Status:
 - The next bibliography step is preliminary BibTeX preparation only for ready records, or a final metadata check for blocked records.
 - The paper remains not submission-ready.
 
+## Preliminary BibTeX v0.1
+
+[KORA First Paper Preliminary BibTeX v0.1](kora-first-paper-preliminary-bibtex-v0-1.md) has been created.
+
+Status:
+
+- Preliminary BibTeX exists only for the ready subset: `[R01]`, `[R06]`, `[R08]`, `[R11]`, `[R14]`, `[R21]`, `[R24]`.
+- Blocked records remain excluded: `[R02]`, `[R03]`, `[R04]`, `[R05]`, `[R07]`, `[R09]`, `[R10]`, `[R12]`, `[R13]`, `[R15]`, `[R16]`, `[R17]`, `[R18]`, `[R19]`, `[R20]`, `[R22]`, `[R23]`.
+- No manuscript changes were made.
+- Final BibTeX key normalization and venue-specific field style remain pending.
+- The paper remains not submission-ready.
+
 ## Claim Boundary
 
 No citation should be used to support unsupported production, API-cost, or energy claims.

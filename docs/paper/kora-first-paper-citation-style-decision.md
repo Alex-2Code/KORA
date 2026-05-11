@@ -16,7 +16,8 @@ It is a planning and traceability document. It does not generate BibTeX, finaliz
 - Metadata audit v0.1 exists.
 - Normalized bibliography v0.1 exists.
 - Metadata gap resolution v0.1 exists at the planning/classification level.
-- Some metadata/style blockers remain before BibTeX.
+- Preliminary BibTeX v0.1 exists for ready records only.
+- Some metadata/style blockers remain before full BibTeX.
 - The paper remains not submission-ready.
 
 ## Style Decision
@@ -79,6 +80,9 @@ Normalization rules:
 - Do not infer DOI values.
 - BibTeX can be generated in a later task only from normalized tracker records.
 - Generated BibTeX must remain traceable to verified source URLs or DOI records.
+- Preliminary BibTeX v0.1 covers only `[R01]`, `[R06]`, `[R08]`, `[R11]`, `[R14]`, `[R21]`, and `[R24]`.
+- Stable `[Rxx]` labels remain canonical during audit.
+- Final venue-specific conversion remains deferred.
 
 ## Claim-Safety Rules
 
@@ -93,7 +97,7 @@ Normalization rules:
 
 ## Next Steps
 
-1. Prepare preliminary BibTeX only for records classified as ready after a final normalized-record check.
+1. Normalize preliminary BibTeX keys and fields for ready records after final style decisions.
 2. Defer blocked records until author-list, venue/status, docs/repo style, or venue-guidance style gaps are resolved.
 3. Run final bibliography and claim audit.
 4. Create manuscript v0.4 only after bibliography and claim audit are stable.

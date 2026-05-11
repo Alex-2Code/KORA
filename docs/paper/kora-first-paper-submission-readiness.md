@@ -24,6 +24,8 @@ Normalized bibliography v0.1 exists for [R01] through [R24]. High-risk metadata 
 
 Metadata gap resolution v0.1 exists. It classifies high-risk metadata blockers before BibTeX preparation. BibTeX and final bibliography review are still pending.
 
+Preliminary BibTeX v0.1 exists for the ready subset only: [R01], [R06], [R08], [R11], [R14], [R21], and [R24]. Full BibTeX and final bibliography review are still pending because blocked records remain excluded.
+
 ## Ready
 
 - Thesis.
@@ -44,6 +46,7 @@ Metadata gap resolution v0.1 exists. It classifies high-risk metadata blockers b
 - Metadata audit v0.1.
 - Normalized bibliography v0.1.
 - Metadata gap resolution v0.1.
+- Preliminary BibTeX v0.1 for ready records only.
 - Citation audit v0.1.
 - Manuscript v0.3 reference integration plan.
 
@@ -52,10 +55,10 @@ Metadata gap resolution v0.1 exists. It classifies high-risk metadata blockers b
 - More references collected and verified.
 - Decide whether selected benchmark-construction references should be integrated if the evaluation-methodology section is expanded.
 - More direct deterministic-heavy synthetic workload construction references if needed.
-- Preliminary BibTeX preparation for ready records only, after final metadata check.
+- Final BibTeX key normalization for ready records.
 - Remaining metadata/style gap resolution for blocked records.
 - Final bibliography entries normalized.
-- BibTeX preparation after metadata audit.
+- Full BibTeX completion after blocked records are resolved.
 - Final citation audit review completed.
 - Figure drafts created.
 - Tables finalized.
@@ -83,6 +86,6 @@ These are suggested formats only. This document does not claim acceptance, endor
 
 ## Reference Status
 
-The first verified reference pass is complete, manuscript v0.2 integrates the first-pass verified references as preliminary citation labels and a preliminary references section, citation audit v0.1 exists, additional reference verification pass 2 has added 8 verified tracker entries, manuscript v0.3 integrates [R11], [R12], and [R13] as preliminary related-work references, the benchmark-construction reference pass has added [R19] through [R24] as tracker/audit entries, the working citation style decision selects stable [Rxx] labels, metadata audit v0.1 exists, normalized bibliography v0.1 exists, and metadata gap resolution v0.1 exists. The paper is still not submission-ready because [R14] through [R18] remain optional/deferred or tracker/audit-only, [R19] through [R24] are not yet integrated into manuscript methodology, more direct deterministic-heavy synthetic workload references may still be needed, production benchmark evidence is still not available, some metadata/style blockers remain before BibTeX, and BibTeX has not been added.
+The first verified reference pass is complete, manuscript v0.2 integrates the first-pass verified references as preliminary citation labels and a preliminary references section, citation audit v0.1 exists, additional reference verification pass 2 has added 8 verified tracker entries, manuscript v0.3 integrates [R11], [R12], and [R13] as preliminary related-work references, the benchmark-construction reference pass has added [R19] through [R24] as tracker/audit entries, the working citation style decision selects stable [Rxx] labels, metadata audit v0.1 exists, normalized bibliography v0.1 exists, metadata gap resolution v0.1 exists, and preliminary BibTeX v0.1 exists for ready records only. The paper is still not submission-ready because [R14] through [R18] remain optional/deferred or tracker/audit-only, [R19] through [R24] are not yet integrated into manuscript methodology, more direct deterministic-heavy synthetic workload references may still be needed, production benchmark evidence is still not available, blocked records remain excluded from BibTeX, and final bibliography and claim audit are not complete.
 
 No fake citations were added. Future citation work should use only verified tracker entries and should not support production, API-cost, energy, production-validation, broad superiority, or cited-system superiority claims.

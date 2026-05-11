@@ -306,6 +306,17 @@ Partially verified. See [KORA first paper reference tracker](kora-first-paper-re
 | R24 | Benchmarking and reproducibility | CheckList | Paper / ACL Anthology | Behavior-oriented evaluation and test-design context | Verified in benchmark-construction pass | Do not imply KORA has completed broad behavioral testing. |
 | R25 | Benchmarking and reproducibility | Deterministic-heavy synthetic workload construction reference | Paper or technical report | More direct context for local/no-network synthetic workload design | Pending | Keep claim language narrow. |
 
+## Preliminary BibTeX Status
+
+[KORA First Paper Preliminary BibTeX v0.1](kora-first-paper-preliminary-bibtex-v0-1.md) has been created for the ready subset only.
+
+Status:
+
+- Included ready records: `[R01]`, `[R06]`, `[R08]`, `[R11]`, `[R14]`, `[R21]`, `[R24]`.
+- Excluded blocked records: `[R02]`, `[R03]`, `[R04]`, `[R05]`, `[R07]`, `[R09]`, `[R10]`, `[R12]`, `[R13]`, `[R15]`, `[R16]`, `[R17]`, `[R18]`, `[R19]`, `[R20]`, `[R22]`, `[R23]`.
+- No manuscript changes were made.
+- Next step: final BibTeX key normalization for included records and metadata/style resolution for blocked records.
+
 ## Next Verification Procedure
 
 1. Search official sources first.
