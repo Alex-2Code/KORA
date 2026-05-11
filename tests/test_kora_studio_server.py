@@ -116,11 +116,21 @@ def test_request_handler_serves_health_status_and_placeholder() -> None:
     assert status["server"] == "local-only"
     assert status["provider_calls_enabled"] is False
     assert status["ollama_calls_enabled"] is False
+    content_type = response.headers.get("Content-Type", "")
+
+    assert "text/html" in content_type
     assert "KORA Studio" in html
     assert APPROVED_BOOST_MESSAGE in html
     assert "Preview / Local-only" in html
+    assert "Local v0.1 Skeleton" in html
+    assert "deterministic-first local workflow exploration" in html
     assert "/health" in html
     assert "/status" in html
+    assert "Provider calls: disabled" in html
+    assert "Model/runtime integration: not connected" in html
+    assert "Browser launch: disabled" in html
+    assert "Ollama integration: not connected" in html
+    assert "No production/API-cost/energy claims" in html
     assert "provider calls enabled" not in html.lower()
     assert "production cost reduction" not in html.lower()
     assert "real api-cost reduction" not in html.lower()
@@ -132,32 +142,48 @@ def test_static_preview_html_content_is_safe_and_complete() -> None:
 
     assert html.startswith("<!doctype html>")
     assert "KORA Studio" in html
+    assert "Local v0.1 Skeleton" in html
     assert "Preview / Local-only" in html
     assert APPROVED_BOOST_MESSAGE in html
     assert TECHNICAL_EXPLANATION in html
-    assert "local placeholder page for the KORA Studio v0.1 skeleton" in html
-    assert "local server skeleton" in html.lower()
-    assert "Deterministic-first local workflow exploration" in html
+    assert "deterministic-first local workflow exploration" in html
+    assert "Status Cards" in html
+    assert "Server: local" in html
+    assert "Provider calls: disabled" in html
+    assert "Model/runtime integration: not connected" in html
+    assert "Browser launch: disabled" in html
+    assert "Ollama integration: not connected" in html
+    assert "Endpoint Panel" in html
+    assert "/health" in html
+    assert "/status" in html
+    assert "Workflow Preview" in html
+    assert "Request" in html
+    assert "Deterministic checks" in html
+    assert "Local status" in html
+    assert "Future runtime integration placeholder" in html
+    assert "Placeholder only; no runtime execution occurs on this page" in html
+    assert "Limitations Panel" in html
     assert "No production/API-cost/energy claims" in html
     assert "No full frontend yet" in html
-    assert "No browser launch yet" in html
+    assert "No browser launch" in html
     assert "No provider calls" in html
     assert "No model/runtime integration yet" in html
     assert "No Ollama integration" in html
-    assert "No API keys required" in html
-    assert "/health" in html
-    assert "/status" in html
     assert "docs/kora-studio/README.md" in html
     assert "docs/kora-studio/fixtures/" in html
-    assert "CLI status" in html
-    assert "fixture-backed planning data" in html
-    assert "report viewer" in html
-    assert "counter dashboard" in html
-    assert "project chat shell" in html
-    assert "Ollama detection" in html
+    assert "Local-only skeleton" in html
     assert "OPENAI_API_KEY" not in html
     assert "ANTHROPIC_API_KEY" not in html
     assert "provider calls enabled" not in html.lower()
     assert "production cost reduction" not in html.lower()
     assert "real api-cost reduction" not in html.lower()
     assert "energy reduction" not in html.lower()
+    assert "<script" not in html.lower()
+    assert "src=" not in html.lower()
+    assert 'href="http' not in html.lower()
+    assert "https://" not in html.lower()
+    assert "localstorage" not in html.lower()
+    assert "sessionstorage" not in html.lower()
+    assert "fetch(" not in html.lower()
+    assert "xmlhttprequest" not in html.lower()
+    assert "navigator.sendbeacon" not in html.lower()
