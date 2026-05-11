@@ -218,6 +218,7 @@ def render_studio_placeholder_html(status: dict[str, Any]) -> str:
           <li>No full frontend yet</li>
           <li>No browser launch yet</li>
           <li>No provider calls</li>
+          <li>No model/runtime integration yet</li>
           <li>No Ollama integration</li>
           <li>No API keys required</li>
           <li>No production/API-cost/energy claims</li>

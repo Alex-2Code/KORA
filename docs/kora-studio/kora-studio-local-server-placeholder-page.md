@@ -30,7 +30,7 @@ The server remains localhost-only by default. Browser auto-launch is not impleme
 - no browser launch
 - no Ollama integration
 - no provider calls
-- no model/runtime integration
+- no model/runtime integration yet
 - no project UI yet
 - no API keys required
 

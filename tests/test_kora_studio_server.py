@@ -142,6 +142,7 @@ def test_static_preview_html_content_is_safe_and_complete() -> None:
     assert "No full frontend yet" in html
     assert "No browser launch yet" in html
     assert "No provider calls" in html
+    assert "No model/runtime integration yet" in html
     assert "No Ollama integration" in html
     assert "No API keys required" in html
     assert "/health" in html
