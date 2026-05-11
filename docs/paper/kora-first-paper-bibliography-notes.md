@@ -51,6 +51,27 @@ Recommended next pass:
 
 Choose a citation style, normalize the final bibliography, audit every citation against the tracker, and add BibTeX only if all required fields are fully verified from official sources.
 
+## Verification Pass 2
+
+Status:
+
+- Additional verified references collected in this pass: 8.
+- New verified labels: `[R11]` through `[R18]`.
+- Categories covered: agent/tool-use and agentic workflows, program-aided language-model workflows, semantic caching, local model runtime systems, reproducibility programs/checklists, and venue-specific artifact evaluation guidance.
+- Manuscript integration was deferred. The new references are tracker/audit entries only until a later manuscript integration pass.
+- BibTeX not added in this pass.
+- Final citation style remains pending.
+
+Categories still needing more coverage:
+
+- Synthetic workload and benchmark-construction references.
+- Optional additional semantic-cache references if caching becomes a larger manuscript topic.
+- Target-venue-specific citation and artifact guidance after venue selection.
+
+Recommended next pass:
+
+Select the final citation style or perform a narrow manuscript integration pass for `[R11]` through `[R18]`, then normalize bibliography metadata without adding unsupported claims.
+
 ## Target Citation Areas
 
 - LLM serving and inference systems.

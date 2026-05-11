@@ -101,3 +101,16 @@ Manuscript v0.2 integrates the first verified reference pass as preliminary cita
 - Benchmarking and artifact evaluation: [R02], [R10].
 
 These labels remain preliminary until final citation style and bibliography normalization are complete.
+
+## Verification Pass 2 Mapping
+
+The second verified reference pass collected 8 additional citation candidates:
+
+- Agent/tool routing and orchestration: ReAct, Toolformer.
+- Programmatic / deterministic AI workflows: PAL.
+- Caching and retrieval-augmented generation: GPTCache.
+- Local model runtime systems: Ollama official docs and repository.
+- Evaluation and reproducibility: NeurIPS reproducibility program report.
+- Systems artifact evaluation practices: USENIX NSDI artifact guidance, MLSys artifact evaluation guidance.
+
+These references are not yet integrated into manuscript v0.2. They should be used in a later manuscript pass only as background, positioning, reproducibility, or future-work context. They should not support production, API-cost, energy, broad superiority, artifact approval, or submission-readiness claims.

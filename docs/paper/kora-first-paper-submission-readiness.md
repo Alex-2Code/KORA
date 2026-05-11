@@ -10,6 +10,8 @@ The reference scaffold now exists, and the first verified reference pass has col
 
 Citation audit v0.1 exists and maps preliminary references to manuscript use, traceability status, and claim boundaries.
 
+Additional reference verification pass 2 has collected 8 more verified references for remaining bibliography gaps. These references are recorded in the tracker and audit, but manuscript integration is deferred.
+
 ## Ready
 
 - Thesis.
@@ -23,6 +25,7 @@ Citation audit v0.1 exists and maps preliminary references to manuscript use, tr
 - Figure and table planning docs.
 - Reference scaffold.
 - First verified reference pass.
+- Additional reference verification pass 2.
 - Citation audit v0.1.
 
 ## Needed Before arXiv / Workshop Submission
@@ -57,6 +60,6 @@ These are suggested formats only. This document does not claim acceptance, endor
 
 ## Reference Status
 
-The first verified reference pass is complete, manuscript v0.2 integrates the verified references as preliminary citation labels and a preliminary references section, and citation audit v0.1 exists. The paper is still not submission-ready because the final bibliography style is not selected, final normalized bibliography entries are pending, and BibTeX has not been added.
+The first verified reference pass is complete, manuscript v0.2 integrates the first-pass verified references as preliminary citation labels and a preliminary references section, citation audit v0.1 exists, and additional reference verification pass 2 has added 8 verified tracker entries. The paper is still not submission-ready because the new references are not yet integrated into the manuscript, the final bibliography style is not selected, final normalized bibliography entries are pending, and BibTeX has not been added.
 
 No fake citations were added. Future citation work should use only verified tracker entries and should not support production, API-cost, energy, production-validation, broad superiority, or cited-system superiority claims.
