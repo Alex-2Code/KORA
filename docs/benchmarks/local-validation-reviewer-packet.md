@@ -261,3 +261,17 @@ The reviewer packet commands still use local/no-network validation. The `local_r
 See the [local model adapter design](local-model-adapter-design.md) for the next local runtime pathway after local/no-network validation.
 
 See the [real provider adapter design](real-provider-adapter-design.md) for the future provider boundary. It is design-only and does not implement provider calls, credential handling, network calls, or provider dependencies.
+
+
+## Validation Counter Glossary
+
+- `baseline_model_calls`: The number of model-call events in the direct baseline path, where every request is sent to the model.
+- `kora_model_calls`: The number of model-call events in the KORA-controlled path, after deterministic routes have been handled without escalation.
+- `avoided_model_calls`: The difference between baseline model calls and KORA-controlled model calls.
+- `avoided_model_call_rate`: The avoided model calls divided by the baseline model calls.
+- `deterministic_routes`: Requests handled through deterministic, structured, or policy-driven paths without a model call.
+- `model_escalations`: Requests that require model escalation because they cannot be safely resolved through deterministic paths.
+- `validation_pass_count`: The number of routed requests that passed their expected validation checks.
+- `validation_fail_count`: The number of routed requests that failed their expected validation checks.
+- `error_count`: The number of requests that produced execution errors during validation.
+- `fallback_count`: The number of requests that required fallback behavior after the primary route could not complete successfully.
