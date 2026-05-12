@@ -211,6 +211,17 @@ Status:
 - Next step: resolve blocked metadata/style records or run a final BibTeX audit before any manuscript update.
 - The paper remains not submission-ready.
 
+## Final Ready-Subset BibTeX Audit
+
+[KORA First Paper Final BibTeX Audit — Ready Subset v0.1](kora-first-paper-final-bibtex-audit-ready-subset-v0-1.md) has been created.
+
+Status:
+
+- Ready-subset BibTeX remains preliminary.
+- Blocked records remain unresolved and excluded from BibTeX.
+- Next step: resolve metadata/style gaps for blocked records.
+- The paper remains not submission-ready.
+
 ## Claim Boundary
 
 No citation should be used to support unsupported production, API-cost, or energy claims.

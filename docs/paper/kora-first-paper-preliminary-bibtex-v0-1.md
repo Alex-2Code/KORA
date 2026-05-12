@@ -57,6 +57,17 @@ No ready-subset record was moved back to blocked in this pass.
 
 All ready-subset keys already followed the selected author/year/topic pattern and were kept unchanged. Final venue key review may still adjust capitalization, punctuation, or venue-specific style, but no blocked record receives a BibTeX key in this pass.
 
+## Final Ready-Subset BibTeX Audit
+
+[KORA First Paper Final BibTeX Audit — Ready Subset v0.1](kora-first-paper-final-bibtex-audit-ready-subset-v0-1.md) has been created.
+
+Status:
+
+- Current BibTeX remains preliminary.
+- Blocked records remain excluded.
+- Ready-subset keys remain stable until venue conversion.
+- Final bibliography and claim audit are still pending.
+
 ## Preliminary BibTeX Entries
 
 ```bibtex
