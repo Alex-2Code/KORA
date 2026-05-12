@@ -28,6 +28,8 @@ Preliminary BibTeX v0.1 exists for the ready subset only: [R01], [R06], [R08], [
 
 Ready-subset BibTeX key normalization is complete. Full BibTeX and blocked metadata/style resolution are still pending, and the paper remains not submission-ready.
 
+Final ready-subset BibTeX audit v0.1 exists. Full BibTeX and blocked metadata/style resolution are still pending, and the paper remains not submission-ready.
+
 ## Ready
 
 - Thesis.
@@ -50,6 +52,7 @@ Ready-subset BibTeX key normalization is complete. Full BibTeX and blocked metad
 - Metadata gap resolution v0.1.
 - Preliminary BibTeX v0.1 for ready records only.
 - Ready-subset BibTeX key normalization.
+- Final ready-subset BibTeX audit v0.1.
 - Citation audit v0.1.
 - Manuscript v0.3 reference integration plan.
 

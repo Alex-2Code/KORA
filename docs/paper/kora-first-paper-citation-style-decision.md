@@ -82,6 +82,7 @@ Normalization rules:
 - Generated BibTeX must remain traceable to verified source URLs or DOI records.
 - Preliminary BibTeX v0.1 covers only `[R01]`, `[R06]`, `[R08]`, `[R11]`, `[R14]`, `[R21]`, and `[R24]`.
 - Ready-subset BibTeX keys are normalized using verified author/year/topic metadata.
+- Final ready-subset BibTeX audit v0.1 checks only the ready records and does not add blocked-record BibTeX.
 - Stable `[Rxx]` labels remain canonical during audit.
 - Final venue-specific conversion remains deferred.
 

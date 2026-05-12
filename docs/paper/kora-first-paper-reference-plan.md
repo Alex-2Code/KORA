@@ -318,6 +318,16 @@ Status:
 - Ready-subset BibTeX key normalization is complete for the included records.
 - Next step: metadata/style resolution for blocked records or final BibTeX audit.
 
+## Final Ready-Subset BibTeX Audit Status
+
+[KORA First Paper Final BibTeX Audit — Ready Subset v0.1](kora-first-paper-final-bibtex-audit-ready-subset-v0-1.md) has been created.
+
+Status:
+
+- Ready-subset BibTeX entries and normalized keys have been audited.
+- Blocked records remain excluded.
+- Next step: blocked metadata/style resolution.
+
 ## Next Verification Procedure
 
 1. Search official sources first.
