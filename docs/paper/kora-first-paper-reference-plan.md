@@ -338,6 +338,16 @@ Status:
 - No BibTeX was added for docs/repo records.
 - Next step: artifact guidance and paper/preprint metadata/style resolution.
 
+## Artifact Guidance Reference Style Resolution Status
+
+[KORA First Paper Artifact Guidance Reference Style Resolution v0.1](kora-first-paper-artifact-guidance-reference-style-resolution-v0-1.md) has been created at the planning/classification level.
+
+Status:
+
+- Artifact guidance records `[R10]`, `[R17]`, and `[R18]` are classified.
+- No BibTeX was added for artifact guidance records.
+- Next step: paper/preprint metadata-style resolution.
+
 ## Next Verification Procedure
 
 1. Search official sources first.

@@ -101,8 +101,10 @@ Citation style decision:
 - Ready-subset BibTeX has been audited in final ready-subset BibTeX audit v0.1.
 - Docs/repo metadata/style classification has been created for `[R03]`, `[R04]`, `[R07]`, `[R09]`, and `[R15]`.
 - BibTeX for docs/repo entries is still pending.
+- Artifact guidance metadata/style classification has been created for `[R10]`, `[R17]`, and `[R18]`.
+- BibTeX for artifact guidance entries is still pending.
 - Full BibTeX remains incomplete because blocked records are still excluded.
-- Artifact guidance and paper/preprint blockers remain unresolved.
+- Paper/preprint blockers remain unresolved.
 - Final claim/citation audit is still pending.
 - Paper is still not submission-ready.
 

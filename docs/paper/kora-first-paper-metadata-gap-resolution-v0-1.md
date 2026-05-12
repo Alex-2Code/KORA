@@ -62,6 +62,16 @@ Status:
 - `[R15]` remains blocked until the final split-or-keep decision is made for the combined docs/repo reference.
 - No BibTeX is generated for these records in this pass.
 
+## Artifact Guidance Style Resolution
+
+[KORA First Paper Artifact Guidance Reference Style Resolution v0.1](kora-first-paper-artifact-guidance-reference-style-resolution-v0-1.md) classifies `[R10]`, `[R17]`, and `[R18]`.
+
+Status:
+
+- `[R10]` is ready for artifact-guidance BibTeX later after final policy-page entry type and access-date field style are chosen.
+- `[R17]` and `[R18]` remain deferred until target venue selection confirms whether USENIX/NSDI-style or MLSys-style guidance belongs in the final bibliography.
+- No BibTeX is generated for these records in this pass.
+
 ## Updated BibTeX Readiness
 
 Ready for preliminary BibTeX after normalized record check:
@@ -80,7 +90,7 @@ Needs docs/repo style decision:
 
 - `[R03]`, `[R04]`, `[R07]`, `[R09]`, `[R15]`
 
-Needs venue/artifact guidance style decision:
+Needs artifact guidance access-date/style decision:
 
 - `[R10]`
 
@@ -95,8 +105,8 @@ The following entries should not receive BibTeX yet:
 - `[R02]`: author-list handling and venue/status normalization remain unresolved.
 - `[R03]`, `[R04]`, `[R07]`, `[R09]`, `[R15]`: docs/repo entry style and access-date formatting remain unresolved.
 - `[R05]`, `[R12]`, `[R13]`, `[R16]`: venue/status normalization remains unresolved.
-- `[R10]`: policy/guidance entry style remains unresolved.
-- `[R17]`, `[R18]`: target-venue decision remains unresolved.
+- `[R10]`: policy/guidance entry style and access-date field style remain unresolved.
+- `[R17]`, `[R18]`: target-venue decision and venue-guidance entry style remain unresolved.
 - `[R19]`, `[R20]`, `[R22]`, `[R23]`: author-list handling remains unresolved.
 
 ## Claim-Safety Note

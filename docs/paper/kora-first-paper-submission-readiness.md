@@ -32,6 +32,8 @@ Final ready-subset BibTeX audit v0.1 exists. Full BibTeX and blocked metadata/st
 
 Docs/repo style resolution v0.1 exists for `[R03]`, `[R04]`, `[R07]`, `[R09]`, and `[R15]`. Full BibTeX and final bibliography review are still pending, and the paper remains not submission-ready.
 
+Artifact guidance style resolution v0.1 exists for `[R10]`, `[R17]`, and `[R18]`. Full BibTeX and final bibliography review are still pending, and the paper remains not submission-ready.
+
 ## Ready
 
 - Thesis.
@@ -56,6 +58,7 @@ Docs/repo style resolution v0.1 exists for `[R03]`, `[R04]`, `[R07]`, `[R09]`, a
 - Ready-subset BibTeX key normalization.
 - Final ready-subset BibTeX audit v0.1.
 - Docs/repo style resolution v0.1.
+- Artifact guidance style resolution v0.1.
 - Citation audit v0.1.
 - Manuscript v0.3 reference integration plan.
 

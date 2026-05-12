@@ -233,6 +233,17 @@ Status:
 - BibTeX remains deferred for docs/repo entries until access-date, owner, entry type, and venue/report style treatment are stable.
 - The paper remains not submission-ready.
 
+## Artifact Guidance Reference Style Resolution
+
+[KORA First Paper Artifact Guidance Reference Style Resolution v0.1](kora-first-paper-artifact-guidance-reference-style-resolution-v0-1.md) has been created.
+
+Status:
+
+- `[R10]`, `[R17]`, and `[R18]` are classified for artifact policy and venue-guidance style handling.
+- `[R17]` and `[R18]` remain deferred until target venue choice confirms whether venue-specific guidance belongs in the final bibliography.
+- BibTeX remains deferred for artifact guidance entries until access-date, venue, and style treatment are stable.
+- The paper remains not submission-ready.
+
 ## Claim Boundary
 
 No citation should be used to support unsupported production, API-cost, or energy claims.
