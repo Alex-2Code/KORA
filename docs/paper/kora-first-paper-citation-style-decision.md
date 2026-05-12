@@ -83,6 +83,7 @@ Normalization rules:
 - Preliminary BibTeX v0.1 covers only `[R01]`, `[R06]`, `[R08]`, `[R11]`, `[R14]`, `[R21]`, and `[R24]`.
 - Ready-subset BibTeX keys are normalized using verified author/year/topic metadata.
 - Final ready-subset BibTeX audit v0.1 checks only the ready records and does not add blocked-record BibTeX.
+- Docs/repo style resolution v0.1 classifies `[R03]`, `[R04]`, `[R07]`, `[R09]`, and `[R15]` without adding BibTeX for those records.
 - Stable `[Rxx]` labels remain canonical during audit.
 - Final venue-specific conversion remains deferred.
 

@@ -328,6 +328,16 @@ Status:
 - Blocked records remain excluded.
 - Next step: blocked metadata/style resolution.
 
+## Docs/Repo Reference Style Resolution Status
+
+[KORA First Paper Docs/Repo Reference Style Resolution v0.1](kora-first-paper-docs-repo-reference-style-resolution-v0-1.md) has been created at the planning/classification level.
+
+Status:
+
+- Official docs/repo records `[R03]`, `[R04]`, `[R07]`, `[R09]`, and `[R15]` are classified.
+- No BibTeX was added for docs/repo records.
+- Next step: artifact guidance and paper/preprint metadata/style resolution.
+
 ## Next Verification Procedure
 
 1. Search official sources first.

@@ -51,6 +51,17 @@ Scope includes:
 | `[R22]` | benchmark paper / arXiv / DOI | AgentBench uses author lead with `et al.` and needs author-list handling | Keep as benchmark-methodology paper with recorded title, ICLR/arXiv status, URL, DOI, and year | normalize author list or approved `et al.` style before BibTeX | needs author-list normalization |
 | `[R23]` | benchmark paper / arXiv / DOI | Dynabench uses author lead with `et al.` and needs author-list handling | Keep as benchmark-methodology paper with recorded title, NAACL/arXiv status, URL, DOI, and year | normalize author list or approved `et al.` style before BibTeX | needs author-list normalization |
 
+## Docs/Repo Style Resolution
+
+[KORA First Paper Docs/Repo Reference Style Resolution v0.1](kora-first-paper-docs-repo-reference-style-resolution-v0-1.md) classifies `[R03]`, `[R04]`, `[R07]`, `[R09]`, and `[R15]`.
+
+Status:
+
+- `[R03]`, `[R04]`, and `[R07]` are ready for docs-style BibTeX later after final docs entry type and access-date field style are chosen.
+- `[R09]` is ready for repository-style BibTeX later after final repository entry type and access-date field style are chosen.
+- `[R15]` remains blocked until the final split-or-keep decision is made for the combined docs/repo reference.
+- No BibTeX is generated for these records in this pass.
+
 ## Updated BibTeX Readiness
 
 Ready for preliminary BibTeX after normalized record check:

@@ -99,8 +99,10 @@ Citation style decision:
 - Preliminary BibTeX v0.1 exists only for ready records `[R01]`, `[R06]`, `[R08]`, `[R11]`, `[R14]`, `[R21]`, `[R24]`.
 - Preliminary BibTeX key normalization is complete for the ready subset.
 - Ready-subset BibTeX has been audited in final ready-subset BibTeX audit v0.1.
+- Docs/repo metadata/style classification has been created for `[R03]`, `[R04]`, `[R07]`, `[R09]`, and `[R15]`.
+- BibTeX for docs/repo entries is still pending.
 - Full BibTeX remains incomplete because blocked records are still excluded.
-- Blocked metadata/style records remain unresolved.
+- Artifact guidance and paper/preprint blockers remain unresolved.
 - Final claim/citation audit is still pending.
 - Paper is still not submission-ready.
 

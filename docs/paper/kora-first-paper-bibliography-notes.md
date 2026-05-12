@@ -222,6 +222,17 @@ Status:
 - Next step: resolve metadata/style gaps for blocked records.
 - The paper remains not submission-ready.
 
+## Docs/Repo Reference Style Resolution
+
+[KORA First Paper Docs/Repo Reference Style Resolution v0.1](kora-first-paper-docs-repo-reference-style-resolution-v0-1.md) has been created.
+
+Status:
+
+- `[R03]`, `[R04]`, `[R07]`, `[R09]`, and `[R15]` are classified for official docs/repo style handling.
+- `[R15]` remains combined for current tracker and audit continuity, with split reconsideration before final BibTeX if docs and repo entries need different treatment.
+- BibTeX remains deferred for docs/repo entries until access-date, owner, entry type, and venue/report style treatment are stable.
+- The paper remains not submission-ready.
+
 ## Claim Boundary
 
 No citation should be used to support unsupported production, API-cost, or energy claims.
