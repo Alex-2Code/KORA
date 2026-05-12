@@ -103,8 +103,10 @@ Citation style decision:
 - BibTeX for docs/repo entries is still pending.
 - Artifact guidance metadata/style classification has been created for `[R10]`, `[R17]`, and `[R18]`.
 - BibTeX for artifact guidance entries is still pending.
+- Paper/preprint metadata-style classification has been created for `[R02]`, `[R05]`, `[R12]`, `[R13]`, `[R16]`, `[R19]`, `[R20]`, `[R22]`, and `[R23]`.
+- BibTeX for paper/preprint blocked records is still pending.
 - Full BibTeX remains incomplete because blocked records are still excluded.
-- Paper/preprint blockers remain unresolved.
+- Final metadata review remains pending.
 - Final claim/citation audit is still pending.
 - Paper is still not submission-ready.
 

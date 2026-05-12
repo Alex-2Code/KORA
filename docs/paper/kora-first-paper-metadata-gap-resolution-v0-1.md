@@ -72,6 +72,17 @@ Status:
 - `[R17]` and `[R18]` remain deferred until target venue selection confirms whether USENIX/NSDI-style or MLSys-style guidance belongs in the final bibliography.
 - No BibTeX is generated for these records in this pass.
 
+## Paper/Preprint Style Resolution
+
+[KORA First Paper Paper/Preprint Reference Style Resolution v0.1](kora-first-paper-paper-preprint-reference-style-resolution-v0-1.md) classifies `[R02]`, `[R05]`, `[R12]`, `[R13]`, `[R16]`, `[R19]`, `[R20]`, `[R22]`, and `[R23]`.
+
+Status:
+
+- `[R02]` remains blocked pending author-list normalization or approved `et al.` handling, plus venue/status normalization.
+- `[R05]`, `[R12]`, `[R13]`, and `[R16]` remain blocked pending venue/status or report/status normalization.
+- `[R19]`, `[R20]`, `[R22]`, and `[R23]` remain blocked pending author-list normalization or approved `et al.` handling.
+- No BibTeX is generated for these records in this pass.
+
 ## Updated BibTeX Readiness
 
 Ready for preliminary BibTeX after normalized record check:
@@ -85,6 +96,10 @@ Needs author-list normalization:
 Needs venue/status normalization:
 
 - `[R02]`, `[R05]`, `[R12]`, `[R13]`, `[R16]`
+
+Paper/preprint style classification recorded:
+
+- `[R02]`, `[R05]`, `[R12]`, `[R13]`, `[R16]`, `[R19]`, `[R20]`, `[R22]`, `[R23]`
 
 Needs docs/repo style decision:
 
@@ -108,6 +123,8 @@ The following entries should not receive BibTeX yet:
 - `[R10]`: policy/guidance entry style and access-date field style remain unresolved.
 - `[R17]`, `[R18]`: target-venue decision and venue-guidance entry style remain unresolved.
 - `[R19]`, `[R20]`, `[R22]`, `[R23]`: author-list handling remains unresolved.
+
+After this paper/preprint style pass, all paper/preprint blockers above remain blocked before BibTeX until final author-list, venue/status, or report/preprint metadata review is complete.
 
 ## Claim-Safety Note
 

@@ -348,6 +348,16 @@ Status:
 - No BibTeX was added for artifact guidance records.
 - Next step: paper/preprint metadata-style resolution.
 
+## Paper/Preprint Reference Style Resolution Status
+
+[KORA First Paper Paper/Preprint Reference Style Resolution v0.1](kora-first-paper-paper-preprint-reference-style-resolution-v0-1.md) has been created at the planning/classification level.
+
+Status:
+
+- Paper/preprint records `[R02]`, `[R05]`, `[R12]`, `[R13]`, `[R16]`, `[R19]`, `[R20]`, `[R22]`, and `[R23]` are classified.
+- No BibTeX was added for paper/preprint blocked records.
+- Next step: final metadata review for blocked records, or expanded BibTeX preparation only after author-list and venue/status fields are verified.
+
 ## Next Verification Procedure
 
 1. Search official sources first.

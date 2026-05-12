@@ -34,6 +34,8 @@ Docs/repo style resolution v0.1 exists for `[R03]`, `[R04]`, `[R07]`, `[R09]`, a
 
 Artifact guidance style resolution v0.1 exists for `[R10]`, `[R17]`, and `[R18]`. Full BibTeX and final bibliography review are still pending, and the paper remains not submission-ready.
 
+Paper/preprint style resolution v0.1 exists for `[R02]`, `[R05]`, `[R12]`, `[R13]`, `[R16]`, `[R19]`, `[R20]`, `[R22]`, and `[R23]`. Full BibTeX and final bibliography review are still pending, and the paper remains not submission-ready.
+
 ## Ready
 
 - Thesis.
@@ -59,6 +61,7 @@ Artifact guidance style resolution v0.1 exists for `[R10]`, `[R17]`, and `[R18]`
 - Final ready-subset BibTeX audit v0.1.
 - Docs/repo style resolution v0.1.
 - Artifact guidance style resolution v0.1.
+- Paper/preprint style resolution v0.1.
 - Citation audit v0.1.
 - Manuscript v0.3 reference integration plan.
 

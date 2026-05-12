@@ -85,6 +85,7 @@ Normalization rules:
 - Final ready-subset BibTeX audit v0.1 checks only the ready records and does not add blocked-record BibTeX.
 - Docs/repo style resolution v0.1 classifies `[R03]`, `[R04]`, `[R07]`, `[R09]`, and `[R15]` without adding BibTeX for those records.
 - Artifact guidance style resolution v0.1 classifies `[R10]`, `[R17]`, and `[R18]` without adding BibTeX for those records.
+- Paper/preprint style resolution v0.1 classifies `[R02]`, `[R05]`, `[R12]`, `[R13]`, `[R16]`, `[R19]`, `[R20]`, `[R22]`, and `[R23]` without adding BibTeX for those records.
 - Stable `[Rxx]` labels remain canonical during audit.
 - Final venue-specific conversion remains deferred.
 

@@ -244,6 +244,17 @@ Status:
 - BibTeX remains deferred for artifact guidance entries until access-date, venue, and style treatment are stable.
 - The paper remains not submission-ready.
 
+## Paper/Preprint Reference Style Resolution
+
+[KORA First Paper Paper/Preprint Reference Style Resolution v0.1](kora-first-paper-paper-preprint-reference-style-resolution-v0-1.md) has been created.
+
+Status:
+
+- `[R02]`, `[R05]`, `[R12]`, `[R13]`, `[R16]`, `[R19]`, `[R20]`, `[R22]`, and `[R23]` are classified for paper, preprint, report, and benchmark-paper style handling.
+- BibTeX remains deferred for these entries until author-list and venue/status treatment is stable.
+- No manuscript changes were made.
+- The paper remains not submission-ready.
+
 ## Claim Boundary
 
 No citation should be used to support unsupported production, API-cost, or energy claims.
