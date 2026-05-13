@@ -36,6 +36,7 @@ This artifact records readiness for a venue-neutral arXiv-style preprint package
 | License | Pending arXiv distribution-license decision | User decision required |
 | Export format | Markdown draft exists | PDF/LaTeX/Markdown export package pending |
 | Source package | Not prepared | Prepare only after export route is selected |
+| Figures/tables/algorithm assets | Text-based drafts exist | Human insertion, numbering, and export treatment pending |
 | Review/survey/position framing | Avoided | Preserve original systems/evaluation framing |
 | Final human review | Pending | Required before any submission action |
 
@@ -69,6 +70,10 @@ The reproduction transcript checklist exists, but a final clean transcript has n
 
 The artifact package inventory exists. Final artifact availability wording, selected artifact bundle, and export package remain pending.
 
+## Figure, Table, and Algorithm Status
+
+The figure/table/algorithm plan and draft docs exist. They provide text-based Mermaid diagrams, benchmark and evidence-boundary tables, deterministic-first routing pseudocode, and an appendix artifact inventory table. Manuscript v0.4 was not edited in that pass. Human review is still needed before insertion into the arXiv-style export package.
+
 ## Missing User Approvals
 
 - Final title and abstract approval.
@@ -76,7 +81,7 @@ The artifact package inventory exists. Final artifact availability wording, sele
 - arXiv category and category compatibility approval.
 - arXiv license selection.
 - Final bibliography/citation formatting approval.
-- Final figures, tables, reproduction transcript, and artifact package approval.
+- Final figures, tables, algorithm placement, reproduction transcript, and artifact package approval.
 - Final submission-ready decision.
 
 ## Conclusion

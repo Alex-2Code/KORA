@@ -56,7 +56,7 @@ This venue-neutral checklist records what is present, missing, and blocked befor
 
 - Final full BibTeX and final bibliography formatting.
 - Final manuscript-to-final-bibliography synchronization.
-- Final rendered figures and tables.
+- Final human-approved figures, tables, algorithm placement, numbering, and rendered/export form.
 - Clean reproduction transcript from a fresh checkout.
 - Final artifact availability statement and package selection.
 - Final author/email display, acknowledgement, funding, conflict, and ethics wording if needed.
@@ -80,3 +80,12 @@ This venue-neutral checklist records what is present, missing, and blocked befor
 6. Prepare artifact availability wording and selected artifact bundle.
 7. Run final claim-to-evidence audit against the exact exported manuscript.
 8. Complete final human review and only then decide whether the paper is submission-ready.
+
+## Figure, Table, and Algorithm Asset Status
+
+Figure/table/algorithm plan and draft docs now exist:
+
+- `docs/paper/kora-first-paper-figure-table-algorithm-plan-v0-1.md`
+- `docs/paper/kora-first-paper-figure-table-algorithm-drafts-v0-1.md`
+
+They draft text-based architecture and benchmark-flow diagrams, benchmark and evidence-boundary tables, deterministic-first routing pseudocode, and an appendix artifact inventory table. Manuscript insertion and final rendered/export assets remain pending human review.

@@ -66,6 +66,15 @@ The arXiv-style package draft docs now exist:
 
 These files record the supplied author metadata, endorsement status, conservative bibliography scope, original systems/evaluation framing, and future venue-scan placeholder. They do not submit to arXiv, select an arXiv category, select a conference/workshop/journal, or mark the paper as submission-ready.
 
+## Figure, Table, and Algorithm Asset Pass
+
+The figure/table/algorithm asset pass now exists:
+
+- `docs/paper/kora-first-paper-figure-table-algorithm-plan-v0-1.md`
+- `docs/paper/kora-first-paper-figure-table-algorithm-drafts-v0-1.md`
+
+These files inventory existing visual assets, draft paper-ready text diagrams, benchmark tables, an evidence-boundary table, deterministic-first routing pseudocode, and an appendix artifact inventory table. Manuscript v0.4 was not edited in this pass; final insertion, numbering, layout, and export treatment require human review.
+
 ## Submission Package Packet
 
 The venue-neutral submission package readiness packet now exists:

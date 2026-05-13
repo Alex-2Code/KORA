@@ -117,6 +117,8 @@ Citation style decision:
 - arXiv metadata checklist v0.1, arXiv bibliography scope v0.1, arXiv-style package readiness v0.1, and future venue scan placeholder v0.1 have been created.
 - arXiv endorsement is already obtained and is not a current blocker.
 - arXiv category compatibility, arXiv license, export package, final transcript, final artifact package review, and final human approval remain pending.
+- Figure/table/algorithm plan v0.1 and draft assets v0.1 have been created.
+- Final figure/table/algorithm insertion, numbering, layout, and export treatment remain pending human review.
 - Clean reproduction transcript capture, final artifact package review, final venue/export decision, and final human review remain pending.
 - Paper is still not submission-ready.
 
