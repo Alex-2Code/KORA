@@ -305,6 +305,18 @@ Status:
 - The next sequence starts with remaining bibliography blockers.
 - The paper remains not submission-ready.
 
+## Manuscript Bibliography Sync
+
+[KORA First Paper Manuscript Bibliography Sync v0.1](kora-first-paper-manuscript-bibliography-sync-v0-1.md) has been created.
+
+Status:
+
+- Manuscript v0.3 cited `[R02]`, which remains still-not-eligible and absent from preliminary BibTeX.
+- Manuscript v0.4 removes `[R02]` from background-only text and now cites only records present in preliminary BibTeX.
+- Preliminary BibTeX still has 16 entries.
+- Full BibTeX remains incomplete.
+- The paper remains not submission-ready.
+
 ## Claim Boundary
 
 No citation should be used to support unsupported production, API-cost, or energy claims.

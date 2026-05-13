@@ -404,6 +404,17 @@ Status:
 - Bibliography blockers remain the first recommended sequence item.
 - The paper remains not submission-ready.
 
+## Manuscript Submission-Candidate Batch Status
+
+[KORA First Paper Manuscript Bibliography Sync v0.1](kora-first-paper-manuscript-bibliography-sync-v0-1.md), [KORA First Paper Manuscript Claim-to-Evidence Audit v0.1](kora-first-paper-manuscript-claim-to-evidence-audit-v0-1.md), and [KORA First Paper Submission-Candidate Status v0.1](kora-first-paper-submission-candidate-status-v0-1.md) have been created.
+
+Status:
+
+- Manuscript v0.4 has been created as a submission-candidate draft.
+- Manuscript v0.4 cites only records currently present in preliminary BibTeX.
+- The bounded 80% deterministic-heavy benchmark claim remains unchanged.
+- Full BibTeX remains incomplete, and the paper remains not submission-ready.
+
 ## Next Verification Procedure
 
 1. Search official sources first.

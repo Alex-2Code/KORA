@@ -111,6 +111,8 @@ Citation style decision:
 - Final bibliography and claim audit v0.1 has been created.
 - Expanded BibTeX remains preliminary, and full BibTeX is still incomplete until deferred and still-not-eligible records are resolved.
 - Submission readiness gate v0.1 has been created to separate required blockers from optional improvements.
+- Manuscript v0.4 submission-candidate draft has been created with current preliminary BibTeX citation synchronization.
+- Manuscript bibliography sync v0.1, manuscript claim-to-evidence audit v0.1, and submission-candidate status v0.1 have been created.
 - Paper is still not submission-ready.
 
 ## Follow-Up Papers / Technical Reports
