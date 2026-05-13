@@ -119,6 +119,15 @@ The dry-build output review now exists:
 
 The review confirms the `/tmp` output inventory and cleaned source-package folder. It records remaining layout, bibliography, link, and final human-review blockers. No generated PDFs, rendered figures, source packages, or binary outputs were committed.
 
+## Word-First Pause
+
+PDF and arXiv source-package work are paused while the Word review path is active. The Word draft review and figure redesign notes now exist:
+
+- `docs/paper/kora-first-paper-word-draft-review-v0-1.md`
+- `docs/paper/kora-first-paper-figure-redesign-note-v0-1.md`
+
+Final arXiv export remains pending until the Word draft, redesigned figures, bibliography formatting, and final human review are resolved.
+
 ## Missing User Approvals
 
 - Final title and abstract approval.

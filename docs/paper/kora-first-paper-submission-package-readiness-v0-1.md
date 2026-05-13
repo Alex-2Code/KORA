@@ -117,3 +117,12 @@ No tools were installed, no full dry build was attempted, and no generated PDF/s
 The installed-tools dry build is recorded in `docs/paper/kora-first-paper-arxiv-dry-build-result-v0-1.md`.
 
 The `/tmp` dry build generated rendered figure PDFs, LaTeX source, and a PDF using Mermaid CLI with a local browser path and Tectonic. No generated PDF, rendered figure, source package, binary output, or raw benchmark artifact was committed. Layout warnings, bibliography integration, source-package hygiene, and final human review remain pending.
+
+## Word-First Review Status
+
+PDF and arXiv source-package work are paused while the Word review path is active. The Word draft review and figure redesign notes now exist:
+
+- `docs/paper/kora-first-paper-word-draft-review-v0-1.md`
+- `docs/paper/kora-first-paper-figure-redesign-note-v0-1.md`
+
+Local-only Word drafts and redesigned figure assets were generated outside the repository for human review. No generated DOCX, PDF, image, source-package, or local working file was committed.

@@ -130,6 +130,8 @@ Citation style decision:
 - A `/tmp` PDF dry build now passes with Mermaid CLI and Tectonic, but layout warnings, bibliography integration, source-package hygiene review, and final human approval remain pending.
 - Dry-build output review and source-package hygiene review have been created for the current `/tmp` outputs.
 - Generated PDF visual review, layout cleanup, final bibliography integration, and final source-package hygiene review remain pending.
+- Word draft review and figure redesign notes have been created.
+- Word-first human review is now active, and PDF/arXiv source-package work is paused until the Word draft and redesigned figures are reviewed.
 - Clean reproduction transcript capture, final artifact package review, final venue/export decision, and final human review remain pending.
 - Paper is still not submission-ready.
 

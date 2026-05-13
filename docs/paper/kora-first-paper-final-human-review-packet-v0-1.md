@@ -64,6 +64,9 @@ This packet lists the human decisions still required before any submission-ready
 - Review the installed-tools dry-build PDF and source-package folder under `/tmp` before approving any final export route.
 - Decide whether the Tectonic layout warnings require manuscript/table cleanup before final package assembly.
 - Review the dry-build output review report and decide whether the generated figure PDFs, repository-document links, and preliminary bibliography handling are acceptable for the final package path.
+- Review the image-inserted Word draft before resuming PDF/arXiv source-package work.
+- Review redesigned Figure 1 and Figure 2 for readability, style, and claim boundaries.
+- Decide whether the redesigned figures should become the basis for publication figures.
 
 ## Venue and Export Decisions
 

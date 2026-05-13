@@ -140,6 +140,15 @@ The dry-build output review now exists:
 
 The review confirms the `/tmp` output inventory, cleaned source-package folder, and remaining blockers. No generated binaries or source-package files were committed.
 
+## Word Draft and Figure Redesign Pass
+
+The Word-first review route is now active, and PDF/arXiv source-package generation is paused. The Word draft review and figure redesign notes now exist:
+
+- `docs/paper/kora-first-paper-word-draft-review-v0-1.md`
+- `docs/paper/kora-first-paper-figure-redesign-note-v0-1.md`
+
+Local-only Word drafts and redesigned Figure 1/Figure 2 PNG/SVG assets were generated outside the public repository. No generated DOCX, PDF, PNG, SVG, source package, or local working Markdown was committed.
+
 ## Submission Package Packet
 
 The venue-neutral submission package readiness packet now exists:
@@ -153,4 +162,4 @@ These files organize package blockers, human review decisions, reproduction tran
 
 ## Status
 
-The manuscript has advanced to v0.5 submission-candidate draft status. Full BibTeX remains incomplete, installed-tools dry build and output review have passed as local `/tmp` work, and final visual review, layout cleanup, bibliography formatting, source-package hygiene, and human review remain pending. The paper remains not submission-ready.
+The manuscript has advanced to v0.5 submission-candidate draft status. Full BibTeX remains incomplete, Word-first human review is now the active route, and final visual review, layout cleanup, bibliography formatting, source-package hygiene, and human review remain pending. The paper remains not submission-ready.

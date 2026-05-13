@@ -61,6 +61,15 @@ Using Tectonic 0.16.9 and Mermaid CLI 11.14.0, a `/tmp` dry build successfully g
 
 Remaining route work is layout cleanup, final bibliography integration, source-package hygiene review, category/license approval, and final human review.
 
+## Word-First Pause
+
+PDF and arXiv source-package work are paused while the Word draft review route is active:
+
+- `docs/paper/kora-first-paper-word-draft-review-v0-1.md`
+- `docs/paper/kora-first-paper-figure-redesign-note-v0-1.md`
+
+The export route recommendation should be revisited after human review of the Word draft and redesigned figures.
+
 ## BibTeX Handling
 
 The export route should use the conservative bibliography subset already aligned with manuscript v0.5. Full BibTeX remains incomplete, and deferred or still-not-eligible records should not be introduced during export cleanup.
