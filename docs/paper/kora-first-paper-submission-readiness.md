@@ -48,6 +48,8 @@ Manuscript v0.4 submission-candidate draft exists. It synchronizes manuscript ci
 
 Submission package readiness packet v0.1 exists. It adds a venue-neutral package checklist, final human review packet, reproduction transcript checklist, and artifact package inventory. These documents organize remaining blockers and user-owned decisions; they do not mark the paper as submission-ready.
 
+arXiv-style package draft v0.1 exists. It records the first target direction as an arXiv-style technical report / preprint, marks endorsement as already obtained and not blocking, keeps arXiv category compatibility pending, records supplied author metadata, preserves conservative bibliography scope, and defers later conference/workshop/journal scanning. It does not submit to arXiv or mark the paper as submission-ready.
+
 ## Ready
 
 - Thesis.
@@ -86,6 +88,10 @@ Submission package readiness packet v0.1 exists. It adds a venue-neutral package
 - Final human review packet v0.1.
 - Reproduction transcript checklist v0.1.
 - Artifact package inventory v0.1.
+- arXiv metadata checklist v0.1.
+- arXiv bibliography scope v0.1.
+- arXiv-style package readiness v0.1.
+- Future venue scan placeholder v0.1.
 - Citation audit v0.1.
 - Manuscript v0.3 reference integration plan.
 
@@ -94,9 +100,10 @@ Submission package readiness packet v0.1 exists. It adds a venue-neutral package
 - More references collected and verified.
 - Decide whether selected benchmark-construction references should be integrated if the evaluation-methodology section is expanded.
 - More direct deterministic-heavy synthetic workload construction references if needed.
-- Resolve submission readiness gate required blockers, starting with deferred and still-not-eligible bibliography records.
+- Confirm arXiv category compatibility and license.
+- Resolve first-package bibliography formatting using the conservative included subset.
 - Final bibliography entries normalized.
-- Full BibTeX completion after blocked records are resolved.
+- Full BibTeX completion remains pending beyond the conservative first-package subset.
 - Final citation audit review completed.
 - Figure drafts created.
 - Tables finalized.
@@ -104,7 +111,7 @@ Submission package readiness packet v0.1 exists. It adds a venue-neutral package
 - Reproduction instructions checked on clean checkout.
 - Final human review packet resolved.
 - Artifact package inventory reviewed for the selected submission context.
-- Expanded workload optional but recommended.
+- Expanded workload optional but outside first arXiv-style package scope.
 - Latency p50/p95 optional but valuable.
 - Final claim review completed.
 
@@ -126,6 +133,6 @@ These are suggested formats only. This document does not claim acceptance, endor
 
 ## Reference Status
 
-The first verified reference pass is complete, manuscript v0.2 integrates the first-pass verified references as preliminary citation labels and a preliminary references section, citation audit v0.1 exists, additional reference verification pass 2 has added 8 verified tracker entries, manuscript v0.3 integrates [R11], [R12], and [R13] as preliminary related-work references, manuscript v0.4 exists as a submission-candidate draft synchronized to current preliminary BibTeX citations, the benchmark-construction reference pass has added [R19] through [R24] as tracker/audit entries, the working citation style decision selects stable [Rxx] labels, metadata audit v0.1 exists, normalized bibliography v0.1 exists, metadata gap resolution v0.1 exists, preliminary BibTeX v0.1 exists for ready records, ready-subset BibTeX keys are normalized, expanded preliminary BibTeX exists for the candidate subset that passed final field check, final bibliography and claim audit v0.1 exists, submission readiness gate v0.1 exists, and submission package readiness packet v0.1 exists. The paper is still not submission-ready because [R17] and [R18] remain deferred, [R02], [R15], [R19], [R20], [R22], and [R23] remain excluded from BibTeX, [R19] through [R24] are not yet integrated into manuscript methodology, more direct deterministic-heavy synthetic workload references may still be needed, production benchmark evidence is still not available, final bibliography entries are not complete, final reproduction transcript and artifact package review are incomplete, final venue/export decisions remain unresolved, and final human review has not been completed.
+The first verified reference pass is complete, manuscript v0.2 integrates the first-pass verified references as preliminary citation labels and a preliminary references section, citation audit v0.1 exists, additional reference verification pass 2 has added 8 verified tracker entries, manuscript v0.3 integrates [R11], [R12], and [R13] as preliminary related-work references, manuscript v0.4 exists as a submission-candidate draft synchronized to current preliminary BibTeX citations, the benchmark-construction reference pass has added [R19] through [R24] as tracker/audit entries, the working citation style decision selects stable [Rxx] labels, metadata audit v0.1 exists, normalized bibliography v0.1 exists, metadata gap resolution v0.1 exists, preliminary BibTeX v0.1 exists for ready records, ready-subset BibTeX keys are normalized, expanded preliminary BibTeX exists for the candidate subset that passed final field check, final bibliography and claim audit v0.1 exists, submission readiness gate v0.1 exists, submission package readiness packet v0.1 exists, and arXiv-style package draft v0.1 exists. The paper is still not submission-ready because arXiv category compatibility and license remain pending, [R17] and [R18] remain deferred, [R02], [R15], [R19], [R20], [R22], and [R23] remain excluded from BibTeX, [R19] through [R24] remain tracker/audit-only for the first arXiv-style package, production benchmark evidence is still not available, final bibliography formatting is not complete, final reproduction transcript and artifact package review are incomplete, final export decisions remain unresolved, and final human review has not been completed.
 
 No fake citations were added. Future citation work should use only verified tracker entries and should not support production, API-cost, energy, production-validation, broad superiority, or cited-system superiority claims.
