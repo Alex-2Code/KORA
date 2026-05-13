@@ -333,7 +333,7 @@ Status:
 
 ## Final Ready-Subset BibTeX Audit Status
 
-[KORA First Paper Final BibTeX Audit — Ready Subset v0.1](kora-first-paper-final-bibtex-audit-ready-subset-v0-1.md) has been created.
+[KORA First Paper Final BibTeX Audit - Ready Subset v0.1](kora-first-paper-final-bibtex-audit-ready-subset-v0-1.md) has been created.
 
 Status:
 
