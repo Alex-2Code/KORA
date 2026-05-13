@@ -42,6 +42,8 @@ Expanded preliminary BibTeX candidate audit v0.1 exists for `[R03]`, `[R04]`, `[
 
 Final bibliography and claim audit v0.1 exists. It confirms that preliminary BibTeX includes only the ready subset and expanded candidate subset, deferred and still-not-eligible records remain excluded, full BibTeX remains incomplete, and the paper remains not submission-ready.
 
+Submission readiness gate v0.1 exists. It records required and optional blockers before any submission package and confirms the paper remains not submission-ready.
+
 ## Ready
 
 - Thesis.
@@ -71,6 +73,7 @@ Final bibliography and claim audit v0.1 exists. It confirms that preliminary Bib
 - Final blocked metadata review v0.1.
 - Expanded preliminary BibTeX candidate audit v0.1.
 - Final bibliography and claim audit v0.1.
+- Submission readiness gate v0.1.
 - Citation audit v0.1.
 - Manuscript v0.3 reference integration plan.
 
@@ -79,7 +82,7 @@ Final bibliography and claim audit v0.1 exists. It confirms that preliminary Bib
 - More references collected and verified.
 - Decide whether selected benchmark-construction references should be integrated if the evaluation-methodology section is expanded.
 - More direct deterministic-heavy synthetic workload construction references if needed.
-- Resolve deferred and still-not-eligible bibliography records.
+- Resolve submission readiness gate required blockers, starting with deferred and still-not-eligible bibliography records.
 - Final bibliography entries normalized.
 - Full BibTeX completion after blocked records are resolved.
 - Final citation audit review completed.
@@ -109,6 +112,6 @@ These are suggested formats only. This document does not claim acceptance, endor
 
 ## Reference Status
 
-The first verified reference pass is complete, manuscript v0.2 integrates the first-pass verified references as preliminary citation labels and a preliminary references section, citation audit v0.1 exists, additional reference verification pass 2 has added 8 verified tracker entries, manuscript v0.3 integrates [R11], [R12], and [R13] as preliminary related-work references, the benchmark-construction reference pass has added [R19] through [R24] as tracker/audit entries, the working citation style decision selects stable [Rxx] labels, metadata audit v0.1 exists, normalized bibliography v0.1 exists, metadata gap resolution v0.1 exists, preliminary BibTeX v0.1 exists for ready records, ready-subset BibTeX keys are normalized, expanded preliminary BibTeX exists for the candidate subset that passed final field check, and final bibliography and claim audit v0.1 exists. The paper is still not submission-ready because [R17] and [R18] remain deferred, [R02], [R15], [R19], [R20], [R22], and [R23] remain excluded from BibTeX, [R19] through [R24] are not yet integrated into manuscript methodology, more direct deterministic-heavy synthetic workload references may still be needed, production benchmark evidence is still not available, and final bibliography entries are not complete.
+The first verified reference pass is complete, manuscript v0.2 integrates the first-pass verified references as preliminary citation labels and a preliminary references section, citation audit v0.1 exists, additional reference verification pass 2 has added 8 verified tracker entries, manuscript v0.3 integrates [R11], [R12], and [R13] as preliminary related-work references, the benchmark-construction reference pass has added [R19] through [R24] as tracker/audit entries, the working citation style decision selects stable [Rxx] labels, metadata audit v0.1 exists, normalized bibliography v0.1 exists, metadata gap resolution v0.1 exists, preliminary BibTeX v0.1 exists for ready records, ready-subset BibTeX keys are normalized, expanded preliminary BibTeX exists for the candidate subset that passed final field check, final bibliography and claim audit v0.1 exists, and submission readiness gate v0.1 exists. The paper is still not submission-ready because [R17] and [R18] remain deferred, [R02], [R15], [R19], [R20], [R22], and [R23] remain excluded from BibTeX, [R19] through [R24] are not yet integrated into manuscript methodology, more direct deterministic-heavy synthetic workload references may still be needed, production benchmark evidence is still not available, final bibliography entries are not complete, and submission-package blockers remain unresolved.
 
 No fake citations were added. Future citation work should use only verified tracker entries and should not support production, API-cost, energy, production-validation, broad superiority, or cited-system superiority claims.

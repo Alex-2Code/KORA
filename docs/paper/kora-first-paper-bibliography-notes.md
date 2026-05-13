@@ -266,7 +266,7 @@ Status:
 - `[R17]` and `[R18]` remain deferred until target venue selection.
 - `[R02]`, `[R15]`, `[R19]`, `[R20]`, `[R22]`, and `[R23]` remain not eligible until author-list, split, or venue/style decisions are resolved.
 - No BibTeX was generated.
-- Final bibliography / claim audit remains pending.
+- Final bibliography and claim audit v0.1 has been created.
 - The paper remains not submission-ready.
 
 ## Expanded BibTeX Candidate Audit
@@ -278,7 +278,7 @@ Status:
 - Expanded preliminary BibTeX now includes the candidate subset that passed final field check: `[R03]`, `[R04]`, `[R05]`, `[R07]`, `[R09]`, `[R10]`, `[R12]`, `[R13]`, `[R16]`.
 - Deferred records remain excluded: `[R17]`, `[R18]`.
 - Still-not-eligible records remain excluded: `[R02]`, `[R15]`, `[R19]`, `[R20]`, `[R22]`, `[R23]`.
-- Expanded BibTeX remains preliminary until final bibliography / claim audit.
+- Expanded BibTeX remains preliminary until final BibTeX consistency and venue-format checks.
 - No manuscript changes were made.
 - The paper remains not submission-ready.
 
@@ -292,6 +292,17 @@ Status:
 - Deferred and still-not-eligible records remain excluded from preliminary BibTeX.
 - Remaining metadata blockers and claim boundaries are documented.
 - Full BibTeX remains incomplete.
+- The paper remains not submission-ready.
+
+## Submission Readiness Gate
+
+[KORA First Paper Submission Readiness Gate v0.1](kora-first-paper-submission-readiness-gate-v0-1.md) has been created.
+
+Status:
+
+- Required blockers are grouped by bibliography, claim/evidence, formatting/export, artifact/reproducibility, and human review.
+- Optional blockers are separated from required submission blockers.
+- The next sequence starts with remaining bibliography blockers.
 - The paper remains not submission-ready.
 
 ## Claim Boundary

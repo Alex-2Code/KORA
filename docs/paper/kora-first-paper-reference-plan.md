@@ -393,6 +393,17 @@ Status:
 - Remaining blockers are author-list, split, venue/status, target-venue, final formatting, and final claim-review work.
 - The paper remains not submission-ready.
 
+## Submission Readiness Gate Status
+
+[KORA First Paper Submission Readiness Gate v0.1](kora-first-paper-submission-readiness-gate-v0-1.md) has been created.
+
+Status:
+
+- Required submission blockers are registered by category.
+- Optional improvements are explicitly separated from required blockers.
+- Bibliography blockers remain the first recommended sequence item.
+- The paper remains not submission-ready.
+
 ## Next Verification Procedure
 
 1. Search official sources first.
