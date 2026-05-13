@@ -9,6 +9,7 @@ This artifact records readiness for a venue-neutral arXiv-style preprint package
 ## Source Files Reviewed
 
 - `docs/paper/kora-first-paper-manuscript-v0-4.md`
+- `docs/paper/kora-first-paper-manuscript-v0-5.md`
 - `docs/paper/kora-first-paper-arxiv-metadata-checklist-v0-1.md`
 - `docs/paper/kora-first-paper-arxiv-bibliography-scope-v0-1.md`
 - `docs/paper/kora-first-paper-submission-package-readiness-v0-1.md`
@@ -34,9 +35,9 @@ This artifact records readiness for a venue-neutral arXiv-style preprint package
 | Candidate categories | `cs.AI`, `cs.LG`, `cs.DC`, `cs.SE` | Candidates only; no category selected here |
 | Title / abstract | v0.5 title and abstract exist | Final human approval pending |
 | License | Pending arXiv distribution-license decision | User decision required |
-| Export format | Markdown draft exists | PDF/LaTeX/Markdown export package pending |
-| Source package | Not prepared | Prepare only after export route is selected |
-| Figures/tables/algorithm assets | Text-based drafts exist | Human insertion, numbering, and export treatment pending |
+| Export format | Markdown draft exists; render/export readiness reviewed | PDF/LaTeX/Markdown export package pending |
+| Source package | Text-only export manifest exists | Prepare final package only after export route is selected |
+| Figures/tables/algorithm assets | Inserted in manuscript v0.5 as Markdown/Mermaid/text assets | Render/conversion, numbering, and export treatment pending |
 | Review/survey/position framing | Avoided | Preserve original systems/evaluation framing |
 | Final human review | Pending | Required before any submission action |
 
@@ -73,6 +74,15 @@ The artifact package inventory exists. Final artifact availability wording, sele
 ## Figure, Table, and Algorithm Status
 
 The figure/table/algorithm plan and draft docs exist. They provide text-based Mermaid diagrams, benchmark and evidence-boundary tables, deterministic-first routing pseudocode, and an appendix artifact inventory table. Manuscript v0.5 now inserts those assets. Human review is still needed before final rendering and inclusion in the arXiv-style export package.
+
+## Render and Export Readiness Status
+
+The v0.5 render/export readiness report and text-only export package manifest now exist:
+
+- `docs/paper/kora-first-paper-v0-5-render-export-readiness-v0-1.md`
+- `docs/paper/kora-first-paper-arxiv-export-package-manifest-v0-1.md`
+
+No repository paper export pipeline was found, no PDF was generated, and no binary output was committed. Mermaid diagrams remain suitable for repository review but need rendering or conversion before an arXiv-compatible package.
 
 ## Missing User Approvals
 

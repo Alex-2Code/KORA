@@ -96,6 +96,15 @@ Manuscript v0.5 now inserts:
 
 The inserted assets remain draft Markdown/Mermaid/text assets. Final rendering, numbering, layout, and export treatment remain pending.
 
+## v0.5 Render and Export Readiness Pass
+
+The v0.5 render/export readiness report and text-only export manifest now exist:
+
+- `docs/paper/kora-first-paper-v0-5-render-export-readiness-v0-1.md`
+- `docs/paper/kora-first-paper-arxiv-export-package-manifest-v0-1.md`
+
+No dedicated paper export pipeline was found. No PDF, rendered figure, binary export, or raw benchmark artifact was generated or committed. The manuscript remains suitable for repository Markdown review, but final arXiv-compatible export requires a chosen export route and figure rendering/conversion.
+
 ## Submission Package Packet
 
 The venue-neutral submission package readiness packet now exists:
@@ -109,4 +118,4 @@ These files organize package blockers, human review decisions, reproduction tran
 
 ## Status
 
-The manuscript has advanced to v0.5 submission-candidate draft status. Full BibTeX remains incomplete, final asset rendering/export review remains pending, and the paper remains not submission-ready.
+The manuscript has advanced to v0.5 submission-candidate draft status. Full BibTeX remains incomplete, final export route and asset rendering/conversion remain pending, and the paper remains not submission-ready.

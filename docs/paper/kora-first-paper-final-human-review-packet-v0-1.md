@@ -55,6 +55,8 @@ This packet lists the human decisions still required before any submission-ready
 - Review whether Algorithm 1 should stay in Section 3 or move to an appendix.
 - Review whether Appendix Table A1 should be included in the arXiv-style package or kept as reviewer-support material.
 - Confirm final numbering and captions after export format is selected.
+- Review the v0.5 render/export readiness report before approving final PDF/source-package treatment.
+- Decide whether Mermaid diagrams should be rendered to image files, converted to another source format, or replaced with text/ASCII diagrams for final export.
 
 ## Venue and Export Decisions
 

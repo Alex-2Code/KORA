@@ -120,6 +120,8 @@ Citation style decision:
 - Figure/table/algorithm plan v0.1 and draft assets v0.1 have been created.
 - Manuscript v0.5 has been created with figure/table/algorithm assets inserted.
 - Final figure/table/algorithm numbering, layout, rendering, and export treatment remain pending human review.
+- v0.5 render/export readiness report and text-only export manifest have been created.
+- No dedicated paper export pipeline has been found; final PDF/source-package generation remains pending.
 - Clean reproduction transcript capture, final artifact package review, final venue/export decision, and final human review remain pending.
 - Paper is still not submission-ready.
 

@@ -89,3 +89,9 @@ Figure/table/algorithm plan and draft docs now exist:
 - `docs/paper/kora-first-paper-figure-table-algorithm-drafts-v0-1.md`
 
 They draft text-based architecture and benchmark-flow diagrams, benchmark and evidence-boundary tables, deterministic-first routing pseudocode, and an appendix artifact inventory table. Manuscript v0.5 now inserts these draft assets. Final rendered/export assets, numbering, layout, and captions remain pending human review.
+
+## v0.5 Render and Export Readiness Status
+
+Render/export readiness has been reviewed in `docs/paper/kora-first-paper-v0-5-render-export-readiness-v0-1.md`, and a text-only export package manifest exists at `docs/paper/kora-first-paper-arxiv-export-package-manifest-v0-1.md`.
+
+No dedicated paper export pipeline was found in the repository. No PDF, rendered figure, binary export, or raw benchmark artifact was generated or committed. Final export route, Mermaid rendering/conversion, table layout, bibliography formatting, and human approval remain pending.
