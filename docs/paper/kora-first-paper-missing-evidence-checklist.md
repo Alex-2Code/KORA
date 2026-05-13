@@ -114,6 +114,9 @@ Citation style decision:
 - Manuscript v0.4 submission-candidate draft has been created with current preliminary BibTeX citation synchronization.
 - Manuscript bibliography sync v0.1, manuscript claim-to-evidence audit v0.1, and submission-candidate status v0.1 have been created.
 - Submission package readiness v0.1, final human review packet v0.1, reproduction transcript checklist v0.1, and artifact package inventory v0.1 have been created.
+- arXiv metadata checklist v0.1, arXiv bibliography scope v0.1, arXiv-style package readiness v0.1, and future venue scan placeholder v0.1 have been created.
+- arXiv endorsement is already obtained and is not a current blocker.
+- arXiv category compatibility, arXiv license, export package, final transcript, final artifact package review, and final human approval remain pending.
 - Clean reproduction transcript capture, final artifact package review, final venue/export decision, and final human review remain pending.
 - Paper is still not submission-ready.
 

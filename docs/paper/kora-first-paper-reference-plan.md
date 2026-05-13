@@ -427,6 +427,20 @@ Status:
 - Artifact package inventory identifies tracked materials and deliberately excluded raw/private artifacts.
 - Full BibTeX remains incomplete, venue/export decisions remain user-owned, and the paper remains not submission-ready.
 
+## arXiv-Style Preprint Package Draft Status
+
+[KORA First Paper arXiv Metadata Checklist v0.1](kora-first-paper-arxiv-metadata-checklist-v0-1.md), [KORA First Paper arXiv Bibliography Scope v0.1](kora-first-paper-arxiv-bibliography-scope-v0-1.md), [KORA First Paper arXiv-Style Package Readiness v0.1](kora-first-paper-arxiv-style-package-readiness-v0-1.md), and [KORA First Paper Future Venue Scan v0.1](kora-first-paper-future-venue-scan-v0-1.md) have been created.
+
+Status:
+
+- First package direction is arXiv-style technical report / preprint.
+- arXiv endorsement is already obtained and is not a current blocker.
+- arXiv category compatibility remains pending because the endorsed category is not recorded here.
+- Manuscript v0.4 remains framed as original reproducible systems/evaluation work, not a review/survey/position paper.
+- First arXiv-style bibliography scope keeps `[R17]` and `[R18]` excluded and `[R19]` through `[R24]` tracker/audit-only for now.
+- Later conference, workshop, or journal venue scanning is deferred.
+- The paper remains not submission-ready.
+
 ## Next Verification Procedure
 
 1. Search official sources first.

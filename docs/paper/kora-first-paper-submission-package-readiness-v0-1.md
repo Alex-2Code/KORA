@@ -27,7 +27,9 @@ This venue-neutral checklist records what is present, missing, and blocked befor
 
 - Manuscript version: v0.4 submission-candidate draft.
 - Package status: not submission-ready.
-- Venue status: no target venue selected.
+- Venue status: arXiv-style technical report / preprint is the first target package direction; no conference, workshop, or journal target is selected.
+- arXiv endorsement status: already obtained / not blocking.
+- arXiv category compatibility: pending until endorsed category and selected category are confirmed.
 - Bibliography status: preliminary BibTeX has 16 entries; full BibTeX remains incomplete.
 - Claim status: bounded to the reproducible deterministic-heavy benchmark workload.
 - Review status: final human review remains pending.
@@ -42,12 +44,12 @@ This venue-neutral checklist records what is present, missing, and blocked befor
 | Claim-to-evidence audit | v0.1 exists | Repeat after any manuscript, figure, table, or package change | Medium | Mechanical |
 | Figures and tables | Planning and specs exist | Final rendered figures/tables are not locked | High | Mechanical preparation plus user approval |
 | Reproduction transcript | Checklist created in this packet | Clean transcript from a fresh checkout is not captured | High | Mechanical |
-| Artifact availability statement | Policy and inventory inputs exist | Final submission wording and artifact package selection are pending | Medium | User approval plus mechanical packaging |
+| Artifact availability statement | Policy and inventory inputs exist | Final preprint wording and artifact package selection are pending | Medium | User approval plus mechanical packaging |
 | Repository / artifact inventory | Inventory created in this packet | Final submission bundle selection is pending | Medium | Mechanical plus user approval |
-| License statement | Repository license exists | Submission-specific license/copyright wording is pending | Medium | User or venue decision |
-| Author and affiliation metadata | Authorship policy exists | Final author block and affiliations are not approved here | High | User approval |
-| Acknowledgement, funding, conflict, ethics metadata | Not finalized in this packet | Required disclosure wording remains pending if applicable | High | User approval |
-| Venue / export format | Venue-neutral draft exists | Target venue, template, page limits, and export format are not selected | High | User approval |
+| License statement | Repository license exists | arXiv distribution-license decision is pending | Medium | User decision |
+| Author and affiliation metadata | Author metadata supplied for preprint draft | Final display approval remains pending | Medium | User approval |
+| Acknowledgement, funding, conflict, ethics metadata | Minimal/no-extra-statement approach selected | Required disclosure wording remains pending if applicable | Medium | User approval |
+| Venue / export format | arXiv-style preprint direction selected | arXiv category, license, and export format are pending | High | User approval |
 | Final human review signoff | Packet created in this pass | No final signoff recorded | High | User approval |
 
 ## Missing Components
@@ -57,8 +59,8 @@ This venue-neutral checklist records what is present, missing, and blocked befor
 - Final rendered figures and tables.
 - Clean reproduction transcript from a fresh checkout.
 - Final artifact availability statement and package selection.
-- Final author, affiliation, acknowledgement, funding, conflict, and ethics metadata.
-- Target venue or venue-neutral preprint export decision.
+- Final author/email display, acknowledgement, funding, conflict, and ethics wording if needed.
+- arXiv category, license, and export format decision.
 - Final human signoff.
 
 ## Conservative Status Notes
@@ -70,10 +72,11 @@ This venue-neutral checklist records what is present, missing, and blocked befor
 
 ## Next Recommended Sequence
 
-1. User reviews the final human review packet and decides venue/export direction.
-2. Resolve bibliography scope and full BibTeX blockers.
-3. Repeat manuscript-to-bibliography sync after final BibTeX changes.
-4. Prepare final figures, tables, and reproduction transcript.
-5. Prepare artifact availability wording and submission package inventory.
-6. Run final claim-to-evidence audit against the exact exported manuscript.
-7. Complete final human review and only then decide whether the paper is submission-ready.
+1. Confirm arXiv category compatibility and arXiv license.
+2. Approve final title, abstract, author display, and email display.
+3. Resolve first-package bibliography formatting using the conservative included subset.
+4. Repeat manuscript-to-bibliography sync after final citation formatting.
+5. Prepare final figures, tables, export package, and reproduction transcript.
+6. Prepare artifact availability wording and selected artifact bundle.
+7. Run final claim-to-evidence audit against the exact exported manuscript.
+8. Complete final human review and only then decide whether the paper is submission-ready.

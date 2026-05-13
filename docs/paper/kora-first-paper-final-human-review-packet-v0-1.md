@@ -23,20 +23,21 @@ This packet lists the human decisions still required before any submission-ready
 |---|---|---|
 | Title and abstract | Approve final wording or request edits | Pending |
 | Claim boundary | Approve the bounded deterministic-heavy benchmark claim | Pending |
-| Bibliography scope | Approve which records remain in or out of the first submission scope | Pending |
+| Bibliography scope | Confirm the conservative first arXiv-style package scope | Draft scope supplied; final approval pending |
 | Limitations | Approve limitations and non-claim language | Pending |
 | Artifact and reproducibility | Approve artifact package scope and reproduction transcript expectations | Pending |
 | Figures and tables | Approve final rendered figures, tables, captions, and numbering | Pending |
-| Author and affiliation metadata | Approve final author block and affiliations | Pending |
-| Acknowledgement, funding, conflict, and ethics metadata | Approve any required disclosure text | Pending |
-| Target venue and export format | Choose venue, template, or venue-neutral preprint route | Pending |
+| Author and affiliation metadata | Approve final author block, affiliation, and email display | Draft metadata supplied; final approval pending |
+| Acknowledgement, funding, conflict, and ethics metadata | Approve minimal required disclosure text if any | Pending |
+| Target venue and export format | Confirm arXiv category, license, and export route | arXiv-style direction supplied; details pending |
 | Final submission-ready decision | Decide whether the exact final package is ready to submit | Pending |
 
 ## Bibliography Scope Decisions
 
-- Decide whether `[R17]` and `[R18]` remain excluded from the first submission or are resolved for inclusion later.
-- Decide whether `[R19]` through `[R24]` remain tracker/audit-only methodology references for the first submission.
-- Decide whether deferred and still-not-eligible records should remain excluded from preliminary BibTeX until a later bibliography pass.
+- Current arXiv-style draft decision: `[R17]` and `[R18]` remain excluded from the first arXiv-style package.
+- Current arXiv-style draft decision: `[R19]` through `[R24]` remain tracker/audit-only for now.
+- Current arXiv-style draft decision: optional workload, latency, API-cost, production, energy, KORA Studio, and real customer-data evidence stay outside first package scope.
+- Deferred and still-not-eligible records should remain excluded from manuscript body citations unless later resolved.
 - Confirm that no missing metadata should be filled without source-backed verification.
 
 ## Evidence Scope Decisions
@@ -48,9 +49,11 @@ This packet lists the human decisions still required before any submission-ready
 
 ## Venue and Export Decisions
 
-- Decide whether to proceed with a venue-neutral preprint style or select a specific venue.
-- If a venue is selected, approve template, page limit, citation style, artifact appendix expectations, and disclosure requirements.
-- Approve whether export preparation should wait until full BibTeX and final figures/tables are complete.
+- Current direction: arXiv-style technical report / preprint first.
+- Endorsement status: already obtained / not blocking.
+- arXiv category compatibility remains pending because the endorsed category is not recorded here.
+- Later conference, workshop, or journal scanning is deferred and should not select a target in the current package draft.
+- Approve whether export preparation should proceed after category, license, bibliography formatting, and figures/tables are stable.
 
 ## Claim Boundary Reminder
 

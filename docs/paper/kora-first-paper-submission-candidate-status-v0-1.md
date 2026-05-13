@@ -53,7 +53,18 @@ No production, API-cost, energy, broad superiority, formal approval, or submissi
 
 ## Target Venue, Export, and Package Decisions
 
-No target venue was selected in this pass. The draft remains venue-neutral. Export/package preparation should wait until bibliography scope and target format are stable.
+The first target package direction is arXiv-style technical report / preprint. Endorsement has been obtained and is not a current blocker. arXiv category compatibility, license, export format, and final human approval remain pending. No conference, workshop, or journal target has been selected.
+
+## arXiv-Style Package Draft
+
+The arXiv-style package draft docs now exist:
+
+- `docs/paper/kora-first-paper-arxiv-metadata-checklist-v0-1.md`
+- `docs/paper/kora-first-paper-arxiv-bibliography-scope-v0-1.md`
+- `docs/paper/kora-first-paper-arxiv-style-package-readiness-v0-1.md`
+- `docs/paper/kora-first-paper-future-venue-scan-v0-1.md`
+
+These files record the supplied author metadata, endorsement status, conservative bibliography scope, original systems/evaluation framing, and future venue-scan placeholder. They do not submit to arXiv, select an arXiv category, select a conference/workshop/journal, or mark the paper as submission-ready.
 
 ## Submission Package Packet
 
