@@ -213,7 +213,7 @@ Status:
 
 ## Final Ready-Subset BibTeX Audit
 
-[KORA First Paper Final BibTeX Audit — Ready Subset v0.1](kora-first-paper-final-bibtex-audit-ready-subset-v0-1.md) has been created.
+[KORA First Paper Final BibTeX Audit - Ready Subset v0.1](kora-first-paper-final-bibtex-audit-ready-subset-v0-1.md) has been created.
 
 Status:
 
@@ -267,6 +267,19 @@ Status:
 - `[R02]`, `[R15]`, `[R19]`, `[R20]`, `[R22]`, and `[R23]` remain not eligible until author-list, split, or venue/style decisions are resolved.
 - No BibTeX was generated.
 - Final bibliography / claim audit remains pending.
+- The paper remains not submission-ready.
+
+## Expanded BibTeX Candidate Audit
+
+[KORA First Paper Expanded BibTeX Candidate Audit v0.1](kora-first-paper-expanded-bibtex-candidate-audit-v0-1.md) has been created.
+
+Status:
+
+- Expanded preliminary BibTeX now includes the candidate subset that passed final field check: `[R03]`, `[R04]`, `[R05]`, `[R07]`, `[R09]`, `[R10]`, `[R12]`, `[R13]`, `[R16]`.
+- Deferred records remain excluded: `[R17]`, `[R18]`.
+- Still-not-eligible records remain excluded: `[R02]`, `[R15]`, `[R19]`, `[R20]`, `[R22]`, `[R23]`.
+- Expanded BibTeX remains preliminary until final bibliography / claim audit.
+- No manuscript changes were made.
 - The paper remains not submission-ready.
 
 ## Claim Boundary
