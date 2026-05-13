@@ -15,6 +15,8 @@ This text-only manifest lists candidate source files and pending package items f
 | Bibliography scope | `docs/paper/kora-first-paper-arxiv-bibliography-scope-v0-1.md` | Scope note exists |
 | Metadata checklist | `docs/paper/kora-first-paper-arxiv-metadata-checklist-v0-1.md` | Metadata draft exists |
 | Render/export readiness report | `docs/paper/kora-first-paper-v0-5-render-export-readiness-v0-1.md` | Created in this pass |
+| Export route dry-run report | `docs/paper/kora-first-paper-arxiv-export-route-dry-run-v0-1.md` | Dry run completed with `/tmp` outputs only |
+| Export route recommendation | `docs/paper/kora-first-paper-arxiv-export-route-recommendation-v0-1.md` | Recommends Pandoc-to-LaTeX starting route with manual cleanup |
 | Figure/table/algorithm drafts | `docs/paper/kora-first-paper-figure-table-algorithm-drafts-v0-1.md` | Source for inserted text assets |
 | Figure/table/algorithm plan | `docs/paper/kora-first-paper-figure-table-algorithm-plan-v0-1.md` | Planning/status source |
 | Reproduction checklist | `docs/paper/kora-first-paper-reproduction-transcript-checklist-v0-1.md` | Checklist exists; final transcript pending |
@@ -48,7 +50,8 @@ This text-only manifest lists candidate source files and pending package items f
 - Select final arXiv category and confirm category compatibility.
 - Confirm arXiv license.
 - Choose export route and source-package format.
-- Convert or render Mermaid diagrams to arXiv-compatible figure assets if needed.
+- Convert or render Mermaid diagrams to arXiv-compatible figure assets after user approval.
+- Install or select a LaTeX/PDF generation route outside this manifest.
 - Finalize bibliography and citation formatting.
 - Review table widths and caption placement for PDF layout.
 - Capture final clean reproduction transcript.

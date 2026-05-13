@@ -95,3 +95,9 @@ They draft text-based architecture and benchmark-flow diagrams, benchmark and ev
 Render/export readiness has been reviewed in `docs/paper/kora-first-paper-v0-5-render-export-readiness-v0-1.md`, and a text-only export package manifest exists at `docs/paper/kora-first-paper-arxiv-export-package-manifest-v0-1.md`.
 
 No dedicated paper export pipeline was found in the repository. No PDF, rendered figure, binary export, or raw benchmark artifact was generated or committed. Final export route, Mermaid rendering/conversion, table layout, bibliography formatting, and human approval remain pending.
+
+## arXiv Export Route Dry-Run Status
+
+The export route dry run is recorded in `docs/paper/kora-first-paper-arxiv-export-route-dry-run-v0-1.md`, with the recommendation recorded in `docs/paper/kora-first-paper-arxiv-export-route-recommendation-v0-1.md`.
+
+Pandoc can produce a LaTeX starting point from manuscript v0.5, but direct PDF generation is blocked locally by missing LaTeX tooling and Mermaid conversion is blocked locally by missing Mermaid CLI tooling. Generated dry-run outputs were kept under `/tmp/kora-paper-export-dry-run` and were not committed.

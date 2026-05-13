@@ -122,6 +122,8 @@ Citation style decision:
 - Final figure/table/algorithm numbering, layout, rendering, and export treatment remain pending human review.
 - v0.5 render/export readiness report and text-only export manifest have been created.
 - No dedicated paper export pipeline has been found; final PDF/source-package generation remains pending.
+- arXiv export route dry-run report and recommendation have been created.
+- Pandoc-to-LaTeX is feasible as a starting route, but LaTeX/PDF tooling, Mermaid conversion, table layout, final bibliography formatting, and human approval remain pending.
 - Clean reproduction transcript capture, final artifact package review, final venue/export decision, and final human review remain pending.
 - Paper is still not submission-ready.
 

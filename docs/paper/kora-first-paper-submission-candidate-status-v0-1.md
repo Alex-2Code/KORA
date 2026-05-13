@@ -105,6 +105,15 @@ The v0.5 render/export readiness report and text-only export manifest now exist:
 
 No dedicated paper export pipeline was found. No PDF, rendered figure, binary export, or raw benchmark artifact was generated or committed. The manuscript remains suitable for repository Markdown review, but final arXiv-compatible export requires a chosen export route and figure rendering/conversion.
 
+## arXiv Export Route Dry Run
+
+The export-route dry run and recommendation now exist:
+
+- `docs/paper/kora-first-paper-arxiv-export-route-dry-run-v0-1.md`
+- `docs/paper/kora-first-paper-arxiv-export-route-recommendation-v0-1.md`
+
+Pandoc-generated LaTeX and HTML outputs were tested under `/tmp/kora-paper-export-dry-run` only. No PDF was generated because a LaTeX engine is not installed locally. No generated outputs or binary figures were committed. The recommended route is a Pandoc-to-LaTeX starting export followed by manual cleanup for Mermaid diagrams, wide tables, and bibliography formatting.
+
 ## Submission Package Packet
 
 The venue-neutral submission package readiness packet now exists:
@@ -118,4 +127,4 @@ These files organize package blockers, human review decisions, reproduction tran
 
 ## Status
 
-The manuscript has advanced to v0.5 submission-candidate draft status. Full BibTeX remains incomplete, final export route and asset rendering/conversion remain pending, and the paper remains not submission-ready.
+The manuscript has advanced to v0.5 submission-candidate draft status. Full BibTeX remains incomplete, final export route approval, asset rendering/conversion, table layout, bibliography formatting, and human review remain pending. The paper remains not submission-ready.

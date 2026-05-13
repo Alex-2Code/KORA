@@ -57,6 +57,8 @@ This packet lists the human decisions still required before any submission-ready
 - Confirm final numbering and captions after export format is selected.
 - Review the v0.5 render/export readiness report before approving final PDF/source-package treatment.
 - Decide whether Mermaid diagrams should be rendered to image files, converted to another source format, or replaced with text/ASCII diagrams for final export.
+- Review the arXiv export route dry-run report and approve or reject the recommended Pandoc-to-LaTeX plus manual cleanup route.
+- Confirm whether the local export environment should use `pdflatex`, `xelatex`, `tectonic`, or another approved PDF generation route.
 
 ## Venue and Export Decisions
 
