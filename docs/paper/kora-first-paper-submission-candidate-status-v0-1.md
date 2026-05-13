@@ -14,6 +14,14 @@ Manuscript v0.4 was created:
 
 v0.4 is a submission-candidate draft, not a final submission package.
 
+## Manuscript v0.5
+
+Manuscript v0.5 was created:
+
+- `docs/paper/kora-first-paper-manuscript-v0-5.md`
+
+v0.5 is a submission-candidate draft that mechanically inserts the prior figure, table, algorithm, and appendix artifact materials into the manuscript. It is not a final submission package.
+
 ## What Was Synchronized
 
 - Manuscript citations were compared against preliminary BibTeX v0.1.
@@ -75,6 +83,19 @@ The figure/table/algorithm asset pass now exists:
 
 These files inventory existing visual assets, draft paper-ready text diagrams, benchmark tables, an evidence-boundary table, deterministic-first routing pseudocode, and an appendix artifact inventory table. Manuscript v0.4 was not edited in this pass; final insertion, numbering, layout, and export treatment require human review.
 
+## Manuscript Asset Insertion Pass
+
+Manuscript v0.5 now inserts:
+
+- Figure 1: KORA execution-control architecture.
+- Figure 2: direct baseline vs KORA-controlled benchmark flow.
+- Table 1: deterministic-heavy benchmark result summary.
+- Table 2: evidence boundary and non-claim table.
+- Algorithm 1: deterministic-first routing pseudocode.
+- Appendix Table A1: artifact and reproducibility inventory.
+
+The inserted assets remain draft Markdown/Mermaid/text assets. Final rendering, numbering, layout, and export treatment remain pending.
+
 ## Submission Package Packet
 
 The venue-neutral submission package readiness packet now exists:
@@ -88,4 +109,4 @@ These files organize package blockers, human review decisions, reproduction tran
 
 ## Status
 
-The manuscript has advanced to v0.4 submission-candidate draft status. Full BibTeX remains incomplete, and the paper remains not submission-ready.
+The manuscript has advanced to v0.5 submission-candidate draft status. Full BibTeX remains incomplete, final asset rendering/export review remains pending, and the paper remains not submission-ready.

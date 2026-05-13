@@ -26,7 +26,7 @@ This packet lists the human decisions still required before any submission-ready
 | Bibliography scope | Confirm the conservative first arXiv-style package scope | Draft scope supplied; final approval pending |
 | Limitations | Approve limitations and non-claim language | Pending |
 | Artifact and reproducibility | Approve artifact package scope and reproduction transcript expectations | Pending |
-| Figures, tables, and algorithm | Approve final diagrams, tables, pseudocode, captions, numbering, and placement | Draft assets exist; final approval pending |
+| Figures, tables, and algorithm | Approve final diagrams, tables, pseudocode, captions, numbering, and placement | Inserted in manuscript v0.5; final approval pending |
 | Author and affiliation metadata | Approve final author block, affiliation, and email display | Draft metadata supplied; final approval pending |
 | Acknowledgement, funding, conflict, and ethics metadata | Approve minimal required disclosure text if any | Pending |
 | Target venue and export format | Confirm arXiv category, license, and export route | arXiv-style direction supplied; details pending |
@@ -49,11 +49,11 @@ This packet lists the human decisions still required before any submission-ready
 
 ## Figure, Table, and Algorithm Decisions
 
-- Decide whether Figure 1 and Figure 2 should use Mermaid-rendered diagrams, exported graphics, or text/ASCII form.
-- Decide whether Table 1 replaces or augments the existing deterministic-heavy benchmark table in manuscript v0.4.
-- Decide whether Table 2 belongs in the main text, limitations, or appendix.
-- Decide whether Algorithm 1 belongs in Section 3 or an appendix.
-- Decide whether the appendix artifact inventory table should be included in the arXiv-style package or kept as reviewer-support material.
+- Decide whether Figure 1 and Figure 2 should remain as Mermaid-rendered diagrams, be converted to exported graphics, or be converted to text/ASCII form.
+- Review whether Table 1 should stay as the expanded deterministic-heavy benchmark table in manuscript v0.5.
+- Review whether Table 2 should stay in the limitations section or move to an appendix.
+- Review whether Algorithm 1 should stay in Section 3 or move to an appendix.
+- Review whether Appendix Table A1 should be included in the arXiv-style package or kept as reviewer-support material.
 - Confirm final numbering and captions after export format is selected.
 
 ## Venue and Export Decisions

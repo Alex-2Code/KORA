@@ -4,7 +4,7 @@ Status date: 2026-05-13
 
 ## Purpose
 
-This artifact records readiness for a venue-neutral arXiv-style preprint package draft around manuscript v0.4. It does not submit to arXiv and does not mark the paper as submission-ready.
+This artifact records readiness for a venue-neutral arXiv-style preprint package draft around manuscript v0.5. It does not submit to arXiv and does not mark the paper as submission-ready.
 
 ## Source Files Reviewed
 
@@ -32,7 +32,7 @@ This artifact records readiness for a venue-neutral arXiv-style preprint package
 | arXiv endorsement | Already obtained / not blocking | No action unless category compatibility requires review |
 | Category compatibility | Pending because endorsed category is not recorded here | Confirm category before submission |
 | Candidate categories | `cs.AI`, `cs.LG`, `cs.DC`, `cs.SE` | Candidates only; no category selected here |
-| Title / abstract | v0.4 title and abstract exist | Final human approval pending |
+| Title / abstract | v0.5 title and abstract exist | Final human approval pending |
 | License | Pending arXiv distribution-license decision | User decision required |
 | Export format | Markdown draft exists | PDF/LaTeX/Markdown export package pending |
 | Source package | Not prepared | Prepare only after export route is selected |
@@ -42,13 +42,13 @@ This artifact records readiness for a venue-neutral arXiv-style preprint package
 
 ## Manuscript Status
 
-Manuscript v0.4 exists and is the current submission-candidate draft. It remains a draft and should not be described as final or submission-ready.
+Manuscript v0.5 exists and is the current submission-candidate draft with inserted figure/table/algorithm assets. It remains a draft and should not be described as final or submission-ready.
 
 ## Bibliography Subset Status
 
 The first arXiv-style package uses the conservative manuscript-cited bibliography subset:
 
-- Manuscript v0.4 cited records: `[R01]`, `[R03]`, `[R04]`, `[R05]`, `[R06]`, `[R07]`, `[R08]`, `[R09]`, `[R10]`, `[R11]`, `[R12]`, `[R13]`.
+- Manuscript v0.5 cited records: `[R01]`, `[R03]`, `[R04]`, `[R05]`, `[R06]`, `[R07]`, `[R08]`, `[R09]`, `[R10]`, `[R11]`, `[R12]`, `[R13]`.
 - Preliminary BibTeX entries count: 16.
 - `[R17]` and `[R18]` remain excluded.
 - `[R19]` through `[R24]` remain tracker/audit-only for now.
@@ -72,7 +72,7 @@ The artifact package inventory exists. Final artifact availability wording, sele
 
 ## Figure, Table, and Algorithm Status
 
-The figure/table/algorithm plan and draft docs exist. They provide text-based Mermaid diagrams, benchmark and evidence-boundary tables, deterministic-first routing pseudocode, and an appendix artifact inventory table. Manuscript v0.4 was not edited in that pass. Human review is still needed before insertion into the arXiv-style export package.
+The figure/table/algorithm plan and draft docs exist. They provide text-based Mermaid diagrams, benchmark and evidence-boundary tables, deterministic-first routing pseudocode, and an appendix artifact inventory table. Manuscript v0.5 now inserts those assets. Human review is still needed before final rendering and inclusion in the arXiv-style export package.
 
 ## Missing User Approvals
 
