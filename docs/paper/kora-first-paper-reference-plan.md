@@ -441,6 +441,18 @@ Status:
 - Later conference, workshop, or journal venue scanning is deferred.
 - The paper remains not submission-ready.
 
+## Manuscript v0.5 Asset Insertion Status
+
+[KORA First Paper Manuscript v0.5](kora-first-paper-manuscript-v0-5.md) has been created from manuscript v0.4.
+
+Status:
+
+- Figure 1, Figure 2, Table 1, Table 2, Algorithm 1, and Appendix Table A1 are inserted as Markdown/Mermaid/text assets.
+- The bibliography/citation scope remains aligned with manuscript v0.4.
+- No new references were added.
+- Final rendering, numbering, layout, export treatment, and human review remain pending.
+- The paper remains not submission-ready.
+
 ## Next Verification Procedure
 
 1. Search official sources first.

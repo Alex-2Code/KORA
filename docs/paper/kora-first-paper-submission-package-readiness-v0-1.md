@@ -25,7 +25,7 @@ This venue-neutral checklist records what is present, missing, and blocked befor
 
 ## Current Package Status
 
-- Manuscript version: v0.4 submission-candidate draft.
+- Manuscript version: v0.5 submission-candidate draft.
 - Package status: not submission-ready.
 - Venue status: arXiv-style technical report / preprint is the first target package direction; no conference, workshop, or journal target is selected.
 - arXiv endorsement status: already obtained / not blocking.
@@ -38,7 +38,7 @@ This venue-neutral checklist records what is present, missing, and blocked befor
 
 | Component | Current status | Missing or pending item | Blocker severity | Owner or decision type |
 |---|---|---|---|---|
-| Manuscript v0.4 | Candidate draft exists | Final human approval and final sync after bibliography changes | High | User approval plus mechanical sync |
+| Manuscript v0.5 | Candidate draft exists with inserted draft figure/table/algorithm assets | Final human approval and final sync after bibliography/export changes | High | User approval plus mechanical sync |
 | Bibliography / BibTeX | Preliminary BibTeX has 16 entries | Full BibTeX completion and final formatting | High | Mechanical metadata work plus user scope approval |
 | Citation sync audit | v0.1 exists | Repeat after final BibTeX and any manuscript edits | Medium | Mechanical |
 | Claim-to-evidence audit | v0.1 exists | Repeat after any manuscript, figure, table, or package change | Medium | Mechanical |
@@ -65,7 +65,7 @@ This venue-neutral checklist records what is present, missing, and blocked befor
 
 ## Conservative Status Notes
 
-- Do not treat manuscript v0.4 as submission-ready.
+- Do not treat manuscript v0.5 as submission-ready.
 - Do not treat the current preliminary BibTeX as a complete bibliography.
 - Do not treat artifact docs or reproduction commands as formal artifact approval.
 - Do not use this packet to claim production cost reduction, real API-cost reduction, production benchmark proof, broad workload superiority, or energy reduction evidence.
@@ -88,4 +88,4 @@ Figure/table/algorithm plan and draft docs now exist:
 - `docs/paper/kora-first-paper-figure-table-algorithm-plan-v0-1.md`
 - `docs/paper/kora-first-paper-figure-table-algorithm-drafts-v0-1.md`
 
-They draft text-based architecture and benchmark-flow diagrams, benchmark and evidence-boundary tables, deterministic-first routing pseudocode, and an appendix artifact inventory table. Manuscript insertion and final rendered/export assets remain pending human review.
+They draft text-based architecture and benchmark-flow diagrams, benchmark and evidence-boundary tables, deterministic-first routing pseudocode, and an appendix artifact inventory table. Manuscript v0.5 now inserts these draft assets. Final rendered/export assets, numbering, layout, and captions remain pending human review.
