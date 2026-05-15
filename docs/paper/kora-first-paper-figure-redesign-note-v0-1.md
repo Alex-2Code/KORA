@@ -68,4 +68,8 @@ Claim boundary:
 
 ## Status
 
-The redesigned figures are ready for Word human review. No generated image binaries were committed. The paper remains not submission-ready.
+The redesigned figures were reviewed in the Word draft and are not accepted for publication use because the inserted figure arrows did not render correctly. They are superseded by placeholders for Word review:
+
+- `docs/paper/kora-first-paper-word-placeholder-review-v0-1.md`
+
+Final publication-quality figures must be recreated after manuscript-body finalization. No generated image binaries were committed. The paper remains not submission-ready.

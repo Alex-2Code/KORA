@@ -70,6 +70,8 @@ PDF and arXiv source-package work are paused while the Word draft review route i
 
 The export route recommendation should be revisited after human review of the Word draft and redesigned figures.
 
+The image-inserted Word draft is superseded by a placeholder Word review draft because the inserted figure arrows did not render correctly. Final publication-quality figures should be recreated after manuscript-body review, before resuming arXiv source-package work.
+
 ## BibTeX Handling
 
 The export route should use the conservative bibliography subset already aligned with manuscript v0.5. Full BibTeX remains incomplete, and deferred or still-not-eligible records should not be introduced during export cleanup.

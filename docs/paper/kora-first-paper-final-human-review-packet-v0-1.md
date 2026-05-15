@@ -67,6 +67,8 @@ This packet lists the human decisions still required before any submission-ready
 - Review the image-inserted Word draft before resuming PDF/arXiv source-package work.
 - Review redesigned Figure 1 and Figure 2 for readability, style, and claim boundaries.
 - Decide whether the redesigned figures should become the basis for publication figures.
+- Use the placeholder Word draft for manuscript-body review because the image-inserted figures had broken arrows.
+- Defer final Figure 1 and Figure 2 creation until after manuscript-body review.
 
 ## Venue and Export Decisions
 

@@ -149,6 +149,14 @@ The Word-first review route is now active, and PDF/arXiv source-package generati
 
 Local-only Word drafts and redesigned Figure 1/Figure 2 PNG/SVG assets were generated outside the public repository. No generated DOCX, PDF, PNG, SVG, source package, or local working Markdown was committed.
 
+## Word Figure Placeholder Pass
+
+The image-inserted Word draft is superseded for review because human review found broken arrows in the inserted figure images. Word-first review now continues with placeholders:
+
+- `docs/paper/kora-first-paper-word-placeholder-review-v0-1.md`
+
+Figure 1 and Figure 2 finalization is deferred until after manuscript-body review. No generated DOCX, PDF, image, source package, binary output, or local working Markdown was committed.
+
 ## Submission Package Packet
 
 The venue-neutral submission package readiness packet now exists:
@@ -162,4 +170,4 @@ These files organize package blockers, human review decisions, reproduction tran
 
 ## Status
 
-The manuscript has advanced to v0.5 submission-candidate draft status. Full BibTeX remains incomplete, Word-first human review is now the active route, and final visual review, layout cleanup, bibliography formatting, source-package hygiene, and human review remain pending. The paper remains not submission-ready.
+The manuscript has advanced to v0.5 submission-candidate draft status. Full BibTeX remains incomplete, Word-first human review is now the active route with figure placeholders, and final visual review, figure creation, layout cleanup, bibliography formatting, source-package hygiene, and human review remain pending. The paper remains not submission-ready.

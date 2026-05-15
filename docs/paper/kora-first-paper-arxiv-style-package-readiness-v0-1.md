@@ -128,6 +128,14 @@ PDF and arXiv source-package work are paused while the Word review path is activ
 
 Final arXiv export remains pending until the Word draft, redesigned figures, bibliography formatting, and final human review are resolved.
 
+## Word Placeholder Review Update
+
+The image-inserted Word draft is superseded by a placeholder Word review draft because the inserted figure arrows did not render correctly:
+
+- `docs/paper/kora-first-paper-word-placeholder-review-v0-1.md`
+
+PDF/arXiv source-package work remains paused. Final publication-quality figures are deferred until after manuscript-body review.
+
 ## Missing User Approvals
 
 - Final title and abstract approval.

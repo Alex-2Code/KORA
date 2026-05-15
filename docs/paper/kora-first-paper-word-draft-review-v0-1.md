@@ -76,4 +76,8 @@ The image-inserted Markdown working copy replaced the two Mermaid code blocks wi
 
 ## Status
 
-The Word-first review route is active. The Word draft package was generated local-only. The paper remains not submission-ready.
+The image-inserted Word draft is superseded for review because the inserted figure arrows did not render correctly. The active Word review draft uses figure placeholders and is recorded in:
+
+- `docs/paper/kora-first-paper-word-placeholder-review-v0-1.md`
+
+The Word-first review route remains active. The paper remains not submission-ready.

@@ -126,3 +126,11 @@ PDF and arXiv source-package work are paused while the Word review path is activ
 - `docs/paper/kora-first-paper-figure-redesign-note-v0-1.md`
 
 Local-only Word drafts and redesigned figure assets were generated outside the repository for human review. No generated DOCX, PDF, image, source-package, or local working file was committed.
+
+## Word Placeholder Review Status
+
+The image-inserted Word draft is superseded for review because the inserted figure arrows did not render correctly. The active Word review draft uses placeholders for Figure 1 and Figure 2:
+
+- `docs/paper/kora-first-paper-word-placeholder-review-v0-1.md`
+
+PDF generation remains paused. Final publication-quality figure creation is deferred until after manuscript-body review.
