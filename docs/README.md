@@ -54,6 +54,26 @@ KORA Studio is future planning only. It is not implemented yet.
 - [Customer-support triage workload spec](workloads/customer-support-triage.md)
 - [Good first issue candidates](good_first_issues.md)
 
+Local setup prerequisites:
+
+- Python 3.11 or newer is required.
+- Python 3.13 is recommended for local development because it matches the current CI test environment.
+- KORA uses `pyproject.toml`-based packaging.
+- Upgrade `pip`, `setuptools`, and `wheel` before editable install.
+
+Clean local setup:
+
+```bash
+python3 --version
+
+rm -rf .venv
+python3 -m venv .venv
+source .venv/bin/activate
+
+python3 -m pip install --upgrade pip setuptools wheel
+python3 -m pip install -e ".[dev]"
+```
+
 Core local commands:
 
 ```bash
@@ -77,6 +97,19 @@ Runnable examples
 
 Some example command names are compatibility-preserving. The local validation examples emit public-facing `local_validation` provider labels.
 Use `--report-md /tmp/kora_validation.md` with local validation examples to generate reviewer-facing Markdown reports from aggregate counters.
+
+Local setup troubleshooting:
+
+- `TypeError: unsupported operand type(s) for |: 'ModelMetaclass' and 'ModelMetaclass'` usually indicates a local Python, virtual environment, or dependency compatibility problem. Confirm Python is 3.11 or newer, recreate `.venv`, upgrade `pip setuptools wheel`, and reinstall with `python3 -m pip install -e ".[dev]"`.
+- Editable install errors mentioning a missing `setup.py` or `setup.cfg` despite `pyproject.toml` existing usually indicate stale local build tooling. Upgrade `pip`, `setuptools`, and `wheel` inside the activated virtual environment.
+
+Useful diagnostics:
+
+```bash
+python3 --version
+python3 -m pip --version
+python3 -m pip show pydantic
+```
 
 ## Inspect Evidence
 

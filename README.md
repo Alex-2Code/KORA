@@ -26,17 +26,38 @@ request -> task graph -> deterministic path -> validation -> model escalation ->
 
 Structure first. Inference second.
 
+## Prerequisites
+
+KORA uses `pyproject.toml`-based Python packaging.
+
+- Required Python: Python 3.11 or newer.
+- Recommended Python for local development: Python 3.13, matching the current CI test environment.
+- Use a fresh virtual environment after a system restart, Python upgrade, or dependency mismatch.
+- Upgrade `pip`, `setuptools`, and `wheel` before editable install so local tooling understands modern `pyproject.toml` builds.
+
+Check your local tools first:
+
+```bash
+python3 --version
+python3 -m pip --version
+```
+
 ## 3-Minute Local Run
 
 For local development in this repository:
 
 ```bash
+python3 --version
+
+rm -rf .venv
 python3 -m venv .venv
 source .venv/bin/activate
+
+python3 -m pip install --upgrade pip setuptools wheel
 python3 -m pip install -e ".[dev]"
 ```
 
-If editable install reports that `setup.py`, `setup.cfg`, or install metadata is missing, verify that your checkout is current:
+If editable install reports that `setup.py`, `setup.cfg`, or install metadata is missing, first verify that your checkout is current:
 
 ```bash
 git remote -v
@@ -57,6 +78,40 @@ python3 -m kora run direct_vs_kora -- --offline
 ```
 
 Inspect the output to see how KORA changes a direct model-first path into a controlled execution path.
+
+## Local Setup Troubleshooting
+
+If first-run setup fails after a system restart, Python upgrade, or virtual environment change, start by checking the local environment:
+
+```bash
+python3 --version
+python3 -m pip --version
+python3 -m pip show pydantic
+```
+
+### `TypeError: unsupported operand type(s) for |: 'ModelMetaclass' and 'ModelMetaclass'`
+
+This usually indicates a local Python, virtual environment, or dependency compatibility problem. KORA requires Python 3.11 or newer. Recreate the environment and reinstall with current build tooling:
+
+```bash
+rm -rf .venv
+python3 -m venv .venv
+source .venv/bin/activate
+
+python3 -m pip install --upgrade pip setuptools wheel
+python3 -m pip install -e ".[dev]"
+python3 -m kora run direct_vs_kora -- --offline
+```
+
+### Editable install says `setup.py` or `setup.cfg` is missing
+
+KORA uses `pyproject.toml`-based packaging, so a missing `setup.py` or `setup.cfg` message usually means the local `pip`/build tooling is too old or the virtual environment is stale. Confirm `pyproject.toml` exists, upgrade build tooling, then reinstall:
+
+```bash
+ls pyproject.toml
+python3 -m pip install --upgrade pip setuptools wheel
+python3 -m pip install -e ".[dev]"
+```
 
 ## What KORA Does
 

@@ -38,15 +38,35 @@ Good contributors are interested in:
 
 ## Local setup
 
+### Prerequisites
+
+KORA uses `pyproject.toml`-based Python packaging.
+
+- Required Python: Python 3.11 or newer.
+- Recommended Python for local development: Python 3.13, matching the current CI test environment.
+- Upgrade `pip`, `setuptools`, and `wheel` before editable install.
+
+Check your local tools before installing:
+
+```bash
+python3 --version
+python3 -m pip --version
+```
+
 Start from a clean checkout of the repository.
 
 ```bash
+python3 --version
+
+rm -rf .venv
 python3 -m venv .venv
 source .venv/bin/activate
+
+python3 -m pip install --upgrade pip setuptools wheel
 python3 -m pip install -e ".[dev]"
 ```
 
-If editable install reports that `setup.py`, `setup.cfg`, or install metadata is missing, verify that your checkout is current:
+If editable install reports that `setup.py`, `setup.cfg`, or install metadata is missing, first verify that your checkout is current:
 
 ```bash
 git remote -v
@@ -59,6 +79,31 @@ ls pyproject.toml
 If `pyproject.toml` is still missing after pulling, re-clone from `https://github.com/Krako-Labs/KORA.git`.
 
 The editable install should install KORA and its development dependencies into the virtual environment.
+
+### Local setup troubleshooting
+
+For first-run failures after a system restart, Python upgrade, or virtual environment change, capture the local environment first:
+
+```bash
+python3 --version
+python3 -m pip --version
+python3 -m pip show pydantic
+```
+
+If `python3 -m kora run direct_vs_kora -- --offline` fails with:
+
+```text
+TypeError: unsupported operand type(s) for |: 'ModelMetaclass' and 'ModelMetaclass'
+```
+
+that usually indicates a local Python, virtual environment, or dependency compatibility problem. Confirm Python is 3.11 or newer, then rebuild the virtual environment using the clean setup block above.
+
+If editable install says `setup.py` or `setup.cfg` is missing even though `pyproject.toml` exists, upgrade local build tooling inside the activated virtual environment:
+
+```bash
+python3 -m pip install --upgrade pip setuptools wheel
+python3 -m pip install -e ".[dev]"
+```
 
 ## First verification commands
 
