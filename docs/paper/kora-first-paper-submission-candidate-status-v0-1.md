@@ -30,6 +30,14 @@ Manuscript v0.6 was created:
 
 v0.6 applies the Word-first manuscript text review from `docs/paper/kora-first-paper-word-first-text-review-v0-1.md`. It tightens abstract draft-status language, clarifies KORA's execution-control positioning, explains the `model_candidate` path at the paper level, preserves the approved 100-task deterministic-heavy benchmark claim boundary, and replaces Figure 1 and Figure 2 content with placeholders. Figure rendering and final publication-quality figure rebuild remain out of scope for v0.6.
 
+## Manuscript v0.6 Human Final-Edit Checklist
+
+The manuscript v0.6 human final-edit checklist now exists:
+
+- `docs/paper/kora-first-paper-v0-6-human-final-edit-checklist.md`
+
+The checklist prepares human review before any possible v0.7 manuscript pass. It covers title and abstract readiness, introduction clarity, execution-control category framing, terminology consistency, method/system clarity, benchmark wording and claim boundary, limitations/non-claims, citation readiness, figure-placeholder handling, submission blockers before v0.7, and items that must be resolved before Word/PDF/arXiv export. Figure rebuild and export work remain out of scope.
+
 ## What Was Synchronized
 
 - Manuscript citations were compared against preliminary BibTeX v0.1.
@@ -186,4 +194,4 @@ These files organize package blockers, human review decisions, reproduction tran
 
 ## Status
 
-The manuscript has advanced to v0.6 submission-candidate draft status. Full BibTeX remains incomplete, Word-first human review is now the active route with Figure 1 and Figure 2 placeholders, and final visual review, figure rebuilding, layout cleanup, bibliography formatting, source-package hygiene, and human review remain pending. v0.6 applies the text-review recommendations while keeping figure work out of scope. PDF/arXiv export remains paused until both manuscript text and final figures are ready. The paper remains not submission-ready.
+The manuscript has advanced to v0.6 submission-candidate draft status. Full BibTeX remains incomplete, Word-first human review is now the active route with Figure 1 and Figure 2 placeholders, and final visual review, figure rebuilding, layout cleanup, bibliography formatting, source-package hygiene, and human review remain pending. v0.6 applies the text-review recommendations while keeping figure work out of scope. The v0.6 human final-edit checklist is ready for review before any v0.7 manuscript pass. PDF/arXiv export remains paused until both manuscript text and final figures are ready. The paper remains not submission-ready.
