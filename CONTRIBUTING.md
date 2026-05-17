@@ -38,15 +38,46 @@ Good contributors are interested in:
 
 ## Local setup
 
+### Prerequisites
+
+KORA uses `pyproject.toml`-based Python packaging.
+
+- Packaged support: Python 3.11 or newer, as declared in `pyproject.toml`.
+- Observed local result: Python 3.9.6 has been confirmed to run the offline `direct_vs_kora` example in one user environment.
+- Treat Python 3.9.6 as an observed troubleshooting datapoint, not as the advertised package support floor until clean Python 3.9 compatibility testing is completed.
+- Check the active terminal interpreter with `python3 --version`.
+- VS Code's selected interpreter may differ from terminal `python3`; use the intended `.venv` in both places when debugging.
+- Upgrade `pip`, `setuptools`, and `wheel` before editable install.
+
+Check your local tools before installing:
+
+```bash
+python3 --version
+python3 -m pip --version
+which python3
+```
+
 Start from a clean checkout of the repository.
 
 ```bash
+python3 --version
+
+rm -rf .venv
 python3 -m venv .venv
 source .venv/bin/activate
+
+python3 -m pip install --upgrade pip setuptools wheel
 python3 -m pip install -e ".[dev]"
 ```
 
-If editable install reports that `setup.py`, `setup.cfg`, or install metadata is missing, verify that your checkout is current:
+Run the first local examples:
+
+```bash
+python3 -m kora run hello_kora -- --offline
+python3 -m kora run direct_vs_kora -- --offline
+```
+
+If editable install reports that `setup.py`, `setup.cfg`, or install metadata is missing, first verify that your checkout is current:
 
 ```bash
 git remote -v
@@ -59,6 +90,34 @@ ls pyproject.toml
 If `pyproject.toml` is still missing after pulling, re-clone from `https://github.com/Krako-Labs/KORA.git`.
 
 The editable install should install KORA and its development dependencies into the virtual environment.
+
+### Local setup troubleshooting
+
+For first-run failures after a system restart, Python upgrade, VS Code interpreter change, or virtual environment change, capture the local environment first:
+
+```bash
+python3 --version
+python3 -m pip --version
+python3 -m pip show pydantic
+which python3
+```
+
+If `python3 -m kora run direct_vs_kora -- --offline` fails with:
+
+```text
+TypeError: unsupported operand type(s) for |: 'ModelMetaclass' and 'ModelMetaclass'
+```
+
+that usually indicates a local Python, virtual environment, `pip`, `setuptools`, or dependency compatibility problem. Python 3.9.6 has been observed to work with the offline `direct_vs_kora` example in one user environment, but packaged support is currently Python 3.11 or newer. Rebuild the virtual environment using the clean setup block above before drawing a Python-version conclusion.
+
+If editable install says `setup.py` or `setup.cfg` is missing even though `pyproject.toml` exists, upgrade local build tooling inside the activated virtual environment:
+
+```bash
+python3 -m pip install --upgrade pip setuptools wheel
+python3 -m pip install -e ".[dev]"
+```
+
+If VS Code fails while Terminal works, select the repository `.venv` interpreter in VS Code and confirm the VS Code terminal reports the same `which python3` and `python3 --version` values as your working shell.
 
 ## First verification commands
 

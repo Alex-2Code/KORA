@@ -54,6 +54,31 @@ KORA Studio is future planning only. It is not implemented yet.
 - [Customer-support triage workload spec](workloads/customer-support-triage.md)
 - [Good first issue candidates](good_first_issues.md)
 
+Local setup prerequisites:
+
+- Packaged support is Python 3.11 or newer, as declared in `pyproject.toml`.
+- Python 3.9.6 has been observed to run the offline `direct_vs_kora` example in one user environment.
+- Treat Python 3.9.6 as a troubleshooting datapoint, not as the advertised package support floor until clean Python 3.9 compatibility testing is completed.
+- KORA uses `pyproject.toml`-based packaging.
+- Upgrade `pip`, `setuptools`, and `wheel` before editable install.
+- VS Code's selected interpreter may differ from terminal `python3`; use the intended `.venv` in both places.
+
+Clean local setup:
+
+```bash
+python3 --version
+
+rm -rf .venv
+python3 -m venv .venv
+source .venv/bin/activate
+
+python3 -m pip install --upgrade pip setuptools wheel
+python3 -m pip install -e ".[dev]"
+
+python3 -m kora run hello_kora -- --offline
+python3 -m kora run direct_vs_kora -- --offline
+```
+
 Core local commands:
 
 ```bash
@@ -77,6 +102,21 @@ Runnable examples
 
 Some example command names are compatibility-preserving. The local validation examples emit public-facing `local_validation` provider labels.
 Use `--report-md /tmp/kora_validation.md` with local validation examples to generate reviewer-facing Markdown reports from aggregate counters.
+
+Local setup troubleshooting:
+
+- `TypeError: unsupported operand type(s) for |: 'ModelMetaclass' and 'ModelMetaclass'` usually indicates a local Python, virtual environment, `pip`, `setuptools`, or dependency compatibility problem. Recreate `.venv`, upgrade `pip setuptools wheel`, and reinstall with `python3 -m pip install -e ".[dev]"`.
+- Editable install errors mentioning a missing `setup.py` or `setup.cfg` despite `pyproject.toml` existing usually indicate stale local build tooling. Upgrade `pip`, `setuptools`, and `wheel` inside the activated virtual environment.
+- If VS Code fails while Terminal works, select the repository `.venv` interpreter in VS Code and confirm VS Code is using the same Python as your working terminal.
+
+Useful diagnostics:
+
+```bash
+python3 --version
+python3 -m pip --version
+python3 -m pip show pydantic
+which python3
+```
 
 ## Inspect Evidence
 
