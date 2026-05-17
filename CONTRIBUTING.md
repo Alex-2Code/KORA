@@ -174,11 +174,57 @@ If you are unsure whether a change expands the public surface, open an issue or 
 
 ## Branch and PR workflow
 
-Use a short topic branch name:
+Do not push directly to `main`. Start each change from the latest `main`, create a topic branch, push that branch, and open a pull request into `main`.
+
+Start from latest `main`:
 
 ```bash
-git switch -c your-name/small-description
+git checkout main
+git pull origin main
 ```
+
+Create your branch:
+
+```bash
+git checkout -b <type>/<short-description>
+```
+
+Recommended branch name prefixes:
+
+- `feature/` for a new capability or example
+- `fix/` for a bug fix
+- `docs/` for documentation-only changes
+- `test/` for tests or test fixtures
+- `chore/` for maintenance that does not change behavior
+
+Good branch names:
+
+- `fix/login-screen-freeze`
+- `docs/python-setup-guide`
+- `test/offline-runner-smoke`
+- `feature/dev-error-reporting`
+
+Check your changes before committing:
+
+```bash
+git status
+git diff
+```
+
+Commit with a short imperative summary:
+
+```bash
+git add .
+git commit -m "Short imperative summary"
+```
+
+Push your branch:
+
+```bash
+git push -u origin <branch-name>
+```
+
+Then open a pull request on GitHub from your branch into `main`.
 
 Keep pull requests focused. A good PR should explain:
 
@@ -188,6 +234,24 @@ Keep pull requests focused. A good PR should explain:
 - what verification commands were run
 
 Prefer one logical change per PR. Do not bundle documentation cleanup, runtime edits, and unrelated formatting in the same pull request.
+
+## Reproducible bug reports
+
+Before attempting a code fix for a support-channel report, capture enough detail for another contributor to reproduce the problem. For example, a report like "login screen appears but code is not accepted" should become a concrete bug report before implementation starts.
+
+Include:
+
+- exact command or screen flow
+- operating system and version
+- Python version, if Python is involved
+- browser or runtime, if a browser or local UI is involved
+- screenshot or screen recording, if useful and safe to share
+- terminal logs or traceback excerpts
+- steps to reproduce
+- expected result
+- actual result
+
+Do not include secrets, tokens, private data, private paths, or sensitive security details in public issues. Use [SECURITY.md](SECURITY.md) for sensitive security reports.
 
 ## Verification expectations
 

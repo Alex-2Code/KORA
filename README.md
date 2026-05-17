@@ -240,6 +240,10 @@ Useful entry points:
 - [Community manager guide](docs/community/KORA_COMMUNITY_MANAGER_GUIDE.md)
 - [Contributing guide](CONTRIBUTING.md)
 
+For branch naming, pushing your work, and opening a pull request into `main`, see the [branch and PR workflow](CONTRIBUTING.md#branch-and-pr-workflow).
+
+For support-channel problems or bugs, start with a reproducible report using the [bug report template](.github/ISSUE_TEMPLATE/bug_report.md) before attempting a code change.
+
 ## Install
 
 Target package install path:

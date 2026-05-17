@@ -12,11 +12,17 @@ Briefly describe the problem.
 
 ## How to reproduce
 
-Steps or command:
+Exact command or screen flow:
 
 ```bash
 
 ```
+
+Steps:
+
+1.
+2.
+3.
 
 Does this affect one or more of these areas?
 
@@ -24,6 +30,7 @@ Does this affect one or more of these areas?
 - [ ] Example
 - [ ] Benchmark / evidence
 - [ ] Documentation
+- [ ] Browser / local UI
 - [ ] Other
 
 ## Expected behavior
@@ -39,8 +46,16 @@ What happened instead?
 - KORA version or commit:
 - Python version:
 - Operating system:
+- Browser and version, if applicable:
+- Runtime, local server, or editor, if applicable:
 - Did `./scripts/release_smoke.sh` pass?
 - Did `python3 -m pytest -q` pass?
+
+## Evidence
+
+- Screenshot or screen recording, if useful and safe to share:
+- Terminal logs or traceback excerpt:
+- Last command or action before the failure:
 
 ## Notes
 
