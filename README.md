@@ -211,6 +211,8 @@ Good candidate workloads:
 
 To participate, follow the [contact and discussion routes](docs/community/contact-and-discussion-routes.md).
 
+To contribute code or docs without write access to this repository, use the [fork-based pull request workflow](CONTRIBUTING.md#fork-workflow-for-external-contributors). Direct write access is not required to contribute through pull requests.
+
 ![KORA help-test flow](docs/assets/kora-help-test-flow.png)
 
 How to help test KORA with a real workload.

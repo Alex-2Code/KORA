@@ -204,6 +204,7 @@ Good candidate workloads:
 - [Canonical governance document](../GOVERNANCE.md)
 - [Contributing guide](../CONTRIBUTING.md)
 - [Branch and PR workflow](../CONTRIBUTING.md#branch-and-pr-workflow)
+- [Fork workflow for external contributors](../CONTRIBUTING.md#fork-workflow-for-external-contributors)
 - [Bug report template](../.github/ISSUE_TEMPLATE/bug_report.md)
 - [Contact and discussion routes](community/contact-and-discussion-routes.md)
 - [Contributor pathway](community/contributor-pathway.md)

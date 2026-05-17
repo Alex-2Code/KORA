@@ -176,6 +176,8 @@ If you are unsure whether a change expands the public surface, open an issue or 
 
 Do not push directly to `main`. Start each change from the latest `main`, create a topic branch, push that branch, and open a pull request into `main`.
 
+Most external contributors will not have write access to `Krako-Labs/KORA`. That is expected. Direct write access is not required to contribute: fork the repository, push your branch to your fork, and open a pull request into `Krako-Labs/KORA:main`.
+
 Start from latest `main`:
 
 ```bash
@@ -204,6 +206,55 @@ Good branch names:
 - `test/offline-runner-smoke`
 - `feature/dev-error-reporting`
 
+### Fork workflow for external contributors
+
+Use this workflow if you do not have write access to `Krako-Labs/KORA`.
+
+1. Fork `https://github.com/Krako-Labs/KORA` on GitHub.
+2. Clone your fork:
+
+   ```bash
+   git clone https://github.com/<your-github-username>/KORA.git
+   cd KORA
+   ```
+
+3. Add the upstream repository:
+
+   ```bash
+   git remote add upstream https://github.com/Krako-Labs/KORA.git
+   git fetch upstream
+   ```
+
+4. Create a branch from the latest upstream `main`:
+
+   ```bash
+   git checkout -b <type>/<short-description> upstream/main
+   ```
+
+5. Make your changes, then check the diff:
+
+   ```bash
+   git status
+   git diff
+   ```
+
+6. Commit with a short imperative summary:
+
+   ```bash
+   git add .
+   git commit -m "Short imperative summary"
+   ```
+
+7. Push to your fork:
+
+   ```bash
+   git push -u origin <branch-name>
+   ```
+
+8. Open a pull request on GitHub from `<your-github-username>:<branch-name>` into `Krako-Labs/KORA:main`.
+
+### Direct branch workflow for contributors with write access
+
 Check your changes before committing:
 
 ```bash
@@ -225,6 +276,46 @@ git push -u origin <branch-name>
 ```
 
 Then open a pull request on GitHub from your branch into `main`.
+
+### If `git push` returns 403
+
+If this push:
+
+```bash
+git push -u origin <branch-name>
+```
+
+fails with:
+
+```text
+remote: Permission to Krako-Labs/KORA.git denied to <username>.
+fatal: unable to access 'https://github.com/Krako-Labs/KORA.git/': The requested URL returned error: 403
+```
+
+you are probably trying to push directly to the upstream `Krako-Labs/KORA` repository without write access. Use the fork workflow above instead. In that workflow, `origin` should point to your fork and `upstream` should point to `https://github.com/Krako-Labs/KORA.git`.
+
+Check your remotes:
+
+```bash
+git remote -v
+```
+
+For an external contributor, a typical setup looks like:
+
+```text
+origin   https://github.com/<your-github-username>/KORA.git (fetch)
+origin   https://github.com/<your-github-username>/KORA.git (push)
+upstream https://github.com/Krako-Labs/KORA.git (fetch)
+upstream https://github.com/Krako-Labs/KORA.git (push)
+```
+
+After fixing the remotes, push your branch to your fork:
+
+```bash
+git push -u origin <branch-name>
+```
+
+Then open a pull request on GitHub into `Krako-Labs/KORA:main`.
 
 Keep pull requests focused. A good PR should explain:
 
@@ -310,7 +401,13 @@ If you reference current benchmark evidence, use only this bounded claim:
 
 ## Local-path hygiene
 
-Public docs should use relative repo paths. Do not include machine-local absolute paths, and keep local-only context outside public documentation.
+Public docs should use relative repo paths. Do not include machine-local absolute paths, private notes, or machine-specific setup details.
+
+## Python requirement changes
+
+Python compatibility changes must follow `pyproject.toml` and the public setup docs. KORA's packaged support is Python 3.11 or newer unless `pyproject.toml` is changed through a reviewed compatibility task.
+
+Do not add macOS-specific checks that require Python 3.9.6. Python 3.9.6 is only an observed troubleshooting datapoint from one environment, not the required macOS version and not the advertised package support floor.
 
 ## Contribution rules
 
