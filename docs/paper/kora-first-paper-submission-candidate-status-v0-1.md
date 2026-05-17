@@ -22,6 +22,14 @@ Manuscript v0.5 was created:
 
 v0.5 is a submission-candidate draft that mechanically inserts the prior figure, table, algorithm, and appendix artifact materials into the manuscript. It is not a final submission package.
 
+## Manuscript v0.6
+
+Manuscript v0.6 was created:
+
+- `docs/paper/kora-first-paper-manuscript-v0-6.md`
+
+v0.6 applies the Word-first manuscript text review from `docs/paper/kora-first-paper-word-first-text-review-v0-1.md`. It tightens abstract draft-status language, clarifies KORA's execution-control positioning, explains the `model_candidate` path at the paper level, preserves the approved 100-task deterministic-heavy benchmark claim boundary, and replaces Figure 1 and Figure 2 content with placeholders. Figure rendering and final publication-quality figure rebuild remain out of scope for v0.6.
+
 ## What Was Synchronized
 
 - Manuscript citations were compared against preliminary BibTeX v0.1.
@@ -178,4 +186,4 @@ These files organize package blockers, human review decisions, reproduction tran
 
 ## Status
 
-The manuscript has advanced to v0.5 submission-candidate draft status. Full BibTeX remains incomplete, Word-first human review is now the active route with Figure 1 and Figure 2 placeholders, and final visual review, figure rebuilding, layout cleanup, bibliography formatting, source-package hygiene, and human review remain pending. The text review note confirms that the current manuscript text is coherent and claim-safe for continued Word-first human review, while recommended cleanup and final approval remain pending. PDF/arXiv export remains paused until both manuscript text and final figures are ready. The paper remains not submission-ready.
+The manuscript has advanced to v0.6 submission-candidate draft status. Full BibTeX remains incomplete, Word-first human review is now the active route with Figure 1 and Figure 2 placeholders, and final visual review, figure rebuilding, layout cleanup, bibliography formatting, source-package hygiene, and human review remain pending. v0.6 applies the text-review recommendations while keeping figure work out of scope. PDF/arXiv export remains paused until both manuscript text and final figures are ready. The paper remains not submission-ready.
