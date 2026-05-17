@@ -74,6 +74,14 @@ The v0.8 citation cleanup delta note now exists:
 
 - `docs/paper/kora-first-paper-v0-8-citation-cleanup-delta.md`
 
+## Manuscript v0.8 Source Verification Packet
+
+The manuscript v0.8 source-verification packet now exists:
+
+- `docs/paper/kora-first-paper-v0-8-source-verification-packet.md`
+
+The packet separates items already resolved in v0.8, items needing source verification before inclusion, final-packaging/export deferrals, and still-not-eligible/do-not-add records. It does not modify manuscript v0.8, add references, generate BibTeX, rebuild figures, generate export artifacts, or mark the paper as submission-ready.
+
 ## What Was Synchronized
 
 - Manuscript citations were compared against preliminary BibTeX v0.1.
@@ -230,4 +238,4 @@ These files organize package blockers, human review decisions, reproduction tran
 
 ## Status
 
-The manuscript has advanced to v0.8 Word-first citation-cleanup text draft status. Full BibTeX remains incomplete, Word-first human review is still the active route with Figure 1 and Figure 2 placeholders, and final visual review, figure rebuilding, layout cleanup, bibliography formatting, source-package hygiene, and human review remain pending. v0.8 applies only the ready-to-apply v0.7 citation cleanup items while keeping source verification, final citation style conversion, bibliography finalization, figure rebuild, and export work out of scope. The v0.7 citation and bibliography readiness review, v0.7 citation cleanup action plan, and v0.8 citation cleanup delta are complete, but final bibliography scope, final citation style conversion, source verification, and final manuscript-to-final-BibTeX synchronization remain pending. PDF/arXiv export remains paused until manuscript text, final figures, and bibliography/export package blockers are resolved. The paper remains not submission-ready.
+The manuscript has advanced to v0.8 Word-first citation-cleanup text draft status. Full BibTeX remains incomplete, Word-first human review is still the active route with Figure 1 and Figure 2 placeholders, and final visual review, figure rebuilding, layout cleanup, bibliography formatting, source-package hygiene, and human review remain pending. v0.8 applies only the ready-to-apply v0.7 citation cleanup items while keeping source verification execution, final citation style conversion, bibliography finalization, figure rebuild, and export work out of scope. The v0.7 citation and bibliography readiness review, v0.7 citation cleanup action plan, v0.8 citation cleanup delta, and v0.8 source-verification packet are complete, but final bibliography scope, final citation style conversion, source verification execution, and final manuscript-to-final-BibTeX synchronization remain pending. PDF/arXiv export remains paused until manuscript text, final figures, and bibliography/export package blockers are resolved. The paper remains not submission-ready.
