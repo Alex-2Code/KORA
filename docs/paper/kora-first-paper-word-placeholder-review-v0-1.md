@@ -47,16 +47,16 @@ Figure 2 placeholder:
 
 ## Reason for Switching to Placeholders
 
-Human review found that arrows in the inserted figure images were broken. The current figure images are not being forced into the Word draft. The goal is to keep manuscript-body review moving while deferring final figure creation.
+Human review found that arrows and diagram elements in the inserted figure images did not render reliably in the generated Word draft. The current figure images are not being forced into the Word draft and must not be treated as publication-ready. The goal is to keep manuscript-body review moving while deferring final figure creation until the manuscript body is stable.
 
 ## Figure Status
 
 | Figure | Current status | Next action |
 |---|---|---|
-| Figure 1: KORA execution-control architecture | deferred | Recreate publication-quality figure after manuscript body finalization |
-| Figure 2: direct baseline vs KORA-controlled deterministic-heavy benchmark flow | deferred | Recreate publication-quality figure after manuscript body finalization |
+| Figure 1: KORA execution-control architecture | placeholder only | Rebuild a publication-quality figure after manuscript body review is complete |
+| Figure 2: direct baseline vs KORA-controlled deterministic-heavy benchmark flow | placeholder only | Rebuild a publication-quality figure after manuscript body review is complete |
 
-Previous redesigned figures are not accepted for publication use. They are superseded by placeholders for Word review.
+Previous redesigned figures are not accepted for publication use. They are superseded by placeholders for Word review. Final figures should be rebuilt separately after the manuscript body is stable and then inserted in a later figure-finalization pass.
 
 ## Verification
 
@@ -70,9 +70,10 @@ Previous redesigned figures are not accepted for publication use. They are super
 
 - Review manuscript body using the placeholder Word draft.
 - Review Table 1, Table 2, Algorithm 1, and Appendix Table A1 in Word.
-- Finalize publication-quality figures only after manuscript-body review.
-- Resume PDF/arXiv source-package work only after Word review and figure decisions are complete.
+- Rebuild publication-quality Figure 1 and Figure 2 only after manuscript-body review is complete.
+- Insert final publication-ready figures in a later pass after the figure redesign is stable.
+- Resume PDF/arXiv source-package work only after Word text review and final figure decisions are complete.
 
 ## Status
 
-Word-first review continues with placeholders. Figure insertion is not complete. Final figure creation is deferred. The paper remains not submission-ready.
+Word-first manuscript text review continues with placeholders. Figure insertion is not complete, and current figure rendering should not be treated as publication-ready. Final figure creation is deferred until after the manuscript body is stable. PDF/arXiv export remains paused. The paper remains not submission-ready.

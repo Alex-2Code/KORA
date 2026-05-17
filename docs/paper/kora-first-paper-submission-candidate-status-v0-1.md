@@ -151,11 +151,11 @@ Local-only Word drafts and redesigned Figure 1/Figure 2 PNG/SVG assets were gene
 
 ## Word Figure Placeholder Pass
 
-The image-inserted Word draft is superseded for review because human review found broken arrows in the inserted figure images. Word-first review now continues with placeholders:
+The image-inserted Word draft is superseded for review because human review found that inserted figure arrows and diagram elements did not render reliably. Word-first manuscript text review now continues with placeholders:
 
 - `docs/paper/kora-first-paper-word-placeholder-review-v0-1.md`
 
-Figure 1 and Figure 2 finalization is deferred until after manuscript-body review. No generated DOCX, PDF, image, source package, binary output, or local working Markdown was committed.
+Figure 1 and Figure 2 are placeholders only. Current figure rendering should not be treated as publication-ready. Final publication-quality figures must be rebuilt separately after manuscript-body review is complete and the body text is stable. No generated DOCX, PDF, image, source package, binary output, or local working Markdown was committed.
 
 ## Submission Package Packet
 
@@ -170,4 +170,4 @@ These files organize package blockers, human review decisions, reproduction tran
 
 ## Status
 
-The manuscript has advanced to v0.5 submission-candidate draft status. Full BibTeX remains incomplete, Word-first human review is now the active route with figure placeholders, and final visual review, figure creation, layout cleanup, bibliography formatting, source-package hygiene, and human review remain pending. The paper remains not submission-ready.
+The manuscript has advanced to v0.5 submission-candidate draft status. Full BibTeX remains incomplete, Word-first human review is now the active route with Figure 1 and Figure 2 placeholders, and final visual review, figure rebuilding, layout cleanup, bibliography formatting, source-package hygiene, and human review remain pending. PDF/arXiv export remains paused until both manuscript text and final figures are ready. The paper remains not submission-ready.

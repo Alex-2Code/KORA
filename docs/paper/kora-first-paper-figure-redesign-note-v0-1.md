@@ -68,8 +68,8 @@ Claim boundary:
 
 ## Status
 
-The redesigned figures were reviewed in the Word draft and are not accepted for publication use because the inserted figure arrows did not render correctly. They are superseded by placeholders for Word review:
+The redesigned figures were reviewed in the Word draft and are not accepted for publication use because inserted arrows and diagram elements did not render reliably. They are superseded by placeholders for Word-first manuscript text review:
 
 - `docs/paper/kora-first-paper-word-placeholder-review-v0-1.md`
 
-Final publication-quality figures must be recreated after manuscript-body finalization. No generated image binaries were committed. The paper remains not submission-ready.
+The current figure outputs are placeholders only and should not be treated as publication-ready. Final publication-quality figures must be rebuilt separately after manuscript-body review is complete and the body text is stable. No generated image binaries were committed. PDF/arXiv export remains paused until the text and final figures are ready. The paper remains not submission-ready.

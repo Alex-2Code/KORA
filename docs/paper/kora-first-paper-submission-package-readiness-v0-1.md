@@ -129,8 +129,8 @@ Local-only Word drafts and redesigned figure assets were generated outside the r
 
 ## Word Placeholder Review Status
 
-The image-inserted Word draft is superseded for review because the inserted figure arrows did not render correctly. The active Word review draft uses placeholders for Figure 1 and Figure 2:
+The image-inserted Word draft is superseded for review because the inserted figure arrows and diagram elements did not render reliably. The active Word review draft uses placeholders for Figure 1 and Figure 2:
 
 - `docs/paper/kora-first-paper-word-placeholder-review-v0-1.md`
 
-PDF generation remains paused. Final publication-quality figure creation is deferred until after manuscript-body review.
+Figure 1 and Figure 2 are placeholders only and should not be treated as publication-ready. Word-first manuscript text review remains the priority. Final publication-quality figures should be rebuilt separately after manuscript-body review is complete and the body text is stable. PDF/arXiv export remains paused until both text and final figures are ready.
