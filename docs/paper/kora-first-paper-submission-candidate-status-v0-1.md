@@ -90,6 +90,18 @@ The manuscript v0.8 source-verification decision note now exists:
 
 The decision note classifies source-verification outcomes for v0.9 planning into records approved to remain in a working v0.9 draft from current repo evidence, records requiring manual/external verification before final bibliography approval or future inclusion, items deferred to final packaging/export, and records or claim areas that should stay excluded. It does not modify manuscript v0.8, add references, generate BibTeX, rebuild figures, generate export artifacts, or mark the paper as submission-ready.
 
+## Manuscript v0.9
+
+Manuscript v0.9 was created:
+
+- `docs/paper/kora-first-paper-manuscript-v0-9.md`
+
+v0.9 applies only the v0.9 working-inclusion items from `docs/paper/kora-first-paper-v0-8-source-verification-decision-note.md`. It preserves the aligned v0.8 cited record set for working review, keeps optional preliminary records `[R14]`, `[R16]`, `[R21]`, and `[R24]` out of the manuscript, keeps deferred and still-not-eligible records excluded, preserves the approved benchmark claim boundary, and keeps Figure 1 and Figure 2 as text placeholders only. It does not apply manual/external-verification items, final-packaging/export deferrals, keep-excluded/do-not-add items, external reference additions, final citation style conversion, or bibliography finalization.
+
+The v0.9 working draft delta note now exists:
+
+- `docs/paper/kora-first-paper-v0-9-working-delta.md`
+
 ## What Was Synchronized
 
 - Manuscript citations were compared against preliminary BibTeX v0.1.
@@ -246,4 +258,4 @@ These files organize package blockers, human review decisions, reproduction tran
 
 ## Status
 
-The manuscript has advanced to v0.8 Word-first citation-cleanup text draft status. Full BibTeX remains incomplete, Word-first human review is still the active route with Figure 1 and Figure 2 placeholders, and final visual review, figure rebuilding, layout cleanup, bibliography formatting, source-package hygiene, and human review remain pending. v0.8 applies only the ready-to-apply v0.7 citation cleanup items while keeping source verification execution, final citation style conversion, bibliography finalization, figure rebuild, and export work out of scope. The v0.7 citation and bibliography readiness review, v0.7 citation cleanup action plan, v0.8 citation cleanup delta, v0.8 source-verification packet, and v0.8 source-verification decision note are complete, but final bibliography scope, final citation style conversion, source verification execution, and final manuscript-to-final-BibTeX synchronization remain pending. PDF/arXiv export remains paused until manuscript text, final figures, and bibliography/export package blockers are resolved. The paper remains not submission-ready.
+The manuscript has advanced to v0.9 Word-first working draft status. Full BibTeX remains incomplete, Word-first human review is still the active route with Figure 1 and Figure 2 placeholders, and final visual review, figure rebuilding, layout cleanup, bibliography formatting, source-package hygiene, and human review remain pending. v0.9 applies only the v0.9 working-inclusion items from the v0.8 source-verification decision note while keeping manual/external verification, final-packaging/export deferrals, keep-excluded/do-not-add records, final citation style conversion, bibliography finalization, figure rebuild, and export work out of scope. The v0.7 citation and bibliography readiness review, v0.7 citation cleanup action plan, v0.8 citation cleanup delta, v0.8 source-verification packet, v0.8 source-verification decision note, and v0.9 working delta are complete, but final bibliography scope, final citation style conversion, source verification execution, and final manuscript-to-final-BibTeX synchronization remain pending. PDF/arXiv export remains paused until manuscript text, final figures, and bibliography/export package blockers are resolved. The paper remains not submission-ready.
