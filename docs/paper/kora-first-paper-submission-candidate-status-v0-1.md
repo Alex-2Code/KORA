@@ -110,6 +110,21 @@ The manuscript v0.9 figure rebuild specification now exists:
 
 The specification defines the later rebuild requirements for Figure 1 and Figure 2, including intended purpose, required visual structure, minimum labels, caption requirements, claim-boundary constraints, rendering constraints, and later Word/PDF readability requirements. It records that current Figure 1 and Figure 2 remain placeholders, prior Word figure arrows and diagram elements did not render reliably, no figures or export artifacts were generated, and final figures should be generated only in a later reviewed figure-finalization task.
 
+## Manuscript v0.9 Draft Figure Assets
+
+Draft Figure 1 and Figure 2 assets now exist for human visual review:
+
+- `docs/assets/paper/kora-first-paper-figure-1-v0-9-draft.svg`
+- `docs/assets/paper/kora-first-paper-figure-1-v0-9-draft.png`
+- `docs/assets/paper/kora-first-paper-figure-2-v0-9-draft.svg`
+- `docs/assets/paper/kora-first-paper-figure-2-v0-9-draft.png`
+
+The draft figure note now exists:
+
+- `docs/paper/kora-first-paper-v0-9-figure-draft-note.md`
+
+The draft assets follow the v0.9 figure rebuild specification and are not final publication figures. Current manuscript placeholders should not yet be treated as final publication layout. No Word, PDF, arXiv, archive, or manuscript export artifact was generated. Final manuscript integration and export review remain pending.
+
 ## What Was Synchronized
 
 - Manuscript citations were compared against preliminary BibTeX v0.1.
@@ -266,4 +281,4 @@ These files organize package blockers, human review decisions, reproduction tran
 
 ## Status
 
-The manuscript has advanced to v0.9 Word-first working draft status. Full BibTeX remains incomplete, Word-first human review is still the active route with Figure 1 and Figure 2 placeholders, and final visual review, figure rebuilding, layout cleanup, bibliography formatting, source-package hygiene, and human review remain pending. v0.9 applies only the v0.9 working-inclusion items from the v0.8 source-verification decision note while keeping manual/external verification, final-packaging/export deferrals, keep-excluded/do-not-add records, final citation style conversion, bibliography finalization, figure rebuild, and export work out of scope. The v0.7 citation and bibliography readiness review, v0.7 citation cleanup action plan, v0.8 citation cleanup delta, v0.8 source-verification packet, v0.8 source-verification decision note, v0.9 working delta, and v0.9 figure rebuild specification are complete, but final bibliography scope, final citation style conversion, source verification execution, final manuscript-to-final-BibTeX synchronization, final figure creation, and figure insertion review remain pending. PDF/arXiv export remains paused until manuscript text, final figures, and bibliography/export package blockers are resolved. The paper remains not submission-ready.
+The manuscript has advanced to v0.9 Word-first working draft status. Full BibTeX remains incomplete, Word-first human review is still the active route with Figure 1 and Figure 2 placeholders, and final visual review, figure rebuilding, layout cleanup, bibliography formatting, source-package hygiene, and human review remain pending. v0.9 applies only the v0.9 working-inclusion items from the v0.8 source-verification decision note while keeping manual/external verification, final-packaging/export deferrals, keep-excluded/do-not-add records, final citation style conversion, bibliography finalization, and export work out of scope. The v0.7 citation and bibliography readiness review, v0.7 citation cleanup action plan, v0.8 citation cleanup delta, v0.8 source-verification packet, v0.8 source-verification decision note, v0.9 working delta, v0.9 figure rebuild specification, and v0.9 draft figure assets are complete, but final bibliography scope, final citation style conversion, source verification execution, final manuscript-to-final-BibTeX synchronization, final figure approval, figure insertion review, and export checks remain pending. PDF/arXiv export remains paused until manuscript text, final figures, and bibliography/export package blockers are resolved. The paper remains not submission-ready.

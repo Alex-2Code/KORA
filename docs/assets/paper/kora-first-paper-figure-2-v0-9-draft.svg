@@ -1,0 +1,96 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="2200" height="1200" viewBox="0 0 2200 1200" role="img" aria-labelledby="title desc">
+<title id="title">Figure 2. Direct baseline vs KORA-controlled benchmark flow</title>
+<desc id="desc">Draft paper figure comparing direct baseline simulated model invocations with KORA-controlled deterministic-heavy benchmark routing.</desc>
+<rect width="2200" height="1200" fill="#f7fafc"/>
+<text x="70" y="78" fill="#17212b" font-family="Arial, Helvetica, sans-serif" font-size="46" font-weight="700" text-anchor="start">
+<tspan x="70" dy="0">Figure 2. Direct baseline vs KORA-controlled benchmark flow</tspan>
+</text>
+<text x="70" y="126" fill="#52616d" font-family="Arial, Helvetica, sans-serif" font-size="27" font-weight="400" text-anchor="start">
+<tspan x="70" dy="0">Reproducible 100-task deterministic-heavy benchmark; simulated model-invocation counters only.</tspan>
+</text>
+<rect x="90" y="220" width="2020" height="300" rx="12" fill="#ffffff" stroke="#c9d5df" stroke-width="3"/>
+<rect x="90" y="620" width="2020" height="360" rx="12" fill="#ffffff" stroke="#c9d5df" stroke-width="3"/>
+<text x="145" y="285" fill="#15324a" font-family="Arial, Helvetica, sans-serif" font-size="34" font-weight="700" text-anchor="start">
+<tspan x="145" dy="0">Direct baseline</tspan>
+</text>
+<text x="145" y="685" fill="#15324a" font-family="Arial, Helvetica, sans-serif" font-size="34" font-weight="700" text-anchor="start">
+<tspan x="145" dy="0">KORA-controlled execution</tspan>
+</text>
+<rect x="170" y="335" width="310" height="135" rx="10" fill="#ffffff" stroke="#2d6f9f" stroke-width="4"/>
+<text x="325.0" y="383.5" fill="#17212b" font-family="Arial, Helvetica, sans-serif" font-size="31" font-weight="700" text-anchor="middle">
+<tspan x="325.0" dy="0">100 benchmark</tspan>
+<tspan x="325.0" dy="37.8">tasks</tspan>
+</text>
+<rect x="760" y="335" width="300" height="135" rx="10" fill="#ffffff" stroke="#2d6f9f" stroke-width="4"/>
+<text x="910.0" y="364.5" fill="#17212b" font-family="Arial, Helvetica, sans-serif" font-size="31" font-weight="700" text-anchor="middle">
+<tspan x="910.0" dy="0">Direct</tspan>
+<tspan x="910.0" dy="37.8">baseline</tspan>
+</text>
+<text x="910.0" y="448.5" fill="#52616d" font-family="Arial, Helvetica, sans-serif" font-size="21" font-weight="400" text-anchor="middle">
+<tspan x="910.0" dy="0">model-first path</tspan>
+</text>
+<rect x="1330" y="325" width="430" height="145" rx="10" fill="#ffffff" stroke="#b36b00" stroke-width="4"/>
+<text x="1545.0" y="359.5" fill="#17212b" font-family="Arial, Helvetica, sans-serif" font-size="31" font-weight="700" text-anchor="middle">
+<tspan x="1545.0" dy="0">100 simulated</tspan>
+<tspan x="1545.0" dy="37.8">model invocations</tspan>
+</text>
+<text x="1545.0" y="443.5" fill="#52616d" font-family="Arial, Helvetica, sans-serif" font-size="21" font-weight="400" text-anchor="middle">
+<tspan x="1545.0" dy="0">one counted invocation per task</tspan>
+</text>
+<rect x="170" y="750" width="310" height="115" rx="10" fill="#ffffff" stroke="#2d6f9f" stroke-width="4"/>
+<text x="325.0" y="788.5" fill="#17212b" font-family="Arial, Helvetica, sans-serif" font-size="31" font-weight="700" text-anchor="middle">
+<tspan x="325.0" dy="0">100 benchmark</tspan>
+<tspan x="325.0" dy="37.8">tasks</tspan>
+</text>
+<rect x="720" y="730" width="360" height="150" rx="10" fill="#ffffff" stroke="#15324a" stroke-width="4"/>
+<text x="900.0" y="767.0" fill="#17212b" font-family="Arial, Helvetica, sans-serif" font-size="31" font-weight="700" text-anchor="middle">
+<tspan x="900.0" dy="0">KORA</tspan>
+<tspan x="900.0" dy="37.8">execution control</tspan>
+</text>
+<text x="900.0" y="851.0" fill="#52616d" font-family="Arial, Helvetica, sans-serif" font-size="21" font-weight="400" text-anchor="middle">
+<tspan x="900.0" dy="0">route before inference</tspan>
+</text>
+<rect x="1300" y="655" width="430" height="135" rx="10" fill="#ffffff" stroke="#2e8b7f" stroke-width="4"/>
+<text x="1515.0" y="684.5" fill="#17212b" font-family="Arial, Helvetica, sans-serif" font-size="31" font-weight="700" text-anchor="middle">
+<tspan x="1515.0" dy="0">80 deterministic</tspan>
+<tspan x="1515.0" dy="37.8">/ no-model completions</tspan>
+</text>
+<text x="1515.0" y="768.5" fill="#52616d" font-family="Arial, Helvetica, sans-serif" font-size="21" font-weight="400" text-anchor="middle">
+<tspan x="1515.0" dy="0">validated deterministic subset</tspan>
+</text>
+<rect x="1300" y="820" width="430" height="135" rx="10" fill="#ffffff" stroke="#b36b00" stroke-width="4"/>
+<text x="1515.0" y="849.5" fill="#17212b" font-family="Arial, Helvetica, sans-serif" font-size="31" font-weight="700" text-anchor="middle">
+<tspan x="1515.0" dy="0">20 model-candidate</tspan>
+<tspan x="1515.0" dy="37.8">paths</tspan>
+</text>
+<text x="1515.0" y="933.5" fill="#52616d" font-family="Arial, Helvetica, sans-serif" font-size="21" font-weight="400" text-anchor="middle">
+<tspan x="1515.0" dy="0">simulated invocation counters</tspan>
+</text>
+<rect x="1840" y="735" width="250" height="170" rx="10" fill="#ffffff" stroke="#2e8b7f" stroke-width="4"/>
+<text x="1965.0" y="763.0" fill="#17212b" font-family="Arial, Helvetica, sans-serif" font-size="31" font-weight="700" text-anchor="middle">
+<tspan x="1965.0" dy="0">80 avoided</tspan>
+<tspan x="1965.0" dy="37.8">simulated</tspan>
+<tspan x="1965.0" dy="37.8">invocations</tspan>
+</text>
+<text x="1965.0" y="889.0" fill="#52616d" font-family="Arial, Helvetica, sans-serif" font-size="21" font-weight="400" text-anchor="middle">
+<tspan x="1965.0" dy="0">80% in this workload</tspan>
+</text>
+<line x1="480" y1="402" x2="760" y2="402" stroke="#2d6f9f" stroke-width="6" stroke-linecap="round"/>
+<polygon points="760,402 738,390 738,414" fill="#2d6f9f"/>
+<line x1="1060" y1="402" x2="1330" y2="402" stroke="#b36b00" stroke-width="6" stroke-linecap="round"/>
+<polygon points="1330,402 1308,390 1308,414" fill="#b36b00"/>
+<polyline points="1080,785 1190,785 1190,722 1300,722" fill="none" stroke="#2e8b7f" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+<polygon points="1300,722 1278,710 1278,734" fill="#2e8b7f"/>
+<polyline points="1080,815 1190,815 1190,888 1300,888" fill="none" stroke="#b36b00" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+<polygon points="1300,888 1278,876 1278,900" fill="#b36b00"/>
+<line x1="1730" y1="722" x2="1840" y2="790" stroke="#2e8b7f" stroke-width="6" stroke-linecap="round"/>
+<polygon points="1840,790 1828,768 1852,768" fill="#2e8b7f"/>
+<line x1="1730" y1="888" x2="1840" y2="840" stroke="#b36b00" stroke-width="6" stroke-linecap="round"/>
+<polygon points="1840,840 1828,862 1852,862" fill="#b36b00"/>
+<text x="1100" y="1060" fill="#17212b" font-family="Arial, Helvetica, sans-serif" font-size="29" font-weight="700" text-anchor="middle">
+<tspan x="1100" dy="0">Approved boundary: KORA-controlled execution avoided 80 of 100 simulated model invocations versus a naive direct baseline.</tspan>
+</text>
+<text x="1100" y="1105" fill="#52616d" font-family="Arial, Helvetica, sans-serif" font-size="25" font-weight="400" text-anchor="middle">
+<tspan x="1100" dy="0">Visual non-claim: no real API calls, production traffic, cost savings, latency improvement, energy reduction, broad superiority, or external validation is implied.</tspan>
+</text>
+</svg>
