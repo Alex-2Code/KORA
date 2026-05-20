@@ -145,6 +145,14 @@ The v0.10 figure integration delta now exists:
 
 Manuscript v0.10 integrates reviewed draft Figure 1 and Figure 2 SVG/PNG asset references into the manuscript while keeping the assets as draft/reviewed, not final publication layout. Word/PDF/arXiv/export work remains paused, and final figure approval, final layout review, and export checks remain pending.
 
+## Manuscript v0.10 Word-First Export Readiness Check
+
+The manuscript v0.10 Word-first export readiness check now exists:
+
+- `docs/paper/kora-first-paper-v0-10-word-export-readiness-check.md`
+
+The readiness check records that v0.10 can proceed to a later Word-first review-draft export task only if it is clearly labeled as a review draft. It does not generate Word, PDF, arXiv, archive, or export artifacts. It keeps bibliography finalization, source verification, final figure approval, final layout review, source-package hygiene, and final human approval pending.
+
 ## What Was Synchronized
 
 - Manuscript citations were compared against preliminary BibTeX v0.1.
@@ -301,4 +309,4 @@ These files organize package blockers, human review decisions, reproduction tran
 
 ## Status
 
-The manuscript has advanced to v0.10 Word-first working draft status. Full BibTeX remains incomplete, Word-first human review is still the active route, and final visual review, final figure approval, layout cleanup, bibliography formatting, source-package hygiene, and human review remain pending. v0.10 integrates reviewed draft Figure 1 and Figure 2 asset references while keeping the assets marked as draft/reviewed and not final publication layout. It preserves the v0.9 citation scope and keeps manual/external verification, final-packaging/export deferrals, keep-excluded/do-not-add records, final citation style conversion, bibliography finalization, and export work out of scope. The v0.7 citation and bibliography readiness review, v0.7 citation cleanup action plan, v0.8 citation cleanup delta, v0.8 source-verification packet, v0.8 source-verification decision note, v0.9 working delta, v0.9 figure rebuild specification, v0.9 draft figure assets, v0.9 figure asset review note, and v0.10 figure integration delta are complete, but final bibliography scope, final citation style conversion, source verification execution, final manuscript-to-final-BibTeX synchronization, final figure approval, figure insertion review, and export checks remain pending. PDF/arXiv export remains paused until manuscript text, final figures, and bibliography/export package blockers are resolved. The paper remains not submission-ready.
+The manuscript has advanced to v0.10 Word-first working draft status. Full BibTeX remains incomplete, Word-first human review is still the active route, and final visual review, final figure approval, layout cleanup, bibliography formatting, source-package hygiene, and human review remain pending. v0.10 integrates reviewed draft Figure 1 and Figure 2 asset references while keeping the assets marked as draft/reviewed and not final publication layout. It preserves the v0.9 citation scope and keeps manual/external verification, final-packaging/export deferrals, keep-excluded/do-not-add records, final citation style conversion, bibliography finalization, and final export work out of scope. The v0.7 citation and bibliography readiness review, v0.7 citation cleanup action plan, v0.8 citation cleanup delta, v0.8 source-verification packet, v0.8 source-verification decision note, v0.9 working delta, v0.9 figure rebuild specification, v0.9 draft figure assets, v0.9 figure asset review note, v0.10 figure integration delta, and v0.10 Word-first export readiness check are complete, but final bibliography scope, final citation style conversion, source verification execution, final manuscript-to-final-BibTeX synchronization, final figure approval, figure insertion review, and export checks remain pending. PDF/arXiv export remains paused until manuscript text, final figures, and bibliography/export package blockers are resolved. The paper remains not submission-ready.
