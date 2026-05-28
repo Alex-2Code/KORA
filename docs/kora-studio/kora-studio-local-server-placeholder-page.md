@@ -14,8 +14,16 @@ Page sections:
 
 - Header with `KORA Studio`, `Local v0.1 Skeleton`, and AI Task Execution Router workspace copy
 - Status cards for local server state, disabled provider calls, disconnected model/runtime integration, browser launch availability, and disconnected Ollama integration
+- Your Computer
+- Model Capability Estimate
+- Runtime Status
+- Catalog vs Installed
+- Setup Guidance
+- KORA Boost Boundary
+- Standard Mode vs KORA Boost fixture comparison
+- Execution Viewer Placeholder with fixture/mock events
+- Report Viewer Placeholder with fixture metadata
 - Endpoint panel for `/health` and `/status`
-- Workflow preview for request handling, deterministic checks, local status, and a future runtime placeholder
 - Limitations panel with explicit no-provider, no-model/runtime, no-Ollama, local-browser-launch, and no unsupported-claims boundaries
 - Footer with local-only and claim-safe wording
 
@@ -52,7 +60,7 @@ Developer options include `kora studio --no-browser`, `kora studio --port 8765`,
 
 - `/` serves the static UI prototype v0.1
 - `/health` returns local health status JSON
-- `/status` returns local preview status, KORA Boost copy, docs paths, and fixture paths
+- `/status` returns local preview status, system profile, model capability estimate, runtime status, model catalog recommendations, setup guidance metadata, execution viewer fixture events, Standard Mode vs KORA Boost fixture metrics, report viewer placeholder metadata, KORA Boost copy, docs paths, and fixture paths
 
 ## Current Limitations
 
@@ -63,6 +71,12 @@ Developer options include `kora studio --no-browser`, `kora studio --port 8765`,
 - no model/runtime integration yet
 - no project UI yet
 - no API keys required
+- no model download
+- no model execution
+- no runtime model list command
+- no private model directory scan
+- no arbitrary report file scan
+- no active report export
 - no client-side calls, telemetry, local storage, or session storage
 
 ## Claim Boundary

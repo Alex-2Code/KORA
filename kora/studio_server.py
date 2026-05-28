@@ -46,11 +46,30 @@ def get_studio_server_status(host: str = DEFAULT_STUDIO_HOST, port: int = DEFAUL
     execution_viewer_fixture = get_execution_viewer_fixture_summary()
     standard_vs_kora_fixture = get_standard_vs_kora_status_fields()
     report_viewer_fixture = get_report_viewer_status_fields()
+    first_run_section_order = [
+        "Launch/local-only status",
+        "Your Computer",
+        "Model Capability",
+        "Runtime Status",
+        "Catalog vs Installed",
+        "Setup Guidance",
+        "KORA Boost Boundary",
+        "Standard Mode vs KORA Boost",
+        "Execution Viewer placeholder",
+        "Report Viewer placeholder",
+    ]
     return {
         "ok": True,
         "service": "kora-studio",
         "status": "preview",
         "implementation": "local_server_skeleton",
+        "v0_1_readiness_status": "local_fixture_demo_ready",
+        "v0_1_demo_surfaces": list(first_run_section_order),
+        "v0_1_claim_boundary": (
+            "KORA Studio v0.1 is a local fixture-backed AI Task Execution Router demo scaffold. It is not "
+            "production-ready, does not execute models, does not download models, does not call providers, "
+            "and does not enable cloud sync."
+        ),
         "server": "local-only",
         "host": host,
         "port": port,
@@ -74,18 +93,7 @@ def get_studio_server_status(host: str = DEFAULT_STUDIO_HOST, port: int = DEFAUL
         **execution_viewer_fixture,
         **standard_vs_kora_fixture,
         **report_viewer_fixture,
-        "first_run_section_order": [
-            "Launch/local-only status",
-            "Your Computer",
-            "Model Capability",
-            "Runtime Status",
-            "Catalog vs Installed",
-            "Setup Guidance",
-            "KORA Boost Boundary",
-            "Standard Mode vs KORA Boost",
-            "Execution Viewer placeholder",
-            "Report Viewer placeholder",
-        ],
+        "first_run_section_order": first_run_section_order,
         "browser_launch_available": True,
         "ollama_calls_enabled": False,
         "local_runtime_required": False,

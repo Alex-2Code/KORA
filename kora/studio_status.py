@@ -1,4 +1,4 @@
-"""Planning-stage status helpers for the KORA Studio CLI skeleton."""
+"""Preview status helpers for the KORA Studio local demo scaffold."""
 
 from __future__ import annotations
 
@@ -11,14 +11,28 @@ KORA_BOOST_TECHNICAL_EXPLANATION = (
 )
 DOCS_PATH = "docs/kora-studio/README.md"
 FIXTURES_PATH = "docs/kora-studio/fixtures/"
+V0_1_DEMO_SURFACES = [
+    "Launch/local-only status",
+    "Your Computer",
+    "Model Capability",
+    "Runtime Status",
+    "Catalog vs Installed",
+    "Setup Guidance",
+    "KORA Boost Boundary",
+    "Standard Mode vs KORA Boost",
+    "Execution Viewer placeholder",
+    "Report Viewer placeholder",
+]
 
 
 def get_studio_status() -> dict[str, Any]:
-    """Return static planning-stage status for KORA Studio."""
+    """Return static preview status for KORA Studio."""
 
     return {
-        "status": "planning",
-        "implementation": "cli_skeleton",
+        "status": "preview",
+        "implementation": "local_server_preview",
+        "v0_1_demo_status": "local_fixture_preview",
+        "v0_1_demo_surfaces": list(V0_1_DEMO_SURFACES),
         "server_available": True,
         "server_skeleton_available": True,
         "server_skeleton_command": "python3 -m kora studio",
@@ -34,18 +48,18 @@ def get_studio_status() -> dict[str, Any]:
 
 
 def render_studio_status_text(status: dict[str, Any]) -> str:
-    """Render KORA Studio planning-stage status for CLI output."""
+    """Render KORA Studio preview status for CLI output."""
 
     lines = [
-        "KORA Studio is in planning/preview mode.",
+        "KORA Studio is in local v0.1 preview mode.",
         "Positioning: local-first AI Task Execution Router workspace.",
         "KORA Studio routes local AI workflows; it is not an LM Studio replacement or generic local chatbot.",
         str(status["kora_boost_message"]),
         str(status["kora_boost_technical_explanation"]),
         "KORA does not remove RAM/VRAM/unified-memory or model-loading requirements.",
         "Provider/cloud/distributed routes: disabled by default unless explicitly enabled.",
-        "Current status: CLI skeleton with local server skeleton.",
-        "Server skeleton: available with python3 -m kora studio.",
+        "Current status: local server preview scaffold with fixture-backed demo surfaces.",
+        "Server preview: available with python3 -m kora studio.",
         "Status-only command: python3 -m kora studio --status.",
         "Browser launch: enabled by default; use --no-browser to suppress it.",
         "Provider calls: disabled. No provider calls are made.",

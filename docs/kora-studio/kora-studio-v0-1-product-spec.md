@@ -1,8 +1,10 @@
-# KORA Studio v0.1 Product Spec
+# KORA Studio v0.1 Local Demo Spec
 
 ## Product Definition
 
-KORA Studio v0.1 is a local-first AI workspace for Mac and Linux that launches from the KORA CLI, opens a local browser UI, helps users choose local models, and lets them use Standard Mode or KORA Boost for project-based AI chat and validation visibility.
+KORA Studio v0.1 is a local-first AI Task Execution Router demo scaffold for Mac and Linux. It launches from the KORA CLI, opens a localhost browser UI, and demonstrates claim-safe local workflow-routing surfaces with fixture/mock data.
+
+KORA Studio v0.1 is not a fully shipped product and is not production-ready. It does not execute models, download models, call providers, enable cloud sync, or claim unsupported larger-model execution.
 
 ## Target Users
 
@@ -32,24 +34,24 @@ Standard Mode runs the selected local model directly.
 
 KORA Boost routes simple or structured work through fast local paths first, then uses the model when deeper reasoning is needed.
 
-## MVP Features
+## v0.1 Demo Surfaces
 
 - CLI launch: `kora studio`
-- local web UI
-- browser auto-open
-- system capability detection
-- Ollama runtime check
-- supported local model list
-- recommended direct model
-- KORA Boost recommendation
-- model pull/download status
-- project-based chat
-- execution path panel
-- model-call counter cards
-- validation report viewer
-- local storage
+- localhost-only web UI
+- browser auto-open by default
+- local-only launch/status panel
+- Your Computer panel
+- Model Capability Estimate panel
+- Runtime Status panel
+- Catalog vs Installed panel
+- disabled download/run action labels
+- Setup Guidance panel
+- KORA Boost Boundary panel
+- Standard Mode vs KORA Boost fixture comparison
+- Execution Viewer placeholder using fixture/mock events
+- Report Viewer placeholder using fixture metadata
 
-## MVP Non-Features
+## v0.1 Non-Features
 
 - no cloud sync
 - no team accounts
@@ -59,17 +61,24 @@ KORA Boost routes simple or structured work through fast local paths first, then
 - no energy dashboard
 - no real provider adapter by default
 - no production monitoring
+- no real model download
+- no real model execution
+- no real runtime model listing
+- no arbitrary private model directory scan
+- no arbitrary report file scan
+- no active report export
 
 ## Success Criteria
 
-- user can launch Studio locally
-- user can see local runtime status
-- user can choose a model
-- user can switch Standard Mode / KORA Boost
-- user can chat within a project
-- user can inspect execution path
-- user can see model-call counters
-- user can open local validation reports
+- user can launch Studio locally with `kora studio`
+- user can open the localhost-only browser UI
+- user can see local-only, provider-disabled, and cloud-disabled status
+- user can see system profile and model capability estimate scaffolds
+- user can see runtime status and catalog-vs-installed boundaries
+- user can see disabled download/run action boundaries
+- user can see Standard Mode vs KORA Boost fixture comparison counters
+- user can inspect fixture/mock execution path events
+- user can see report viewer/export placeholder boundaries
 
 ## Claim Safety
 

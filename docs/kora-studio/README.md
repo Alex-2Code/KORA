@@ -157,6 +157,7 @@ The page shows a first-run flow ordered around launch/local-only status, Your Co
 ## Implementation Planning
 
 - [KORA Studio implementation breakdown](kora-studio-implementation-breakdown.md)
+- [KORA Studio v0.1 readiness report](kora-studio-v0-1-readiness-report.md)
 - [Harness engineering specification](kora-studio-harness-engineering-spec.md)
 - [Runtime setup guidance](kora-studio-runtime-setup-guidance.md)
 - [Report viewer requirements](report-viewer-requirements.md)

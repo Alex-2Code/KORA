@@ -53,6 +53,9 @@ def test_get_studio_server_status_fields() -> None:
     assert status["ok"] is True
     assert status["service"] == "kora-studio"
     assert status["status"] == "preview"
+    assert status["v0_1_readiness_status"] == "local_fixture_demo_ready"
+    assert "Report Viewer placeholder" in status["v0_1_demo_surfaces"]
+    assert "local fixture-backed AI Task Execution Router demo scaffold" in status["v0_1_claim_boundary"]
     assert status["server"] == "local-only"
     assert status["host"] == "127.0.0.1"
     assert status["port"] == 8765

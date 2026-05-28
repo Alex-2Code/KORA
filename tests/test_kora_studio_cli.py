@@ -43,10 +43,10 @@ def test_kora_studio_status_command_is_safe_noop() -> None:
     completed = _run_kora_studio("--status")
 
     assert completed.returncode == 0
-    assert "KORA Studio is in planning/preview mode." in completed.stdout
+    assert "KORA Studio is in local v0.1 preview mode." in completed.stdout
     assert APPROVED_BOOST_MESSAGE in completed.stdout
     assert TECHNICAL_EXPLANATION in completed.stdout
-    assert "Server skeleton: available with python3 -m kora studio." in completed.stdout
+    assert "Server preview: available with python3 -m kora studio." in completed.stdout
     assert "Status-only command: python3 -m kora studio --status." in completed.stdout
     assert "Browser launch: enabled by default; use --no-browser to suppress it." in completed.stdout
     assert "Provider calls: disabled. No provider calls are made." in completed.stdout
@@ -93,11 +93,13 @@ def test_kora_studio_serve_remains_compatible(monkeypatch) -> None:
     assert calls == [{"host": "127.0.0.1", "port": 8765, "open_browser": True}]
 
 
-def test_get_studio_status_is_planning_skeleton() -> None:
+def test_get_studio_status_is_local_preview() -> None:
     status = get_studio_status()
 
-    assert status["status"] == "planning"
-    assert status["implementation"] == "cli_skeleton"
+    assert status["status"] == "preview"
+    assert status["implementation"] == "local_server_preview"
+    assert status["v0_1_demo_status"] == "local_fixture_preview"
+    assert "Report Viewer placeholder" in status["v0_1_demo_surfaces"]
     assert status["server_available"] is True
     assert status["server_skeleton_available"] is True
     assert status["server_skeleton_command"] == "python3 -m kora studio"
@@ -114,8 +116,8 @@ def test_render_studio_status_text_includes_boundaries() -> None:
     text = render_studio_status_text(get_studio_status())
 
     assert text.endswith("\n")
-    assert "CLI skeleton" in text
-    assert "local server skeleton" in text
+    assert "local server preview scaffold" in text
+    assert "fixture-backed demo surfaces" in text
     assert "No provider calls are made" in text
     assert "No cloud sync is performed" in text
     assert "Local runtime: not required" in text
