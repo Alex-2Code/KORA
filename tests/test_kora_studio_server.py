@@ -111,6 +111,17 @@ def test_get_studio_server_status_fields() -> None:
     assert status["standard_vs_kora_metrics"]["validation_pass_count"] == 1
     assert len(status["standard_vs_kora_metric_cards"]) == 6
     assert "fixture/mock comparison" in status["standard_vs_kora_claim_boundary"]
+    assert status["report_viewer_status"] == "fixture_metadata_placeholder"
+    assert status["report_viewer_placeholder"]["report_fixture_path"] == (
+        "docs/kora-studio/fixtures/report-viewer-metadata.sample.json"
+    )
+    assert status["report_viewer_placeholder"]["arbitrary_local_file_scan_enabled"] is False
+    assert status["report_viewer_placeholder"]["upload_enabled"] is False
+    assert status["report_viewer_placeholder"]["generated_report_commit_enabled"] is False
+    assert status["report_viewer_placeholder"]["counters"]["avoided_model_calls"] == 8
+    assert status["report_export_status"] == "placeholder_not_connected"
+    assert status["report_export_placeholder"]["export_action_enabled"] is False
+    assert "local fixture metadata only" in status["report_viewer_claim_boundary"]
     assert status["first_run_section_order"] == [
         "Launch/local-only status",
         "Your Computer",
@@ -121,6 +132,7 @@ def test_get_studio_server_status_fields() -> None:
         "KORA Boost Boundary",
         "Standard Mode vs KORA Boost",
         "Execution Viewer placeholder",
+        "Report Viewer placeholder",
     ]
     assert status["browser_launch_available"] is True
     assert status["ollama_calls_enabled"] is False
@@ -161,6 +173,8 @@ def test_health_and_status_payloads_are_claim_safe() -> None:
     assert status["model_execution_connected"] is False
     assert status["standard_vs_kora_comparison_status"] == "fixture_mock_scaffold"
     assert status["standard_vs_kora_metrics"]["avoided_model_calls"] == 1
+    assert status["report_viewer_status"] == "fixture_metadata_placeholder"
+    assert status["report_export_status"] == "placeholder_not_connected"
     assert status["no_server_side_provider_calls"] is True
     assert status["kora_boost_message"] == APPROVED_BOOST_MESSAGE
 
@@ -337,6 +351,14 @@ def test_request_handler_serves_health_status_and_placeholder() -> None:
     assert "Browser launch: available" in html
     assert "Ollama integration: not connected" in html
     assert "No production/API-cost/energy claims" in html
+    assert "Report Viewer Placeholder" in html
+    assert "Local No-Network Validation Report" in html
+    assert "docs/kora-studio/fixtures/report-viewer-metadata.sample.json" in html
+    assert "No arbitrary local file scan is performed" in html
+    assert "No cloud upload is connected" in html
+    assert "Export not connected yet" in html
+    assert "Fixture summary only" in html
+    assert "No new benchmark evidence is created" in html
     assert "provider calls enabled" not in html.lower()
     assert "production cost reduction" not in html.lower()
     assert "real api-cost reduction" not in html.lower()
@@ -409,6 +431,14 @@ def test_static_preview_html_content_is_safe_and_complete() -> None:
     assert "Model fallback skipped" in html
     assert "Final counters" in html
     assert "No runtime execution occurs on this page" in html
+    assert "Report Viewer Placeholder" in html
+    assert "Report metadata" in html
+    assert "Export placeholder" in html
+    assert "Boundary warnings" in html
+    assert "No arbitrary local file scan is performed" in html
+    assert "No cloud upload is connected" in html
+    assert "Export not connected yet" in html
+    assert "No new benchmark evidence is created" in html
     assert "Limitations Panel" in html
     assert "No production/API-cost/energy claims" in html
     assert "No full frontend yet" in html
@@ -448,6 +478,7 @@ def test_static_preview_html_content_is_safe_and_complete() -> None:
         "KORA Boost Boundary",
         "Standard Mode vs KORA Boost",
         "Execution Viewer Placeholder",
+        "Report Viewer Placeholder",
     ]
     positions = [html.index(f"<h2>{section}</h2>") for section in ordered_sections]
     assert positions == sorted(positions)

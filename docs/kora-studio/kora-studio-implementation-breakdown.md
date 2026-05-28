@@ -343,6 +343,30 @@ Acceptance criteria:
 - metrics are labelled as local fixture/mock data
 - no production behavior, billing, cost, energy, or runtime execution claim is made
 
+## Phase 3.13 — Report Viewer and Export Placeholder
+
+Status: Initial local report viewer/export placeholder exists. `/status` exposes fixture report metadata, report counters, local-only boundary fields, disabled export state, and claim boundary text. The static preview page shows a report viewer placeholder and export placeholder without scanning arbitrary local files.
+
+Scope:
+
+- report viewer fixture metadata
+- report section list
+- fixture counter summary
+- boundary warnings
+- disabled export placeholder
+- no arbitrary local file scans
+- no report uploads
+- no generated report commits
+- no provider/cloud route
+- no new benchmark evidence
+
+Acceptance criteria:
+
+- report viewer data is labelled as fixture metadata only
+- export action remains disabled
+- preview UI displays claim boundary text
+- no local report file scan, upload, provider call, or generated report commit is connected
+
 ## Phase 4 — Report Viewer
 
 Goal: Render existing local Markdown validation reports.

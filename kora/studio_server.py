@@ -10,6 +10,7 @@ from typing import Any, Callable
 
 from kora.studio_execution_fixture import get_execution_viewer_fixture_summary, get_standard_vs_kora_status_fields
 from kora.studio_model_catalog import MODEL_CATALOG_CLAIM_BOUNDARY, SETUP_GUIDANCE_PATH, recommend_catalog_models
+from kora.studio_report_viewer import get_report_viewer_status_fields
 from kora.studio_runtime_status import get_runtime_status, summarize_installed_models
 from kora.studio_status import get_studio_status
 from kora.studio_system_profile import estimate_model_capability, get_system_profile
@@ -44,6 +45,7 @@ def get_studio_server_status(host: str = DEFAULT_STUDIO_HOST, port: int = DEFAUL
     recommended_models = recommend_catalog_models(system_profile, model_capability_estimate, runtime_status)
     execution_viewer_fixture = get_execution_viewer_fixture_summary()
     standard_vs_kora_fixture = get_standard_vs_kora_status_fields()
+    report_viewer_fixture = get_report_viewer_status_fields()
     return {
         "ok": True,
         "service": "kora-studio",
@@ -71,6 +73,7 @@ def get_studio_server_status(host: str = DEFAULT_STUDIO_HOST, port: int = DEFAUL
         "disabled_actions_route_to_guidance": True,
         **execution_viewer_fixture,
         **standard_vs_kora_fixture,
+        **report_viewer_fixture,
         "first_run_section_order": [
             "Launch/local-only status",
             "Your Computer",
@@ -81,6 +84,7 @@ def get_studio_server_status(host: str = DEFAULT_STUDIO_HOST, port: int = DEFAUL
             "KORA Boost Boundary",
             "Standard Mode vs KORA Boost",
             "Execution Viewer placeholder",
+            "Report Viewer placeholder",
         ],
         "browser_launch_available": True,
         "ollama_calls_enabled": False,
@@ -336,6 +340,35 @@ def render_studio_placeholder_html(status: dict[str, Any]) -> str:
         "</li>"
         for event in execution_events
     )
+    report_viewer = status.get("report_viewer_placeholder", {})
+    report_export = status.get("report_export_placeholder", {})
+    report_viewer_status = html.escape(str(status.get("report_viewer_status", "fixture_metadata_placeholder")), quote=True)
+    report_title = html.escape(str(report_viewer.get("report_title", "Local report fixture")), quote=True)
+    report_fixture_path = html.escape(str(report_viewer.get("report_fixture_path", "")), quote=True)
+    report_path_display = html.escape(str(report_viewer.get("report_path_display", "not loaded")), quote=True)
+    report_boundary = html.escape(str(status.get("report_viewer_claim_boundary", "")), quote=True)
+    report_export_status = html.escape(str(status.get("report_export_status", "placeholder_not_connected")), quote=True)
+    report_export_label = html.escape(str(report_export.get("export_action_label", "Export not connected yet")), quote=True)
+    report_export_reason = html.escape(str(report_export.get("export_action_reason", "")), quote=True)
+    report_export_boundary = html.escape(str(status.get("report_export_claim_boundary", "")), quote=True)
+    report_sections = "".join(
+        f"<li>{html.escape(str(item), quote=True)}</li>"
+        for item in report_viewer.get("sections", [])
+    )
+    report_warnings = "".join(
+        f"<li>{html.escape(str(item), quote=True)}</li>"
+        for item in report_viewer.get("boundary_warnings", [])
+    )
+    report_counters = report_viewer.get("counters", {}) if isinstance(report_viewer, dict) else {}
+    report_counter_items = "".join(
+        "<div class=\"card\">"
+        f"<h3>{html.escape(str(key), quote=True)}</h3>"
+        f"<p class=\"status-value\">{html.escape(str(value), quote=True)}</p>"
+        "<p>Fixture metadata only.</p>"
+        "</div>"
+        for key, value in report_counters.items()
+        if key in {"total_requests", "baseline_model_calls", "kora_model_calls", "avoided_model_calls"}
+    )
     section_order_items = "".join(
         f"<li>{html.escape(str(item), quote=True)}</li>"
         for item in status.get(
@@ -350,6 +383,7 @@ def render_studio_placeholder_html(status: dict[str, Any]) -> str:
                 "KORA Boost Boundary",
                 "Standard Mode vs KORA Boost",
                 "Execution Viewer placeholder",
+                "Report Viewer placeholder",
             ],
         )
     )
@@ -628,6 +662,21 @@ def render_studio_placeholder_html(status: dict[str, Any]) -> str:
           <div class=\"step\"><p class=\"step-number\">03</p><h3>Structured lookup and validation pass</h3><p>Fixture structured lookup succeeds and validation passes.</p></div>
           <div class=\"step\"><p class=\"step-number\">04</p><h3>Model fallback skipped / Final counters</h3><p>Fixture counters show the model path skipped after validation. No runtime execution occurs on this page.</p></div>
         </div>
+      </section>
+
+      <section>
+        <h2>Report Viewer Placeholder</h2>
+        <div class=\"grid\">
+          <div class=\"card\"><h3>Report metadata</h3><p>{report_viewer_status}</p><p>{report_title}</p><p><code>{report_fixture_path}</code></p><p>Displayed path: <code>{report_path_display}</code></p></div>
+          <div class=\"card\"><h3>Local-only boundary</h3><p>No arbitrary local file scan is performed.</p><p>No cloud upload is connected.</p><p>No provider calls are made.</p><p>Fixture summary only.</p></div>
+          <div class=\"card\"><h3>Export placeholder</h3><p>{report_export_status}</p><p><span class=\"badge\">{report_export_label}</span></p><p>{report_export_reason}</p><p>{report_export_boundary}</p></div>
+          <div class=\"card\"><h3>Claim boundary</h3><p>{report_boundary}</p><p>No new benchmark evidence is created.</p></div>
+        </div>
+        <div class=\"grid\">
+          <div class=\"card\"><h3>Report sections</h3><ul>{report_sections}</ul></div>
+          <div class=\"card\"><h3>Boundary warnings</h3><ul>{report_warnings}</ul></div>
+        </div>
+        <div class=\"grid\">{report_counter_items}</div>
       </section>
 
       <section>

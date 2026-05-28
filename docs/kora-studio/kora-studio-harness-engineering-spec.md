@@ -148,6 +148,8 @@ Requirements:
 
 The report export layer creates local claim-safe artifacts for inspection and review.
 
+Current scaffold status: the preview server exposes a local report viewer/export placeholder through `/status`. It uses fixture metadata only; it does not scan arbitrary local files, upload reports, write generated report files, commit generated reports, call providers, or create new benchmark evidence.
+
 Requirements:
 
 - local report export

@@ -38,9 +38,13 @@ This doc describes static fixture shapes for future KORA Studio UI work. The fix
 
 - `report_title`: display title for the report.
 - `report_path`: local sample path used for UI planning.
+- `report_fixture_path`: public fixture metadata path used by the local preview scaffold.
 - `sections`: expected report sections for navigation.
 - `counters`: aggregate counter object extracted from a report or companion JSON.
 - `boundary_warnings`: warnings the UI should keep visible near report content.
+- `arbitrary_local_file_scan_enabled`: whether the viewer scans arbitrary local files; public preview fixtures should keep this false.
+- `upload_enabled`: whether report upload is connected; public preview fixtures should keep this false.
+- `generated_report_commit_enabled`: whether generated report commit behavior is connected; public preview fixtures should keep this false.
 
 ## Execution Viewer Event Fields
 
