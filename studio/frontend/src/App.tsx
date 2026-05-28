@@ -114,6 +114,16 @@ const EMPTY_RUN_STATE: DemoRunState = {
 };
 
 const STATIONS = ["Input", "Deterministic", "Decision", "Adapter", "Verify", "Output"];
+const FIRST_RUN_SECTIONS = [
+  "Launch / Local-only Status",
+  "Your Computer",
+  "Model Capability",
+  "Runtime Status",
+  "Catalog vs Installed",
+  "Setup Guidance",
+  "KORA Boost Boundary",
+  "Execution Viewer Placeholder"
+];
 
 export default function App() {
   const [prompt, setPrompt] = useState("Summarize this request path.");
@@ -465,6 +475,22 @@ export default function App() {
         </p>
       </header>
 
+      <section className="card">
+        <h2>First-run Local Setup</h2>
+        <div className="first-run-grid">
+          {FIRST_RUN_SECTIONS.map((section) => (
+            <div className="metric-card" key={section}>
+              <div className="metric-label">v0.1 surface</div>
+              <div className="metric-value compact">{section}</div>
+            </div>
+          ))}
+        </div>
+        <p className="trace-note">
+          Local-only preview: provider calls and cloud sync are disabled by default. Download and run actions remain
+          disabled until explicitly connected.
+        </p>
+      </section>
+
       <section className="controls card">
         <label htmlFor="prompt">Input</label>
         <textarea
@@ -613,11 +639,11 @@ export default function App() {
 
       {comparison && (
         <section className="card">
-          <h2>Direct vs KORA (Latest Pair)</h2>
+          <h2>Fixture Direct vs KORA (Latest Pair)</h2>
           <div className="comparison-grid">
-            <MetricLite label="Direct Cost" value={comparison.directCost.toFixed(8)} />
-            <MetricLite label="KORA Cost" value={comparison.koraCost.toFixed(8)} />
-            <MetricLite label="Savings %" value={comparison.savingsPercent.toFixed(4)} />
+            <MetricLite label="Direct Demo Cost" value={comparison.directCost.toFixed(8)} />
+            <MetricLite label="KORA Demo Cost" value={comparison.koraCost.toFixed(8)} />
+            <MetricLite label="Fixture Delta %" value={comparison.savingsPercent.toFixed(4)} />
             <MetricLite label="Tokens Out Diff" value={comparison.tokensDiff} />
             <MetricLite label="Latency Diff (ms)" value={comparison.latencyDiff} />
           </div>

@@ -11,7 +11,7 @@ The demo should be read as a local workflow-routing scaffold, not an LM Studio r
 - Real-time station replay via Server-Sent Events (SSE) from `/api/sse_run`
 - Stage-level metric badges (status/time and adapter token usage) overlaid on each station during replay
 - Skip routing visualization (Decision -> Output bypass) when deterministic-first logic skips LLM execution
-- Direct vs KORA comparison view using recent run history (cost/tokens/latency deltas for same prompt)
+- Fixture Direct vs KORA comparison view using recent run history (demo cost/tokens/latency deltas for same prompt)
 - A metrics panel fed by backend demo telemetry (`LLM calls`, `tokens`, `estimated cost`, `stage counts`)
 - A local-only scaffold to iterate before wiring real runtime streaming
 
@@ -53,6 +53,8 @@ Runtime status is also exposed as a local scaffold. Executable detection is loca
 Catalog action labels are disabled planning scaffolds only. The preview may show "Download not connected yet" and "Run not connected yet"; these labels do not download, execute, call a registry, or call a provider.
 
 Setup guidance is informational in this scaffold. Disabled actions can point to guidance copy, but they do not install runtimes, download models, execute models, call runtime model list commands, scan private model directories, or enable provider/cloud routes.
+
+The first-run demo surface is ordered around Launch / Local-only Status, Your Computer, Model Capability, Runtime Status, Catalog vs Installed, Setup Guidance, KORA Boost Boundary, and an Execution Viewer placeholder.
 
 The separate FastAPI/React demo scaffold can still be run manually:
 

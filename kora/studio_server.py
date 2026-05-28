@@ -66,6 +66,16 @@ def get_studio_server_status(host: str = DEFAULT_STUDIO_HOST, port: int = DEFAUL
         "setup_guidance_url": SETUP_GUIDANCE_PATH,
         "setup_guidance_claim_boundary": SETUP_GUIDANCE_CLAIM_BOUNDARY,
         "disabled_actions_route_to_guidance": True,
+        "first_run_section_order": [
+            "Launch/local-only status",
+            "Your Computer",
+            "Model Capability",
+            "Runtime Status",
+            "Catalog vs Installed",
+            "Setup Guidance",
+            "KORA Boost Boundary",
+            "Execution Viewer placeholder",
+        ],
         "browser_launch_available": True,
         "ollama_calls_enabled": False,
         "local_runtime_required": False,
@@ -261,6 +271,22 @@ def render_studio_placeholder_html(status: dict[str, Any]) -> str:
         str(status.get("setup_guidance_claim_boundary", SETUP_GUIDANCE_CLAIM_BOUNDARY)),
         quote=True,
     )
+    section_order_items = "".join(
+        f"<li>{html.escape(str(item), quote=True)}</li>"
+        for item in status.get(
+            "first_run_section_order",
+            [
+                "Launch/local-only status",
+                "Your Computer",
+                "Model Capability",
+                "Runtime Status",
+                "Catalog vs Installed",
+                "Setup Guidance",
+                "KORA Boost Boundary",
+                "Execution Viewer placeholder",
+            ],
+        )
+    )
 
     return f"""<!doctype html>
 <html lang=\"en\">
@@ -443,8 +469,8 @@ def render_studio_placeholder_html(status: dict[str, Any]) -> str:
       <p class=\"technical\">Standard Mode sends every step to the model. KORA Boost routes deterministic and structured tasks to CPU/local fast paths first, so the model becomes one execution path, not the default path.</p>
     </header>
 
-    <section aria-label=\"Status Cards\" style=\"margin-top: 18px;\">
-      <h2>Status Cards</h2>
+    <section aria-label=\"Launch Local-only Status\" style=\"margin-top: 18px;\">
+      <h2>Launch / Local-only Status</h2>
       <div class=\"grid\">
         <div class=\"status-card card\"><h3>Server</h3><p class=\"status-value\">Server: local</p><p>Bound to the local Studio skeleton.</p></div>
         <div class=\"status-card card\"><h3>Provider Calls</h3><p class=\"status-value disabled\">Provider calls: disabled</p><p>No remote provider requests are made.</p></div>
@@ -452,17 +478,10 @@ def render_studio_placeholder_html(status: dict[str, Any]) -> str:
         <div class=\"status-card card\"><h3>Browser Launch</h3><p class=\"status-value\">Browser launch: available</p><p>The CLI opens the local page by default; use <code>--no-browser</code> to suppress it.</p></div>
         <div class=\"status-card card\"><h3>Ollama</h3><p class=\"status-value disabled\">Ollama integration: not connected</p><p>No Ollama model calls happen here.</p></div>
       </div>
+      <div class=\"card\" style=\"margin-top: 16px;\"><h3>First-run order</h3><ol>{section_order_items}</ol></div>
     </section>
 
     <div class=\"section-stack\">
-      <section>
-        <h2>Endpoint Panel</h2>
-        <div class=\"grid\">
-          <div class=\"card\"><h3><a href=\"/health\">/health</a></h3><p>Returns local health status JSON for the preview server.</p></div>
-          <div class=\"card\"><h3><a href=\"/status\">/status</a></h3><p>Returns local preview status, system profile, model capability estimate, KORA Boost copy, docs paths, and fixture paths.</p></div>
-        </div>
-      </section>
-
       <section>
         <h2>Your Computer</h2>
         <div class=\"grid\">
@@ -475,19 +494,29 @@ def render_studio_placeholder_html(status: dict[str, Any]) -> str:
         <h2>Model Capability Estimate</h2>
         <div class=\"grid\">
           <div class=\"card\"><h3>Estimated local model tier</h3><p>{recommended_tier}</p><p>{physical_notes}</p></div>
-          <div class=\"card\"><h3>KORA Boost Boundary</h3><p>{workflow_notes}</p><p>{claim_boundary}</p></div>
+          <div class=\"card\"><h3>Workflow feasibility</h3><p>{workflow_notes}</p><p>{claim_boundary}</p></div>
         </div>
       </section>
 
       <section>
-        <h2>Model Catalog Preview</h2>
+        <h2>Runtime Status</h2>
+        <div class=\"grid\">
+          <div class=\"card\"><h3>Runtime detected</h3><p>{runtime_name}: {runtime_detected}</p><p>Runtime executable detection is local-only.</p></div>
+          <div class=\"card\"><h3>Service reachability</h3><p>Runtime reachable: {service_status}</p><p>Service URL: {service_url}</p><p>Service reachability is a localhost-only check.</p><p>No model execution occurs during this check.</p><p>{service_boundary}</p></div>
+          <div class=\"card\"><h3>Installed model detection</h3><p>Detection enabled: {installed_enabled}</p><p>Detection method: {installed_method}</p><p>Installed model detection is not connected yet.</p></div>
+        </div>
+      </section>
+
+      <section>
+        <h2>Catalog vs Installed</h2>
         <div class=\"grid\">
           <div class=\"card\"><h3>Catalog examples</h3><p>{catalog_status}</p><p>Catalog examples are curated examples, not installed models.</p></div>
           <div class=\"card\"><h3>Physically runnable local candidates</h3><p>{local_candidate_name}</p><p>{local_candidate_note}</p></div>
           <div class=\"card\"><h3>Larger-model workflow candidates</h3><p>{workflow_candidate_name}</p><p>{workflow_candidate_note}</p></div>
+          <div class=\"card\"><h3>Installed locally</h3><p>Installed model detection: {installed_status}</p><p>Installed count: {installed_count}</p><p>No private model directories are scanned.</p><p>No runtime model list command is called by default.</p></div>
           <div class=\"card\"><h3>Download</h3><p><span class=\"badge\">{local_download_label}</span></p><p>{local_download_reason}</p><p>Download and run actions remain disabled.</p></div>
           <div class=\"card\"><h3>Run</h3><p><span class=\"badge\">{local_run_label}</span></p><p>{local_run_reason}</p><p>{local_action_boundary}</p></div>
-          <div class=\"card\"><h3>Catalog boundary</h3><p>{catalog_boundary}</p></div>
+          <div class=\"card\"><h3>Catalog boundary</h3><p>{catalog_boundary}</p><p>{installed_boundary}</p></div>
         </div>
       </section>
 
@@ -501,23 +530,29 @@ def render_studio_placeholder_html(status: dict[str, Any]) -> str:
       </section>
 
       <section>
-        <h2>Runtime Status</h2>
+        <h2>KORA Boost Boundary</h2>
         <div class=\"grid\">
-          <div class=\"card\"><h3>Runtime detected</h3><p>{runtime_name}: {runtime_detected}</p><p>Runtime executable detection is local-only.</p></div>
-          <div class=\"card\"><h3>Service reachability</h3><p>Runtime reachable: {service_status}</p><p>Service URL: {service_url}</p><p>Service reachability is a localhost-only check.</p><p>No model execution occurs during this check.</p><p>{service_boundary}</p></div>
-          <div class=\"card\"><h3>Installed locally</h3><p>Installed model detection: {installed_status}</p><p>Detection enabled: {installed_enabled}</p><p>Detection method: {installed_method}</p><p>Installed count: {installed_count}</p><p>Installed model detection is not connected yet.</p></div>
-          <div class=\"card\"><h3>Catalog vs Installed</h3><p>Catalog examples are not installed models.</p><p>No private model directories are scanned.</p><p>No runtime model list command is called by default.</p><p>{installed_boundary}</p></div>
-          <div class=\"card\"><h3>Actions</h3><p>Download and execution are not connected yet.</p><p>Download and run actions remain disabled.</p><p>KORA does not remove model memory requirements.</p></div>
+          <div class=\"card\"><h3>Standard Mode</h3><p>Standard Mode sends every step to the model.</p><p>In this preview, model execution is not connected.</p></div>
+          <div class=\"card\"><h3>KORA Boost</h3><p>KORA Boost routes deterministic and structured tasks to CPU/local fast paths first.</p><p>Larger-model workflows may become more practical when deterministic work avoids the model path.</p></div>
+          <div class=\"card\"><h3>Boundary</h3><p>KORA does not remove model memory requirements.</p><p>Provider/cloud routes are disabled by default.</p></div>
         </div>
       </section>
 
       <section>
-        <h2>Workflow Preview</h2>
+        <h2>Execution Viewer Placeholder</h2>
         <div class=\"workflow\">
           <div class=\"step\"><p class=\"step-number\">01</p><h3>Request / System Profile</h3><p>Planned: show what this machine can physically run.</p></div>
           <div class=\"step\"><p class=\"step-number\">02</p><h3>Deterministic checks / Route Selection</h3><p>Planned: choose deterministic code, structured lookup, local model, or larger execution path only when needed.</p></div>
           <div class=\"step\"><p class=\"step-number\">03</p><h3>Local status / KORA Boost</h3><p>Planned: route deterministic and structured work to CPU/local fast paths first.</p></div>
           <div class=\"step\"><p class=\"step-number\">04</p><h3>Future runtime integration placeholder</h3><p>Placeholder only; no runtime execution occurs on this page.</p></div>
+        </div>
+      </section>
+
+      <section>
+        <h2>Endpoint Panel</h2>
+        <div class=\"grid\">
+          <div class=\"card\"><h3><a href=\"/health\">/health</a></h3><p>Returns local health status JSON for the preview server.</p></div>
+          <div class=\"card\"><h3><a href=\"/status\">/status</a></h3><p>Returns local preview status, system profile, model capability estimate, KORA Boost copy, docs paths, and fixture paths.</p></div>
         </div>
       </section>
 

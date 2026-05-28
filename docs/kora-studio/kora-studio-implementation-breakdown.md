@@ -274,6 +274,27 @@ Acceptance criteria:
 - UI copy does not imply install/download/run behavior is connected
 - provider/cloud routes remain disabled by default
 
+## Phase 3.10 — First-run UI Order Scaffold
+
+Status: Initial static preview ordering exists. The local preview page and React demo copy now orient first-run users around Launch/local-only status, Your Computer, Model Capability, Runtime Status, Catalog vs Installed, Setup Guidance, KORA Boost Boundary, and an Execution Viewer placeholder.
+
+Scope:
+
+- first-run section order metadata
+- static preview order cleanup
+- React demo first-run surface copy
+- disabled/planned action language preserved
+- no model downloads
+- no model execution
+- no provider/cloud route
+
+Acceptance criteria:
+
+- first-run sections appear in the intended order
+- catalog examples remain distinct from installed models
+- setup guidance remains informational only
+- execution viewer remains fixture/demo or placeholder until future harness work
+
 ## Phase 4 — Report Viewer
 
 Goal: Render existing local Markdown validation reports.

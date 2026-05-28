@@ -94,6 +94,16 @@ def test_get_studio_server_status_fields() -> None:
     assert status["setup_guidance_url"] == "docs/kora-studio/kora-studio-runtime-setup-guidance.md"
     assert status["disabled_actions_route_to_guidance"] is True
     assert "not to an active installer" in status["setup_guidance_claim_boundary"]
+    assert status["first_run_section_order"] == [
+        "Launch/local-only status",
+        "Your Computer",
+        "Model Capability",
+        "Runtime Status",
+        "Catalog vs Installed",
+        "Setup Guidance",
+        "KORA Boost Boundary",
+        "Execution Viewer placeholder",
+    ]
     assert status["browser_launch_available"] is True
     assert status["ollama_calls_enabled"] is False
     assert status["local_runtime_required"] is False
@@ -272,7 +282,7 @@ def test_request_handler_serves_health_status_and_placeholder() -> None:
     assert "Provider calls: disabled" in html
     assert "Your Computer" in html
     assert "Model Capability Estimate" in html
-    assert "Model Catalog Preview" in html
+    assert "Catalog vs Installed" in html
     assert "Physically runnable local candidates" in html
     assert "Larger-model workflow candidates" in html
     assert "Model recommendations are estimates until validated on this machine" in html
@@ -320,12 +330,13 @@ def test_static_preview_html_content_is_safe_and_complete() -> None:
     assert APPROVED_BOOST_MESSAGE in html
     assert TECHNICAL_EXPLANATION in html
     assert "deterministic-first local workflow exploration" in html
-    assert "Status Cards" in html
+    assert "Launch / Local-only Status" in html
+    assert "First-run order" in html
     assert "Server: local" in html
     assert "Provider calls: disabled" in html
     assert "Your Computer" in html
     assert "Model Capability Estimate" in html
-    assert "Model Catalog Preview" in html
+    assert "Catalog vs Installed" in html
     assert "Catalog examples" in html
     assert "static_local_scaffold" in html
     assert "Download and execution are not connected yet" in html
@@ -354,7 +365,7 @@ def test_static_preview_html_content_is_safe_and_complete() -> None:
     assert "Endpoint Panel" in html
     assert "/health" in html
     assert "/status" in html
-    assert "Workflow Preview" in html
+    assert "Execution Viewer Placeholder" in html
     assert "Request" in html
     assert "Deterministic checks" in html
     assert "Local status" in html
@@ -388,6 +399,19 @@ def test_static_preview_html_content_is_safe_and_complete() -> None:
     assert "fetch(" not in html.lower()
     assert "xmlhttprequest" not in html.lower()
     assert "navigator.sendbeacon" not in html.lower()
+
+    ordered_sections = [
+        "Launch / Local-only Status",
+        "Your Computer",
+        "Model Capability Estimate",
+        "Runtime Status",
+        "Catalog vs Installed",
+        "Setup Guidance",
+        "KORA Boost Boundary",
+        "Execution Viewer Placeholder",
+    ]
+    positions = [html.index(f"<h2>{section}</h2>") for section in ordered_sections]
+    assert positions == sorted(positions)
 
 
 def test_runtime_setup_guidance_doc_is_claim_safe() -> None:
