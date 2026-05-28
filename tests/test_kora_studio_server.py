@@ -4,6 +4,7 @@ import json
 import os
 import threading
 import urllib.request
+from pathlib import Path
 
 import pytest
 from http.server import ThreadingHTTPServer
@@ -70,6 +71,8 @@ def test_get_studio_server_status_fields() -> None:
     assert first_model["run_action_enabled"] is False
     assert first_model["download_action_label"] == "Download not connected yet"
     assert first_model["run_action_label"] == "Run not connected yet"
+    assert first_model["disabled_actions_route_to_guidance"] is True
+    assert first_model["setup_guidance_path"] == "docs/kora-studio/kora-studio-runtime-setup-guidance.md"
     assert "estimates until validated" in status["model_catalog_claim_boundary"]
     assert "Download and execution are not connected yet" in status["model_catalog_claim_boundary"]
     assert status["runtime_status"]
@@ -87,6 +90,10 @@ def test_get_studio_server_status_fields() -> None:
     assert status["installed_models_summary"]["installed_model_detection_enabled"] is False
     assert status["installed_models_summary"]["installed_models_count"] == 0
     assert "Catalog examples are not the same as installed models" in status["catalog_runtime_distinction"]
+    assert status["setup_guidance_status"] == "informational_scaffold"
+    assert status["setup_guidance_url"] == "docs/kora-studio/kora-studio-runtime-setup-guidance.md"
+    assert status["disabled_actions_route_to_guidance"] is True
+    assert "not to an active installer" in status["setup_guidance_claim_boundary"]
     assert status["browser_launch_available"] is True
     assert status["ollama_calls_enabled"] is False
     assert status["local_runtime_required"] is False
@@ -119,6 +126,8 @@ def test_health_and_status_payloads_are_claim_safe() -> None:
     assert "runtime_status" in status
     assert "installed_models_summary" in status
     assert status["installed_models_summary"]["installed_model_detection_enabled"] is False
+    assert status["setup_guidance_status"] == "informational_scaffold"
+    assert status["disabled_actions_route_to_guidance"] is True
     assert status["no_server_side_provider_calls"] is True
     assert status["kora_boost_message"] == APPROVED_BOOST_MESSAGE
 
@@ -272,6 +281,12 @@ def test_request_handler_serves_health_status_and_placeholder() -> None:
     assert "Run" in html
     assert "Download not connected yet" in html
     assert "Run not connected yet" in html
+    assert "Setup Guidance" in html
+    assert "Disabled actions point to guidance, not to an active installer" in html
+    assert "No model is downloaded" in html
+    assert "No model is executed" in html
+    assert "Provider/cloud routes are disabled by default" in html
+    assert "docs/kora-studio/kora-studio-runtime-setup-guidance.md" in html
     assert "Runtime Status" in html
     assert "Installed locally" in html
     assert "Service reachability is a localhost-only check" in html
@@ -316,6 +331,10 @@ def test_static_preview_html_content_is_safe_and_complete() -> None:
     assert "Download and execution are not connected yet" in html
     assert "Download not connected yet" in html
     assert "Run not connected yet" in html
+    assert "Setup Guidance" in html
+    assert "Disabled actions point to guidance, not to an active installer" in html
+    assert "No model is downloaded" in html
+    assert "No model is executed" in html
     assert "Runtime Status" in html
     assert "Installed model detection" in html
     assert "Runtime executable detection is local-only" in html
@@ -356,6 +375,7 @@ def test_static_preview_html_content_is_safe_and_complete() -> None:
     assert "provider calls enabled" not in html.lower()
     assert "download now" not in html.lower()
     assert "run now" not in html.lower()
+    assert "install now" not in html.lower()
     assert "production cost reduction" not in html.lower()
     assert "real api-cost reduction" not in html.lower()
     assert "energy reduction" not in html.lower()
@@ -368,3 +388,16 @@ def test_static_preview_html_content_is_safe_and_complete() -> None:
     assert "fetch(" not in html.lower()
     assert "xmlhttprequest" not in html.lower()
     assert "navigator.sendbeacon" not in html.lower()
+
+
+def test_runtime_setup_guidance_doc_is_claim_safe() -> None:
+    doc = Path("docs/kora-studio/kora-studio-runtime-setup-guidance.md").read_text()
+
+    assert "Setup guidance is informational in this scaffold" in doc
+    assert "Disabled actions point to guidance, not to an active installer" in doc
+    assert "No model is downloaded" in doc
+    assert "No model is executed" in doc
+    assert "No private model directories are scanned" in doc
+    assert "No runtime model list command is called" in doc
+    assert "No provider call is made" in doc
+    assert "Provider and cloud routes are disabled by default" in doc

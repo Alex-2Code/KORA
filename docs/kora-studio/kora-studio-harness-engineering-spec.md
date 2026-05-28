@@ -77,6 +77,8 @@ Runtime status scaffold status: the preview server exposes local runtime executa
 
 Disabled action scaffold status: catalog recommendations expose planned download/run action metadata with actions disabled by default. The preview page may show disabled labels such as "Download not connected yet" and "Run not connected yet", but no download, execution, registry lookup, provider call, or cloud sync is connected.
 
+Runtime setup guidance status: the preview server exposes informational setup guidance metadata through `/status`. Disabled actions may point to `kora-studio-runtime-setup-guidance.md`, but this does not connect an installer, model download, runtime model list command, model execution, provider route, or cloud sync.
+
 ### 4. Deterministic route layer
 
 The deterministic route layer captures non-model execution choices and their validation results.

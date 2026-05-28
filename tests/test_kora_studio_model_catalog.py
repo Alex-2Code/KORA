@@ -42,6 +42,10 @@ def test_recommendations_for_unknown_memory_are_conservative() -> None:
         assert item["run_action_enabled"] is False
         assert item["download_action_label"] == "Download not connected yet"
         assert item["run_action_label"] == "Run not connected yet"
+        assert item["disabled_actions_route_to_guidance"] is True
+        assert item["setup_guidance_path"] == "docs/kora-studio/kora-studio-runtime-setup-guidance.md"
+        assert "guidance" in item["download_action_reason"].lower()
+        assert "not install or download" in item["install_guidance"].lower()
         assert item["download_action_status"] == "not_connected"
         assert item["run_action_status"] == "not_connected"
         assert "not connected" in item["runtime_guidance"].lower()
@@ -124,8 +128,12 @@ def test_recommendations_include_disabled_action_guidance() -> None:
         assert item["run_action_status"] == "not_connected"
         assert item["run_action_enabled"] is False
         assert "KORA does not remove model memory requirements" in item["action_claim_boundary"]
+        assert item["disabled_actions_route_to_guidance"] is True
+        assert "guidance" in item["download_action_reason"].lower()
+        assert "readiness" in item["run_action_reason"].lower() or "not connected" in item["run_action_reason"].lower()
         assert "Download now" not in str(item)
         assert "Run now" not in str(item)
+        assert "Install now" not in str(item)
 
 
 def test_recommendations_for_mid_memory_tiers() -> None:

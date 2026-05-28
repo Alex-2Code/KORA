@@ -250,6 +250,30 @@ Acceptance criteria:
 - UI copy does not imply models can be downloaded or run
 - catalog examples remain distinct from installed models
 
+## Phase 3.9 — Runtime Setup Guidance Scaffold
+
+Status: Initial informational setup guidance exists in `kora-studio-runtime-setup-guidance.md`. `/status` includes setup guidance metadata, and disabled actions route to guidance copy rather than active install, download, or run behavior.
+
+Scope:
+
+- setup guidance docs path
+- disabled actions route to guidance
+- catalog vs installed vs downloadable boundary
+- runtime readiness distinction
+- no install commands
+- no model downloads
+- no model execution
+- no runtime model list commands
+- no private model directory scans
+- no provider/cloud route
+
+Acceptance criteria:
+
+- setup guidance is informational only
+- disabled actions remain disabled
+- UI copy does not imply install/download/run behavior is connected
+- provider/cloud routes remain disabled by default
+
 ## Phase 4 — Report Viewer
 
 Goal: Render existing local Markdown validation reports.

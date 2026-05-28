@@ -52,6 +52,8 @@ Runtime status is also exposed as a local scaffold. Executable detection is loca
 
 Catalog action labels are disabled planning scaffolds only. The preview may show "Download not connected yet" and "Run not connected yet"; these labels do not download, execute, call a registry, or call a provider.
 
+Setup guidance is informational in this scaffold. Disabled actions can point to guidance copy, but they do not install runtimes, download models, execute models, call runtime model list commands, scan private model directories, or enable provider/cloud routes.
+
 The separate FastAPI/React demo scaffold can still be run manually:
 
 From repo root:

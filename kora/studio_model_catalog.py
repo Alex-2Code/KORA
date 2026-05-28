@@ -16,6 +16,7 @@ MODEL_ACTION_CLAIM_BOUNDARY = (
     "Model actions are disabled planning scaffolds. Catalog examples are not installed models. "
     "KORA does not remove model memory requirements."
 )
+SETUP_GUIDANCE_PATH = "docs/kora-studio/kora-studio-runtime-setup-guidance.md"
 
 REQUIRED_MODEL_CATALOG_FIELDS = {
     "model_id",
@@ -146,9 +147,9 @@ def _attach_disabled_action_state(item: dict[str, Any], *, runtime_detected: boo
     item["download_action_enabled"] = False
     item["download_action_label"] = "Download not connected yet"
     item["download_action_reason"] = (
-        "Install a supported local runtime before model download can be connected."
+        "Setup guidance is informational in this scaffold; download is not connected."
         if not runtime_detected
-        else "Download is planned but not connected in this preview."
+        else "Download is planned but not connected; see setup guidance for boundaries."
     )
     item["run_action_status"] = "not_connected"
     item["run_action_enabled"] = False
@@ -159,13 +160,15 @@ def _attach_disabled_action_state(item: dict[str, Any], *, runtime_detected: boo
         else "Runtime service and model execution are not connected yet."
     )
     item["install_guidance"] = (
-        "Install a supported local runtime before model download can be connected."
+        "Setup guidance is informational only and does not install or download models."
         if not runtime_detected
-        else "Catalog examples are not installed models."
+        else "Catalog examples are not installed models; setup guidance does not install or download models."
     )
     item["runtime_guidance"] = (
-        "Runtime service reachability is not checked yet. Download and execution are not connected yet."
+        "Runtime service reachability is not model execution readiness. Download and execution are not connected yet."
     )
+    item["setup_guidance_path"] = SETUP_GUIDANCE_PATH
+    item["disabled_actions_route_to_guidance"] = True
     item["action_claim_boundary"] = MODEL_ACTION_CLAIM_BOUNDARY
 
 

@@ -8,7 +8,7 @@ import webbrowser
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from typing import Any, Callable
 
-from kora.studio_model_catalog import MODEL_CATALOG_CLAIM_BOUNDARY, recommend_catalog_models
+from kora.studio_model_catalog import MODEL_CATALOG_CLAIM_BOUNDARY, SETUP_GUIDANCE_PATH, recommend_catalog_models
 from kora.studio_runtime_status import get_runtime_status, summarize_installed_models
 from kora.studio_status import get_studio_status
 from kora.studio_system_profile import estimate_model_capability, get_system_profile
@@ -16,6 +16,11 @@ from kora.studio_system_profile import estimate_model_capability, get_system_pro
 DEFAULT_STUDIO_HOST = "127.0.0.1"
 DEFAULT_STUDIO_PORT = 8765
 ALLOWED_STUDIO_HOSTS = {"127.0.0.1", "localhost"}
+SETUP_GUIDANCE_CLAIM_BOUNDARY = (
+    "Setup guidance is informational in this scaffold. Disabled actions point to guidance, not to an active "
+    "installer. No model is downloaded, no model is executed, no provider call is made, and cloud routes remain "
+    "disabled by default."
+)
 
 StatusProvider = Callable[[], dict[str, Any]]
 BrowserOpener = Callable[[str], bool]
@@ -57,6 +62,10 @@ def get_studio_server_status(host: str = DEFAULT_STUDIO_HOST, port: int = DEFAUL
             "Catalog examples are not the same as installed models. Installed model detection is not connected by "
             "default. Download and execution are not connected yet."
         ),
+        "setup_guidance_status": "informational_scaffold",
+        "setup_guidance_url": SETUP_GUIDANCE_PATH,
+        "setup_guidance_claim_boundary": SETUP_GUIDANCE_CLAIM_BOUNDARY,
+        "disabled_actions_route_to_guidance": True,
         "browser_launch_available": True,
         "ollama_calls_enabled": False,
         "local_runtime_required": False,
@@ -193,6 +202,8 @@ def render_studio_placeholder_html(status: dict[str, Any]) -> str:
     )
     local_download_label = html.escape(str(local_candidate.get("download_action_label", "Download not connected yet")), quote=True)
     local_run_label = html.escape(str(local_candidate.get("run_action_label", "Run not connected yet")), quote=True)
+    local_download_reason = html.escape(str(local_candidate.get("download_action_reason", "")), quote=True)
+    local_run_reason = html.escape(str(local_candidate.get("run_action_reason", "")), quote=True)
     local_action_boundary = html.escape(
         str(
             local_candidate.get(
@@ -242,6 +253,12 @@ def render_studio_placeholder_html(status: dict[str, Any]) -> str:
                 "Installed model detection is local-only and disabled by default. Catalog examples are not installed models.",
             )
         ),
+        quote=True,
+    )
+    setup_guidance_status = html.escape(str(status.get("setup_guidance_status", "informational_scaffold")), quote=True)
+    setup_guidance_url = html.escape(str(status.get("setup_guidance_url", SETUP_GUIDANCE_PATH)), quote=True)
+    setup_guidance_boundary = html.escape(
+        str(status.get("setup_guidance_claim_boundary", SETUP_GUIDANCE_CLAIM_BOUNDARY)),
         quote=True,
     )
 
@@ -468,9 +485,18 @@ def render_studio_placeholder_html(status: dict[str, Any]) -> str:
           <div class=\"card\"><h3>Catalog examples</h3><p>{catalog_status}</p><p>Catalog examples are curated examples, not installed models.</p></div>
           <div class=\"card\"><h3>Physically runnable local candidates</h3><p>{local_candidate_name}</p><p>{local_candidate_note}</p></div>
           <div class=\"card\"><h3>Larger-model workflow candidates</h3><p>{workflow_candidate_name}</p><p>{workflow_candidate_note}</p></div>
-          <div class=\"card\"><h3>Download</h3><p><span class=\"badge\">{local_download_label}</span></p><p>Download and run actions remain disabled.</p></div>
-          <div class=\"card\"><h3>Run</h3><p><span class=\"badge\">{local_run_label}</span></p><p>{local_action_boundary}</p></div>
+          <div class=\"card\"><h3>Download</h3><p><span class=\"badge\">{local_download_label}</span></p><p>{local_download_reason}</p><p>Download and run actions remain disabled.</p></div>
+          <div class=\"card\"><h3>Run</h3><p><span class=\"badge\">{local_run_label}</span></p><p>{local_run_reason}</p><p>{local_action_boundary}</p></div>
           <div class=\"card\"><h3>Catalog boundary</h3><p>{catalog_boundary}</p></div>
+        </div>
+      </section>
+
+      <section>
+        <h2>Setup Guidance</h2>
+        <div class=\"grid\">
+          <div class=\"card\"><h3>Guidance status</h3><p>{setup_guidance_status}</p><p>Disabled actions point to guidance, not to an active installer.</p><p><code>{setup_guidance_url}</code></p></div>
+          <div class=\"card\"><h3>Setup boundary</h3><p>No model is downloaded.</p><p>No model is executed.</p><p>No provider call is made.</p><p>Provider/cloud routes are disabled by default.</p></div>
+          <div class=\"card\"><h3>Runtime readiness</h3><p>Runtime executable detection is not model execution readiness.</p><p>Catalog examples are not installed models.</p><p>{setup_guidance_boundary}</p></div>
         </div>
       </section>
 
