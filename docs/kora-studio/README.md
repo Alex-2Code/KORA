@@ -117,6 +117,7 @@ Status:
 - default port: `8765`
 - endpoints: `/health`, `/status`, `/`
 - `/status` includes a local system profile scaffold and model capability estimate
+- `/status` includes a static local model catalog scaffold and claim-safe recommendations
 - browser launch enabled by default unless `--no-browser` is set
 - no Ollama calls
 - no provider calls
@@ -139,7 +140,7 @@ Open locally:
 http://127.0.0.1:8765/
 ```
 
-The page shows local status cards, endpoint references, a static system profile panel, a model capability estimate panel, a static workflow preview, and explicit limitations. It uses embedded HTML/CSS, can be opened automatically by the CLI, does not call Ollama or providers, does not enable cloud sync, does not connect a model/runtime, does not require API keys, and does not use a frontend framework yet. Use `python3 -m kora studio --no-browser` to keep serving locally without opening a browser. The model capability estimate is local and heuristic; recommendations are estimates until validated and do not claim unsupported larger models can run.
+The page shows local status cards, endpoint references, a static system profile panel, a model capability estimate panel, a static model catalog preview, a static workflow preview, and explicit limitations. It uses embedded HTML/CSS, can be opened automatically by the CLI, does not call Ollama or providers, does not enable cloud sync, does not connect a model/runtime, does not download models, does not require API keys, and does not use a frontend framework yet. Use `python3 -m kora studio --no-browser` to keep serving locally without opening a browser. The model capability estimate and model catalog recommendations are local and heuristic; recommendations are estimates until validated and do not claim unsupported larger models can run. KORA does not support all open-source LLMs by default.
 
 ## Implementation Planning
 

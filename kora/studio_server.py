@@ -8,6 +8,7 @@ import webbrowser
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from typing import Any, Callable
 
+from kora.studio_model_catalog import MODEL_CATALOG_CLAIM_BOUNDARY, recommend_catalog_models
 from kora.studio_status import get_studio_status
 from kora.studio_system_profile import estimate_model_capability, get_system_profile
 
@@ -31,6 +32,7 @@ def get_studio_server_status(host: str = DEFAULT_STUDIO_HOST, port: int = DEFAUL
     studio_status = get_studio_status()
     system_profile = get_system_profile(default_host=host, default_port=port)
     model_capability_estimate = estimate_model_capability(system_profile)
+    recommended_models = recommend_catalog_models(system_profile, model_capability_estimate)
     return {
         "ok": True,
         "service": "kora-studio",
@@ -43,6 +45,9 @@ def get_studio_server_status(host: str = DEFAULT_STUDIO_HOST, port: int = DEFAUL
         "cloud_sync_enabled": False,
         "system_profile": system_profile.to_dict(),
         "model_capability_estimate": model_capability_estimate,
+        "model_catalog_status": "static_local_scaffold",
+        "recommended_models": recommended_models,
+        "model_catalog_claim_boundary": MODEL_CATALOG_CLAIM_BOUNDARY,
         "browser_launch_available": True,
         "ollama_calls_enabled": False,
         "local_runtime_required": False,
@@ -149,6 +154,42 @@ def render_studio_placeholder_html(status: dict[str, Any]) -> str:
     )
     claim_boundary = html.escape(
         str(model_capability.get("claim_boundary", "Recommendations are estimates until validated on this machine.")),
+        quote=True,
+    )
+    recommended_models = status.get("recommended_models", [])
+    catalog_status = html.escape(str(status.get("model_catalog_status", "static_local_scaffold")), quote=True)
+    catalog_boundary = html.escape(
+        str(status.get("model_catalog_claim_boundary", MODEL_CATALOG_CLAIM_BOUNDARY)),
+        quote=True,
+    )
+    runnable_models = [
+        item
+        for item in recommended_models
+        if isinstance(item, dict) and item.get("candidate_type") == "physically_runnable_local_candidate"
+    ]
+    workflow_models = [
+        item
+        for item in recommended_models
+        if isinstance(item, dict) and item.get("candidate_type") == "larger_model_workflow_candidate"
+    ]
+    unknown_models = [
+        item for item in recommended_models if isinstance(item, dict) and item.get("candidate_type") == "unknown_needs_validation"
+    ]
+    local_candidate = runnable_models[0] if runnable_models else (unknown_models[0] if unknown_models else {})
+    workflow_candidate = workflow_models[0] if workflow_models else {}
+    local_candidate_name = html.escape(str(local_candidate.get("display_name", "Unknown until validated")), quote=True)
+    local_candidate_note = html.escape(
+        str(local_candidate.get("recommendation_note", "Model recommendations are estimates until validated on this machine.")),
+        quote=True,
+    )
+    workflow_candidate_name = html.escape(str(workflow_candidate.get("display_name", "Larger workflow example")), quote=True)
+    workflow_candidate_note = html.escape(
+        str(
+            workflow_candidate.get(
+                "recommendation_note",
+                "Larger-model workflows may become more practical when deterministic work avoids the model path.",
+            )
+        ),
         quote=True,
     )
 
@@ -366,6 +407,16 @@ def render_studio_placeholder_html(status: dict[str, Any]) -> str:
         <div class=\"grid\">
           <div class=\"card\"><h3>Estimated local model tier</h3><p>{recommended_tier}</p><p>{physical_notes}</p></div>
           <div class=\"card\"><h3>KORA Boost Boundary</h3><p>{workflow_notes}</p><p>{claim_boundary}</p></div>
+        </div>
+      </section>
+
+      <section>
+        <h2>Model Catalog Preview</h2>
+        <div class=\"grid\">
+          <div class=\"card\"><h3>Catalog status</h3><p>{catalog_status}</p><p>Download and execution are not connected yet.</p></div>
+          <div class=\"card\"><h3>Physically runnable local candidates</h3><p>{local_candidate_name}</p><p>{local_candidate_note}</p></div>
+          <div class=\"card\"><h3>Larger-model workflow candidates</h3><p>{workflow_candidate_name}</p><p>{workflow_candidate_note}</p></div>
+          <div class=\"card\"><h3>Catalog boundary</h3><p>{catalog_boundary}</p></div>
         </div>
       </section>
 

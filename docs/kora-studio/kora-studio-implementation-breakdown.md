@@ -174,6 +174,30 @@ Acceptance criteria:
 - no unsupported larger-model claim is shown
 - no provider/cloud route is enabled by default
 
+## Phase 3.6 — Model Catalog Planning Scaffold
+
+Status: Initial static local scaffold exists in the preview server. `/status` includes `model_catalog_status`, `recommended_models`, and `model_catalog_claim_boundary`, and the static preview page shows a read-only model catalog preview.
+
+Scope:
+
+- curated static model tier metadata
+- local-only recommendation helper
+- physically runnable local candidate labels
+- larger-model workflow candidate labels
+- estimate-until-validated claim boundary
+- download and execution disabled
+- no remote catalog fetching
+- no Hugging Face search
+- no Ollama registry calls
+- no provider/cloud route
+
+Acceptance criteria:
+
+- model recommendations are estimates until validated
+- no catalog entry claims all open-source LLM support
+- no unsupported larger-model local execution claim is shown
+- no download or execution action is connected
+
 ## Phase 4 — Report Viewer
 
 Goal: Render existing local Markdown validation reports.

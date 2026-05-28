@@ -71,6 +71,8 @@ Requirements:
 
 Initial implementation status: the preview server exposes a local heuristic model capability estimate through `/status` and the static preview page. Recommendations are estimates until validated on the machine and do not claim unsupported larger-model execution.
 
+Model catalog scaffold status: the preview server exposes a static curated local catalog scaffold through `/status`. It does not fetch remote catalogs, search Hugging Face, call Ollama registries, download models, execute models, or claim all open-source LLM support. Catalog recommendations are estimates until validated and must keep download/execution actions disabled until separate implementation work lands.
+
 ### 4. Deterministic route layer
 
 The deterministic route layer captures non-model execution choices and their validation results.

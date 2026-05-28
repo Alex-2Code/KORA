@@ -46,6 +46,8 @@ It starts the localhost-only server on `127.0.0.1:8765`, opens the default brows
 
 The preview `/status` response includes a local system profile scaffold and model capability estimate. The estimate is heuristic and local-only; recommendations are estimates until validated on the machine and do not claim unsupported larger-model execution.
 
+The preview also includes a static local model catalog scaffold. Catalog recommendations are curated examples, do not fetch remote registries, do not download or execute models, and do not imply all open-source LLMs are supported.
+
 The separate FastAPI/React demo scaffold can still be run manually:
 
 From repo root:

@@ -63,6 +63,10 @@ def test_get_studio_server_status_fields() -> None:
     assert status["system_profile"]["cloud_sync_enabled"] is False
     assert status["model_capability_estimate"]["recommended_local_chat_tier"]
     assert "estimates until validated" in status["model_capability_estimate"]["claim_boundary"]
+    assert status["model_catalog_status"] == "static_local_scaffold"
+    assert status["recommended_models"]
+    assert "estimates until validated" in status["model_catalog_claim_boundary"]
+    assert "Download and execution are not connected yet" in status["model_catalog_claim_boundary"]
     assert status["browser_launch_available"] is True
     assert status["ollama_calls_enabled"] is False
     assert status["local_runtime_required"] is False
@@ -90,6 +94,8 @@ def test_health_and_status_payloads_are_claim_safe() -> None:
     assert status["cloud_sync_enabled"] is False
     assert "system_profile" in status
     assert "model_capability_estimate" in status
+    assert "recommended_models" in status
+    assert status["model_catalog_status"] == "static_local_scaffold"
     assert status["no_server_side_provider_calls"] is True
     assert status["kora_boost_message"] == APPROVED_BOOST_MESSAGE
 
@@ -216,6 +222,8 @@ def test_request_handler_serves_health_status_and_placeholder() -> None:
     assert status["cloud_sync_enabled"] is False
     assert "system_profile" in status
     assert "model_capability_estimate" in status
+    assert "recommended_models" in status
+    assert status["model_catalog_claim_boundary"]
     assert status["ollama_calls_enabled"] is False
     content_type = response.headers.get("Content-Type", "")
 
@@ -230,6 +238,11 @@ def test_request_handler_serves_health_status_and_placeholder() -> None:
     assert "Provider calls: disabled" in html
     assert "Your Computer" in html
     assert "Model Capability Estimate" in html
+    assert "Model Catalog Preview" in html
+    assert "Physically runnable local candidates" in html
+    assert "Larger-model workflow candidates" in html
+    assert "Model recommendations are estimates until validated on this machine" in html
+    assert "Download and execution are not connected yet" in html
     assert "Estimated local model tier" in html
     assert "KORA Boost Boundary" in html
     assert "KORA does not remove RAM/VRAM/unified-memory requirements" in html
@@ -258,6 +271,10 @@ def test_static_preview_html_content_is_safe_and_complete() -> None:
     assert "Provider calls: disabled" in html
     assert "Your Computer" in html
     assert "Model Capability Estimate" in html
+    assert "Model Catalog Preview" in html
+    assert "Catalog status" in html
+    assert "static_local_scaffold" in html
+    assert "Download and execution are not connected yet" in html
     assert "Estimated local model tier" in html
     assert "Unknown until validated" in html or "depending on runtime" in html
     assert "KORA does not remove RAM/VRAM/unified-memory requirements" in html
@@ -286,6 +303,7 @@ def test_static_preview_html_content_is_safe_and_complete() -> None:
     assert "OPENAI_API_KEY" not in html
     assert "ANTHROPIC_API_KEY" not in html
     assert "provider calls enabled" not in html.lower()
+    assert "download now" not in html.lower()
     assert "production cost reduction" not in html.lower()
     assert "real api-cost reduction" not in html.lower()
     assert "energy reduction" not in html.lower()
