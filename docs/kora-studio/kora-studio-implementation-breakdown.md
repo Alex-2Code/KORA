@@ -200,17 +200,18 @@ Acceptance criteria:
 
 ## Phase 3.7 — Runtime Status and Installed Model Scaffold
 
-Status: Initial local scaffold exists in the preview server. `/status` includes `runtime_status`, `installed_models_summary`, and catalog/runtime distinction copy, and the static preview page shows read-only runtime and installed-model panels.
+Status: Initial local scaffold exists in the preview server. `/status` includes `runtime_status`, localhost-only service reachability fields, `installed_models_summary`, and catalog/runtime distinction copy, and the static preview page shows read-only runtime and installed-model panels.
 
 Scope:
 
 - local runtime executable detection
-- runtime service reachability marked `not_checked`
+- runtime service reachability scaffolded as a localhost-only check
+- service reachability is not model execution readiness
 - installed model detection marked `not_checked`
 - catalog examples distinguished from installed models
 - download disabled
 - execution disabled
-- no runtime API calls
+- no model listing calls
 - no model execution
 - no model downloads
 - no remote registry calls
@@ -219,6 +220,7 @@ Scope:
 Acceptance criteria:
 
 - runtime executable detection is local-only
+- service reachability does not execute, list, pull, or download models
 - catalog examples are not presented as installed models
 - no model is shown as installed unless safely confirmed
 - no download or execution action is connected

@@ -73,7 +73,15 @@ def test_get_studio_server_status_fields() -> None:
     assert "estimates until validated" in status["model_catalog_claim_boundary"]
     assert "Download and execution are not connected yet" in status["model_catalog_claim_boundary"]
     assert status["runtime_status"]
+    first_runtime = status["runtime_status"][0]
+    assert first_runtime["service_reachable"] is False
+    assert first_runtime["service_check_status"] == "not_checked"
+    assert first_runtime["service_url"] == "http://127.0.0.1:11434/"
+    assert first_runtime["service_probe_timeout_ms"] <= 500
+    assert "localhost-only check" in first_runtime["service_probe_claim_boundary"]
+    assert first_runtime["installed_model_detection_status"] == "not_checked"
     assert status["installed_models_summary"]["detection_status"] == "not_checked"
+    assert status["installed_models_summary"]["installed_model_detection_status"] == "not_checked"
     assert "Catalog examples are not the same as installed models" in status["catalog_runtime_distinction"]
     assert status["browser_launch_available"] is True
     assert status["ollama_calls_enabled"] is False
@@ -260,6 +268,10 @@ def test_request_handler_serves_health_status_and_placeholder() -> None:
     assert "Run not connected yet" in html
     assert "Runtime Status" in html
     assert "Installed Models" in html
+    assert "Service reachability is a localhost-only check" in html
+    assert "No model execution occurs during this check" in html
+    assert "Installed model detection is not connected yet" in html
+    assert "Download and run actions remain disabled" in html
     assert "Catalog vs Installed" in html
     assert "Catalog examples are not the same as installed models" in html
     assert "Estimated local model tier" in html
@@ -298,6 +310,11 @@ def test_static_preview_html_content_is_safe_and_complete() -> None:
     assert "Run not connected yet" in html
     assert "Runtime Status" in html
     assert "Installed model detection" in html
+    assert "Runtime executable detection is local-only" in html
+    assert "Service reachability is a localhost-only check" in html
+    assert "No model execution occurs during this check" in html
+    assert "Installed model detection is not connected yet" in html
+    assert "Download and run actions remain disabled" in html
     assert "Catalog examples are not the same as installed models" in html
     assert "Estimated local model tier" in html
     assert "Unknown until validated" in html or "depending on runtime" in html

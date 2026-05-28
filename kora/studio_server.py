@@ -217,6 +217,16 @@ def render_studio_placeholder_html(status: dict[str, Any]) -> str:
     runtime_name = html.escape(str(first_runtime.get("display_name", "Unknown runtime")), quote=True)
     runtime_detected = "detected" if first_runtime.get("executable_detected") is True else "not detected"
     service_status = html.escape(str(first_runtime.get("service_check_status", "not_checked")), quote=True)
+    service_url = html.escape(str(first_runtime.get("service_url") or "not configured"), quote=True)
+    service_boundary = html.escape(
+        str(
+            first_runtime.get(
+                "service_probe_claim_boundary",
+                "Service reachability is a localhost-only check. It does not execute models.",
+            )
+        ),
+        quote=True,
+    )
     installed_status = html.escape(str(installed_summary.get("detection_status", "not_checked")), quote=True)
     installed_count = html.escape(str(installed_summary.get("installed_model_count", 0)), quote=True)
     installed_boundary = html.escape(
@@ -417,7 +427,7 @@ def render_studio_placeholder_html(status: dict[str, Any]) -> str:
         <div class=\"status-card card\"><h3>Provider Calls</h3><p class=\"status-value disabled\">Provider calls: disabled</p><p>No remote provider requests are made.</p></div>
         <div class=\"status-card card\"><h3>Model Runtime</h3><p class=\"status-value disabled\">Model/runtime integration: not connected</p><p>Future runtime work must distinguish physically runnable local models from workflow-usable models.</p></div>
         <div class=\"status-card card\"><h3>Browser Launch</h3><p class=\"status-value\">Browser launch: available</p><p>The CLI opens the local page by default; use <code>--no-browser</code> to suppress it.</p></div>
-        <div class=\"status-card card\"><h3>Ollama</h3><p class=\"status-value disabled\">Ollama integration: not connected</p><p>No Ollama detection or model calls happen here.</p></div>
+        <div class=\"status-card card\"><h3>Ollama</h3><p class=\"status-value disabled\">Ollama integration: not connected</p><p>No Ollama model calls happen here.</p></div>
       </div>
     </section>
 
@@ -460,10 +470,11 @@ def render_studio_placeholder_html(status: dict[str, Any]) -> str:
       <section>
         <h2>Runtime Status</h2>
         <div class=\"grid\">
-          <div class=\"card\"><h3>Runtime detected</h3><p>{runtime_name}: {runtime_detected}</p><p>Runtime reachable: {service_status}</p></div>
-          <div class=\"card\"><h3>Installed Models</h3><p>Installed model detection: {installed_status}</p><p>Installed model count: {installed_count}</p></div>
+          <div class=\"card\"><h3>Runtime detected</h3><p>{runtime_name}: {runtime_detected}</p><p>Runtime executable detection is local-only.</p></div>
+          <div class=\"card\"><h3>Service reachability</h3><p>Runtime reachable: {service_status}</p><p>Service URL: {service_url}</p><p>Service reachability is a localhost-only check.</p><p>No model execution occurs during this check.</p><p>{service_boundary}</p></div>
+          <div class=\"card\"><h3>Installed Models</h3><p>Installed model detection: {installed_status}</p><p>Installed model count: {installed_count}</p><p>Installed model detection is not connected yet.</p></div>
           <div class=\"card\"><h3>Catalog vs Installed</h3><p>Catalog examples are not the same as installed models.</p><p>{installed_boundary}</p></div>
-          <div class=\"card\"><h3>Actions</h3><p>Download and execution are not connected yet.</p><p>KORA does not remove model memory requirements.</p></div>
+          <div class=\"card\"><h3>Actions</h3><p>Download and execution are not connected yet.</p><p>Download and run actions remain disabled.</p><p>KORA does not remove model memory requirements.</p></div>
         </div>
       </section>
 
