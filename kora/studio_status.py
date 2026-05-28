@@ -14,14 +14,15 @@ FIXTURES_PATH = "docs/kora-studio/fixtures/"
 V0_1_DEMO_SURFACES = [
     "Launch/local-only status",
     "Your Computer",
-    "Model Capability",
+    "Model Capability Estimate",
     "Runtime Status",
     "Catalog vs Installed",
     "Setup Guidance",
+    "Disabled Download/Run Actions",
     "KORA Boost Boundary",
+    "Execution Viewer",
     "Standard Mode vs KORA Boost",
-    "Execution Viewer placeholder",
-    "Report Viewer placeholder",
+    "Report Viewer Placeholder",
 ]
 
 
@@ -51,7 +52,7 @@ def render_studio_status_text(status: dict[str, Any]) -> str:
     """Render KORA Studio preview status for CLI output."""
 
     lines = [
-        "KORA Studio is in local v0.1 preview mode.",
+        "KORA Studio is in local preview mode.",
         "Positioning: local-first AI Task Execution Router workspace.",
         "KORA Studio routes local AI workflows; it is not an LM Studio replacement or generic local chatbot.",
         str(status["kora_boost_message"]),

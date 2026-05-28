@@ -43,7 +43,7 @@ def test_kora_studio_status_command_is_safe_noop() -> None:
     completed = _run_kora_studio("--status")
 
     assert completed.returncode == 0
-    assert "KORA Studio is in local v0.1 preview mode." in completed.stdout
+    assert "KORA Studio is in local preview mode." in completed.stdout
     assert APPROVED_BOOST_MESSAGE in completed.stdout
     assert TECHNICAL_EXPLANATION in completed.stdout
     assert "Server preview: available with python3 -m kora studio." in completed.stdout
@@ -99,7 +99,7 @@ def test_get_studio_status_is_local_preview() -> None:
     assert status["status"] == "preview"
     assert status["implementation"] == "local_server_preview"
     assert status["v0_1_demo_status"] == "local_fixture_preview"
-    assert "Report Viewer placeholder" in status["v0_1_demo_surfaces"]
+    assert "Report Viewer Placeholder" in status["v0_1_demo_surfaces"]
     assert status["server_available"] is True
     assert status["server_skeleton_available"] is True
     assert status["server_skeleton_command"] == "python3 -m kora studio"

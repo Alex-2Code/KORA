@@ -49,14 +49,15 @@ def get_studio_server_status(host: str = DEFAULT_STUDIO_HOST, port: int = DEFAUL
     first_run_section_order = [
         "Launch/local-only status",
         "Your Computer",
-        "Model Capability",
+        "Model Capability Estimate",
         "Runtime Status",
         "Catalog vs Installed",
         "Setup Guidance",
+        "Disabled Download/Run Actions",
         "KORA Boost Boundary",
+        "Execution Viewer",
         "Standard Mode vs KORA Boost",
-        "Execution Viewer placeholder",
-        "Report Viewer placeholder",
+        "Report Viewer Placeholder",
     ]
     return {
         "ok": True,
@@ -384,14 +385,15 @@ def render_studio_placeholder_html(status: dict[str, Any]) -> str:
             [
                 "Launch/local-only status",
                 "Your Computer",
-                "Model Capability",
+                "Model Capability Estimate",
                 "Runtime Status",
                 "Catalog vs Installed",
                 "Setup Guidance",
+                "Disabled Download/Run Actions",
                 "KORA Boost Boundary",
+                "Execution Viewer",
                 "Standard Mode vs KORA Boost",
-                "Execution Viewer placeholder",
-                "Report Viewer placeholder",
+                "Report Viewer Placeholder",
             ],
         )
     )
@@ -567,7 +569,7 @@ def render_studio_placeholder_html(status: dict[str, Any]) -> str:
   <main>
     <header>
       <div class=\"topline\">
-        <strong>Local v0.1 Skeleton</strong>
+        <strong>Local Preview Scaffold</strong>
         <span class=\"badge\">Preview / Local-only</span>
       </div>
       <h1>KORA Studio</h1>
@@ -622,8 +624,6 @@ def render_studio_placeholder_html(status: dict[str, Any]) -> str:
           <div class=\"card\"><h3>Physically runnable local candidates</h3><p>{local_candidate_name}</p><p>{local_candidate_note}</p></div>
           <div class=\"card\"><h3>Larger-model workflow candidates</h3><p>{workflow_candidate_name}</p><p>{workflow_candidate_note}</p></div>
           <div class=\"card\"><h3>Installed locally</h3><p>Installed model detection: {installed_status}</p><p>Installed count: {installed_count}</p><p>No private model directories are scanned.</p><p>No runtime model list command is called by default.</p></div>
-          <div class=\"card\"><h3>Download</h3><p><span class=\"badge\">{local_download_label}</span></p><p>{local_download_reason}</p><p>Download and run actions remain disabled.</p></div>
-          <div class=\"card\"><h3>Run</h3><p><span class=\"badge\">{local_run_label}</span></p><p>{local_run_reason}</p><p>{local_action_boundary}</p></div>
           <div class=\"card\"><h3>Catalog boundary</h3><p>{catalog_boundary}</p><p>{installed_boundary}</p></div>
         </div>
       </section>
@@ -638,11 +638,35 @@ def render_studio_placeholder_html(status: dict[str, Any]) -> str:
       </section>
 
       <section>
+        <h2>Disabled Download/Run Actions</h2>
+        <div class=\"grid\">
+          <div class=\"card\"><h3>Download action</h3><p><span class=\"badge\">{local_download_label}</span></p><p>{local_download_reason}</p><p>Download remains disabled until explicitly connected.</p></div>
+          <div class=\"card\"><h3>Run action</h3><p><span class=\"badge\">{local_run_label}</span></p><p>{local_run_reason}</p><p>Run remains disabled until explicitly connected.</p></div>
+          <div class=\"card\"><h3>Action boundary</h3><p>Download and run actions remain disabled.</p><p>{local_action_boundary}</p><p>No install, download, or model execution action is active in this preview.</p></div>
+        </div>
+      </section>
+
+      <section>
         <h2>KORA Boost Boundary</h2>
         <div class=\"grid\">
           <div class=\"card\"><h3>Standard Mode</h3><p>Standard Mode sends every step to the model.</p><p>In this preview, model execution is not connected.</p></div>
           <div class=\"card\"><h3>KORA Boost</h3><p>KORA Boost routes deterministic and structured tasks to CPU/local fast paths first.</p><p>Larger-model workflows may become more practical when deterministic work avoids the model path.</p></div>
           <div class=\"card\"><h3>Boundary</h3><p>KORA does not remove model memory requirements.</p><p>Provider/cloud routes are disabled by default.</p></div>
+        </div>
+      </section>
+
+      <section>
+        <h2>Execution Viewer</h2>
+        <div class=\"grid\">
+          <div class=\"card\"><h3>Fixture status</h3><p>{execution_status}</p><p>Fixture/mock events only.</p><p>No real model execution.</p><p>No provider calls.</p><p>No model downloads.</p></div>
+          <div class=\"card\"><h3>Event schema</h3><p>Schema fields: {execution_schema_count}</p><p>Fixture events: {execution_event_count}</p><p>{execution_boundary}</p></div>
+          <div class=\"card\"><h3>Fixture stages</h3><ul>{execution_event_items}</ul></div>
+        </div>
+        <div class=\"workflow\" style=\"margin-top: 16px;\">
+          <div class=\"step\"><p class=\"step-number\">01</p><h3>Request received</h3><p>Local fixture request is received by the Execution Viewer scaffold.</p></div>
+          <div class=\"step\"><p class=\"step-number\">02</p><h3>Deterministic route check</h3><p>Fixture route selection checks deterministic code before the model path.</p></div>
+          <div class=\"step\"><p class=\"step-number\">03</p><h3>Structured lookup and validation pass</h3><p>Fixture structured lookup succeeds and validation passes.</p></div>
+          <div class=\"step\"><p class=\"step-number\">04</p><h3>Model fallback skipped / Final counters</h3><p>Fixture counters show the model path skipped after validation. No runtime execution occurs on this page.</p></div>
         </div>
       </section>
 
@@ -655,21 +679,6 @@ def render_studio_placeholder_html(status: dict[str, Any]) -> str:
           <div class=\"card\"><h3>Claim boundary</h3><p>{standard_vs_kora_boundary}</p><p>No cost or energy claim is made.</p></div>
         </div>
         <div class=\"grid\">{standard_vs_kora_metric_items}</div>
-      </section>
-
-      <section>
-        <h2>Execution Viewer Placeholder</h2>
-        <div class=\"grid\">
-          <div class=\"card\"><h3>Fixture status</h3><p>{execution_status}</p><p>Fixture/mock events only.</p><p>No real model execution.</p><p>No provider calls.</p><p>No model downloads.</p></div>
-          <div class=\"card\"><h3>Event schema</h3><p>Schema fields: {execution_schema_count}</p><p>Fixture events: {execution_event_count}</p><p>{execution_boundary}</p></div>
-          <div class=\"card\"><h3>Fixture stages</h3><ul>{execution_event_items}</ul></div>
-        </div>
-        <div class=\"workflow\" style=\"margin-top: 16px;\">
-          <div class=\"step\"><p class=\"step-number\">01</p><h3>Request received</h3><p>Local fixture request is received by the Execution Viewer scaffold.</p></div>
-          <div class=\"step\"><p class=\"step-number\">02</p><h3>Deterministic route check</h3><p>Fixture route selection checks deterministic code before the model path.</p></div>
-          <div class=\"step\"><p class=\"step-number\">03</p><h3>Structured lookup and validation pass</h3><p>Fixture structured lookup succeeds and validation passes.</p></div>
-          <div class=\"step\"><p class=\"step-number\">04</p><h3>Model fallback skipped / Final counters</h3><p>Fixture counters show the model path skipped after validation. No runtime execution occurs on this page.</p></div>
-        </div>
       </section>
 
       <section>

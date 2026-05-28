@@ -117,12 +117,15 @@ const STATIONS = ["Input", "Deterministic", "Decision", "Adapter", "Verify", "Ou
 const FIRST_RUN_SECTIONS = [
   "Launch / Local-only Status",
   "Your Computer",
-  "Model Capability",
+  "Model Capability Estimate",
   "Runtime Status",
   "Catalog vs Installed",
   "Setup Guidance",
+  "Disabled Download/Run Actions",
   "KORA Boost Boundary",
-  "Execution Viewer Placeholder"
+  "Execution Viewer",
+  "Standard Mode vs KORA Boost",
+  "Report Viewer Placeholder"
 ];
 
 export default function App() {
@@ -480,7 +483,7 @@ export default function App() {
         <div className="first-run-grid">
           {FIRST_RUN_SECTIONS.map((section) => (
             <div className="metric-card" key={section}>
-              <div className="metric-label">v0.1 surface</div>
+              <div className="metric-label">first-run surface</div>
               <div className="metric-value compact">{section}</div>
             </div>
           ))}

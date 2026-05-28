@@ -276,7 +276,7 @@ Acceptance criteria:
 
 ## Phase 3.10 — First-run UI Order Scaffold
 
-Status: Initial static preview ordering exists. The local preview page and React demo copy now orient first-run users around Launch/local-only status, Your Computer, Model Capability, Runtime Status, Catalog vs Installed, Setup Guidance, KORA Boost Boundary, and an Execution Viewer placeholder.
+Status: Initial static preview ordering exists. The local preview page and React demo copy now orient first-run users around Launch/local-only status, Your Computer, Model Capability Estimate, Runtime Status, Catalog vs Installed, Setup Guidance, Disabled Download/Run Actions, KORA Boost Boundary, Execution Viewer, Standard Mode vs KORA Boost, and Report Viewer Placeholder.
 
 Scope:
 

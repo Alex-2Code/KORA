@@ -2,26 +2,27 @@
 
 ## Status
 
-The KORA Studio local server root now renders a static UI prototype v0.1 for the server skeleton. It is still not a full frontend and does not make KORA Studio production-ready.
+The KORA Studio local server root renders a static first-run preview for the server skeleton. It is still not a full frontend and does not make KORA Studio production-ready.
 
 The preview should frame KORA Studio as a local-first AI Task Execution Router workspace. It should not describe Studio as an LM Studio replacement or a generic local chatbot.
 
-## Static UI Prototype v0.1
+## Static UI Prototype
 
 The page is a self-contained HTML preview served from `/`. It uses embedded CSS only and does not load external scripts, external stylesheets, CDNs, generated assets, frontend build tools, or runtime integrations.
 
 Page sections:
 
-- Header with `KORA Studio`, `Local v0.1 Skeleton`, and AI Task Execution Router workspace copy
+- Header with `KORA Studio`, `Local Preview Scaffold`, and AI Task Execution Router workspace copy
 - Status cards for local server state, disabled provider calls, disconnected model/runtime integration, browser launch availability, and disconnected Ollama integration
 - Your Computer
 - Model Capability Estimate
 - Runtime Status
 - Catalog vs Installed
 - Setup Guidance
+- Disabled Download/Run Actions
 - KORA Boost Boundary
+- Execution Viewer with fixture/mock events
 - Standard Mode vs KORA Boost fixture comparison
-- Execution Viewer Placeholder with fixture/mock events
 - Report Viewer Placeholder with fixture metadata
 - Endpoint panel for `/health` and `/status`
 - Limitations panel with explicit no-provider, no-model/runtime, no-Ollama, local-browser-launch, and no unsupported-claims boundaries
@@ -58,7 +59,7 @@ Developer options include `kora studio --no-browser`, `kora studio --port 8765`,
 
 ## Endpoints
 
-- `/` serves the static UI prototype v0.1
+- `/` serves the static first-run UI prototype
 - `/health` returns local health status JSON
 - `/status` returns local preview status, system profile, model capability estimate, runtime status, model catalog recommendations, setup guidance metadata, execution viewer fixture events, Standard Mode vs KORA Boost fixture metrics, report viewer placeholder metadata, KORA Boost copy, docs paths, and fixture paths
 

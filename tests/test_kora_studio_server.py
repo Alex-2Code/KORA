@@ -54,7 +54,7 @@ def test_get_studio_server_status_fields() -> None:
     assert status["service"] == "kora-studio"
     assert status["status"] == "preview"
     assert status["v0_1_readiness_status"] == "local_fixture_demo_ready"
-    assert "Report Viewer placeholder" in status["v0_1_demo_surfaces"]
+    assert "Report Viewer Placeholder" in status["v0_1_demo_surfaces"]
     assert "local fixture-backed AI Task Execution Router demo scaffold" in status["v0_1_claim_boundary"]
     assert status["server"] == "local-only"
     assert status["host"] == "127.0.0.1"
@@ -128,14 +128,15 @@ def test_get_studio_server_status_fields() -> None:
     assert status["first_run_section_order"] == [
         "Launch/local-only status",
         "Your Computer",
-        "Model Capability",
+        "Model Capability Estimate",
         "Runtime Status",
         "Catalog vs Installed",
         "Setup Guidance",
+        "Disabled Download/Run Actions",
         "KORA Boost Boundary",
+        "Execution Viewer",
         "Standard Mode vs KORA Boost",
-        "Execution Viewer placeholder",
-        "Report Viewer placeholder",
+        "Report Viewer Placeholder",
     ]
     assert status["browser_launch_available"] is True
     assert status["ollama_calls_enabled"] is False
@@ -315,7 +316,7 @@ def test_request_handler_serves_health_status_and_placeholder() -> None:
     assert "KORA Studio" in html
     assert APPROVED_BOOST_MESSAGE in html
     assert "Preview / Local-only" in html
-    assert "Local v0.1 Skeleton" in html
+    assert "Local Preview Scaffold" in html
     assert "deterministic-first local workflow exploration" in html
     assert "/health" in html
     assert "/status" in html
@@ -329,6 +330,9 @@ def test_request_handler_serves_health_status_and_placeholder() -> None:
     assert "Download and execution are not connected yet" in html
     assert "Download" in html
     assert "Run" in html
+    assert "Disabled Download/Run Actions" in html
+    assert "Download action" in html
+    assert "Run action" in html
     assert "Download not connected yet" in html
     assert "Run not connected yet" in html
     assert "Setup Guidance" in html
@@ -373,7 +377,7 @@ def test_static_preview_html_content_is_safe_and_complete() -> None:
 
     assert html.startswith("<!doctype html>")
     assert "KORA Studio" in html
-    assert "Local v0.1 Skeleton" in html
+    assert "Local Preview Scaffold" in html
     assert "Preview / Local-only" in html
     assert APPROVED_BOOST_MESSAGE in html
     assert TECHNICAL_EXPLANATION in html
@@ -388,6 +392,9 @@ def test_static_preview_html_content_is_safe_and_complete() -> None:
     assert "Catalog examples" in html
     assert "static_local_scaffold" in html
     assert "Download and execution are not connected yet" in html
+    assert "Disabled Download/Run Actions" in html
+    assert "Download action" in html
+    assert "Run action" in html
     assert "Download not connected yet" in html
     assert "Run not connected yet" in html
     assert "Setup Guidance" in html
@@ -422,7 +429,7 @@ def test_static_preview_html_content_is_safe_and_complete() -> None:
     assert "Endpoint Panel" in html
     assert "/health" in html
     assert "/status" in html
-    assert "Execution Viewer Placeholder" in html
+    assert "Execution Viewer" in html
     assert "Fixture/mock events only" in html
     assert "No real model execution" in html
     assert "No provider calls" in html
@@ -478,9 +485,10 @@ def test_static_preview_html_content_is_safe_and_complete() -> None:
         "Runtime Status",
         "Catalog vs Installed",
         "Setup Guidance",
+        "Disabled Download/Run Actions",
         "KORA Boost Boundary",
+        "Execution Viewer",
         "Standard Mode vs KORA Boost",
-        "Execution Viewer Placeholder",
         "Report Viewer Placeholder",
     ]
     positions = [html.index(f"<h2>{section}</h2>") for section in ordered_sections]
