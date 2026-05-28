@@ -9,6 +9,7 @@ from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from typing import Any, Callable
 
 from kora.studio_status import get_studio_status
+from kora.studio_system_profile import estimate_model_capability, get_system_profile
 
 DEFAULT_STUDIO_HOST = "127.0.0.1"
 DEFAULT_STUDIO_PORT = 8765
@@ -28,6 +29,8 @@ def get_studio_server_status(host: str = DEFAULT_STUDIO_HOST, port: int = DEFAUL
     """Return static local server skeleton status without starting a server."""
 
     studio_status = get_studio_status()
+    system_profile = get_system_profile(default_host=host, default_port=port)
+    model_capability_estimate = estimate_model_capability(system_profile)
     return {
         "ok": True,
         "service": "kora-studio",
@@ -38,6 +41,8 @@ def get_studio_server_status(host: str = DEFAULT_STUDIO_HOST, port: int = DEFAUL
         "port": port,
         "provider_calls_enabled": False,
         "cloud_sync_enabled": False,
+        "system_profile": system_profile.to_dict(),
+        "model_capability_estimate": model_capability_estimate,
         "browser_launch_available": True,
         "ollama_calls_enabled": False,
         "local_runtime_required": False,
@@ -120,6 +125,32 @@ def render_studio_placeholder_html(status: dict[str, Any]) -> str:
     fixtures_path = html.escape(str(status["fixtures_path"]), quote=True)
     boost_message = html.escape(str(status["kora_boost_message"]), quote=True)
     boost_explanation = html.escape(str(status["kora_boost_technical_explanation"]), quote=True)
+    system_profile = status.get("system_profile", {})
+    model_capability = status.get("model_capability_estimate", {})
+    os_name = html.escape(str(system_profile.get("os_name", "unknown")), quote=True)
+    machine = html.escape(str(system_profile.get("machine", "unknown")), quote=True)
+    memory = system_profile.get("total_memory_gb")
+    memory_text = "unknown" if memory is None else f"{memory} GB"
+    memory_text = html.escape(memory_text, quote=True)
+    memory_status = html.escape(str(system_profile.get("memory_detection_status", "unknown")), quote=True)
+    ollama_status = "detected" if system_profile.get("ollama_detected") is True else "not detected"
+    llama_cpp_status = "detected" if system_profile.get("llama_cpp_detected") is True else "not detected"
+    recommended_tier = html.escape(
+        str(model_capability.get("recommended_local_chat_tier", "unknown")),
+        quote=True,
+    )
+    physical_notes = html.escape(
+        str(model_capability.get("physically_runnable_model_notes", "Unknown until validated.")),
+        quote=True,
+    )
+    workflow_notes = html.escape(
+        str(model_capability.get("larger_model_workflow_notes", "")),
+        quote=True,
+    )
+    claim_boundary = html.escape(
+        str(model_capability.get("claim_boundary", "Recommendations are estimates until validated on this machine.")),
+        quote=True,
+    )
 
     return f"""<!doctype html>
 <html lang=\"en\">
@@ -318,7 +349,23 @@ def render_studio_placeholder_html(status: dict[str, Any]) -> str:
         <h2>Endpoint Panel</h2>
         <div class=\"grid\">
           <div class=\"card\"><h3><a href=\"/health\">/health</a></h3><p>Returns local health status JSON for the preview server.</p></div>
-          <div class=\"card\"><h3><a href=\"/status\">/status</a></h3><p>Returns local preview status, KORA Boost copy, docs paths, and fixture paths.</p></div>
+          <div class=\"card\"><h3><a href=\"/status\">/status</a></h3><p>Returns local preview status, system profile, model capability estimate, KORA Boost copy, docs paths, and fixture paths.</p></div>
+        </div>
+      </section>
+
+      <section>
+        <h2>Your Computer</h2>
+        <div class=\"grid\">
+          <div class=\"card\"><h3>System Profile</h3><p>OS: {os_name}</p><p>Machine: {machine}</p><p>Memory: {memory_text} ({memory_status})</p></div>
+          <div class=\"card\"><h3>Local Runtime Detection</h3><p>Ollama: {ollama_status}</p><p>llama.cpp: {llama_cpp_status}</p><p>No runtime APIs are called by this preview.</p></div>
+        </div>
+      </section>
+
+      <section>
+        <h2>Model Capability Estimate</h2>
+        <div class=\"grid\">
+          <div class=\"card\"><h3>Estimated local model tier</h3><p>{recommended_tier}</p><p>{physical_notes}</p></div>
+          <div class=\"card\"><h3>KORA Boost Boundary</h3><p>{workflow_notes}</p><p>{claim_boundary}</p></div>
         </div>
       </section>
 

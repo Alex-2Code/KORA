@@ -57,6 +57,12 @@ def test_get_studio_server_status_fields() -> None:
     assert status["port"] == 8765
     assert status["provider_calls_enabled"] is False
     assert status["cloud_sync_enabled"] is False
+    assert status["system_profile"]["default_host"] == "127.0.0.1"
+    assert status["system_profile"]["default_port"] == 8765
+    assert status["system_profile"]["provider_calls_enabled"] is False
+    assert status["system_profile"]["cloud_sync_enabled"] is False
+    assert status["model_capability_estimate"]["recommended_local_chat_tier"]
+    assert "estimates until validated" in status["model_capability_estimate"]["claim_boundary"]
     assert status["browser_launch_available"] is True
     assert status["ollama_calls_enabled"] is False
     assert status["local_runtime_required"] is False
@@ -82,6 +88,8 @@ def test_health_and_status_payloads_are_claim_safe() -> None:
     }
     assert status["provider_calls_enabled"] is False
     assert status["cloud_sync_enabled"] is False
+    assert "system_profile" in status
+    assert "model_capability_estimate" in status
     assert status["no_server_side_provider_calls"] is True
     assert status["kora_boost_message"] == APPROVED_BOOST_MESSAGE
 
@@ -206,6 +214,8 @@ def test_request_handler_serves_health_status_and_placeholder() -> None:
     assert status["server"] == "local-only"
     assert status["provider_calls_enabled"] is False
     assert status["cloud_sync_enabled"] is False
+    assert "system_profile" in status
+    assert "model_capability_estimate" in status
     assert status["ollama_calls_enabled"] is False
     content_type = response.headers.get("Content-Type", "")
 
@@ -218,6 +228,11 @@ def test_request_handler_serves_health_status_and_placeholder() -> None:
     assert "/health" in html
     assert "/status" in html
     assert "Provider calls: disabled" in html
+    assert "Your Computer" in html
+    assert "Model Capability Estimate" in html
+    assert "Estimated local model tier" in html
+    assert "KORA Boost Boundary" in html
+    assert "KORA does not remove RAM/VRAM/unified-memory requirements" in html
     assert "Model/runtime integration: not connected" in html
     assert "Browser launch: available" in html
     assert "Ollama integration: not connected" in html
@@ -241,6 +256,11 @@ def test_static_preview_html_content_is_safe_and_complete() -> None:
     assert "Status Cards" in html
     assert "Server: local" in html
     assert "Provider calls: disabled" in html
+    assert "Your Computer" in html
+    assert "Model Capability Estimate" in html
+    assert "Estimated local model tier" in html
+    assert "Unknown until validated" in html or "depending on runtime" in html
+    assert "KORA does not remove RAM/VRAM/unified-memory requirements" in html
     assert "Model/runtime integration: not connected" in html
     assert "Browser launch: available" in html
     assert "Ollama integration: not connected" in html

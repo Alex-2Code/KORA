@@ -55,6 +55,8 @@ Requirements:
 - port availability
 - unknown/fail-closed behavior
 
+Initial implementation status: the preview server exposes a standard-library-only system profile scaffold through `/status`. It reports OS, machine, Python version, safely detectable total memory, local executable presence for runtime candidates, local storage writability, localhost defaults, provider-disabled state, and cloud-sync-disabled state. It does not call runtime APIs, provider APIs, model APIs, or external network services.
+
 ### 3. Model capability estimator layer
 
 The model capability estimator layer separates physical model capability from workflow feasibility.
@@ -66,6 +68,8 @@ Requirements:
 - larger-model workflow feasibility
 - memory/runtime/quantization dependency
 - recommendations labelled as estimates until validated
+
+Initial implementation status: the preview server exposes a local heuristic model capability estimate through `/status` and the static preview page. Recommendations are estimates until validated on the machine and do not claim unsupported larger-model execution.
 
 ### 4. Deterministic route layer
 

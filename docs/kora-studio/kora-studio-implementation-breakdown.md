@@ -152,6 +152,28 @@ Acceptance criteria:
 - KORA Boost copy appears correctly
 - planning-only status is clear
 
+## Phase 3.5 — System Profile and Model Capability Scaffold
+
+Status: Initial local scaffold exists in the preview server. `/status` includes `system_profile` and `model_capability_estimate`, and the static preview page shows read-only system/model capability panels.
+
+Scope:
+
+- standard-library-only local system profile fields
+- safe executable detection for runtime candidates
+- local heuristic model capability estimate
+- unknown/fail-closed memory fallback
+- provider calls disabled by default
+- cloud sync disabled by default
+- no runtime API calls
+- no model downloads
+- no model execution
+
+Acceptance criteria:
+
+- recommendations are labelled as estimates until validated
+- no unsupported larger-model claim is shown
+- no provider/cloud route is enabled by default
+
 ## Phase 4 — Report Viewer
 
 Goal: Render existing local Markdown validation reports.
