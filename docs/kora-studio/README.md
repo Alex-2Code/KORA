@@ -102,6 +102,14 @@ Developer/status options:
 - `kora studio --status`
 - optional future browser selector, such as `--browser chrome`
 
+Local smoke check for an already-running preview:
+
+```bash
+python3 scripts/check_kora_studio_preview.py
+```
+
+The smoke check only accepts `http://127.0.0.1` or `http://localhost` URLs. It checks `/health`, `/status`, and `/` without starting external services, calling providers, downloading models, executing models, scanning private model directories, or running runtime model list commands.
+
 ## Local Server Skeleton
 
 A preview local-only server skeleton remains available through the compatibility flag:

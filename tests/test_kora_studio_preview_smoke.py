@@ -1,0 +1,132 @@
+from __future__ import annotations
+
+import importlib.util
+import json
+from pathlib import Path
+
+import pytest
+
+
+SCRIPT_PATH = Path(__file__).resolve().parents[1] / "scripts" / "check_kora_studio_preview.py"
+SPEC = importlib.util.spec_from_file_location("check_kora_studio_preview", SCRIPT_PATH)
+assert SPEC is not None
+smoke = importlib.util.module_from_spec(SPEC)
+assert SPEC.loader is not None
+SPEC.loader.exec_module(smoke)
+
+
+class FakeHeaders(dict[str, str]):
+    def get(self, key: str, default: str = "") -> str:
+        return super().get(key, default)
+
+
+class FakeResponse:
+    def __init__(self, *, status: int, content_type: str, body: str) -> None:
+        self.status = status
+        self.headers = FakeHeaders({"Content-Type": content_type})
+        self._body = body.encode("utf-8")
+
+    def __enter__(self) -> FakeResponse:
+        return self
+
+    def __exit__(self, exc_type: object, exc: object, traceback: object) -> None:
+        return None
+
+    def read(self) -> bytes:
+        return self._body
+
+
+def _fake_opener(url: str, timeout: float) -> FakeResponse:
+    assert timeout == 0.5
+    if url.endswith("/health"):
+        return FakeResponse(
+            status=200,
+            content_type="application/json; charset=utf-8",
+            body=json.dumps(
+                {
+                    "server": "local-only",
+                    "provider_calls_enabled": False,
+                    "cloud_sync_enabled": False,
+                }
+            ),
+        )
+    if url.endswith("/status"):
+        return FakeResponse(
+            status=200,
+            content_type="application/json; charset=utf-8",
+            body=json.dumps(
+                {
+                    "studio_status": {},
+                    "launch_boundary": {},
+                    "system_profile": {},
+                    "model_capability_estimate": {},
+                    "runtime_status": [],
+                    "installed_models_summary": {},
+                    "model_catalog_status": "static_local_scaffold",
+                    "recommended_models": [],
+                    "setup_guidance_status": "informational_scaffold",
+                    "disabled_action_state": {
+                        "download_connected": False,
+                        "run_connected": False,
+                        "model_execution_connected": False,
+                    },
+                    "execution_viewer_status": "fixture_mock_scaffold",
+                    "standard_vs_kora_comparison_status": "fixture_mock_scaffold",
+                    "report_viewer_status": "fixture_metadata_placeholder",
+                    "provider_calls_enabled": False,
+                    "cloud_sync_enabled": False,
+                    "claim_boundaries": {},
+                }
+            ),
+        )
+    if url.endswith("/"):
+        return FakeResponse(
+            status=200,
+            content_type="text/html; charset=utf-8",
+            body="""
+            Launch / Local-only Status
+            Your Computer
+            Model Capability Estimate
+            Runtime Status
+            Catalog vs Installed
+            Setup Guidance
+            Disabled Download/Run Actions
+            KORA Boost Boundary
+            Execution Viewer
+            Standard Mode vs KORA Boost
+            Report Viewer Placeholder
+            Provider calls: disabled
+            Cloud sync: disabled
+            No model is downloaded
+            No model is executed
+            """,
+        )
+    raise AssertionError(f"unexpected URL: {url}")
+
+
+def test_check_preview_uses_local_endpoints_only() -> None:
+    results = smoke.check_preview("http://127.0.0.1:8765", timeout=0.5, opener=_fake_opener)
+
+    assert results == ["/health ok", "/status ok", "/ ok"]
+
+
+def test_check_preview_rejects_non_local_url() -> None:
+    with pytest.raises(smoke.SmokeCheckError, match="only accepts"):
+        smoke.check_preview("https://example.com", timeout=0.5, opener=_fake_opener)
+
+
+def test_check_preview_fails_when_download_is_connected() -> None:
+    def opener(url: str, timeout: float) -> FakeResponse:
+        if url.endswith("/status"):
+            response = _fake_opener(url, timeout)
+            data = json.loads(response.read().decode("utf-8"))
+            data["disabled_action_state"]["download_connected"] = True
+            return FakeResponse(status=200, content_type="application/json", body=json.dumps(data))
+        return _fake_opener(url, timeout)
+
+    with pytest.raises(smoke.SmokeCheckError, match="download connected"):
+        smoke.check_preview("http://localhost:8765", timeout=0.5, opener=opener)
+
+
+def test_main_returns_failure_without_real_network() -> None:
+    assert smoke.main(["--base-url", "https://example.com"]) == 1

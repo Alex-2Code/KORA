@@ -418,6 +418,7 @@ def test_request_handler_serves_health_status_and_placeholder() -> None:
     assert "/health" in html
     assert "/status" in html
     assert "Provider calls: disabled" in html
+    assert "Cloud sync: disabled" in html
     assert "Your Computer" in html
     assert "Model Capability Estimate" in html
     assert "Catalog vs Installed" in html
@@ -483,6 +484,7 @@ def test_static_preview_html_content_is_safe_and_complete() -> None:
     assert "First-run order" in html
     assert "Server: local" in html
     assert "Provider calls: disabled" in html
+    assert "Cloud sync: disabled" in html
     assert "Your Computer" in html
     assert "Model Capability Estimate" in html
     assert "Catalog vs Installed" in html

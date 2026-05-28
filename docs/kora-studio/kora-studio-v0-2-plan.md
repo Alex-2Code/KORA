@@ -90,7 +90,7 @@ Review `/status` response shape and add tests for required v0.2 contract fields 
 
 ### Task 421 — Local Server Smoke Check
 
-Add a non-mutating smoke-test helper or documented procedure for checking `/health`, `/status`, and `/` on localhost without providers, downloads, or model execution.
+Add a non-mutating smoke-test helper or documented procedure for checking `/health`, `/status`, and `/` on localhost without providers, downloads, or model execution. Initial helper target: `scripts/check_kora_studio_preview.py`.
 
 ### Task 422 — v0.2 Readiness Report
 
