@@ -48,7 +48,7 @@ The preview `/status` response includes a local system profile scaffold and mode
 
 The preview also includes a static local model catalog scaffold. Catalog recommendations are curated examples, do not fetch remote registries, do not download or execute models, and do not imply all open-source LLMs are supported.
 
-Runtime status is also exposed as a local scaffold. Executable detection is local-only, catalog examples are not installed models, service reachability is a localhost-only scaffold rather than model execution readiness, installed-model detection may remain unknown, and download/execution actions are not connected.
+Runtime status is also exposed as a local scaffold. Executable detection is local-only, catalog examples are not installed models, service reachability is a localhost-only scaffold rather than model execution readiness, installed-model detection is disabled/not connected by default, and download/execution actions are not connected. The default path does not scan private model directories or run runtime model list commands.
 
 Catalog action labels are disabled planning scaffolds only. The preview may show "Download not connected yet" and "Run not connected yet"; these labels do not download, execute, call a registry, or call a provider.
 

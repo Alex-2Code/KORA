@@ -12,6 +12,7 @@ from typing import Any
 
 ExecutableDetector = Callable[[str], str | None]
 ServiceProbe = Callable[[str, int], dict[str, Any]]
+InstalledModelDetector = Callable[[str], list[dict[str, Any]]]
 
 DEFAULT_SERVICE_PROBE_TIMEOUT_MS = 250
 LOCAL_SERVICE_HOSTS = {"127.0.0.1", "localhost"}
@@ -23,6 +24,10 @@ RUNTIME_STATUS_CLAIM_BOUNDARY = (
 SERVICE_PROBE_CLAIM_BOUNDARY = (
     "Service reachability is a localhost-only check. It does not execute models, list models, download models, "
     "or prove runtime execution readiness."
+)
+INSTALLED_MODEL_DETECTION_CLAIM_BOUNDARY = (
+    "Installed model detection is local-only and disabled by default. Catalog examples are not installed models. "
+    "No private model directories are scanned and no runtime model list command is called by default."
 )
 
 RUNTIME_CANDIDATES = [
@@ -143,12 +148,62 @@ def _service_probe_status(
     }
 
 
+def _installed_model_detection_status(
+    runtime_id: str,
+    *,
+    detect_installed_models: bool,
+    installed_model_detector: InstalledModelDetector | None,
+) -> dict[str, Any]:
+    base = {
+        "installed_model_detection_status": "not_connected",
+        "installed_model_detection_enabled": False,
+        "installed_model_detection_method": "not_connected",
+        "installed_models_detected": False,
+        "installed_models": [],
+        "installed_models_count": 0,
+        "installed_model_detection_claim_boundary": INSTALLED_MODEL_DETECTION_CLAIM_BOUNDARY,
+        "installed_model_detection_error": None,
+    }
+    if not detect_installed_models:
+        return base
+    if installed_model_detector is None:
+        return {
+            **base,
+            "installed_model_detection_status": "not_checked",
+            "installed_model_detection_method": "mock_detector_not_supplied",
+        }
+
+    try:
+        detected_models = installed_model_detector(runtime_id)
+    except Exception as exc:
+        return {
+            **base,
+            "installed_model_detection_status": "detector_error",
+            "installed_model_detection_enabled": True,
+            "installed_model_detection_method": "mock_detector",
+            "installed_model_detection_error": exc.__class__.__name__,
+        }
+
+    normalized_models = [deepcopy(model) for model in detected_models if isinstance(model, dict)]
+    return {
+        **base,
+        "installed_model_detection_status": "detected" if normalized_models else "not_detected",
+        "installed_model_detection_enabled": True,
+        "installed_model_detection_method": "mock_detector",
+        "installed_models_detected": bool(normalized_models),
+        "installed_models": normalized_models,
+        "installed_models_count": len(normalized_models),
+    }
+
+
 def get_runtime_status(
     which: ExecutableDetector = shutil.which,
     *,
     probe_services: bool = False,
     service_probe: ServiceProbe | None = None,
     service_probe_timeout_ms: int = DEFAULT_SERVICE_PROBE_TIMEOUT_MS,
+    detect_installed_models: bool = False,
+    installed_model_detector: InstalledModelDetector | None = None,
 ) -> list[dict[str, Any]]:
     """Return runtime status without starting services or executing models."""
 
@@ -165,6 +220,11 @@ def get_runtime_status(
             service_probe=service_probe,
             timeout_ms=service_probe_timeout_ms,
         )
+        installed_status = _installed_model_detection_status(
+            str(candidate["runtime_id"]),
+            detect_installed_models=detect_installed_models,
+            installed_model_detector=installed_model_detector,
+        )
         statuses.append(
             {
                 "runtime_id": candidate["runtime_id"],
@@ -172,9 +232,7 @@ def get_runtime_status(
                 "executable_detected": executable_detected,
                 "executable_path": executable_path,
                 **service_status,
-                "installed_models_detected": False,
-                "installed_models": [],
-                "installed_model_detection_status": "not_checked",
+                **installed_status,
                 "detection_method": candidate["detection_method"],
                 "detection_status": "detected" if executable_detected else "not_detected",
                 "claim_boundary": RUNTIME_STATUS_CLAIM_BOUNDARY,
@@ -198,11 +256,23 @@ def summarize_installed_models(runtime_status: list[dict[str, Any]]) -> dict[str
         "installed_models_detected": bool(installed_models),
         "installed_models": installed_models,
         "installed_model_count": len(installed_models),
-        "detection_status": "not_checked" if not installed_models else "detected",
-        "installed_model_detection_status": "not_checked" if not installed_models else "detected",
-        "claim_boundary": (
-            "Installed model detection is local-only and may be unknown. Catalog examples are not installed models."
+        "installed_models_count": len(installed_models),
+        "detection_status": "not_connected" if not installed_models else "detected",
+        "installed_model_detection_status": "not_connected" if not installed_models else "detected",
+        "installed_model_detection_enabled": any(
+            runtime.get("installed_model_detection_enabled") is True for runtime in runtime_status
         ),
+        "installed_model_detection_method": "mock_detector" if installed_models else "not_connected",
+        "installed_model_detection_error": next(
+            (
+                runtime.get("installed_model_detection_error")
+                for runtime in runtime_status
+                if runtime.get("installed_model_detection_error")
+            ),
+            None,
+        ),
+        "installed_model_detection_claim_boundary": INSTALLED_MODEL_DETECTION_CLAIM_BOUNDARY,
+        "claim_boundary": INSTALLED_MODEL_DETECTION_CLAIM_BOUNDARY,
     }
 
 

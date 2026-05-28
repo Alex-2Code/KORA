@@ -120,8 +120,11 @@ Status:
 - `/status` includes a static local model catalog scaffold and claim-safe recommendations
 - `/status` includes a local runtime status scaffold and installed-model summary
 - runtime service reachability is a localhost-only scaffold, not model execution readiness
+- installed model detection is disabled/not connected by default
 - browser launch enabled by default unless `--no-browser` is set
 - no Ollama calls
+- no runtime model list commands
+- no private model directory scans
 - no provider calls
 - no cloud sync
 - no API keys required
@@ -142,7 +145,7 @@ Open locally:
 http://127.0.0.1:8765/
 ```
 
-The page shows local status cards, endpoint references, a static system profile panel, a model capability estimate panel, a static model catalog preview, a runtime status panel, a static workflow preview, and explicit limitations. It uses embedded HTML/CSS, can be opened automatically by the CLI, does not call Ollama or providers, does not enable cloud sync, does not connect a model/runtime, does not download models, does not require API keys, and does not use a frontend framework yet. Use `python3 -m kora studio --no-browser` to keep serving locally without opening a browser. The model capability estimate and model catalog recommendations are local and heuristic; recommendations are estimates until validated and do not claim unsupported larger models can run. Catalog examples are not the same as installed models. Runtime executable detection is local-only; service reachability is a localhost-only scaffold and is not model execution readiness. Installed model detection remains not connected unless future work implements a safe local method. Download and run actions are visible only as disabled/planned UI scaffolding. KORA does not support all open-source LLMs by default.
+The page shows local status cards, endpoint references, a static system profile panel, a model capability estimate panel, a static model catalog preview, a runtime status panel, a static workflow preview, and explicit limitations. It uses embedded HTML/CSS, can be opened automatically by the CLI, does not call Ollama or providers, does not enable cloud sync, does not connect a model/runtime, does not download models, does not require API keys, and does not use a frontend framework yet. Use `python3 -m kora studio --no-browser` to keep serving locally without opening a browser. The model capability estimate and model catalog recommendations are local and heuristic; recommendations are estimates until validated and do not claim unsupported larger models can run. Catalog examples are not installed models. Runtime executable detection is local-only; service reachability is a localhost-only scaffold and is not model execution readiness. Installed model detection remains not connected unless future work implements a safe local method. The default path does not scan private model directories and does not run runtime model list commands. Download and run actions are visible only as disabled/planned UI scaffolding. KORA does not support all open-source LLMs by default.
 
 ## Implementation Planning
 

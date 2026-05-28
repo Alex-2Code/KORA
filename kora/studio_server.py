@@ -54,7 +54,8 @@ def get_studio_server_status(host: str = DEFAULT_STUDIO_HOST, port: int = DEFAUL
         "runtime_status": runtime_status,
         "installed_models_summary": installed_models_summary,
         "catalog_runtime_distinction": (
-            "Catalog examples are not the same as installed models. Download and execution are not connected yet."
+            "Catalog examples are not the same as installed models. Installed model detection is not connected by "
+            "default. Download and execution are not connected yet."
         ),
         "browser_launch_available": True,
         "ollama_calls_enabled": False,
@@ -228,12 +229,17 @@ def render_studio_placeholder_html(status: dict[str, Any]) -> str:
         quote=True,
     )
     installed_status = html.escape(str(installed_summary.get("detection_status", "not_checked")), quote=True)
-    installed_count = html.escape(str(installed_summary.get("installed_model_count", 0)), quote=True)
+    installed_enabled = (
+        "enabled" if installed_summary.get("installed_model_detection_enabled") is True else "disabled"
+    )
+    installed_enabled = html.escape(installed_enabled, quote=True)
+    installed_method = html.escape(str(installed_summary.get("installed_model_detection_method", "not_connected")), quote=True)
+    installed_count = html.escape(str(installed_summary.get("installed_models_count", 0)), quote=True)
     installed_boundary = html.escape(
         str(
             installed_summary.get(
                 "claim_boundary",
-                "Installed model detection is local-only and may be unknown. Catalog examples are not installed models.",
+                "Installed model detection is local-only and disabled by default. Catalog examples are not installed models.",
             )
         ),
         quote=True,
@@ -459,10 +465,11 @@ def render_studio_placeholder_html(status: dict[str, Any]) -> str:
       <section>
         <h2>Model Catalog Preview</h2>
         <div class=\"grid\">
-          <div class=\"card\"><h3>Catalog status</h3><p>{catalog_status}</p><p>Download and execution are not connected yet.</p></div>
+          <div class=\"card\"><h3>Catalog examples</h3><p>{catalog_status}</p><p>Catalog examples are curated examples, not installed models.</p></div>
           <div class=\"card\"><h3>Physically runnable local candidates</h3><p>{local_candidate_name}</p><p>{local_candidate_note}</p></div>
           <div class=\"card\"><h3>Larger-model workflow candidates</h3><p>{workflow_candidate_name}</p><p>{workflow_candidate_note}</p></div>
-          <div class=\"card\"><h3>Disabled actions</h3><p><span class=\"badge\">{local_download_label}</span></p><p style=\"margin-top: 10px;\"><span class=\"badge\">{local_run_label}</span></p><p>{local_action_boundary}</p></div>
+          <div class=\"card\"><h3>Download</h3><p><span class=\"badge\">{local_download_label}</span></p><p>Download and run actions remain disabled.</p></div>
+          <div class=\"card\"><h3>Run</h3><p><span class=\"badge\">{local_run_label}</span></p><p>{local_action_boundary}</p></div>
           <div class=\"card\"><h3>Catalog boundary</h3><p>{catalog_boundary}</p></div>
         </div>
       </section>
@@ -472,8 +479,8 @@ def render_studio_placeholder_html(status: dict[str, Any]) -> str:
         <div class=\"grid\">
           <div class=\"card\"><h3>Runtime detected</h3><p>{runtime_name}: {runtime_detected}</p><p>Runtime executable detection is local-only.</p></div>
           <div class=\"card\"><h3>Service reachability</h3><p>Runtime reachable: {service_status}</p><p>Service URL: {service_url}</p><p>Service reachability is a localhost-only check.</p><p>No model execution occurs during this check.</p><p>{service_boundary}</p></div>
-          <div class=\"card\"><h3>Installed Models</h3><p>Installed model detection: {installed_status}</p><p>Installed model count: {installed_count}</p><p>Installed model detection is not connected yet.</p></div>
-          <div class=\"card\"><h3>Catalog vs Installed</h3><p>Catalog examples are not the same as installed models.</p><p>{installed_boundary}</p></div>
+          <div class=\"card\"><h3>Installed locally</h3><p>Installed model detection: {installed_status}</p><p>Detection enabled: {installed_enabled}</p><p>Detection method: {installed_method}</p><p>Installed count: {installed_count}</p><p>Installed model detection is not connected yet.</p></div>
+          <div class=\"card\"><h3>Catalog vs Installed</h3><p>Catalog examples are not installed models.</p><p>No private model directories are scanned.</p><p>No runtime model list command is called by default.</p><p>{installed_boundary}</p></div>
           <div class=\"card\"><h3>Actions</h3><p>Download and execution are not connected yet.</p><p>Download and run actions remain disabled.</p><p>KORA does not remove model memory requirements.</p></div>
         </div>
       </section>

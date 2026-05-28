@@ -207,10 +207,12 @@ Scope:
 - local runtime executable detection
 - runtime service reachability scaffolded as a localhost-only check
 - service reachability is not model execution readiness
-- installed model detection marked `not_checked`
+- installed model detection marked `not_connected` by default
+- installed model detection fields for enabled state, method, count, error, and claim boundary
 - catalog examples distinguished from installed models
 - download disabled
 - execution disabled
+- no private model directory scans
 - no model listing calls
 - no model execution
 - no model downloads
@@ -223,6 +225,7 @@ Acceptance criteria:
 - service reachability does not execute, list, pull, or download models
 - catalog examples are not presented as installed models
 - no model is shown as installed unless safely confirmed
+- default installed-model detection does not scan private model directories or run model list commands
 - no download or execution action is connected
 
 ## Phase 3.8 — Disabled Model Action Scaffold

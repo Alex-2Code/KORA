@@ -181,6 +181,13 @@ def recommend_catalog_models(
     runtimes = runtime_status or []
     runtime_detected = any(item.get("executable_detected") is True for item in runtimes if isinstance(item, dict))
     runtime_service_reachable = any(item.get("service_reachable") is True for item in runtimes if isinstance(item, dict))
+    installed_model_ids = {
+        str(model.get("model_id"))
+        for runtime in runtimes
+        if isinstance(runtime, dict)
+        for model in runtime.get("installed_models", [])
+        if isinstance(model, dict) and model.get("model_id")
+    }
     recommended: list[dict[str, Any]] = []
 
     for entry in get_static_model_catalog():
@@ -214,7 +221,9 @@ def recommend_catalog_models(
         item["estimated_runnable"] = item["candidate_type"] == "physically_runnable_local_candidate"
         item["runtime_detected"] = runtime_detected
         item["runtime_service_reachable"] = runtime_service_reachable
-        item["installed_locally"] = False
+        item["installed_locally"] = item["model_id"] in installed_model_ids
+        item["installed_model_detection_status"] = "detected" if item["installed_locally"] else "not_connected"
+        item["catalog_vs_installed_boundary"] = "Catalog examples are not installed models unless explicitly detected."
         item["download_available"] = False
         item["execution_connected"] = False
         _attach_disabled_action_state(
@@ -238,7 +247,9 @@ def recommend_catalog_models(
         larger["estimated_runnable"] = False
         larger["runtime_detected"] = runtime_detected
         larger["runtime_service_reachable"] = runtime_service_reachable
-        larger["installed_locally"] = False
+        larger["installed_locally"] = larger["model_id"] in installed_model_ids
+        larger["installed_model_detection_status"] = "detected" if larger["installed_locally"] else "not_connected"
+        larger["catalog_vs_installed_boundary"] = "Catalog examples are not installed models unless explicitly detected."
         larger["download_available"] = False
         larger["execution_connected"] = False
         _attach_disabled_action_state(

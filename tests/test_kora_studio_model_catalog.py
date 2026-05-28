@@ -77,12 +77,41 @@ def test_recommendations_distinguish_catalog_runtime_and_installed_status() -> N
         assert item["runtime_detected"] is True
         assert item["runtime_service_reachable"] is False
         assert item["installed_locally"] is False
+        assert item["installed_model_detection_status"] == "not_connected"
+        assert "Catalog examples are not installed models" in item["catalog_vs_installed_boundary"]
         assert item["download_available"] is False
         assert item["download_action_enabled"] is False
         assert item["download_action_label"] == "Download not connected yet"
         assert item["execution_connected"] is False
         assert item["run_action_enabled"] is False
         assert item["run_action_label"] == "Run not connected yet"
+
+
+def test_recommendations_can_reflect_explicit_mock_installed_models() -> None:
+    runtime_status = get_runtime_status(
+        which=lambda command: None,
+        detect_installed_models=True,
+        installed_model_detector=lambda runtime_id: [
+            {
+                "model_id": "example-mini-local",
+                "display_name": "Example mini local model",
+                "runtime_id": runtime_id,
+                "source": "mock_test_data",
+                "detection_method": "mock_detector",
+                "validation_status": "mocked_not_validated",
+            }
+        ]
+        if runtime_id == "ollama"
+        else [],
+    )
+    profile = get_system_profile(which=lambda command: None, total_memory_gb=16)
+    recommendations = recommend_catalog_models(profile, estimate_model_capability(profile), runtime_status)
+    by_id = {item["model_id"]: item for item in recommendations}
+
+    assert by_id["example-mini-local"]["installed_locally"] is True
+    assert by_id["example-mini-local"]["installed_model_detection_status"] == "detected"
+    assert by_id["example-3b-quantized"]["installed_locally"] is False
+    assert by_id["example-3b-quantized"]["installed_model_detection_status"] == "not_connected"
 
 
 def test_recommendations_include_disabled_action_guidance() -> None:

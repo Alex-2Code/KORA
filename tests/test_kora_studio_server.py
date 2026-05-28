@@ -79,9 +79,13 @@ def test_get_studio_server_status_fields() -> None:
     assert first_runtime["service_url"] == "http://127.0.0.1:11434/"
     assert first_runtime["service_probe_timeout_ms"] <= 500
     assert "localhost-only check" in first_runtime["service_probe_claim_boundary"]
-    assert first_runtime["installed_model_detection_status"] == "not_checked"
-    assert status["installed_models_summary"]["detection_status"] == "not_checked"
-    assert status["installed_models_summary"]["installed_model_detection_status"] == "not_checked"
+    assert first_runtime["installed_model_detection_enabled"] is False
+    assert first_runtime["installed_model_detection_status"] == "not_connected"
+    assert first_runtime["installed_models_count"] == 0
+    assert status["installed_models_summary"]["detection_status"] == "not_connected"
+    assert status["installed_models_summary"]["installed_model_detection_status"] == "not_connected"
+    assert status["installed_models_summary"]["installed_model_detection_enabled"] is False
+    assert status["installed_models_summary"]["installed_models_count"] == 0
     assert "Catalog examples are not the same as installed models" in status["catalog_runtime_distinction"]
     assert status["browser_launch_available"] is True
     assert status["ollama_calls_enabled"] is False
@@ -114,6 +118,7 @@ def test_health_and_status_payloads_are_claim_safe() -> None:
     assert status["model_catalog_status"] == "static_local_scaffold"
     assert "runtime_status" in status
     assert "installed_models_summary" in status
+    assert status["installed_models_summary"]["installed_model_detection_enabled"] is False
     assert status["no_server_side_provider_calls"] is True
     assert status["kora_boost_message"] == APPROVED_BOOST_MESSAGE
 
@@ -263,17 +268,20 @@ def test_request_handler_serves_health_status_and_placeholder() -> None:
     assert "Larger-model workflow candidates" in html
     assert "Model recommendations are estimates until validated on this machine" in html
     assert "Download and execution are not connected yet" in html
-    assert "Disabled actions" in html
+    assert "Download" in html
+    assert "Run" in html
     assert "Download not connected yet" in html
     assert "Run not connected yet" in html
     assert "Runtime Status" in html
-    assert "Installed Models" in html
+    assert "Installed locally" in html
     assert "Service reachability is a localhost-only check" in html
     assert "No model execution occurs during this check" in html
     assert "Installed model detection is not connected yet" in html
+    assert "No private model directories are scanned" in html
+    assert "No runtime model list command is called by default" in html
     assert "Download and run actions remain disabled" in html
     assert "Catalog vs Installed" in html
-    assert "Catalog examples are not the same as installed models" in html
+    assert "Catalog examples are not installed models" in html
     assert "Estimated local model tier" in html
     assert "KORA Boost Boundary" in html
     assert "KORA does not remove RAM/VRAM/unified-memory requirements" in html
@@ -303,7 +311,7 @@ def test_static_preview_html_content_is_safe_and_complete() -> None:
     assert "Your Computer" in html
     assert "Model Capability Estimate" in html
     assert "Model Catalog Preview" in html
-    assert "Catalog status" in html
+    assert "Catalog examples" in html
     assert "static_local_scaffold" in html
     assert "Download and execution are not connected yet" in html
     assert "Download not connected yet" in html
@@ -314,8 +322,10 @@ def test_static_preview_html_content_is_safe_and_complete() -> None:
     assert "Service reachability is a localhost-only check" in html
     assert "No model execution occurs during this check" in html
     assert "Installed model detection is not connected yet" in html
+    assert "No private model directories are scanned" in html
+    assert "No runtime model list command is called by default" in html
     assert "Download and run actions remain disabled" in html
-    assert "Catalog examples are not the same as installed models" in html
+    assert "Catalog examples are not installed models" in html
     assert "Estimated local model tier" in html
     assert "Unknown until validated" in html or "depending on runtime" in html
     assert "KORA does not remove RAM/VRAM/unified-memory requirements" in html
