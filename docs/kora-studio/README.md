@@ -76,17 +76,17 @@ KORA Studio docs in public KORA should describe technical design, local validati
 
 KORA Studio planning does not create new benchmark claims. It should only visualize already generated validation counters and claim-safe reports.
 
-## CLI Skeleton
+## CLI Launch
 
-A minimal planning/preview CLI skeleton is available:
+The local KORA Studio preview can be launched with:
 
 ```bash
 python3 -m kora studio
 ```
 
-The command prints the current KORA Studio status and links to the Studio docs and fixtures. It does not start a server, open a browser, call a model runtime, call a provider, or require API keys. The next implementation phases are tracked in the [KORA Studio implementation breakdown](kora-studio-implementation-breakdown.md).
+The command starts the localhost-only Studio server and attempts to open the default browser at `http://127.0.0.1:8765/`. It does not call a model runtime, call a provider, enable cloud sync, or require API keys. If browser launch fails, it prints the local URL and keeps serving locally.
 
-Planned default launch behavior:
+Default launch behavior:
 
 - `kora studio` starts the localhost-only Studio server
 - opens the default browser automatically
@@ -95,15 +95,16 @@ Planned default launch behavior:
 - requires no API key for default local mode
 - if browser launch fails, prints the local URL and keeps serving locally
 
-Planned developer options:
+Developer/status options:
 
 - `kora studio --no-browser`
 - `kora studio --port 8765`
+- `kora studio --status`
 - optional future browser selector, such as `--browser chrome`
 
 ## Local Server Skeleton
 
-A preview local-only server skeleton is available behind an explicit flag:
+A preview local-only server skeleton remains available through the compatibility flag:
 
 ```bash
 python3 -m kora studio --serve
@@ -115,9 +116,10 @@ Status:
 - default host: `127.0.0.1`
 - default port: `8765`
 - endpoints: `/health`, `/status`, `/`
-- no browser launch yet
+- browser launch enabled by default unless `--no-browser` is set
 - no Ollama calls
 - no provider calls
+- no cloud sync
 - no API keys required
 
 The server skeleton is not the full KORA Studio runtime or frontend. It exists to define the local server boundary for future Studio implementation work.
@@ -127,7 +129,7 @@ The server skeleton is not the full KORA Studio runtime or frontend. It exists t
 The local server root serves a static UI prototype v0.1:
 
 ```bash
-python3 -m kora studio --serve
+python3 -m kora studio
 ```
 
 Open locally:
@@ -136,7 +138,7 @@ Open locally:
 http://127.0.0.1:8765/
 ```
 
-The page shows local status cards, endpoint references, a static workflow preview, and explicit limitations. It uses embedded HTML/CSS, does not auto-launch a browser, does not call Ollama or providers, does not connect a model/runtime, does not require API keys, and does not use a frontend framework yet. The preview should use AI Task Execution Router language: system profile, model capability, KORA Boost explanation, execution path UI, Standard Mode vs KORA Boost comparison, and local-only/provider-disabled status.
+The page shows local status cards, endpoint references, a static workflow preview, and explicit limitations. It uses embedded HTML/CSS, can be opened automatically by the CLI, does not call Ollama or providers, does not enable cloud sync, does not connect a model/runtime, does not require API keys, and does not use a frontend framework yet. Use `python3 -m kora studio --no-browser` to keep serving locally without opening a browser. The preview should use AI Task Execution Router language: system profile, model capability, KORA Boost explanation, execution path UI, Standard Mode vs KORA Boost comparison, and local-only/provider-disabled status.
 
 ## Implementation Planning
 

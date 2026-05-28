@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import html
 import json
+import webbrowser
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from typing import Any, Callable
 
@@ -14,6 +15,7 @@ DEFAULT_STUDIO_PORT = 8765
 ALLOWED_STUDIO_HOSTS = {"127.0.0.1", "localhost"}
 
 StatusProvider = Callable[[], dict[str, Any]]
+BrowserOpener = Callable[[str], bool]
 
 
 def is_allowed_studio_host(host: str) -> bool:
@@ -35,7 +37,8 @@ def get_studio_server_status(host: str = DEFAULT_STUDIO_HOST, port: int = DEFAUL
         "host": host,
         "port": port,
         "provider_calls_enabled": False,
-        "browser_launch_available": False,
+        "cloud_sync_enabled": False,
+        "browser_launch_available": True,
         "ollama_calls_enabled": False,
         "local_runtime_required": False,
         "no_server_side_provider_calls": True,
@@ -55,7 +58,8 @@ def get_studio_health_payload() -> dict[str, Any]:
         "status": "preview",
         "server": "local-only",
         "provider_calls_enabled": False,
-        "browser_launch_available": False,
+        "cloud_sync_enabled": False,
+        "browser_launch_available": True,
     }
 
 
@@ -65,20 +69,47 @@ def get_studio_status_payload(host: str = DEFAULT_STUDIO_HOST, port: int = DEFAU
     return get_studio_server_status(host=host, port=port)
 
 
-def render_studio_server_status_text(status: dict[str, Any]) -> str:
+def get_studio_url(host: str = DEFAULT_STUDIO_HOST, port: int = DEFAULT_STUDIO_PORT) -> str:
+    """Return the local KORA Studio URL."""
+
+    return f"http://{host}:{port}/"
+
+
+def open_studio_browser(url: str, browser_opener: BrowserOpener = webbrowser.open) -> bool:
+    """Open the Studio URL with a mockable browser opener."""
+
+    try:
+        return bool(browser_opener(url))
+    except Exception:
+        return False
+
+
+def render_studio_server_status_text(
+    status: dict[str, Any],
+    *,
+    open_browser: bool = True,
+    browser_opened: bool | None = None,
+) -> str:
     """Render local server skeleton startup status for CLI output."""
 
+    url = get_studio_url(str(status["host"]), int(status["port"]))
     lines = [
-        "KORA Studio local server skeleton starting.",
-        f"Local URL: http://{status['host']}:{status['port']}/",
-        "Server mode: preview/local-only.",
-        "Positioning: AI Task Execution Router workspace for local AI workflows.",
-        "Browser launch: not implemented yet.",
-        "Provider calls: disabled. No provider calls are made.",
-        "Ollama calls: disabled. No Ollama calls are made.",
-        "API keys: not required.",
-        "Endpoints: /health, /status, /",
+        "Launching KORA Studio...",
+        "",
+        "Local URL:",
+        url,
+        "",
+        "Mode:",
+        "Local-only",
+        "Provider calls: disabled",
+        "Cloud sync: disabled",
+        "",
+        "Press Ctrl+C to stop.",
     ]
+    if open_browser and browser_opened is False:
+        lines.extend(["", "Browser launch failed. Open this URL manually:", url])
+    elif not open_browser:
+        lines.extend(["", "Browser launch: disabled by --no-browser."])
     return "\n".join(lines) + "\n"
 
 
@@ -277,7 +308,7 @@ def render_studio_placeholder_html(status: dict[str, Any]) -> str:
         <div class=\"status-card card\"><h3>Server</h3><p class=\"status-value\">Server: local</p><p>Bound to the local Studio skeleton.</p></div>
         <div class=\"status-card card\"><h3>Provider Calls</h3><p class=\"status-value disabled\">Provider calls: disabled</p><p>No remote provider requests are made.</p></div>
         <div class=\"status-card card\"><h3>Model Runtime</h3><p class=\"status-value disabled\">Model/runtime integration: not connected</p><p>Future runtime work must distinguish physically runnable local models from workflow-usable models.</p></div>
-        <div class=\"status-card card\"><h3>Browser Launch</h3><p class=\"status-value disabled\">Browser launch: disabled</p><p>The CLI does not open a browser automatically.</p></div>
+        <div class=\"status-card card\"><h3>Browser Launch</h3><p class=\"status-value\">Browser launch: available</p><p>The CLI opens the local page by default; use <code>--no-browser</code> to suppress it.</p></div>
         <div class=\"status-card card\"><h3>Ollama</h3><p class=\"status-value disabled\">Ollama integration: not connected</p><p>No Ollama detection or model calls happen here.</p></div>
       </div>
     </section>
@@ -307,7 +338,7 @@ def render_studio_placeholder_html(status: dict[str, Any]) -> str:
           <li>No full frontend yet</li>
           <li>No provider calls</li>
           <li>No model/runtime integration yet</li>
-          <li>No browser launch</li>
+          <li>Browser launch is local-only and can be disabled with <code>--no-browser</code></li>
           <li>No Ollama integration</li>
           <li>No production/API-cost/energy claims</li>
           <li>No claim that KORA removes model memory requirements</li>
@@ -377,7 +408,13 @@ def create_studio_request_handler(status_provider: StatusProvider | None = None)
     return StudioRequestHandler
 
 
-def run_studio_server(host: str = DEFAULT_STUDIO_HOST, port: int = DEFAULT_STUDIO_PORT) -> None:
+def run_studio_server(
+    host: str = DEFAULT_STUDIO_HOST,
+    port: int = DEFAULT_STUDIO_PORT,
+    *,
+    open_browser: bool = True,
+    browser_opener: BrowserOpener = webbrowser.open,
+) -> None:
     """Run the local-only KORA Studio preview server until interrupted."""
 
     if not is_allowed_studio_host(host):
@@ -386,8 +423,17 @@ def run_studio_server(host: str = DEFAULT_STUDIO_HOST, port: int = DEFAULT_STUDI
     status = get_studio_server_status(host=host, port=port)
     handler = create_studio_request_handler(lambda: get_studio_server_status(host=host, port=port))
     server = ThreadingHTTPServer((host, port), handler)
+    browser_opened = open_studio_browser(get_studio_url(host, port), browser_opener) if open_browser else None
     try:
-        print(render_studio_server_status_text(status), end="", flush=True)
+        print(
+            render_studio_server_status_text(
+                status,
+                open_browser=open_browser,
+                browser_opened=browser_opened,
+            ),
+            end="",
+            flush=True,
+        )
         server.serve_forever()
     except KeyboardInterrupt:
         print("KORA Studio local server stopped.", flush=True)

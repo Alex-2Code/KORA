@@ -146,15 +146,15 @@ def main(argv: list[str] | None = None) -> int:
 
     studio_parser = subparsers.add_parser(
         "studio",
-        help="show KORA Studio planning/preview status",
-        description="Show KORA Studio planning/preview status. Use --serve to start the localhost-only server skeleton; browser launch and model runtime calls are not implemented.",
+        help="launch KORA Studio local browser UI",
+        description="Launch the localhost-only KORA Studio preview server and open the local browser UI by default. Use --status to print planning/preview status only.",
     )
     studio_parser.add_argument("--status", action="store_true", help="show planning/preview status")
-    studio_parser.add_argument("--no-browser", action="store_true", help="accepted for future compatibility; no browser is launched")
-    studio_parser.add_argument("--open-browser", action="store_true", help="accepted for future compatibility; browser launch is not implemented yet")
-    studio_parser.add_argument("--serve", action="store_true", help="start the local-only Studio server skeleton")
-    studio_parser.add_argument("--host", default=DEFAULT_STUDIO_HOST, help="local host for --serve (default: 127.0.0.1)")
-    studio_parser.add_argument("--port", default=DEFAULT_STUDIO_PORT, type=int, help="local port for --serve (default: 8765)")
+    studio_parser.add_argument("--no-browser", action="store_true", help="start the local server without opening a browser")
+    studio_parser.add_argument("--open-browser", action="store_true", help="open the default browser; this is already the default")
+    studio_parser.add_argument("--serve", action="store_true", help="start the local-only Studio server; preserved for compatibility")
+    studio_parser.add_argument("--host", default=DEFAULT_STUDIO_HOST, help="local host for Studio server (default: 127.0.0.1)")
+    studio_parser.add_argument("--port", default=DEFAULT_STUDIO_PORT, type=int, help="local port for Studio server (default: 8765)")
 
     telemetry_parser = subparsers.add_parser("telemetry", help="summarize a run JSON file")
     telemetry_parser.add_argument("--input", required=True, help="path to run/report JSON")
@@ -177,17 +177,17 @@ def main(argv: list[str] | None = None) -> int:
         return _run_example(args.example, extra_args)
 
     if args.command == "studio":
-        if args.serve:
-            if not is_allowed_studio_host(args.host):
-                print(
-                    "KORA Studio server is local-only; use --host 127.0.0.1 or --host localhost.",
-                    file=sys.stderr,
-                )
-                return 2
-            run_studio_server(host=args.host, port=args.port)
+        if args.status:
+            status = get_studio_status()
+            print(render_studio_status_text(status), end="")
             return 0
-        status = get_studio_status()
-        print(render_studio_status_text(status), end="")
+        if not is_allowed_studio_host(args.host):
+            print(
+                "KORA Studio server is local-only; use --host 127.0.0.1 or --host localhost.",
+                file=sys.stderr,
+            )
+            return 2
+        run_studio_server(host=args.host, port=args.port, open_browser=not args.no_browser)
         return 0
 
     if args.command == "telemetry":

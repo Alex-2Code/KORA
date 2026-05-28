@@ -13,10 +13,10 @@ The page is a self-contained HTML preview served from `/`. It uses embedded CSS 
 Page sections:
 
 - Header with `KORA Studio`, `Local v0.1 Skeleton`, and AI Task Execution Router workspace copy
-- Status cards for local server state, disabled provider calls, disconnected model/runtime integration, disabled browser launch, and disconnected Ollama integration
+- Status cards for local server state, disabled provider calls, disconnected model/runtime integration, browser launch availability, and disconnected Ollama integration
 - Endpoint panel for `/health` and `/status`
 - Workflow preview for request handling, deterministic checks, local status, and a future runtime placeholder
-- Limitations panel with explicit no-provider, no-model/runtime, no-Ollama, no-browser-launch, and no unsupported-claims boundaries
+- Limitations panel with explicit no-provider, no-model/runtime, no-Ollama, local-browser-launch, and no unsupported-claims boundaries
 - Footer with local-only and claim-safe wording
 
 Required future UI narrative:
@@ -29,7 +29,7 @@ Required future UI narrative:
 ## How to Run
 
 ```bash
-python3 -m kora studio --serve
+python3 -m kora studio
 ```
 
 Open the local page at:
@@ -38,11 +38,15 @@ Open the local page at:
 http://127.0.0.1:8765/
 ```
 
-The server remains localhost-only by default. Browser auto-launch is not implemented.
+The server remains localhost-only by default. Browser auto-launch is enabled by default and can be suppressed with:
 
-Planned default launch behavior is `kora studio`: start the localhost-only Studio server, open the default browser automatically, keep provider calls and cloud sync disabled by default, and require no API key for default local mode. If browser launch fails, Studio should print the local URL and keep serving locally.
+```bash
+python3 -m kora studio --no-browser
+```
 
-Planned developer options include `kora studio --no-browser`, `kora studio --port 8765`, and an optional future browser selector such as `--browser chrome`.
+The compatibility command `python3 -m kora studio --serve` also starts the local server. If browser launch fails, Studio prints the local URL and keeps serving locally.
+
+Developer options include `kora studio --no-browser`, `kora studio --port 8765`, and `kora studio --status`. An optional future browser selector such as `--browser chrome` is not implemented yet.
 
 ## Endpoints
 
@@ -53,9 +57,9 @@ Planned developer options include `kora studio --no-browser`, `kora studio --por
 ## Current Limitations
 
 - no full frontend yet
-- no browser launch
 - no Ollama integration
 - no provider calls
+- no cloud sync
 - no model/runtime integration yet
 - no project UI yet
 - no API keys required

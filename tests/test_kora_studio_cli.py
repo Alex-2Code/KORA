@@ -4,6 +4,7 @@ import os
 import subprocess
 import sys
 
+from kora.cli import main as cli_main
 from kora.studio_status import get_studio_status, render_studio_status_text
 
 APPROVED_BOOST_MESSAGE = "Less waiting. Better answers. No hardware upgrade."
@@ -30,7 +31,7 @@ def test_kora_studio_help_works() -> None:
     completed = _run_kora_studio("--help")
 
     assert completed.returncode == 0
-    assert "planning/preview status" in completed.stdout
+    assert "KORA Studio" in completed.stdout
     assert "--no-browser" in completed.stdout
     assert "--open-browser" in completed.stdout
     assert "--serve" in completed.stdout
@@ -39,28 +40,57 @@ def test_kora_studio_help_works() -> None:
 
 
 def test_kora_studio_status_command_is_safe_noop() -> None:
-    completed = _run_kora_studio()
+    completed = _run_kora_studio("--status")
 
     assert completed.returncode == 0
     assert "KORA Studio is in planning/preview mode." in completed.stdout
     assert APPROVED_BOOST_MESSAGE in completed.stdout
     assert TECHNICAL_EXPLANATION in completed.stdout
-    assert "Server skeleton: available with python3 -m kora studio --serve." in completed.stdout
-    assert "no local server is started yet." in completed.stdout
+    assert "Server skeleton: available with python3 -m kora studio." in completed.stdout
+    assert "Status-only command: python3 -m kora studio --status." in completed.stdout
+    assert "Browser launch: enabled by default; use --no-browser to suppress it." in completed.stdout
     assert "Provider calls: disabled. No provider calls are made." in completed.stdout
+    assert "Cloud sync: disabled. No cloud sync is performed." in completed.stdout
     assert "API keys: not required." in completed.stdout
     assert "Docs: docs/kora-studio/README.md" in completed.stdout
     assert "Fixtures: docs/kora-studio/fixtures/" in completed.stdout
     assert completed.stderr == ""
 
 
-def test_kora_studio_inert_browser_flags_do_not_launch_browser() -> None:
-    completed = _run_kora_studio("--open-browser", "--no-browser")
+def test_kora_studio_default_launches_server_with_browser(monkeypatch) -> None:
+    calls: list[dict[str, object]] = []
 
-    assert completed.returncode == 0
-    assert "Browser launch: not implemented yet." in completed.stdout
-    assert "Server skeleton: available with python3 -m kora studio --serve." in completed.stdout
-    assert "no local server is started yet." in completed.stdout
+    def fake_run_studio_server(*, host: str, port: int, open_browser: bool) -> None:
+        calls.append({"host": host, "port": port, "open_browser": open_browser})
+
+    monkeypatch.setattr("kora.cli.run_studio_server", fake_run_studio_server)
+
+    assert cli_main(["studio"]) == 0
+    assert calls == [{"host": "127.0.0.1", "port": 8765, "open_browser": True}]
+
+
+def test_kora_studio_no_browser_suppresses_browser_open(monkeypatch) -> None:
+    calls: list[dict[str, object]] = []
+
+    def fake_run_studio_server(*, host: str, port: int, open_browser: bool) -> None:
+        calls.append({"host": host, "port": port, "open_browser": open_browser})
+
+    monkeypatch.setattr("kora.cli.run_studio_server", fake_run_studio_server)
+
+    assert cli_main(["studio", "--no-browser", "--port", "8766"]) == 0
+    assert calls == [{"host": "127.0.0.1", "port": 8766, "open_browser": False}]
+
+
+def test_kora_studio_serve_remains_compatible(monkeypatch) -> None:
+    calls: list[dict[str, object]] = []
+
+    def fake_run_studio_server(*, host: str, port: int, open_browser: bool) -> None:
+        calls.append({"host": host, "port": port, "open_browser": open_browser})
+
+    monkeypatch.setattr("kora.cli.run_studio_server", fake_run_studio_server)
+
+    assert cli_main(["studio", "--serve"]) == 0
+    assert calls == [{"host": "127.0.0.1", "port": 8765, "open_browser": True}]
 
 
 def test_get_studio_status_is_planning_skeleton() -> None:
@@ -68,11 +98,12 @@ def test_get_studio_status_is_planning_skeleton() -> None:
 
     assert status["status"] == "planning"
     assert status["implementation"] == "cli_skeleton"
-    assert status["server_available"] is False
+    assert status["server_available"] is True
     assert status["server_skeleton_available"] is True
-    assert status["server_skeleton_command"] == "python3 -m kora studio --serve"
-    assert status["browser_launch_available"] is False
+    assert status["server_skeleton_command"] == "python3 -m kora studio"
+    assert status["browser_launch_available"] is True
     assert status["provider_calls_enabled"] is False
+    assert status["cloud_sync_enabled"] is False
     assert status["local_runtime_required"] is False
     assert status["docs_path"] == "docs/kora-studio/README.md"
     assert status["fixtures_path"] == "docs/kora-studio/fixtures/"
@@ -86,10 +117,17 @@ def test_render_studio_status_text_includes_boundaries() -> None:
     assert "CLI skeleton" in text
     assert "local server skeleton" in text
     assert "No provider calls are made" in text
+    assert "No cloud sync is performed" in text
     assert "Local runtime: not required" in text
 
 
-def test_kora_studio_rejects_non_localhost_serve_host() -> None:
+def test_kora_studio_status_does_not_start_or_validate_server_host() -> None:
+    completed = _run_kora_studio("--status", "--host", "0.0.0.0")
+
+    assert completed.returncode == 0
+
+
+def test_kora_studio_rejects_non_localhost_launch_host() -> None:
     completed = _run_kora_studio("--serve", "--host", "0.0.0.0")
 
     assert completed.returncode == 2

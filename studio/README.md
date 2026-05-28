@@ -36,6 +36,16 @@ The demo should be read as a local workflow-routing scaffold, not an LM Studio r
 
 ## Run Backend
 
+The repository-level local preview skeleton launches with:
+
+```bash
+python3 -m kora studio
+```
+
+It starts the localhost-only server on `127.0.0.1:8765`, opens the default browser unless `--no-browser` is set, keeps provider calls and cloud sync disabled by default, and requires no API key for default local mode. If browser launch fails, it prints the manual local URL and keeps serving locally.
+
+The separate FastAPI/React demo scaffold can still be run manually:
+
 From repo root:
 
 ```bash

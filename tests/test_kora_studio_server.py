@@ -12,12 +12,15 @@ from kora.studio_server import (
     DEFAULT_STUDIO_HOST,
     DEFAULT_STUDIO_PORT,
     create_studio_request_handler,
+    get_studio_url,
     get_studio_health_payload,
     get_studio_server_status,
     get_studio_status_payload,
     is_allowed_studio_host,
+    open_studio_browser,
     render_studio_placeholder_html,
     render_studio_server_status_text,
+    run_studio_server,
 )
 
 APPROVED_BOOST_MESSAGE = "Less waiting. Better answers. No hardware upgrade."
@@ -53,7 +56,8 @@ def test_get_studio_server_status_fields() -> None:
     assert status["host"] == "127.0.0.1"
     assert status["port"] == 8765
     assert status["provider_calls_enabled"] is False
-    assert status["browser_launch_available"] is False
+    assert status["cloud_sync_enabled"] is False
+    assert status["browser_launch_available"] is True
     assert status["ollama_calls_enabled"] is False
     assert status["local_runtime_required"] is False
     assert status["no_server_side_provider_calls"] is True
@@ -73,9 +77,11 @@ def test_health_and_status_payloads_are_claim_safe() -> None:
         "status": "preview",
         "server": "local-only",
         "provider_calls_enabled": False,
-        "browser_launch_available": False,
+        "cloud_sync_enabled": False,
+        "browser_launch_available": True,
     }
     assert status["provider_calls_enabled"] is False
+    assert status["cloud_sync_enabled"] is False
     assert status["no_server_side_provider_calls"] is True
     assert status["kora_boost_message"] == APPROVED_BOOST_MESSAGE
 
@@ -83,11 +89,95 @@ def test_health_and_status_payloads_are_claim_safe() -> None:
 def test_render_studio_server_status_text_includes_boundaries() -> None:
     text = render_studio_server_status_text(get_studio_server_status())
 
-    assert "Local URL: http://127.0.0.1:8765/" in text
-    assert "preview/local-only" in text
-    assert "No provider calls are made" in text
-    assert "No Ollama calls are made" in text
-    assert "API keys: not required" in text
+    assert "Launching KORA Studio" in text
+    assert "Local URL:" in text
+    assert "http://127.0.0.1:8765/" in text
+    assert "Local-only" in text
+    assert "Provider calls: disabled" in text
+    assert "Cloud sync: disabled" in text
+    assert "Press Ctrl+C to stop" in text
+
+
+def test_render_studio_server_status_text_includes_no_browser_state() -> None:
+    text = render_studio_server_status_text(get_studio_server_status(), open_browser=False)
+
+    assert "Local URL:" in text
+    assert "http://127.0.0.1:8765/" in text
+    assert "Browser launch: disabled by --no-browser." in text
+
+
+def test_render_studio_server_status_text_includes_browser_failure_fallback() -> None:
+    text = render_studio_server_status_text(
+        get_studio_server_status(),
+        open_browser=True,
+        browser_opened=False,
+    )
+
+    assert "Browser launch failed. Open this URL manually:" in text
+    assert "http://127.0.0.1:8765/" in text
+
+
+def test_open_studio_browser_is_mockable_and_failure_safe() -> None:
+    opened_urls: list[str] = []
+
+    assert open_studio_browser("http://127.0.0.1:8765/", lambda url: (opened_urls.append(url), False)[1]) is False
+    assert opened_urls == ["http://127.0.0.1:8765/"]
+
+    def raise_error(url: str) -> bool:
+        raise RuntimeError(f"cannot open {url}")
+
+    assert open_studio_browser("http://127.0.0.1:8765/", raise_error) is False
+    assert open_studio_browser("http://127.0.0.1:8765/", lambda url: True) is True
+
+
+def test_run_studio_server_opens_browser_by_default(monkeypatch: pytest.MonkeyPatch, capsys: pytest.CaptureFixture[str]) -> None:
+    opened_urls: list[str] = []
+    created_servers: list[object] = []
+
+    class FakeServer:
+        def __init__(self, address: tuple[str, int], handler: object) -> None:
+            self.address = address
+            self.handler = handler
+            created_servers.append(self)
+
+        def serve_forever(self) -> None:
+            raise KeyboardInterrupt
+
+        def server_close(self) -> None:
+            return None
+
+    monkeypatch.setattr("kora.studio_server.ThreadingHTTPServer", FakeServer)
+
+    run_studio_server(browser_opener=lambda url: opened_urls.append(url) is None or True)
+
+    assert opened_urls == [get_studio_url()]
+    assert created_servers
+    assert getattr(created_servers[0], "address") == ("127.0.0.1", 8765)
+    output = capsys.readouterr().out
+    assert "Launching KORA Studio" in output
+    assert "Provider calls: disabled" in output
+    assert "Cloud sync: disabled" in output
+
+
+def test_run_studio_server_no_browser_suppresses_browser_open(monkeypatch: pytest.MonkeyPatch) -> None:
+    opened_urls: list[str] = []
+
+    class FakeServer:
+        def __init__(self, address: tuple[str, int], handler: object) -> None:
+            self.address = address
+            self.handler = handler
+
+        def serve_forever(self) -> None:
+            raise KeyboardInterrupt
+
+        def server_close(self) -> None:
+            return None
+
+    monkeypatch.setattr("kora.studio_server.ThreadingHTTPServer", FakeServer)
+
+    run_studio_server(open_browser=False, browser_opener=lambda url: opened_urls.append(url) is None or True)
+
+    assert opened_urls == []
 
 
 def test_request_handler_serves_health_status_and_placeholder() -> None:
@@ -115,6 +205,7 @@ def test_request_handler_serves_health_status_and_placeholder() -> None:
     assert health["service"] == "kora-studio"
     assert status["server"] == "local-only"
     assert status["provider_calls_enabled"] is False
+    assert status["cloud_sync_enabled"] is False
     assert status["ollama_calls_enabled"] is False
     content_type = response.headers.get("Content-Type", "")
 
@@ -128,7 +219,7 @@ def test_request_handler_serves_health_status_and_placeholder() -> None:
     assert "/status" in html
     assert "Provider calls: disabled" in html
     assert "Model/runtime integration: not connected" in html
-    assert "Browser launch: disabled" in html
+    assert "Browser launch: available" in html
     assert "Ollama integration: not connected" in html
     assert "No production/API-cost/energy claims" in html
     assert "provider calls enabled" not in html.lower()
@@ -151,7 +242,7 @@ def test_static_preview_html_content_is_safe_and_complete() -> None:
     assert "Server: local" in html
     assert "Provider calls: disabled" in html
     assert "Model/runtime integration: not connected" in html
-    assert "Browser launch: disabled" in html
+    assert "Browser launch: available" in html
     assert "Ollama integration: not connected" in html
     assert "Endpoint Panel" in html
     assert "/health" in html
@@ -165,7 +256,7 @@ def test_static_preview_html_content_is_safe_and_complete() -> None:
     assert "Limitations Panel" in html
     assert "No production/API-cost/energy claims" in html
     assert "No full frontend yet" in html
-    assert "No browser launch" in html
+    assert "Browser launch is local-only" in html
     assert "No provider calls" in html
     assert "No model/runtime integration yet" in html
     assert "No Ollama integration" in html
