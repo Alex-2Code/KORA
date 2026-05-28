@@ -116,6 +116,7 @@ Status:
 - default host: `127.0.0.1`
 - default port: `8765`
 - endpoints: `/health`, `/status`, `/`
+- `/status` includes grouped v0.2 status, launch boundary, disabled action state, and claim boundary fields
 - `/status` includes a local system profile scaffold and model capability estimate
 - `/status` includes a static local model catalog scaffold and claim-safe recommendations
 - `/status` includes a local runtime status scaffold and installed-model summary

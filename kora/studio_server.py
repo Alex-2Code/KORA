@@ -59,11 +59,72 @@ def get_studio_server_status(host: str = DEFAULT_STUDIO_HOST, port: int = DEFAUL
         "Standard Mode vs KORA Boost",
         "Report Viewer Placeholder",
     ]
+    launch_boundary = {
+        "host": host,
+        "port": port,
+        "url": get_studio_url(host=host, port=port),
+        "server": "local-only",
+        "allowed_hosts": sorted(ALLOWED_STUDIO_HOSTS),
+        "provider_calls_enabled": False,
+        "cloud_sync_enabled": False,
+        "browser_launch_available": True,
+        "api_key_required": False,
+        "claim_boundary": (
+            "The Studio preview is localhost-only by default. Provider calls and cloud sync are disabled, "
+            "and no API key is required for the default local preview."
+        ),
+    }
+    disabled_action_state = {
+        "download_connected": False,
+        "run_connected": False,
+        "model_execution_connected": False,
+        "provider_calls_enabled": False,
+        "cloud_sync_enabled": False,
+        "disabled_actions_route_to_guidance": True,
+        "setup_guidance_url": SETUP_GUIDANCE_PATH,
+        "claim_boundary": (
+            "Download and run actions remain disabled until explicitly connected. Disabled actions point to "
+            "informational setup guidance, not to an active installer or model runner."
+        ),
+    }
+    v0_2_status = {
+        "milestone": "v0.2",
+        "status": "first_run_preview",
+        "readiness": "in_progress",
+        "description": "Local first-run setup preview for the AI Task Execution Router demo.",
+        "first_run_section_order": list(first_run_section_order),
+        "claim_boundary": (
+            "v0.2 is a local preview/demo readiness milestone, not a production release. Execution data is "
+            "fixture/mock only until live harness wiring is implemented."
+        ),
+    }
+    studio_status_block = {
+        "service": "kora-studio",
+        "status": "preview",
+        "implementation": "local_server_skeleton",
+        "positioning": "local-first AI Task Execution Router workspace",
+        "v0_1_readiness_status": "local_fixture_demo_ready",
+        "v0_2_status": v0_2_status,
+    }
+    claim_boundaries = {
+        "studio": v0_2_status["claim_boundary"],
+        "launch": launch_boundary["claim_boundary"],
+        "model_capability": str(model_capability_estimate.get("claim_boundary", "")),
+        "model_catalog": MODEL_CATALOG_CLAIM_BOUNDARY,
+        "runtime_setup_guidance": SETUP_GUIDANCE_CLAIM_BOUNDARY,
+        "disabled_actions": disabled_action_state["claim_boundary"],
+        "execution_viewer": str(execution_viewer_fixture.get("execution_viewer_claim_boundary", "")),
+        "standard_vs_kora": str(standard_vs_kora_fixture.get("standard_vs_kora_claim_boundary", "")),
+        "report_viewer": str(report_viewer_fixture.get("report_viewer_claim_boundary", "")),
+    }
     return {
         "ok": True,
         "service": "kora-studio",
         "status": "preview",
         "implementation": "local_server_skeleton",
+        "studio_status": studio_status_block,
+        "launch_boundary": launch_boundary,
+        "v0_2_status": v0_2_status,
         "v0_1_readiness_status": "local_fixture_demo_ready",
         "v0_1_demo_surfaces": list(first_run_section_order),
         "v0_1_claim_boundary": (
@@ -91,9 +152,11 @@ def get_studio_server_status(host: str = DEFAULT_STUDIO_HOST, port: int = DEFAUL
         "setup_guidance_url": SETUP_GUIDANCE_PATH,
         "setup_guidance_claim_boundary": SETUP_GUIDANCE_CLAIM_BOUNDARY,
         "disabled_actions_route_to_guidance": True,
+        "disabled_action_state": disabled_action_state,
         **execution_viewer_fixture,
         **standard_vs_kora_fixture,
         **report_viewer_fixture,
+        "claim_boundaries": claim_boundaries,
         "first_run_section_order": first_run_section_order,
         "browser_launch_available": True,
         "ollama_calls_enabled": False,

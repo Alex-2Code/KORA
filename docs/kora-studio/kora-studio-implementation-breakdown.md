@@ -288,6 +288,34 @@ Scope:
 - no model execution
 - no provider/cloud route
 
+## Phase 3.11 — v0.2 Status Contract
+
+Status: Initial v0.2 status contract fields exist. `/status` preserves the existing preview fields and also exposes grouped `studio_status`, `launch_boundary`, `disabled_action_state`, and `claim_boundaries` blocks so the first-run UI can read status, launch limits, disabled action state, fixture boundaries, and local-only constraints without inferring them from scattered fields.
+
+Scope:
+
+- grouped Studio status
+- launch/local-only boundary
+- disabled action state
+- provider-disabled and cloud-disabled defaults
+- system profile
+- model capability estimate
+- runtime status and installed model summary
+- model catalog status and recommendations
+- setup guidance status
+- execution viewer fixture status
+- Standard Mode vs KORA Boost fixture status
+- report viewer placeholder status
+- claim boundary grouping
+
+Acceptance criteria:
+
+- status response remains backward compatible with existing safe fields
+- provider calls remain disabled
+- cloud sync remains disabled
+- download/run/model execution remain disconnected
+- fixture and report placeholders remain clearly labelled
+
 Acceptance criteria:
 
 - first-run sections appear in the intended order

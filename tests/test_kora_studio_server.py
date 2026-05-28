@@ -53,12 +53,35 @@ def test_get_studio_server_status_fields() -> None:
     assert status["ok"] is True
     assert status["service"] == "kora-studio"
     assert status["status"] == "preview"
+    assert status["studio_status"]["service"] == "kora-studio"
+    assert status["studio_status"]["status"] == "preview"
+    assert status["studio_status"]["implementation"] == "local_server_skeleton"
+    assert status["studio_status"]["positioning"] == "local-first AI Task Execution Router workspace"
+    assert status["studio_status"]["v0_2_status"]["milestone"] == "v0.2"
+    assert status["studio_status"]["v0_2_status"]["readiness"] == "in_progress"
+    assert "local preview/demo readiness milestone" in status["studio_status"]["v0_2_status"]["claim_boundary"]
+    assert status["v0_2_status"] == status["studio_status"]["v0_2_status"]
     assert status["v0_1_readiness_status"] == "local_fixture_demo_ready"
     assert "Report Viewer Placeholder" in status["v0_1_demo_surfaces"]
     assert "local fixture-backed AI Task Execution Router demo scaffold" in status["v0_1_claim_boundary"]
     assert status["server"] == "local-only"
     assert status["host"] == "127.0.0.1"
     assert status["port"] == 8765
+    assert status["launch_boundary"] == {
+        "host": "127.0.0.1",
+        "port": 8765,
+        "url": "http://127.0.0.1:8765/",
+        "server": "local-only",
+        "allowed_hosts": ["127.0.0.1", "localhost"],
+        "provider_calls_enabled": False,
+        "cloud_sync_enabled": False,
+        "browser_launch_available": True,
+        "api_key_required": False,
+        "claim_boundary": (
+            "The Studio preview is localhost-only by default. Provider calls and cloud sync are disabled, "
+            "and no API key is required for the default local preview."
+        ),
+    }
     assert status["provider_calls_enabled"] is False
     assert status["cloud_sync_enabled"] is False
     assert status["system_profile"]["default_host"] == "127.0.0.1"
@@ -96,6 +119,19 @@ def test_get_studio_server_status_fields() -> None:
     assert status["setup_guidance_status"] == "informational_scaffold"
     assert status["setup_guidance_url"] == "docs/kora-studio/kora-studio-runtime-setup-guidance.md"
     assert status["disabled_actions_route_to_guidance"] is True
+    assert status["disabled_action_state"] == {
+        "download_connected": False,
+        "run_connected": False,
+        "model_execution_connected": False,
+        "provider_calls_enabled": False,
+        "cloud_sync_enabled": False,
+        "disabled_actions_route_to_guidance": True,
+        "setup_guidance_url": "docs/kora-studio/kora-studio-runtime-setup-guidance.md",
+        "claim_boundary": (
+            "Download and run actions remain disabled until explicitly connected. Disabled actions point to "
+            "informational setup guidance, not to an active installer or model runner."
+        ),
+    }
     assert "not to an active installer" in status["setup_guidance_claim_boundary"]
     assert status["execution_viewer_status"] == "fixture_mock_scaffold"
     assert status["execution_viewer_fixture_event_count"] == 6
@@ -125,6 +161,26 @@ def test_get_studio_server_status_fields() -> None:
     assert status["report_export_status"] == "placeholder_not_connected"
     assert status["report_export_placeholder"]["export_action_enabled"] is False
     assert "local fixture metadata only" in status["report_viewer_claim_boundary"]
+    assert set(status["claim_boundaries"]) == {
+        "studio",
+        "launch",
+        "model_capability",
+        "model_catalog",
+        "runtime_setup_guidance",
+        "disabled_actions",
+        "execution_viewer",
+        "standard_vs_kora",
+        "report_viewer",
+    }
+    assert "not a production release" in status["claim_boundaries"]["studio"]
+    assert "localhost-only" in status["claim_boundaries"]["launch"]
+    assert "estimates until validated" in status["claim_boundaries"]["model_capability"]
+    assert "Download and execution are not connected yet" in status["claim_boundaries"]["model_catalog"]
+    assert "No model is downloaded" in status["claim_boundaries"]["runtime_setup_guidance"]
+    assert "remain disabled" in status["claim_boundaries"]["disabled_actions"]
+    assert "local fixture/mock data" in status["claim_boundaries"]["execution_viewer"]
+    assert "fixture/mock comparison" in status["claim_boundaries"]["standard_vs_kora"]
+    assert "local fixture metadata only" in status["claim_boundaries"]["report_viewer"]
     assert status["first_run_section_order"] == [
         "Launch/local-only status",
         "Your Computer",
@@ -181,6 +237,47 @@ def test_health_and_status_payloads_are_claim_safe() -> None:
     assert status["report_export_status"] == "placeholder_not_connected"
     assert status["no_server_side_provider_calls"] is True
     assert status["kora_boost_message"] == APPROVED_BOOST_MESSAGE
+
+
+def test_status_payload_exposes_v0_2_contract_fields() -> None:
+    status = get_studio_status_payload()
+
+    required_top_level_fields = {
+        "studio_status",
+        "launch_boundary",
+        "system_profile",
+        "model_capability_estimate",
+        "runtime_status",
+        "installed_models_summary",
+        "model_catalog_status",
+        "recommended_models",
+        "setup_guidance_status",
+        "disabled_action_state",
+        "execution_viewer_status",
+        "execution_viewer_fixture_events",
+        "standard_vs_kora_comparison_status",
+        "standard_vs_kora_comparison",
+        "standard_vs_kora_metrics",
+        "report_viewer_status",
+        "report_viewer_placeholder",
+        "provider_calls_enabled",
+        "cloud_sync_enabled",
+        "claim_boundaries",
+        "first_run_section_order",
+    }
+    assert required_top_level_fields <= set(status)
+
+    assert status["studio_status"]["v0_2_status"]["first_run_section_order"] == status["first_run_section_order"]
+    assert status["launch_boundary"]["provider_calls_enabled"] is False
+    assert status["launch_boundary"]["cloud_sync_enabled"] is False
+    assert status["disabled_action_state"]["download_connected"] is False
+    assert status["disabled_action_state"]["run_connected"] is False
+    assert status["disabled_action_state"]["model_execution_connected"] is False
+    assert status["execution_viewer_status"] == "fixture_mock_scaffold"
+    assert status["standard_vs_kora_comparison_status"] == "fixture_mock_scaffold"
+    assert status["report_viewer_status"] == "fixture_metadata_placeholder"
+    assert status["provider_calls_enabled"] is False
+    assert status["cloud_sync_enabled"] is False
 
 
 def test_render_studio_server_status_text_includes_boundaries() -> None:
