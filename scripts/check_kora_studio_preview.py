@@ -14,7 +14,7 @@ import sys
 from typing import Any, Callable
 from urllib.error import URLError
 from urllib.parse import urlparse
-from urllib.request import urlopen
+from urllib.request import Request, urlopen
 
 DEFAULT_BASE_URL = "http://127.0.0.1:8765"
 UrlOpen = Callable[..., Any]
@@ -38,6 +38,33 @@ def _read_url(base_url: str, path: str, *, timeout: float, opener: UrlOpen = url
     url = f"{_normalise_base_url(base_url)}{path}"
     try:
         with opener(url, timeout=timeout) as response:
+            status = int(getattr(response, "status", 0))
+            content_type = str(response.headers.get("Content-Type", ""))
+            body = response.read().decode("utf-8")
+    except URLError as exc:
+        raise SmokeCheckError(f"Unable to reach {url}: {exc}") from exc
+    except OSError as exc:
+        raise SmokeCheckError(f"Unable to read {url}: {exc}") from exc
+    return status, content_type, body
+
+
+def _post_json(
+    base_url: str,
+    path: str,
+    payload: dict[str, Any],
+    *,
+    timeout: float,
+    opener: UrlOpen = urlopen,
+) -> tuple[int, str, str]:
+    url = f"{_normalise_base_url(base_url)}{path}"
+    request = Request(
+        url,
+        data=json.dumps(payload).encode("utf-8"),
+        headers={"Content-Type": "application/json"},
+        method="POST",
+    )
+    try:
+        with opener(request, timeout=timeout) as response:
             status = int(getattr(response, "status", 0))
             content_type = str(response.headers.get("Content-Type", ""))
             body = response.read().decode("utf-8")
@@ -113,6 +140,14 @@ def check_preview(base_url: str = DEFAULT_BASE_URL, *, timeout: float = 2.0, ope
         "/status local harness is not available",
     )
     _require(
+        status["local_harness_status"].get("run_trigger_status") == "api_endpoint_connected",
+        "/status local harness run trigger is not connected",
+    )
+    _require(
+        status["local_harness_status"].get("approved_request_ids_only") is True,
+        "/status does not restrict harness trigger to approved request IDs",
+    )
+    _require(
         status["local_harness_status"].get("model_execution_connected") is False,
         "/status local harness reports model execution connected",
     )
@@ -140,6 +175,26 @@ def check_preview(base_url: str = DEFAULT_BASE_URL, *, timeout: float = 2.0, ope
     )
     results.append("/status ok")
 
+    run_status, run_content_type, run_body = _post_json(
+        base_url,
+        "/api/harness/run",
+        {"request_id": "local-harness-json-required-fields-001"},
+        timeout=timeout,
+        opener=opener,
+    )
+    _require(run_status == 200, f"/api/harness/run returned HTTP {run_status}")
+    _require("application/json" in run_content_type, "/api/harness/run did not return JSON")
+    run = json.loads(run_body)
+    _require(run.get("run_status") == "completed", "/api/harness/run did not complete local harness run")
+    _require(run.get("request_id") == "local-harness-json-required-fields-001", "/api/harness/run returned wrong request")
+    _require(run.get("provider_calls_enabled") is False, "/api/harness/run reports provider calls enabled")
+    _require(run.get("cloud_sync_enabled") is False, "/api/harness/run reports cloud sync enabled")
+    _require(run.get("model_execution_connected") is False, "/api/harness/run reports model execution connected")
+    _require(run.get("download_connected") is False, "/api/harness/run reports download connected")
+    _require(run.get("generated_events"), "/api/harness/run did not return generated events")
+    _require(run.get("generated_counters", {}).get("kora_model_calls") == 0, "/api/harness/run reports KORA model calls")
+    results.append("/api/harness/run ok")
+
     root_status, root_content_type, root_body = _read_url(base_url, "/", timeout=timeout, opener=opener)
     _require(root_status == 200, f"/ returned HTTP {root_status}")
     _require("text/html" in root_content_type, "/ did not return HTML")
@@ -160,6 +215,7 @@ def check_preview(base_url: str = DEFAULT_BASE_URL, *, timeout: float = 2.0, ope
         "Execution Viewer",
         "Standard Mode vs KORA Boost",
         "Report Viewer Placeholder",
+        "api_endpoint_connected",
         "Provider calls: disabled",
         "Cloud sync: disabled",
         "No model is downloaded",

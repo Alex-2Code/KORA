@@ -36,8 +36,29 @@ class FakeResponse:
         return self._body
 
 
-def _fake_opener(url: str, timeout: float) -> FakeResponse:
+def _fake_opener(url: object, timeout: float) -> FakeResponse:
     assert timeout == 0.5
+    if hasattr(url, "full_url"):
+        request_url = str(getattr(url, "full_url"))
+        if request_url.endswith("/api/harness/run"):
+            return FakeResponse(
+                status=200,
+                content_type="application/json; charset=utf-8",
+                body=json.dumps(
+                    {
+                        "run_status": "completed",
+                        "request_id": "local-harness-json-required-fields-001",
+                        "provider_calls_enabled": False,
+                        "cloud_sync_enabled": False,
+                        "model_execution_connected": False,
+                        "download_connected": False,
+                        "generated_events": [{"stage_id": "request_received"}],
+                        "generated_counters": {"kora_model_calls": 0},
+                    }
+                ),
+            )
+        raise AssertionError(f"unexpected request URL: {request_url}")
+    assert isinstance(url, str)
     if url.endswith("/health"):
         return FakeResponse(
             status=200,
@@ -73,6 +94,8 @@ def _fake_opener(url: str, timeout: float) -> FakeResponse:
                     "execution_viewer_status": "fixture_mock_scaffold",
                     "local_harness_status": {
                         "status": "local_deterministic_harness_available",
+                        "run_trigger_status": "api_endpoint_connected",
+                        "approved_request_ids_only": True,
                         "model_execution_connected": False,
                     },
                     "local_harness_sample_run": {"status": "completed"},
@@ -111,6 +134,7 @@ def _fake_opener(url: str, timeout: float) -> FakeResponse:
             Execution Viewer
             Standard Mode vs KORA Boost
             Report Viewer Placeholder
+            api_endpoint_connected
             Provider calls: disabled
             Cloud sync: disabled
             No model is downloaded
@@ -123,7 +147,7 @@ def _fake_opener(url: str, timeout: float) -> FakeResponse:
 def test_check_preview_uses_local_endpoints_only() -> None:
     results = smoke.check_preview("http://127.0.0.1:8765", timeout=0.5, opener=_fake_opener)
 
-    assert results == ["/health ok", "/status ok", "/ ok"]
+    assert results == ["/health ok", "/status ok", "/api/harness/run ok", "/ ok"]
 
 
 def test_check_preview_rejects_non_local_url() -> None:

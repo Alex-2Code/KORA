@@ -110,7 +110,7 @@ def _event(
     }
 
 
-def build_local_harness_events(request: dict[str, Any] | str) -> dict[str, Any]:
+def build_local_harness_events(request: dict[str, Any] | str, *, run_id: str | None = None) -> dict[str, Any]:
     """Convert a local harness request into claim-safe execution events."""
 
     if isinstance(request, str):
@@ -123,7 +123,7 @@ def build_local_harness_events(request: dict[str, Any] | str) -> dict[str, Any]:
     if not validate_local_harness_request(selected_request):
         raise ValueError("Local harness request is missing required claim-safe fields")
 
-    run_id = f"local-harness-run-{selected_request['request_id']}"
+    run_id = run_id or f"local-harness-run-{selected_request['request_id']}"
     route_class = selected_request["expected_route_class"]
     validation_result = selected_request["expected_validation_result"]
     model_needed = selected_request["expected_model_needed"]

@@ -7,11 +7,18 @@ import json
 import webbrowser
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from typing import Any, Callable
+from urllib.parse import urlparse
 
 from kora.studio_execution_fixture import get_execution_viewer_fixture_summary, get_standard_vs_kora_status_fields
 from kora.studio_harness_comparison import get_local_harness_comparison_status_fields
 from kora.studio_harness_events import LOCAL_HARNESS_EVENT_CLAIM_BOUNDARY, build_local_harness_events
 from kora.studio_harness_requests import get_local_harness_request_summary, get_local_harness_requests
+from kora.studio_harness_runs import (
+    LOCAL_HARNESS_RUN_CLAIM_BOUNDARY,
+    get_local_harness_run_record,
+    get_local_harness_run_store_status,
+    trigger_local_harness_run,
+)
 from kora.studio_model_catalog import MODEL_CATALOG_CLAIM_BOUNDARY, SETUP_GUIDANCE_PATH, recommend_catalog_models
 from kora.studio_report_viewer import get_report_viewer_status_fields
 from kora.studio_runtime_status import get_runtime_status, summarize_installed_models
@@ -59,8 +66,12 @@ def get_studio_server_status(host: str = DEFAULT_STUDIO_HOST, port: int = DEFAUL
     )
     local_harness_status = {
         "status": "local_deterministic_harness_available",
-        "event_source_status": "status_sample_only",
-        "run_trigger_status": "not_connected",
+        "event_source_status": "generated_events_available",
+        "run_trigger_status": "api_endpoint_connected",
+        "run_trigger_endpoint": "/api/harness/run",
+        "run_retrieval_endpoint": "/api/harness/run/{run_id}",
+        "approved_request_ids_only": True,
+        "arbitrary_prompt_execution_connected": False,
         "sample_request_count": len(local_harness_requests),
         "sample_run_id": local_harness_sample_run["run_id"],
         "provider_calls_enabled": False,
@@ -69,6 +80,7 @@ def get_studio_server_status(host: str = DEFAULT_STUDIO_HOST, port: int = DEFAUL
         "download_connected": False,
         "claim_boundary": LOCAL_HARNESS_EVENT_CLAIM_BOUNDARY,
     }
+    local_harness_run_store = get_local_harness_run_store_status()
     first_run_section_order = [
         "Launch/local-only status",
         "Your Computer",
@@ -141,6 +153,7 @@ def get_studio_server_status(host: str = DEFAULT_STUDIO_HOST, port: int = DEFAUL
         "standard_vs_kora": str(standard_vs_kora_fixture.get("standard_vs_kora_claim_boundary", "")),
         "report_viewer": str(report_viewer_fixture.get("report_viewer_claim_boundary", "")),
         "local_harness": LOCAL_HARNESS_EVENT_CLAIM_BOUNDARY,
+        "local_harness_run": LOCAL_HARNESS_RUN_CLAIM_BOUNDARY,
         "local_harness_comparison": str(local_harness_comparison.get("comparison_claim_boundary", "")),
     }
     return {
@@ -180,11 +193,13 @@ def get_studio_server_status(host: str = DEFAULT_STUDIO_HOST, port: int = DEFAUL
         "disabled_actions_route_to_guidance": True,
         "disabled_action_state": disabled_action_state,
         "local_harness_status": local_harness_status,
+        "local_harness_run_store": local_harness_run_store,
         "local_harness_request_summary": local_harness_request_summary,
         "local_harness_requests": local_harness_requests,
         "local_harness_sample_run": local_harness_sample_run,
         "local_harness_counters": local_harness_counters,
         "local_harness_claim_boundary": LOCAL_HARNESS_EVENT_CLAIM_BOUNDARY,
+        "local_harness_run_claim_boundary": LOCAL_HARNESS_RUN_CLAIM_BOUNDARY,
         **execution_viewer_fixture,
         **standard_vs_kora_fixture,
         **local_harness_comparison,
@@ -200,6 +215,26 @@ def get_studio_server_status(host: str = DEFAULT_STUDIO_HOST, port: int = DEFAUL
         "kora_boost_message": studio_status["kora_boost_message"],
         "kora_boost_technical_explanation": studio_status["kora_boost_technical_explanation"],
     }
+
+
+def get_harness_run_error_payload(error: str, message: str, *, request_id: str | None = None) -> dict[str, Any]:
+    """Return a claim-safe local harness run error response."""
+
+    payload: dict[str, Any] = {
+        "ok": False,
+        "error": error,
+        "message": message,
+        "run_status": "failed",
+        "provider_calls_enabled": False,
+        "cloud_sync_enabled": False,
+        "model_execution_connected": False,
+        "download_connected": False,
+        "arbitrary_prompt_execution_connected": False,
+        "claim_boundary": LOCAL_HARNESS_RUN_CLAIM_BOUNDARY,
+    }
+    if request_id is not None:
+        payload["request_id"] = request_id
+    return payload
 
 
 def get_studio_health_payload() -> dict[str, Any]:
@@ -881,6 +916,8 @@ def render_studio_placeholder_html(status: dict[str, Any]) -> str:
         <div class=\"grid\">
           <div class=\"card\"><h3><a href=\"/health\">/health</a></h3><p>Returns local health status JSON for the preview server.</p></div>
           <div class=\"card\"><h3><a href=\"/status\">/status</a></h3><p>Returns local preview status, system profile, model capability estimate, KORA Boost copy, docs paths, and fixture paths.</p></div>
+          <div class=\"card\"><h3>/api/harness/run</h3><p>POST accepts only approved local deterministic sample request IDs and returns generated local harness events. Arbitrary prompt execution is not connected.</p></div>
+          <div class=\"card\"><h3>/api/harness/run/&lt;run_id&gt;</h3><p>GET returns an in-memory local harness run record if it exists. No persistence, provider call, download, or model execution is connected.</p></div>
         </div>
       </section>
 
@@ -941,21 +978,87 @@ def create_studio_request_handler(status_provider: StatusProvider | None = None)
             self.end_headers()
             self.wfile.write(body)
 
+        def _read_json_body(self) -> dict[str, Any] | None:
+            try:
+                content_length = int(self.headers.get("Content-Length", "0") or "0")
+            except ValueError:
+                return None
+            if content_length <= 0:
+                return None
+            body = self.rfile.read(content_length)
+            try:
+                payload = json.loads(body.decode("utf-8"))
+            except (UnicodeDecodeError, json.JSONDecodeError):
+                return None
+            return payload if isinstance(payload, dict) else None
+
         def do_GET(self) -> None:
+            parsed_path = urlparse(self.path)
+            path = parsed_path.path
             status = provider()
-            if self.path == "/health":
+            if path == "/health":
                 self._write_json(get_studio_health_payload())
                 return
-            if self.path == "/status":
+            if path == "/status":
                 self._write_json(status)
                 return
-            if self.path == "/":
+            if path == "/":
                 self._write_html(render_studio_placeholder_html(status))
+                return
+            if path.startswith("/api/harness/run/"):
+                run_id = path.removeprefix("/api/harness/run/")
+                run_record = get_local_harness_run_record(run_id)
+                if run_record is None:
+                    self._write_json(
+                        get_harness_run_error_payload(
+                            "run_not_found",
+                            "No in-memory local harness run exists for this run_id.",
+                        ),
+                        status_code=404,
+                    )
+                    return
+                self._write_json(run_record)
                 return
             self._write_json({"ok": False, "error": "not_found"}, status_code=404)
 
         def do_POST(self) -> None:
-            self._write_json({"ok": False, "error": "post_not_supported"}, status_code=405)
+            parsed_path = urlparse(self.path)
+            if parsed_path.path != "/api/harness/run":
+                self._write_json({"ok": False, "error": "post_not_supported"}, status_code=405)
+                return
+            payload = self._read_json_body()
+            if payload is None:
+                self._write_json(
+                    get_harness_run_error_payload(
+                        "invalid_json",
+                        "POST /api/harness/run expects a JSON body with an approved request_id.",
+                    ),
+                    status_code=400,
+                )
+                return
+            request_id = payload.get("request_id")
+            if not isinstance(request_id, str) or not request_id:
+                self._write_json(
+                    get_harness_run_error_payload(
+                        "invalid_request_id",
+                        "POST /api/harness/run accepts only an approved local harness request_id string.",
+                    ),
+                    status_code=400,
+                )
+                return
+            try:
+                run_record = trigger_local_harness_run(request_id)
+            except ValueError:
+                self._write_json(
+                    get_harness_run_error_payload(
+                        "unknown_request_id",
+                        "Only approved deterministic local harness sample request IDs can be triggered.",
+                        request_id=request_id,
+                    ),
+                    status_code=404,
+                )
+                return
+            self._write_json(run_record)
 
     return StudioRequestHandler
 

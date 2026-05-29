@@ -3,6 +3,7 @@ from __future__ import annotations
 import json
 import os
 import threading
+import urllib.error
 import urllib.request
 from pathlib import Path
 
@@ -23,6 +24,7 @@ from kora.studio_server import (
     render_studio_server_status_text,
     run_studio_server,
 )
+from kora.studio_harness_runs import clear_local_harness_run_records
 
 APPROVED_BOOST_MESSAGE = "Less waiting. Better answers. No hardware upgrade."
 TECHNICAL_EXPLANATION = (
@@ -134,13 +136,22 @@ def test_get_studio_server_status_fields() -> None:
     }
     assert "not to an active installer" in status["setup_guidance_claim_boundary"]
     assert status["local_harness_status"]["status"] == "local_deterministic_harness_available"
-    assert status["local_harness_status"]["event_source_status"] == "status_sample_only"
-    assert status["local_harness_status"]["run_trigger_status"] == "not_connected"
+    assert status["local_harness_status"]["event_source_status"] == "generated_events_available"
+    assert status["local_harness_status"]["run_trigger_status"] == "api_endpoint_connected"
+    assert status["local_harness_status"]["run_trigger_endpoint"] == "/api/harness/run"
+    assert status["local_harness_status"]["run_retrieval_endpoint"] == "/api/harness/run/{run_id}"
+    assert status["local_harness_status"]["approved_request_ids_only"] is True
+    assert status["local_harness_status"]["arbitrary_prompt_execution_connected"] is False
     assert status["local_harness_status"]["sample_request_count"] == 5
     assert status["local_harness_status"]["provider_calls_enabled"] is False
     assert status["local_harness_status"]["cloud_sync_enabled"] is False
     assert status["local_harness_status"]["model_execution_connected"] is False
     assert status["local_harness_status"]["download_connected"] is False
+    assert status["local_harness_run_store"]["run_store_status"] == "in_memory_local_only"
+    assert status["local_harness_run_store"]["persistence_enabled"] is False
+    assert status["local_harness_run_store"]["provider_calls_enabled"] is False
+    assert status["local_harness_run_store"]["model_execution_connected"] is False
+    assert "approved synthetic deterministic request IDs" in status["local_harness_run_claim_boundary"]
     assert status["local_harness_request_summary"]["local_harness_request_count"] == 5
     assert status["local_harness_requests"][0]["request_id"] == "local-harness-json-required-fields-001"
     assert status["local_harness_sample_run"]["request_id"] == "local-harness-json-required-fields-001"
@@ -197,6 +208,7 @@ def test_get_studio_server_status_fields() -> None:
         "standard_vs_kora",
         "report_viewer",
         "local_harness",
+        "local_harness_run",
         "local_harness_comparison",
     }
     assert "not a production release" in status["claim_boundaries"]["studio"]
@@ -209,6 +221,7 @@ def test_get_studio_server_status_fields() -> None:
     assert "fixture/mock comparison" in status["claim_boundaries"]["standard_vs_kora"]
     assert "local summary metadata only" in status["claim_boundaries"]["report_viewer"]
     assert "synthetic deterministic requests" in status["claim_boundaries"]["local_harness"]
+    assert "approved synthetic deterministic request IDs" in status["claim_boundaries"]["local_harness_run"]
     assert "local deterministic harness data" in status["claim_boundaries"]["local_harness_comparison"]
     assert status["first_run_section_order"] == [
         "Launch/local-only status",
@@ -261,7 +274,7 @@ def test_health_and_status_payloads_are_claim_safe() -> None:
     assert status["execution_viewer_status"] == "fixture_mock_scaffold"
     assert status["execution_viewer_fixture_event_count"] == 6
     assert status["local_harness_status"]["status"] == "local_deterministic_harness_available"
-    assert status["local_harness_status"]["run_trigger_status"] == "not_connected"
+    assert status["local_harness_status"]["run_trigger_status"] == "api_endpoint_connected"
     assert status["local_harness_requests"]
     assert status["local_harness_sample_run"]["status"] == "completed"
     assert status["local_harness_counters"]["avoided_model_calls"] == 1
@@ -296,10 +309,12 @@ def test_status_payload_exposes_v0_2_contract_fields() -> None:
         "execution_viewer_status",
         "execution_viewer_fixture_events",
         "local_harness_status",
+        "local_harness_run_store",
         "local_harness_requests",
         "local_harness_sample_run",
         "local_harness_counters",
         "local_harness_claim_boundary",
+        "local_harness_run_claim_boundary",
         "local_harness_comparison_status",
         "local_harness_comparison",
         "comparison_counters",
@@ -503,7 +518,8 @@ def test_request_handler_serves_health_status_and_placeholder() -> None:
     assert "KORA does not remove RAM/VRAM/unified-memory requirements" in html
     assert "Local Harness Preview" in html
     assert "local_deterministic_harness_available" in html
-    assert "status_sample_only" in html
+    assert "generated_events_available" in html
+    assert "api_endpoint_connected" in html
     assert "Available local deterministic sample requests" in html
     assert "local-harness-json-required-fields-001" in html
     assert "Expected route: deterministic_code" in html
@@ -526,6 +542,92 @@ def test_request_handler_serves_health_status_and_placeholder() -> None:
     assert "production cost reduction" not in html.lower()
     assert "real api-cost reduction" not in html.lower()
     assert "energy reduction" not in html.lower()
+
+
+def test_request_handler_triggers_and_retrieves_local_harness_run() -> None:
+    clear_local_harness_run_records()
+    handler = create_studio_request_handler(lambda: get_studio_server_status(port=0))
+    try:
+        server = ThreadingHTTPServer(("127.0.0.1", 0), handler)
+    except PermissionError:
+        pytest.skip("localhost binding is not available in this sandbox")
+    thread = threading.Thread(target=server.serve_forever, daemon=True)
+    thread.start()
+    base_url = f"http://127.0.0.1:{server.server_port}"
+    try:
+        request_body = json.dumps({"request_id": "local-harness-known-faq-001"}).encode("utf-8")
+        request = urllib.request.Request(
+            f"{base_url}/api/harness/run",
+            data=request_body,
+            headers={"Content-Type": "application/json"},
+            method="POST",
+        )
+        with urllib.request.urlopen(request, timeout=2) as response:
+            run = json.loads(response.read().decode("utf-8"))
+
+        with urllib.request.urlopen(f"{base_url}/api/harness/run/{run['run_id']}", timeout=2) as response:
+            retrieved_run = json.loads(response.read().decode("utf-8"))
+    finally:
+        server.shutdown()
+        thread.join(timeout=2)
+        server.server_close()
+
+    assert run["ok"] is True
+    assert run["request_id"] == "local-harness-known-faq-001"
+    assert run["run_status"] == "completed"
+    assert run["generated_events"][0]["stage_id"] == "request_received"
+    assert run["generated_events"][-1]["stage_id"] == "final_counters"
+    assert run["generated_counters"]["structured_lookup_routes"] == 1
+    assert run["generated_counters"]["kora_model_calls"] == 0
+    assert run["comparison_summary"]["metrics"]["avoided_model_calls"] == 1
+    assert run["report_metadata_summary"]["report_source"] == "local_harness_summary"
+    assert run["provider_calls_enabled"] is False
+    assert run["cloud_sync_enabled"] is False
+    assert run["model_execution_connected"] is False
+    assert run["download_connected"] is False
+    assert retrieved_run == run
+
+
+def test_request_handler_rejects_invalid_local_harness_run_request() -> None:
+    clear_local_harness_run_records()
+    handler = create_studio_request_handler(lambda: get_studio_server_status(port=0))
+    try:
+        server = ThreadingHTTPServer(("127.0.0.1", 0), handler)
+    except PermissionError:
+        pytest.skip("localhost binding is not available in this sandbox")
+    thread = threading.Thread(target=server.serve_forever, daemon=True)
+    thread.start()
+    base_url = f"http://127.0.0.1:{server.server_port}"
+    try:
+        request_body = json.dumps({"request_id": "missing-request"}).encode("utf-8")
+        request = urllib.request.Request(
+            f"{base_url}/api/harness/run",
+            data=request_body,
+            headers={"Content-Type": "application/json"},
+            method="POST",
+        )
+        with pytest.raises(urllib.error.HTTPError) as exc_info:
+            urllib.request.urlopen(request, timeout=2)
+        error_body = json.loads(exc_info.value.read().decode("utf-8"))
+
+        with pytest.raises(urllib.error.HTTPError) as missing_run_exc:
+            urllib.request.urlopen(f"{base_url}/api/harness/run/missing-run", timeout=2)
+        missing_run_body = json.loads(missing_run_exc.value.read().decode("utf-8"))
+    finally:
+        server.shutdown()
+        thread.join(timeout=2)
+        server.server_close()
+
+    assert exc_info.value.code == 404
+    assert error_body["ok"] is False
+    assert error_body["error"] == "unknown_request_id"
+    assert error_body["request_id"] == "missing-request"
+    assert error_body["run_status"] == "failed"
+    assert error_body["provider_calls_enabled"] is False
+    assert error_body["model_execution_connected"] is False
+
+    assert missing_run_exc.value.code == 404
+    assert missing_run_body["error"] == "run_not_found"
 
 
 def test_static_preview_html_content_is_safe_and_complete() -> None:
@@ -573,8 +675,8 @@ def test_static_preview_html_content_is_safe_and_complete() -> None:
     assert "KORA does not remove RAM/VRAM/unified-memory requirements" in html
     assert "Local Harness Preview" in html
     assert "local_deterministic_harness_available" in html
-    assert "status_sample_only" in html
-    assert "Run trigger: not_connected" in html
+    assert "generated_events_available" in html
+    assert "Run trigger: api_endpoint_connected" in html
     assert "Available sample requests: 5" in html
     assert "Available local deterministic sample requests" in html
     assert "local-harness-json-required-fields-001" in html

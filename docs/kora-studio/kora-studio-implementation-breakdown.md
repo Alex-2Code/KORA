@@ -422,19 +422,20 @@ Acceptance criteria:
 - report viewer remains placeholder behavior
 - claim boundaries remain visible
 
-## Phase 3.15 — v0.4 Local Run Trigger Plan
+## Phase 3.15 — v0.4 Local Run Trigger Scaffold
 
-Status: Planning only. See `docs/kora-studio/kora-studio-v0-4-local-run-trigger-plan.md`.
+Status: Initial endpoint scaffold connected. See `docs/kora-studio/kora-studio-v0-4-local-run-trigger-plan.md`.
 
-Goal: Add a future local run trigger surface for approved deterministic sample requests and optional event-stream scaffolding for generated harness events.
+Goal: Add a local run trigger surface for approved deterministic sample requests and optional event-stream scaffolding for generated harness events.
 
 Scope:
 
 - approved request selection
-- local-only run trigger
+- local-only run trigger through `POST /api/harness/run`
+- in-memory run retrieval through `GET /api/harness/run/{run_id}`
 - generated event retrieval
 - generated counters
-- optional SSE/event-stream scaffold
+- optional SSE/event-stream scaffold remains planned
 - selected-run comparison update
 - selected-run report metadata update
 - no arbitrary prompt execution unless explicitly bounded in a later task
@@ -451,6 +452,7 @@ Acceptance criteria:
 - invalid request ids are rejected
 - model-needed boundaries return `execution_not_connected`
 - run state and counters remain local deterministic harness output
+- run records are in-memory only and are not persisted
 - smoke checks cover planned harness endpoints if implemented
 
 ## Phase 4 — Report Viewer
