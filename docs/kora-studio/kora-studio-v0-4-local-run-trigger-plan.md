@@ -12,6 +12,8 @@ Task 435 adds non-SSE generated event retrieval through `GET /api/harness/events
 
 Task 436 adds optional SSE formatting through `GET /api/harness/sse?run_id=<id>`. The stream emits only already-generated local harness events for an existing in-memory run, including stream start, harness stage, and stream completion markers. It is not model token streaming, provider streaming, model output streaming, or arbitrary prompt execution.
 
+Task 437 adds a static Run Local Harness trigger panel to the local preview UI. The panel lists approved deterministic sample request IDs, route classes, and model-needed boundaries, and points to the local run/event endpoints. It does not add browser-side JavaScript, arbitrary prompt input, model execution, provider calls, downloads, or cloud behavior.
+
 v0.4 remains a local preview/demo milestone. It is not a production release, hosted service, provider billing dashboard, cost-reduction dashboard, energy dashboard, generic local chatbot, or LM Studio replacement.
 
 ## Scope

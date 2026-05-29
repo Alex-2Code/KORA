@@ -432,6 +432,7 @@ Scope:
 
 - approved request selection
 - local-only run trigger through `POST /api/harness/run`
+- static Run Local Harness trigger panel in the local preview UI
 - in-memory run retrieval through `GET /api/harness/run/{run_id}`
 - generated event retrieval through `GET /api/harness/events?run_id=<id>`
 - generated counters
@@ -439,6 +440,7 @@ Scope:
 - selected-run comparison update
 - selected-run report metadata update
 - no arbitrary prompt execution unless explicitly bounded in a later task
+- no browser-side JavaScript trigger yet
 - no provider calls
 - no cloud sync
 - no model downloads
@@ -449,6 +451,7 @@ Scope:
 Acceptance criteria:
 
 - approved sample request can be triggered locally
+- preview UI lists approved request IDs, route classes, and trigger boundaries
 - invalid request ids are rejected
 - model-needed boundaries return `execution_not_connected`
 - run state and counters remain local deterministic harness output

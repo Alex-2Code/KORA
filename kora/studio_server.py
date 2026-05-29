@@ -578,6 +578,18 @@ def render_studio_placeholder_html(status: dict[str, Any]) -> str:
         "</li>"
         for request in local_harness_requests
     )
+    local_harness_trigger_items = "".join(
+        "<div class=\"card\">"
+        "<h3>Run Local Harness</h3>"
+        f"<p><code>{html.escape(str(request.get('request_id', 'unknown')), quote=True)}</code></p>"
+        f"<p>{html.escape(str(request.get('input_text', 'Approved local sample request.')), quote=True)}</p>"
+        f"<p>Family: {html.escape(str(request.get('task_family', 'unknown')), quote=True)}</p>"
+        f"<p>Route: {html.escape(str(request.get('expected_route_class', 'unknown')), quote=True)}</p>"
+        f"<p>Model-needed boundary: {html.escape(str(request.get('expected_model_needed', False)), quote=True)}</p>"
+        "<p><span class=\"badge\">Approved deterministic sample requests only</span></p>"
+        "</div>"
+        for request in local_harness_requests
+    )
     local_harness_event_items = "".join(
         "<li>"
         f"{html.escape(str(event.get('stage_name', 'Unknown stage')), quote=True)} "
@@ -869,6 +881,12 @@ def render_studio_placeholder_html(status: dict[str, Any]) -> str:
           <div class=\"card\"><h3>Sample request</h3><p><code>{sample_request_id}</code></p><p>{sample_input}</p><p>Family: {sample_family}</p><p>Expected route: {sample_route}</p><p>Validation: {sample_validation}</p><p>Model needed: {sample_model_needed}</p></div>
           <div class=\"card\"><h3>Boundary</h3><p>{local_harness_boundary}</p><p>Model-needed boundaries do not execute models in this milestone.</p><p>No provider call, download, or cloud sync is connected.</p></div>
         </div>
+        <div class=\"grid\" style=\"margin-top: 16px;\">
+          <div class=\"card\"><h3>Run Local Harness action state</h3><p><span class=\"badge\">Run Local Harness</span></p><p>Static preview guidance only; no browser-side JavaScript is connected in this panel.</p><p>Use <code>POST /api/harness/run</code> with an approved <code>request_id</code>.</p><p>Generated harness events only.</p></div>
+          <div class=\"card\"><h3>Trigger boundary</h3><p>Approved deterministic sample requests only.</p><p>No arbitrary prompt execution.</p><p>No model execution.</p><p>No provider calls.</p><p>No downloads.</p><p>This is local preview/demo data, not production evidence.</p></div>
+          <div class=\"card\"><h3>Result surfaces</h3><p><code>GET /api/harness/run/&lt;run_id&gt;</code></p><p><code>GET /api/harness/events?run_id=&lt;id&gt;</code></p><p><code>GET /api/harness/sse?run_id=&lt;id&gt;</code></p><p>Model-needed boundary returns <code>execution_not_connected</code>.</p></div>
+        </div>
+        <div class=\"grid\" style=\"margin-top: 16px;\">{local_harness_trigger_items}</div>
         <div class=\"grid\" style=\"margin-top: 16px;\">
           <div class=\"card\"><h3>Available local deterministic sample requests</h3><ul>{local_harness_request_items}</ul></div>
           <div class=\"card\"><h3>Harness event stages</h3><ul>{local_harness_event_items}</ul></div>

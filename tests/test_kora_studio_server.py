@@ -528,6 +528,13 @@ def test_request_handler_serves_health_status_and_placeholder() -> None:
     assert "local_deterministic_harness_available" in html
     assert "generated_events_available" in html
     assert "api_endpoint_connected" in html
+    assert "Run Local Harness" in html
+    assert "Run Local Harness action state" in html
+    assert "Approved deterministic sample requests only" in html
+    assert "No arbitrary prompt execution" in html
+    assert "Generated harness events only" in html
+    assert "This is local preview/demo data, not production evidence" in html
+    assert "execution_not_connected" in html
     assert "Available local deterministic sample requests" in html
     assert "local-harness-json-required-fields-001" in html
     assert "Expected route: deterministic_code" in html
@@ -723,6 +730,12 @@ def test_static_preview_html_content_is_safe_and_complete() -> None:
     assert "local_deterministic_harness_available" in html
     assert "generated_events_available" in html
     assert "Run trigger: api_endpoint_connected" in html
+    assert "Run Local Harness" in html
+    assert "Run Local Harness action state" in html
+    assert "Approved deterministic sample requests only" in html
+    assert "No arbitrary prompt execution" in html
+    assert "Generated harness events only" in html
+    assert "This is local preview/demo data, not production evidence" in html
     assert "Available sample requests: 5" in html
     assert "Available local deterministic sample requests" in html
     assert "local-harness-json-required-fields-001" in html
@@ -797,6 +810,12 @@ def test_static_preview_html_content_is_safe_and_complete() -> None:
     assert "fetch(" not in html.lower()
     assert "xmlhttprequest" not in html.lower()
     assert "navigator.sendbeacon" not in html.lower()
+    assert "<input" not in html.lower()
+    assert "<textarea" not in html.lower()
+    assert "Run any prompt" not in html
+    assert "Run model" not in html
+    assert "Download model" not in html
+    assert "Production benchmark" not in html
 
     ordered_sections = [
         "Launch / Local-only Status",

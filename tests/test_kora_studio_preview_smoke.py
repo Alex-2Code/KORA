@@ -174,6 +174,11 @@ def _fake_opener(url: object, timeout: float) -> FakeResponse:
             Standard Mode vs KORA Boost
             Report Viewer Placeholder
             api_endpoint_connected
+            Run Local Harness
+            Approved deterministic sample requests only
+            No arbitrary prompt execution
+            Generated harness events only
+            This is local preview/demo data, not production evidence
             /api/harness/events
             /api/harness/sse
             Provider calls: disabled
