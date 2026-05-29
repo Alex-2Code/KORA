@@ -209,6 +209,7 @@ def test_get_studio_server_status_fields() -> None:
         "Setup Guidance",
         "Disabled Download/Run Actions",
         "KORA Boost Boundary",
+        "Local Harness Preview",
         "Execution Viewer",
         "Standard Mode vs KORA Boost",
         "Report Viewer Placeholder",
@@ -482,6 +483,15 @@ def test_request_handler_serves_health_status_and_placeholder() -> None:
     assert "Estimated local model tier" in html
     assert "KORA Boost Boundary" in html
     assert "KORA does not remove RAM/VRAM/unified-memory requirements" in html
+    assert "Local Harness Preview" in html
+    assert "local_deterministic_harness_available" in html
+    assert "status_sample_only" in html
+    assert "Available local deterministic sample requests" in html
+    assert "local-harness-json-required-fields-001" in html
+    assert "Expected route: deterministic_code" in html
+    assert "Harness event stages" in html
+    assert "Model-needed boundaries do not execute models in this milestone" in html
+    assert "Local deterministic harness output" in html
     assert "Model/runtime integration: not connected" in html
     assert "Browser launch: available" in html
     assert "Ollama integration: not connected" in html
@@ -543,6 +553,16 @@ def test_static_preview_html_content_is_safe_and_complete() -> None:
     assert "Estimated local model tier" in html
     assert "Unknown until validated" in html or "depending on runtime" in html
     assert "KORA does not remove RAM/VRAM/unified-memory requirements" in html
+    assert "Local Harness Preview" in html
+    assert "local_deterministic_harness_available" in html
+    assert "status_sample_only" in html
+    assert "Run trigger: not_connected" in html
+    assert "Available sample requests: 5" in html
+    assert "Available local deterministic sample requests" in html
+    assert "local-harness-json-required-fields-001" in html
+    assert "Harness event stages" in html
+    assert "Model-needed boundaries do not execute models in this milestone" in html
+    assert "Local deterministic harness output" in html
     assert "Standard Mode vs KORA Boost" in html
     assert "Fixture/mock comparison only" in html
     assert "Baseline model calls" in html
@@ -616,6 +636,7 @@ def test_static_preview_html_content_is_safe_and_complete() -> None:
         "Setup Guidance",
         "Disabled Download/Run Actions",
         "KORA Boost Boundary",
+        "Local Harness Preview",
         "Execution Viewer",
         "Standard Mode vs KORA Boost",
         "Report Viewer Placeholder",

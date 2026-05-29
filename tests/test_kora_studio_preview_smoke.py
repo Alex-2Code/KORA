@@ -92,6 +92,7 @@ def _fake_opener(url: str, timeout: float) -> FakeResponse:
             Setup Guidance
             Disabled Download/Run Actions
             KORA Boost Boundary
+            Local Harness Preview
             Execution Viewer
             Standard Mode vs KORA Boost
             Report Viewer Placeholder

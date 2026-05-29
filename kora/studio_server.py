@@ -73,6 +73,7 @@ def get_studio_server_status(host: str = DEFAULT_STUDIO_HOST, port: int = DEFAUL
         "Setup Guidance",
         "Disabled Download/Run Actions",
         "KORA Boost Boundary",
+        "Local Harness Preview",
         "Execution Viewer",
         "Standard Mode vs KORA Boost",
         "Report Viewer Placeholder",
@@ -479,11 +480,69 @@ def render_studio_placeholder_html(status: dict[str, Any]) -> str:
                 "Setup Guidance",
                 "Disabled Download/Run Actions",
                 "KORA Boost Boundary",
+                "Local Harness Preview",
                 "Execution Viewer",
                 "Standard Mode vs KORA Boost",
                 "Report Viewer Placeholder",
             ],
         )
+    )
+    local_harness_status = status.get("local_harness_status", {})
+    local_harness_requests = [
+        item for item in status.get("local_harness_requests", []) if isinstance(item, dict)
+    ]
+    local_harness_sample_run = status.get("local_harness_sample_run", {})
+    local_harness_counters = status.get("local_harness_counters", {})
+    local_harness_status_text = html.escape(str(local_harness_status.get("status", "not_connected")), quote=True)
+    local_harness_event_source = html.escape(str(local_harness_status.get("event_source_status", "not_connected")), quote=True)
+    local_harness_run_trigger = html.escape(str(local_harness_status.get("run_trigger_status", "not_connected")), quote=True)
+    local_harness_request_count = html.escape(
+        str(local_harness_status.get("sample_request_count", len(local_harness_requests))),
+        quote=True,
+    )
+    local_harness_boundary = html.escape(str(status.get("local_harness_claim_boundary", "")), quote=True)
+    sample_request = local_harness_sample_run.get("request", {}) if isinstance(local_harness_sample_run, dict) else {}
+    sample_request_id = html.escape(
+        str(sample_request.get("request_id", local_harness_sample_run.get("request_id", "unknown"))),
+        quote=True,
+    )
+    sample_input = html.escape(str(sample_request.get("input_text", "No sample request selected.")), quote=True)
+    sample_family = html.escape(str(sample_request.get("task_family", "unknown")), quote=True)
+    sample_route = html.escape(str(sample_request.get("expected_route_class", "unknown")), quote=True)
+    sample_validation = html.escape(str(sample_request.get("expected_validation_result", "unknown")), quote=True)
+    sample_model_needed = html.escape(str(sample_request.get("expected_model_needed", "unknown")), quote=True)
+    local_harness_request_items = "".join(
+        "<li>"
+        f"{html.escape(str(request.get('request_id', 'unknown')), quote=True)} "
+        f"({html.escape(str(request.get('task_family', 'unknown')), quote=True)} / "
+        f"{html.escape(str(request.get('expected_route_class', 'unknown')), quote=True)})"
+        "</li>"
+        for request in local_harness_requests
+    )
+    local_harness_event_items = "".join(
+        "<li>"
+        f"{html.escape(str(event.get('stage_name', 'Unknown stage')), quote=True)} "
+        f"({html.escape(str(event.get('route_class', 'unknown')), quote=True)} / "
+        f"{html.escape(str(event.get('status', 'unknown')), quote=True)})"
+        "</li>"
+        for event in local_harness_sample_run.get("events", [])
+        if isinstance(event, dict)
+    )
+    local_harness_counter_items = "".join(
+        "<div class=\"card\">"
+        f"<h3>{html.escape(str(key), quote=True)}</h3>"
+        f"<p class=\"status-value\">{html.escape(str(local_harness_counters.get(key, 0)), quote=True)}</p>"
+        "<p>Local deterministic harness output.</p>"
+        "</div>"
+        for key in [
+            "total_requests",
+            "baseline_model_calls",
+            "kora_model_calls",
+            "avoided_model_calls",
+            "deterministic_routes",
+            "model_escalations",
+            "validation_pass_count",
+        ]
     )
 
     return f"""<!doctype html>
@@ -742,6 +801,20 @@ def render_studio_placeholder_html(status: dict[str, Any]) -> str:
           <div class=\"card\"><h3>KORA Boost</h3><p>KORA Boost routes deterministic and structured tasks to CPU/local fast paths first.</p><p>Larger-model workflows may become more practical when deterministic work avoids the model path.</p></div>
           <div class=\"card\"><h3>Boundary</h3><p>KORA does not remove model memory requirements.</p><p>Provider/cloud routes are disabled by default.</p></div>
         </div>
+      </section>
+
+      <section>
+        <h2>Local Harness Preview</h2>
+        <div class=\"grid\">
+          <div class=\"card\"><h3>Harness status</h3><p>{local_harness_status_text}</p><p>Event source: {local_harness_event_source}</p><p>Run trigger: {local_harness_run_trigger}</p><p>Available sample requests: {local_harness_request_count}</p></div>
+          <div class=\"card\"><h3>Sample request</h3><p><code>{sample_request_id}</code></p><p>{sample_input}</p><p>Family: {sample_family}</p><p>Expected route: {sample_route}</p><p>Validation: {sample_validation}</p><p>Model needed: {sample_model_needed}</p></div>
+          <div class=\"card\"><h3>Boundary</h3><p>{local_harness_boundary}</p><p>Model-needed boundaries do not execute models in this milestone.</p><p>No provider call, download, or cloud sync is connected.</p></div>
+        </div>
+        <div class=\"grid\" style=\"margin-top: 16px;\">
+          <div class=\"card\"><h3>Available local deterministic sample requests</h3><ul>{local_harness_request_items}</ul></div>
+          <div class=\"card\"><h3>Harness event stages</h3><ul>{local_harness_event_items}</ul></div>
+        </div>
+        <div class=\"grid\">{local_harness_counter_items}</div>
       </section>
 
       <section>

@@ -125,6 +125,7 @@ def check_preview(base_url: str = DEFAULT_BASE_URL, *, timeout: float = 2.0, ope
         "Setup Guidance",
         "Disabled Download/Run Actions",
         "KORA Boost Boundary",
+        "Local Harness Preview",
         "Execution Viewer",
         "Standard Mode vs KORA Boost",
         "Report Viewer Placeholder",
