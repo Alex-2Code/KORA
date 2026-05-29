@@ -442,7 +442,7 @@ Scope:
 - selected-run comparison update
 - selected-run report metadata update with disabled file export state
 - no arbitrary prompt execution unless explicitly bounded in a later task
-- no browser-side JavaScript trigger yet
+- browser-side trigger calls only `POST /api/harness/run` with approved request IDs
 - no provider calls
 - no cloud sync
 - no model downloads
@@ -467,7 +467,7 @@ Acceptance criteria:
 
 ## Phase 3.16 — v0.5 Local Interactive UI Plan
 
-Status: Initial request selector scaffold exists. See `docs/kora-studio/kora-studio-v0-5-local-interactive-ui-plan.md`.
+Status: Approved request selector and local Run Local Harness button are connected to approved request IDs only. See `docs/kora-studio/kora-studio-v0-5-local-interactive-ui-plan.md`.
 
 Goal: Add a local interactive UI for approved deterministic sample requests and selected-run state.
 
@@ -491,7 +491,8 @@ Scope:
 Acceptance criteria:
 
 - interactive UI only calls existing localhost harness endpoints
-- selector scaffold lists approved request IDs without arbitrary prompt input
+- selector lists approved request IDs without arbitrary prompt input
+- Run Local Harness calls `POST /api/harness/run` with the selected approved request ID only
 - selected-run state stays browser-local
 - model-needed boundaries remain `execution_not_connected`
 - no production cost, energy, provider, model execution, or unsupported larger-model claim is introduced

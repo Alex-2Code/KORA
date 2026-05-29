@@ -613,10 +613,13 @@ def render_studio_placeholder_html(status: dict[str, Any]) -> str:
     selector_preview_text = html.escape(str(selector_preview_request.get("input_text", "No approved request selected.")), quote=True)
     selector_preview_route = html.escape(str(selector_preview_request.get("expected_route_class", "unknown")), quote=True)
     selector_preview_model_needed = html.escape(str(selector_preview_request.get("expected_model_needed", "unknown")), quote=True)
+    local_harness_requests_json = json.dumps(local_harness_requests, sort_keys=True).replace("</", "<\\/")
     local_harness_selector_items = "".join(
         "<div class=\"card\">"
         "<h3>Selector option</h3>"
-        f"<p><code>{html.escape(str(request.get('request_id', 'unknown')), quote=True)}</code></p>"
+        f"<button class=\"request-option\" type=\"button\" data-kora-request-id=\"{html.escape(str(request.get('request_id', 'unknown')), quote=True)}\">"
+        f"{html.escape(str(request.get('request_id', 'unknown')), quote=True)}"
+        "</button>"
         f"<p>{html.escape(str(request.get('input_text', 'Approved local sample request.')), quote=True)}</p>"
         f"<p>Route class: {html.escape(str(request.get('expected_route_class', 'unknown')), quote=True)}</p>"
         f"<p>Model-needed boundary: {html.escape(str(request.get('expected_model_needed', False)), quote=True)}</p>"
@@ -787,6 +790,41 @@ def render_studio_placeholder_html(status: dict[str, Any]) -> str:
       margin-top: 8px;
     }}
     .status-value.disabled {{ color: var(--amber); }}
+    button {{
+      font: inherit;
+    }}
+    .request-option, .action-button {{
+      width: 100%;
+      border: 1px solid var(--cyan);
+      background: #071014;
+      color: var(--text);
+      border-radius: 8px;
+      padding: 10px 12px;
+      cursor: pointer;
+      text-align: left;
+      overflow-wrap: anywhere;
+    }}
+    .request-option:hover, .request-option[aria-pressed="true"], .action-button:hover {{
+      border-color: var(--green);
+      color: var(--green);
+    }}
+    .action-button {{
+      margin-top: 10px;
+      text-align: center;
+      font-weight: 800;
+    }}
+    .action-button:disabled {{
+      border-color: var(--line);
+      color: var(--muted);
+      cursor: wait;
+    }}
+    .run-state {{
+      border: 1px solid var(--line);
+      background: var(--panel-3);
+      border-radius: 8px;
+      padding: 14px;
+      margin-top: 10px;
+    }}
     .workflow {{
       display: grid;
       grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -930,13 +968,17 @@ def render_studio_placeholder_html(status: dict[str, Any]) -> str:
           <div class=\"card\"><h3>Boundary</h3><p>{local_harness_boundary}</p><p>Model-needed boundaries do not execute models in this milestone.</p><p>No provider call, download, or cloud sync is connected.</p></div>
         </div>
         <div class=\"grid\" style=\"margin-top: 16px;\">
-          <div class=\"card\"><h3>Approved Request Selector</h3><p>Selector preview only.</p><p>Approved local harness requests only.</p><p>Run action will use local harness endpoint in a later task.</p><p>No arbitrary prompt execution.</p><p>No model execution.</p><p>No provider calls.</p><p>No downloads.</p><p>Local deterministic harness data only.</p></div>
-          <div class=\"card\"><h3>Selected request preview</h3><p><code>{selector_preview_id}</code></p><p>{selector_preview_text}</p><p>Route class: {selector_preview_route}</p><p>Model-needed boundary: {selector_preview_model_needed}</p><p>Selected request state is preview-only and browser-local state is planned for Task 443.</p></div>
-          <div class=\"card\"><h3>Disabled Run Local Harness action</h3><p><span class=\"badge\">Run Local Harness planned</span></p><p>The interactive POST trigger is not connected in this selector scaffold.</p><p>No external scripts, no arbitrary input, and no model path are connected.</p></div>
+          <div class=\"card\"><h3>Approved Request Selector</h3><p>Interactive approved request selector.</p><p>Approved local harness requests only.</p><p>Approved request only.</p><p>No arbitrary prompt execution.</p><p>No model execution.</p><p>No provider calls.</p><p>No downloads.</p><p>Local deterministic harness data only.</p></div>
+          <div class=\"card\"><h3>Selected request preview</h3><p><code id=\"kora-selected-request-id\">{selector_preview_id}</code></p><p id=\"kora-selected-request-text\">{selector_preview_text}</p><p>Route class: <span id=\"kora-selected-request-route\">{selector_preview_route}</span></p><p>Model-needed boundary: <span id=\"kora-selected-request-model-needed\">{selector_preview_model_needed}</span></p><p>Selector state is browser-local in-memory page state only.</p></div>
+          <div class=\"card\"><h3>Run Local Harness</h3><p><span class=\"badge\">Approved request only</span></p><button class=\"action-button\" type=\"button\" id=\"kora-run-local-harness-button\">Run Local Harness</button><p>Calls <code>POST /api/harness/run</code> with the selected approved <code>request_id</code> only.</p><p>No arbitrary prompt text is sent.</p></div>
         </div>
         <div class=\"grid\" style=\"margin-top: 16px;\">{local_harness_selector_items}</div>
         <div class=\"grid\" style=\"margin-top: 16px;\">
-          <div class=\"card\"><h3>Run Local Harness action state</h3><p><span class=\"badge\">Run Local Harness</span></p><p>Static preview guidance only; no browser-side JavaScript is connected in this panel.</p><p>Use <code>POST /api/harness/run</code> with an approved <code>request_id</code>.</p><p>Generated harness events only.</p></div>
+          <div class=\"card\"><h3>Selected run state</h3><p>Generated local harness output only.</p><div class=\"run-state\" id=\"kora-selected-run-state\" aria-live=\"polite\"><p>Status: <span id=\"kora-run-status\">not_started</span></p><p>Run id: <code id=\"kora-selected-run-id\">not run yet</code></p><p>Request id: <code id=\"kora-run-request-id\">not run yet</code></p><p>Event count: <span id=\"kora-run-event-count\">0</span></p><p>Model execution status: <span id=\"kora-run-model-execution-status\">not_connected</span></p><p>Provider calls: <span id=\"kora-run-provider-calls-enabled\">false</span></p><p>Cloud sync: <span id=\"kora-run-cloud-sync-enabled\">false</span></p><p>File export: <span id=\"kora-run-file-export-enabled\">false</span></p><p>Claim boundary: <span id=\"kora-run-claim-boundary\">No run has been generated yet.</span></p></div></div>
+          <div class=\"card\"><h3>Interactive run boundary</h3><p>Model-needed boundary returns <code>execution_not_connected</code>.</p><p>No model execution was attempted.</p><p>Provider calls remain disabled.</p><p>No downloads.</p><p>Selected run state is local browser memory only.</p></div>
+        </div>
+        <div class=\"grid\" style=\"margin-top: 16px;\">
+          <div class=\"card\"><h3>Run Local Harness action state</h3><p><span class=\"badge\">Run Local Harness</span></p><p>The browser button calls only the local harness run endpoint for an approved request id.</p><p>Use <code>POST /api/harness/run</code> with an approved <code>request_id</code>.</p><p>Generated harness events only.</p></div>
           <div class=\"card\"><h3>Trigger boundary</h3><p>Approved deterministic sample requests only.</p><p>No arbitrary prompt execution.</p><p>No model execution.</p><p>No provider calls.</p><p>No downloads.</p><p>This is local preview/demo data, not production evidence.</p></div>
           <div class=\"card\"><h3>Result surfaces</h3><p><code>GET /api/harness/run/&lt;run_id&gt;</code></p><p><code>GET /api/harness/events?run_id=&lt;id&gt;</code></p><p><code>GET /api/harness/sse?run_id=&lt;id&gt;</code></p><p>Model-needed boundary returns <code>execution_not_connected</code>.</p></div>
         </div>
@@ -1030,6 +1072,109 @@ def render_studio_placeholder_html(status: dict[str, Any]) -> str:
 
     <p class=\"footer\">Local-only skeleton. Claim-safe AI Task Execution Router preview; KORA does not make large models smaller or remove memory requirements.</p>
   </main>
+  <script type=\"application/json\" id=\"kora-approved-requests-data\">{local_harness_requests_json}</script>
+  <script>
+    (function () {{
+      const dataElement = document.getElementById("kora-approved-requests-data");
+      const approvedRequests = JSON.parse(dataElement ? dataElement.textContent || "[]" : "[]");
+      const requestById = new Map(approvedRequests.map((request) => [request.request_id, request]));
+      let selectedRequestId = approvedRequests.length ? approvedRequests[0].request_id : "";
+      let selectedRunId = "";
+
+      const text = (id, value) => {{
+        const element = document.getElementById(id);
+        if (element) {{
+          element.textContent = String(value);
+        }}
+      }};
+
+      const setButtonState = () => {{
+        document.querySelectorAll("[data-kora-request-id]").forEach((button) => {{
+          button.setAttribute("aria-pressed", button.getAttribute("data-kora-request-id") === selectedRequestId ? "true" : "false");
+        }});
+      }};
+
+      const renderSelectedRequest = () => {{
+        const request = requestById.get(selectedRequestId);
+        if (!request) {{
+          text("kora-selected-request-id", "none");
+          text("kora-selected-request-text", "No approved request selected.");
+          text("kora-selected-request-route", "unknown");
+          text("kora-selected-request-model-needed", "unknown");
+          return;
+        }}
+        text("kora-selected-request-id", request.request_id);
+        text("kora-selected-request-text", request.input_text || "Approved local sample request.");
+        text("kora-selected-request-route", request.expected_route_class || "unknown");
+        text("kora-selected-request-model-needed", request.expected_model_needed === true ? "true" : "false");
+        setButtonState();
+      }};
+
+      const renderRunError = (message) => {{
+        text("kora-run-status", "failed");
+        text("kora-run-claim-boundary", `${{message}} No model execution was attempted. Provider calls remain disabled. Try again or inspect the local server logs.`);
+      }};
+
+      const renderRunResponse = (run) => {{
+        selectedRunId = run.run_id || "";
+        const report = run.report_metadata_summary || {{}};
+        text("kora-selected-run-id", selectedRunId || "not returned");
+        text("kora-run-request-id", run.request_id || selectedRequestId);
+        text("kora-run-status", run.run_status || "unknown");
+        text("kora-run-event-count", run.event_count || (Array.isArray(run.generated_events) ? run.generated_events.length : 0));
+        text("kora-run-model-execution-status", run.model_execution_status || "execution_not_connected");
+        text("kora-run-provider-calls-enabled", run.provider_calls_enabled === true ? "true" : "false");
+        text("kora-run-cloud-sync-enabled", run.cloud_sync_enabled === true ? "true" : "false");
+        text("kora-run-file-export-enabled", report.file_export_enabled === true ? "true" : "false");
+        text("kora-run-claim-boundary", run.claim_boundary || "Generated local harness output only. No model execution.");
+      }};
+
+      document.querySelectorAll("[data-kora-request-id]").forEach((button) => {{
+        button.addEventListener("click", () => {{
+          const requestId = button.getAttribute("data-kora-request-id") || "";
+          if (requestById.has(requestId)) {{
+            selectedRequestId = requestId;
+            renderSelectedRequest();
+          }}
+        }});
+      }});
+
+      const runButton = document.getElementById("kora-run-local-harness-button");
+      if (runButton) {{
+        runButton.addEventListener("click", async () => {{
+          if (!requestById.has(selectedRequestId)) {{
+            renderRunError("No approved request is selected.");
+            return;
+          }}
+          runButton.disabled = true;
+          text("kora-run-status", "running");
+          text("kora-run-claim-boundary", "Local harness run requested for an approved request id only.");
+          try {{
+            const response = await fetch("/api/harness/run", {{
+              method: "POST",
+              headers: {{"Content-Type": "application/json"}},
+              body: JSON.stringify({{request_id: selectedRequestId}})
+            }});
+            const payload = await response.json();
+            if (!response.ok || payload.ok === false) {{
+              throw new Error(payload.message || "Local harness run failed.");
+            }}
+            renderRunResponse(payload);
+          }} catch (error) {{
+            renderRunError(error && error.message ? error.message : "Local harness run failed.");
+          }} finally {{
+            runButton.disabled = false;
+          }}
+        }});
+      }}
+
+      renderSelectedRequest();
+      window.koraStudioSelectedRunState = {{
+        get selected_request_id() {{ return selectedRequestId; }},
+        get selected_run_id() {{ return selectedRunId; }}
+      }};
+    }})();
+  </script>
 </body>
 </html>
 """

@@ -762,21 +762,26 @@ def test_static_preview_html_content_is_safe_and_complete() -> None:
     assert "generated_events_available" in html
     assert "Run trigger: api_endpoint_connected" in html
     assert "Approved Request Selector" in html
-    assert "Selector preview only" in html
+    assert "Interactive approved request selector" in html
     assert "Approved local harness requests only" in html
+    assert "Approved request only" in html
     assert "Selected request preview" in html
-    assert "Run action will use local harness endpoint in a later task" in html
-    assert "Disabled Run Local Harness action" in html
-    assert "Run Local Harness planned" in html
-    assert "The interactive POST trigger is not connected in this selector scaffold" in html
-    assert "Selected request state is preview-only and browser-local state is planned for Task 443" in html
+    assert "Selector state is browser-local in-memory page state only" in html
+    assert "id=\"kora-run-local-harness-button\"" in html
+    assert "id=\"kora-selected-run-state\"" in html
+    assert "Selected run state" in html
+    assert "Generated local harness output only" in html
+    assert "selectedRunId" in html
+    assert "data-kora-request-id" in html
     assert "Local deterministic harness data only" in html
     assert "Run Local Harness" in html
     assert "Run Local Harness action state" in html
+    assert "The browser button calls only the local harness run endpoint for an approved request id" in html
     assert "Approved deterministic sample requests only" in html
     assert "No arbitrary prompt execution" in html
     assert "Generated harness events only" in html
     assert "This is local preview/demo data, not production evidence" in html
+    assert "Model-needed boundary returns <code>execution_not_connected</code>" in html
     assert "Available sample requests: 5" in html
     assert "Available local deterministic sample requests" in html
     assert "local-harness-json-required-fields-001" in html
@@ -872,13 +877,20 @@ def test_static_preview_html_content_is_safe_and_complete() -> None:
     assert "model output report" not in html.lower()
     assert "download report" not in html.lower()
     assert "export now" not in html.lower()
-    assert "<script" not in html.lower()
+    assert "<script" in html.lower()
+    assert "type=\"application/json\" id=\"kora-approved-requests-data\"" in html
+    assert "fetch(\"/api/harness/run\"" in html
+    assert "JSON.stringify({request_id: selectedRequestId})" in html
     assert "src=" not in html.lower()
     assert 'href="http' not in html.lower()
     assert "https://" not in html.lower()
     assert "localstorage" not in html.lower()
     assert "sessionstorage" not in html.lower()
-    assert "fetch(" not in html.lower()
+    assert "fetch(\"/api/harness/events" not in html
+    assert "fetch(\"/api/harness/sse" not in html
+    assert "fetch(\"/api/model" not in html
+    assert "fetch(\"/api/provider" not in html
+    assert "fetch(\"/api/download" not in html
     assert "xmlhttprequest" not in html.lower()
     assert "navigator.sendbeacon" not in html.lower()
     assert "<input" not in html.lower()
