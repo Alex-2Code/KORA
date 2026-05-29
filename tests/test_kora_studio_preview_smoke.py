@@ -178,6 +178,14 @@ def _fake_opener(url: object, timeout: float) -> FakeResponse:
             Approved deterministic sample requests only
             No arbitrary prompt execution
             Generated harness events only
+            Generated Event Timeline
+            Generated local harness events only
+            Not model token streaming
+            No provider output
+            Generated Counters
+            Local Harness Comparison boundary
+            Comparison is generated from local deterministic harness output
+            This is not production cost evidence
             This is local preview/demo data, not production evidence
             /api/harness/events
             /api/harness/sse

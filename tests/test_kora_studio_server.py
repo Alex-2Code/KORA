@@ -539,8 +539,19 @@ def test_request_handler_serves_health_status_and_placeholder() -> None:
     assert "local-harness-json-required-fields-001" in html
     assert "Expected route: deterministic_code" in html
     assert "Harness event stages" in html
+    assert "Generated Event Timeline" in html
+    assert "Generated local harness events only" in html
+    assert "Not model token streaming" in html
+    assert "No provider output" in html
+    assert "Route class: input" in html
+    assert "Status: completed" in html
+    assert "Model called: False" in html
+    assert "Deterministic route used:" in html
+    assert "Validation result:" in html
+    assert "Latency:" in html
     assert "Model-needed boundaries do not execute models in this milestone" in html
     assert "Local deterministic harness output" in html
+    assert "Generated Counters" in html
     assert "Model/runtime integration: not connected" in html
     assert "Browser launch: available" in html
     assert "Ollama integration: not connected" in html
@@ -740,10 +751,25 @@ def test_static_preview_html_content_is_safe_and_complete() -> None:
     assert "Available local deterministic sample requests" in html
     assert "local-harness-json-required-fields-001" in html
     assert "Harness event stages" in html
+    assert "Generated Event Timeline" in html
+    assert "Generated local harness events only" in html
+    assert "Not model token streaming" in html
+    assert "No provider output" in html
+    assert "Route class: input" in html
+    assert "Status: completed" in html
+    assert "Model called: False" in html
+    assert "Deterministic route used:" in html
+    assert "Validation result:" in html
+    assert "Latency:" in html
     assert "Model-needed boundaries do not execute models in this milestone" in html
     assert "Local deterministic harness output" in html
+    assert "Generated Counters" in html
     assert "Standard Mode vs KORA Boost" in html
     assert "Local deterministic harness comparison" in html
+    assert "Local Harness Comparison boundary" in html
+    assert "Comparison is generated from local deterministic harness output" in html
+    assert "This is not production cost evidence" in html
+    assert "This does not execute a model" in html
     assert "local_deterministic_harness_generated" in html
     assert "Baseline model calls" in html
     assert "KORA model calls" in html

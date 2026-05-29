@@ -599,6 +599,20 @@ def render_studio_placeholder_html(status: dict[str, Any]) -> str:
         for event in local_harness_sample_run.get("events", [])
         if isinstance(event, dict)
     )
+    local_harness_timeline_items = "".join(
+        "<div class=\"card\">"
+        f"<h3>{html.escape(str(event.get('stage_name', 'Unknown stage')), quote=True)}</h3>"
+        f"<p>Stage: <code>{html.escape(str(event.get('stage_id', 'unknown')), quote=True)}</code></p>"
+        f"<p>Route class: {html.escape(str(event.get('route_class', 'unknown')), quote=True)}</p>"
+        f"<p>Status: {html.escape(str(event.get('status', 'unknown')), quote=True)}</p>"
+        f"<p>Model called: {html.escape(str(event.get('model_called', False)), quote=True)}</p>"
+        f"<p>Deterministic route used: {html.escape(str(event.get('deterministic_route_used', False)), quote=True)}</p>"
+        f"<p>Validation result: {html.escape(str(event.get('validation_result', 'not_applicable')), quote=True)}</p>"
+        f"<p>Latency: {html.escape(str(event.get('latency_ms', 0)), quote=True)} ms</p>"
+        "</div>"
+        for event in local_harness_sample_run.get("events", [])
+        if isinstance(event, dict)
+    )
     local_harness_counter_items = "".join(
         "<div class=\"card\">"
         f"<h3>{html.escape(str(key), quote=True)}</h3>"
@@ -891,6 +905,9 @@ def render_studio_placeholder_html(status: dict[str, Any]) -> str:
           <div class=\"card\"><h3>Available local deterministic sample requests</h3><ul>{local_harness_request_items}</ul></div>
           <div class=\"card\"><h3>Harness event stages</h3><ul>{local_harness_event_items}</ul></div>
         </div>
+        <div class=\"card\" style=\"margin-top: 16px;\"><h3>Generated Event Timeline</h3><p>Generated local harness events only. Not model token streaming. No model execution. No provider output.</p></div>
+        <div class=\"grid\">{local_harness_timeline_items}</div>
+        <div class=\"card\" style=\"margin-top: 16px;\"><h3>Generated Counters</h3><p>Generated counters come from local deterministic harness output only. No cost or energy conversion is performed.</p></div>
         <div class=\"grid\">{local_harness_counter_items}</div>
       </section>
 
@@ -915,7 +932,7 @@ def render_studio_placeholder_html(status: dict[str, Any]) -> str:
           <div class=\"card\"><h3>Comparison status</h3><p>{standard_vs_kora_status}</p><p>Local deterministic harness comparison.</p><p>No model execution occurs.</p></div>
           <div class=\"card\"><h3>Standard Mode</h3><p>{standard_route_summary}</p><p>Model call counted in fixture baseline: 1</p></div>
           <div class=\"card\"><h3>KORA Boost</h3><p>{kora_route_summary}</p><p>Model call counted in fixture KORA path: 0</p></div>
-          <div class=\"card\"><h3>Claim boundary</h3><p>{standard_vs_kora_boundary}</p><p>No cost or energy claim is made.</p></div>
+          <div class=\"card\"><h3>Local Harness Comparison boundary</h3><p>{standard_vs_kora_boundary}</p><p>Comparison is generated from local deterministic harness output.</p><p>This is not production cost evidence.</p><p>This does not execute a model.</p><p>No cost or energy claim is made.</p></div>
         </div>
         <div class=\"grid\">{standard_vs_kora_metric_items}</div>
       </section>
