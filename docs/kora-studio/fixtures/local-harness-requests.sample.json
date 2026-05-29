@@ -1,0 +1,105 @@
+{
+  "fixture_id": "kora_studio_local_harness_requests_v0_3",
+  "fixture_type": "local_harness_requests",
+  "mode": "local_deterministic_harness_input",
+  "provider": "none",
+  "model": "none",
+  "privacy_class": "synthetic",
+  "claim_boundary": "Local harness requests are synthetic deterministic samples. They do not execute models, call providers, download models, scan private data, or prove production behavior.",
+  "schema_fields": [
+    "request_id",
+    "input_text",
+    "task_family",
+    "expected_route_class",
+    "expected_validation_result",
+    "expected_model_needed",
+    "claim_boundary"
+  ],
+  "provider_calls_enabled": false,
+  "cloud_sync_enabled": false,
+  "model_execution_connected": false,
+  "download_connected": false,
+  "requests": [
+    {
+      "request_id": "local-harness-json-required-fields-001",
+      "input_text": "Format {\"ticket_id\":\"T-100\",\"priority\":\"high\",\"channel\":\"email\"} and validate required fields.",
+      "task_family": "json_required_fields",
+      "expected_route_class": "deterministic_code",
+      "expected_validation_result": "pass",
+      "expected_model_needed": false,
+      "claim_boundary": "Local harness requests are synthetic deterministic samples. They do not execute models, call providers, download models, scan private data, or prove production behavior.",
+      "expected_checks": [
+        "valid_json",
+        "required_fields_present"
+      ],
+      "provider_calls_enabled": false,
+      "cloud_sync_enabled": false,
+      "model_execution_connected": false
+    },
+    {
+      "request_id": "local-harness-policy-rule-001",
+      "input_text": "Classify whether a refund request within 14 days routes to the standard refund policy.",
+      "task_family": "policy_rule_classification",
+      "expected_route_class": "policy",
+      "expected_validation_result": "pass",
+      "expected_model_needed": false,
+      "claim_boundary": "Local harness requests are synthetic deterministic samples. They do not execute models, call providers, download models, scan private data, or prove production behavior.",
+      "expected_checks": [
+        "known_policy_window",
+        "route_policy_refund_standard"
+      ],
+      "provider_calls_enabled": false,
+      "cloud_sync_enabled": false,
+      "model_execution_connected": false
+    },
+    {
+      "request_id": "local-harness-known-faq-001",
+      "input_text": "What is the support response for account access help?",
+      "task_family": "known_faq_lookup",
+      "expected_route_class": "structured_lookup",
+      "expected_validation_result": "pass",
+      "expected_model_needed": false,
+      "claim_boundary": "Local harness requests are synthetic deterministic samples. They do not execute models, call providers, download models, scan private data, or prove production behavior.",
+      "expected_checks": [
+        "faq_key_found",
+        "answer_template_present"
+      ],
+      "provider_calls_enabled": false,
+      "cloud_sync_enabled": false,
+      "model_execution_connected": false
+    },
+    {
+      "request_id": "local-harness-structured-normalize-001",
+      "input_text": "Normalize customer record: name=ALBERT KIM; email=A.KIM@EXAMPLE.COM; tier=Pro.",
+      "task_family": "structured_record_normalization",
+      "expected_route_class": "deterministic_code",
+      "expected_validation_result": "pass",
+      "expected_model_needed": false,
+      "claim_boundary": "Local harness requests are synthetic deterministic samples. They do not execute models, call providers, download models, scan private data, or prove production behavior.",
+      "expected_checks": [
+        "lowercase_email",
+        "titlecase_name",
+        "tier_preserved"
+      ],
+      "provider_calls_enabled": false,
+      "cloud_sync_enabled": false,
+      "model_execution_connected": false
+    },
+    {
+      "request_id": "local-harness-ambiguous-model-needed-001",
+      "input_text": "Write a nuanced customer apology for an unusual situation with incomplete context.",
+      "task_family": "ambiguous_generation_boundary",
+      "expected_route_class": "model_needed_boundary",
+      "expected_validation_result": "not_applicable",
+      "expected_model_needed": true,
+      "claim_boundary": "Local harness requests are synthetic deterministic samples. They do not execute models, call providers, download models, scan private data, or prove production behavior.",
+      "expected_checks": [
+        "ambiguous_context",
+        "model_needed_boundary_only"
+      ],
+      "provider_calls_enabled": false,
+      "cloud_sync_enabled": false,
+      "model_execution_connected": false
+    }
+  ]
+}

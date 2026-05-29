@@ -81,6 +81,20 @@ This doc describes static fixture shapes for future KORA Studio UI work. The fix
 - `cost_claim_enabled`: whether the fixture enables cost claims; public comparison fixtures should keep this false.
 - `energy_claim_enabled`: whether the fixture enables energy claims; public comparison fixtures should keep this false.
 
+## Local Harness Request Fields
+
+- `request_id`: stable local harness request identifier.
+- `input_text`: synthetic request text.
+- `task_family`: deterministic task family represented by the request.
+- `expected_route_class`: expected route class, such as deterministic code, policy, structured lookup, or model-needed boundary.
+- `expected_validation_result`: expected validation result, such as pass or not_applicable.
+- `expected_model_needed`: whether the sample should stop at a model-needed boundary.
+- `claim_boundary`: explicit boundary text for what the request set does and does not show.
+- `expected_checks`: local deterministic checks expected for the request.
+- `provider_calls_enabled`: provider-call state; public harness samples should keep this false.
+- `cloud_sync_enabled`: cloud-sync state; public harness samples should keep this false.
+- `model_execution_connected`: model-execution state; public harness samples should keep this false.
+
 ## Claim-Safe Display Rules
 
 - show measured counters only

@@ -28,6 +28,7 @@ Fixtures help future Studio development by providing stable sample data for the 
 - `kora-boost-mode-card.sample.json`
 - `execution-viewer-events.sample.json`
 - `standard-vs-kora-comparison.sample.json`
+- `local-harness-requests.sample.json`
 
 ## Claim Boundary
 
