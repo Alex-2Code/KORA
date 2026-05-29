@@ -204,6 +204,12 @@ def _fake_opener(url: object, timeout: float) -> FakeResponse:
             kora-selected-comparison-status
             Not production telemetry
             Not production cost evidence
+            Selected Run Report Metadata
+            kora-selected-run-report-metadata
+            kora-selected-report-status
+            Report metadata preview only
+            No file export
+            No file writing
             kora-run-local-harness-button
             data-kora-request-id
             fetch("/api/harness/run"

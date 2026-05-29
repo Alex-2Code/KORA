@@ -784,6 +784,13 @@ def test_static_preview_html_content_is_safe_and_complete() -> None:
     assert "id=\"kora-selected-run-comparison\"" in html
     assert "id=\"kora-selected-comparison-status\"" in html
     assert "Run an approved local harness request to view selected-run comparison" in html
+    assert "Selected Run Report Metadata" in html
+    assert "id=\"kora-selected-run-report-metadata\"" in html
+    assert "id=\"kora-selected-report-status\"" in html
+    assert "Run an approved local harness request to view selected-run report metadata" in html
+    assert "Report metadata preview only" in html
+    assert "No file export" in html
+    assert "No file writing" in html
     assert "Generated local harness counters only" in html
     assert "Not production telemetry" in html
     assert "Not production cost evidence" in html
@@ -791,6 +798,7 @@ def test_static_preview_html_content_is_safe_and_complete() -> None:
     assert "selectedRunEvents" in html
     assert "selectedRunCounters" in html
     assert "selectedRunComparison" in html
+    assert "selectedRunReportMetadata" in html
     assert "data-kora-request-id" in html
     assert "Local deterministic harness data only" in html
     assert "Run Local Harness" in html
@@ -903,6 +911,7 @@ def test_static_preview_html_content_is_safe_and_complete() -> None:
     assert html.index("renderRunResponse(payload);") < html.index("await fetchSelectedEvents();")
     assert "renderSelectedCounters(run.generated_counters" in html
     assert "renderSelectedComparison(run.comparison_summary" in html
+    assert "renderSelectedReportMetadata(run.report_metadata_summary)" in html
     assert "JSON.stringify({request_id: selectedRequestId})" in html
     assert "src=" not in html.lower()
     assert 'href="http' not in html.lower()
@@ -914,6 +923,9 @@ def test_static_preview_html_content_is_safe_and_complete() -> None:
     assert "fetch(\"/api/model" not in html
     assert "fetch(\"/api/provider" not in html
     assert "fetch(\"/api/download" not in html
+    assert "fetch(\"/api/report" not in html
+    assert "fetch(\"/api/export" not in html
+    assert "fetch(\"/api/file" not in html
     assert "xmlhttprequest" not in html.lower()
     assert "navigator.sendbeacon" not in html.lower()
     assert "<input" not in html.lower()

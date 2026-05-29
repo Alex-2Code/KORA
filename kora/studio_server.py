@@ -985,6 +985,8 @@ def render_studio_placeholder_html(status: dict[str, Any]) -> str:
         </div>
         <div class=\"grid\" id=\"kora-selected-run-counters\" aria-live=\"polite\"></div>
         <div class=\"grid\" id=\"kora-selected-run-comparison\" aria-live=\"polite\"></div>
+        <div class=\"card\" style=\"margin-top: 16px;\"><h3>Selected Run Report Metadata</h3><p>Report metadata preview only. No file export. No file writing. Generated local harness output only.</p><p>No model execution. No provider calls. No cloud sync. Not production evidence.</p><p id=\"kora-selected-report-status\">Run an approved local harness request to view selected-run report metadata.</p></div>
+        <div class=\"grid\" id=\"kora-selected-run-report-metadata\" aria-live=\"polite\"></div>
         <div class=\"grid\" style=\"margin-top: 16px;\">
           <div class=\"card\"><h3>Run Local Harness action state</h3><p><span class=\"badge\">Run Local Harness</span></p><p>The browser button calls only the local harness run endpoint for an approved request id.</p><p>Use <code>POST /api/harness/run</code> with an approved <code>request_id</code>.</p><p>Generated harness events only.</p></div>
           <div class=\"card\"><h3>Trigger boundary</h3><p>Approved deterministic sample requests only.</p><p>No arbitrary prompt execution.</p><p>No model execution.</p><p>No provider calls.</p><p>No downloads.</p><p>This is local preview/demo data, not production evidence.</p></div>
@@ -1091,6 +1093,7 @@ def render_studio_placeholder_html(status: dict[str, Any]) -> str:
       let selectedRunEvents = [];
       let selectedRunCounters = {{}};
       let selectedRunComparison = {{}};
+      let selectedRunReportMetadata = {{}};
 
       const text = (id, value) => {{
         const element = document.getElementById(id);
@@ -1126,6 +1129,7 @@ def render_studio_placeholder_html(status: dict[str, Any]) -> str:
         text("kora-run-claim-boundary", `${{message}} No model execution was attempted. Provider calls remain disabled. Try again or inspect the local server logs.`);
         renderCountersUnavailable("Selected-run counters unavailable.");
         renderComparisonUnavailable("Selected-run comparison unavailable.");
+        renderReportMetadataUnavailable("Selected-run report metadata unavailable.");
       }};
 
       const renderEventError = (message) => {{
@@ -1154,6 +1158,12 @@ def render_studio_placeholder_html(status: dict[str, Any]) -> str:
         selectedRunComparison = {{}};
         text("kora-selected-comparison-status", `${{message}} This is not production cost evidence. No model execution. No provider calls.`);
         clearSelectedCards("kora-selected-run-comparison");
+      }};
+
+      const renderReportMetadataUnavailable = (message) => {{
+        selectedRunReportMetadata = {{}};
+        text("kora-selected-report-status", `${{message}} Report metadata preview only. No file export. No file writing.`);
+        clearSelectedCards("kora-selected-run-report-metadata");
       }};
 
       const renderSelectedCounters = (counters, eventCount) => {{
@@ -1235,6 +1245,62 @@ def render_studio_placeholder_html(status: dict[str, Any]) -> str:
         }});
       }};
 
+      const renderSelectedReportMetadata = (report) => {{
+        selectedRunReportMetadata = report && typeof report === "object" ? report : {{}};
+        const container = document.getElementById("kora-selected-run-report-metadata");
+        if (!container) {{
+          return;
+        }}
+        container.replaceChildren();
+        if (!Object.keys(selectedRunReportMetadata).length) {{
+          renderReportMetadataUnavailable("Selected-run report metadata unavailable.");
+          return;
+        }}
+        text("kora-selected-report-status", "Selected-run report metadata loaded. Report metadata preview only. Not production evidence.");
+        const fields = [
+          ["report_status", selectedRunReportMetadata.report_status || selectedRunReportMetadata.report_viewer_status || "unknown"],
+          ["report_source", selectedRunReportMetadata.report_source || "local_harness_summary"],
+          ["run_id", selectedRunReportMetadata.run_id || selectedRunId || "unknown"],
+          ["request_id", selectedRunReportMetadata.request_id || selectedRequestId || "unknown"],
+          ["generated_at", selectedRunReportMetadata.generated_at || selectedRunReportMetadata.created_at || "unknown"],
+          ["event_count", selectedRunReportMetadata.event_count === undefined ? 0 : selectedRunReportMetadata.event_count],
+          ["counter_summary_status", selectedRunReportMetadata.counter_summary ? "available" : "not_available"],
+          ["comparison_summary_status", selectedRunReportMetadata.comparison_summary_status || "unknown"],
+          ["model_execution_status", selectedRunReportMetadata.model_execution_status || "execution_not_connected"],
+          ["provider_calls_enabled", selectedRunReportMetadata.provider_calls_enabled === true ? "true" : "false"],
+          ["cloud_sync_enabled", selectedRunReportMetadata.cloud_sync_enabled === true ? "true" : "false"],
+          ["file_export_enabled", selectedRunReportMetadata.file_export_enabled === true ? "true" : "false"],
+          ["file_written", selectedRunReportMetadata.file_written === true ? "true" : "false"]
+        ];
+        fields.forEach(([label, value]) => {{
+          const card = document.createElement("div");
+          card.className = "card";
+          const title = document.createElement("h3");
+          title.textContent = label;
+          const display = document.createElement("p");
+          display.className = "status-value";
+          display.textContent = String(value);
+          const note = document.createElement("p");
+          note.textContent = "Report metadata preview only. No file export. No file writing.";
+          card.appendChild(title);
+          card.appendChild(display);
+          card.appendChild(note);
+          container.appendChild(card);
+        }});
+        const boundaryCard = document.createElement("div");
+        boundaryCard.className = "card";
+        const title = document.createElement("h3");
+        title.textContent = "Report claim boundary";
+        const boundary = document.createElement("p");
+        boundary.textContent = selectedRunReportMetadata.claim_boundary || "Local deterministic harness output only. No model execution. No provider calls. No cloud sync. Not production evidence.";
+        const noExport = document.createElement("p");
+        noExport.textContent = "No file export. No file writing. No downloads.";
+        boundaryCard.appendChild(title);
+        boundaryCard.appendChild(boundary);
+        boundaryCard.appendChild(noExport);
+        container.appendChild(boundaryCard);
+      }};
+
       const renderSelectedEvents = (events) => {{
         selectedRunEvents = Array.isArray(events) ? events : [];
         const container = document.getElementById("kora-selected-run-events");
@@ -1308,6 +1374,7 @@ def render_studio_placeholder_html(status: dict[str, Any]) -> str:
         text("kora-run-claim-boundary", run.claim_boundary || "Generated local harness output only. No model execution.");
         renderSelectedCounters(run.generated_counters, run.event_count || 0);
         renderSelectedComparison(run.comparison_summary, run.model_execution_status || "execution_not_connected");
+        renderSelectedReportMetadata(run.report_metadata_summary);
       }};
 
       document.querySelectorAll("[data-kora-request-id]").forEach((button) => {{
@@ -1356,7 +1423,8 @@ def render_studio_placeholder_html(status: dict[str, Any]) -> str:
         get selected_run_id() {{ return selectedRunId; }},
         get selected_run_events() {{ return selectedRunEvents.slice(); }},
         get selected_run_counters() {{ return Object.assign({{}}, selectedRunCounters); }},
-        get selected_run_comparison() {{ return Object.assign({{}}, selectedRunComparison); }}
+        get selected_run_comparison() {{ return Object.assign({{}}, selectedRunComparison); }},
+        get selected_run_report_metadata() {{ return Object.assign({{}}, selectedRunReportMetadata); }}
       }};
     }})();
   </script>

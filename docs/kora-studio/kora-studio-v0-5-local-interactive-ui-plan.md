@@ -184,6 +184,8 @@ Status: Connected in the local preview from the selected local harness run respo
 
 Render selected-run report metadata preview and disabled file export boundary from local harness output only.
 
+Status: Connected in the local preview from the selected local harness run response. The report metadata is preview-only, renders from `report_metadata_summary`, and does not export files, write files, download reports, execute models, call providers, or enable cloud sync.
+
 ### Task 447 - Interactive UI Smoke Check and Readiness Report
 
 Update local preview smoke checks for the interactive UI markers and add a v0.5 readiness report after validation.
