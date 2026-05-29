@@ -47,6 +47,7 @@ def _fake_opener(url: object, timeout: float) -> FakeResponse:
                 body=json.dumps(
                     {
                         "run_status": "completed",
+                        "run_id": "local-harness-trigger-test",
                         "request_id": "local-harness-json-required-fields-001",
                         "provider_calls_enabled": False,
                         "cloud_sync_enabled": False,
@@ -113,6 +114,31 @@ def _fake_opener(url: object, timeout: float) -> FakeResponse:
                 }
             ),
         )
+    if url.endswith("/api/harness/run/local-harness-trigger-test"):
+        return FakeResponse(
+            status=200,
+            content_type="application/json; charset=utf-8",
+            body=json.dumps(
+                {
+                    "run_id": "local-harness-trigger-test",
+                    "model_execution_connected": False,
+                }
+            ),
+        )
+    if url.endswith("/api/harness/events?run_id=local-harness-trigger-test"):
+        return FakeResponse(
+            status=200,
+            content_type="application/json; charset=utf-8",
+            body=json.dumps(
+                {
+                    "run_id": "local-harness-trigger-test",
+                    "event_count": 1,
+                    "events": [{"stage_id": "request_received"}],
+                    "sse_connected": False,
+                    "model_execution_connected": False,
+                }
+            ),
+        )
     if url.endswith("/"):
         return FakeResponse(
             status=200,
@@ -135,6 +161,7 @@ def _fake_opener(url: object, timeout: float) -> FakeResponse:
             Standard Mode vs KORA Boost
             Report Viewer Placeholder
             api_endpoint_connected
+            /api/harness/events
             Provider calls: disabled
             Cloud sync: disabled
             No model is downloaded
@@ -147,7 +174,14 @@ def _fake_opener(url: object, timeout: float) -> FakeResponse:
 def test_check_preview_uses_local_endpoints_only() -> None:
     results = smoke.check_preview("http://127.0.0.1:8765", timeout=0.5, opener=_fake_opener)
 
-    assert results == ["/health ok", "/status ok", "/api/harness/run ok", "/ ok"]
+    assert results == [
+        "/health ok",
+        "/status ok",
+        "/api/harness/run ok",
+        "/api/harness/run/<run_id> ok",
+        "/api/harness/events ok",
+        "/ ok",
+    ]
 
 
 def test_check_preview_rejects_non_local_url() -> None:

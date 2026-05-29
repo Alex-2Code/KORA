@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 from copy import deepcopy
+from datetime import UTC, datetime
 from typing import Any
 from uuid import uuid4
 
@@ -49,6 +50,7 @@ def trigger_local_harness_run(request_id: str) -> dict[str, Any]:
     if selected_request is None:
         raise ValueError(f"Unknown approved local harness request id: {request_id}")
 
+    created_at = datetime.now(UTC).isoformat().replace("+00:00", "Z")
     run_id = f"local-harness-trigger-{uuid4().hex}"
     harness_run = build_local_harness_events(selected_request, run_id=run_id)
     comparison = build_local_harness_comparison(selected_request)
@@ -59,6 +61,7 @@ def trigger_local_harness_run(request_id: str) -> dict[str, Any]:
     generated_events = deepcopy(harness_run["events"])
     generated_counters = deepcopy(harness_run["counters_snapshot"])
     model_needed = bool(selected_request["expected_model_needed"])
+    completed_at = datetime.now(UTC).isoformat().replace("+00:00", "Z")
 
     run_record = {
         "ok": True,
@@ -66,6 +69,8 @@ def trigger_local_harness_run(request_id: str) -> dict[str, Any]:
         "request_id": selected_request["request_id"],
         "run_status": "completed",
         "run_state": "completed",
+        "created_at": created_at,
+        "completed_at": completed_at,
         "selected_request": _selected_request_summary(selected_request),
         "generated_events": generated_events,
         "generated_counters": generated_counters,
@@ -92,13 +97,16 @@ def trigger_local_harness_run(request_id: str) -> dict[str, Any]:
             "upload_enabled": False,
             "generated_report_commit_enabled": False,
         },
+        "event_count": len(generated_events),
         "model_needed_boundary_status": "execution_not_connected" if model_needed else "not_needed",
+        "model_execution_status": "execution_not_connected" if model_needed else "not_needed",
         "provider_calls_enabled": False,
         "cloud_sync_enabled": False,
         "model_execution_connected": False,
         "download_connected": False,
         "runtime_model_list_connected": False,
         "private_directory_scan_enabled": False,
+        "error": None,
         "claim_boundary": LOCAL_HARNESS_RUN_CLAIM_BOUNDARY,
         "event_claim_boundary": LOCAL_HARNESS_EVENT_CLAIM_BOUNDARY,
     }
@@ -111,6 +119,31 @@ def get_local_harness_run_record(run_id: str) -> dict[str, Any] | None:
 
     record = _LOCAL_HARNESS_RUNS.get(run_id)
     return deepcopy(record) if record is not None else None
+
+
+def get_local_harness_run_events(run_id: str) -> dict[str, Any] | None:
+    """Return generated event payload for an in-memory local harness run."""
+
+    record = get_local_harness_run_record(run_id)
+    if record is None:
+        return None
+    events = deepcopy(record["generated_events"])
+    return {
+        "ok": True,
+        "run_id": record["run_id"],
+        "request_id": record["request_id"],
+        "run_status": record["run_status"],
+        "event_count": len(events),
+        "events": events,
+        "provider_calls_enabled": False,
+        "cloud_sync_enabled": False,
+        "model_execution_connected": False,
+        "download_connected": False,
+        "streaming_connected": False,
+        "sse_connected": False,
+        "claim_boundary": LOCAL_HARNESS_RUN_CLAIM_BOUNDARY,
+        "event_claim_boundary": LOCAL_HARNESS_EVENT_CLAIM_BOUNDARY,
+    }
 
 
 def get_local_harness_run_store_status() -> dict[str, Any]:

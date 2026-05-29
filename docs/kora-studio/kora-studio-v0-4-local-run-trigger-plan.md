@@ -6,7 +6,9 @@ KORA Studio v0.3 is complete as a local preview/demo readiness milestone. It exp
 
 KORA Studio v0.4 should add a local run trigger surface for approved deterministic sample requests and may optionally expose event-stream scaffolding for generated harness events.
 
-Task 434 adds the first local run trigger endpoint scaffold. `POST /api/harness/run` accepts approved sample request IDs only and returns generated local deterministic harness events, counters, comparison summary, and report metadata summary. `GET /api/harness/run/{run_id}` retrieves in-memory run records while the local server process is alive. Arbitrary prompt execution, SSE, model execution, provider calls, downloads, runtime model listing, private directory scanning, and persistence remain out of scope.
+Task 434 adds the first local run trigger endpoint scaffold. `POST /api/harness/run` accepts approved sample request IDs only and returns generated local deterministic harness events, counters, comparison summary, and report metadata summary. `GET /api/harness/run/{run_id}` retrieves in-memory run records while the local server process is alive.
+
+Task 435 adds non-SSE generated event retrieval through `GET /api/harness/events?run_id=<id>`. The endpoint returns generated harness events for an existing in-memory local run. It is not SSE, not token streaming, and not model output. Arbitrary prompt execution, model execution, provider calls, downloads, runtime model listing, private directory scanning, and persistence remain out of scope.
 
 v0.4 remains a local preview/demo milestone. It is not a production release, hosted service, provider billing dashboard, cost-reduction dashboard, energy dashboard, generic local chatbot, or LM Studio replacement.
 

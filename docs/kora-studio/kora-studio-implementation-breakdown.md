@@ -433,7 +433,7 @@ Scope:
 - approved request selection
 - local-only run trigger through `POST /api/harness/run`
 - in-memory run retrieval through `GET /api/harness/run/{run_id}`
-- generated event retrieval
+- generated event retrieval through `GET /api/harness/events?run_id=<id>`
 - generated counters
 - optional SSE/event-stream scaffold remains planned
 - selected-run comparison update
@@ -453,6 +453,7 @@ Acceptance criteria:
 - model-needed boundaries return `execution_not_connected`
 - run state and counters remain local deterministic harness output
 - run records are in-memory only and are not persisted
+- generated event retrieval is non-SSE and does not stream model tokens
 - smoke checks cover planned harness endpoints if implemented
 
 ## Phase 4 — Report Viewer

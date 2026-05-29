@@ -195,6 +195,36 @@ def check_preview(base_url: str = DEFAULT_BASE_URL, *, timeout: float = 2.0, ope
     _require(run.get("generated_counters", {}).get("kora_model_calls") == 0, "/api/harness/run reports KORA model calls")
     results.append("/api/harness/run ok")
 
+    run_id = str(run.get("run_id", ""))
+    _require(run_id, "/api/harness/run did not return run_id")
+    retrieved_status, retrieved_content_type, retrieved_body = _read_url(
+        base_url,
+        f"/api/harness/run/{run_id}",
+        timeout=timeout,
+        opener=opener,
+    )
+    _require(retrieved_status == 200, f"/api/harness/run/<run_id> returned HTTP {retrieved_status}")
+    _require("application/json" in retrieved_content_type, "/api/harness/run/<run_id> did not return JSON")
+    retrieved_run = json.loads(retrieved_body)
+    _require(retrieved_run.get("run_id") == run_id, "/api/harness/run/<run_id> returned wrong run")
+    _require(retrieved_run.get("model_execution_connected") is False, "/api/harness/run/<run_id> reports model execution")
+    results.append("/api/harness/run/<run_id> ok")
+
+    events_status, events_content_type, events_body = _read_url(
+        base_url,
+        f"/api/harness/events?run_id={run_id}",
+        timeout=timeout,
+        opener=opener,
+    )
+    _require(events_status == 200, f"/api/harness/events returned HTTP {events_status}")
+    _require("application/json" in events_content_type, "/api/harness/events did not return JSON")
+    events_payload = json.loads(events_body)
+    _require(events_payload.get("run_id") == run_id, "/api/harness/events returned wrong run")
+    _require(events_payload.get("event_count") == len(events_payload.get("events", [])), "/api/harness/events count mismatch")
+    _require(events_payload.get("sse_connected") is False, "/api/harness/events reports SSE connected")
+    _require(events_payload.get("model_execution_connected") is False, "/api/harness/events reports model execution")
+    results.append("/api/harness/events ok")
+
     root_status, root_content_type, root_body = _read_url(base_url, "/", timeout=timeout, opener=opener)
     _require(root_status == 200, f"/ returned HTTP {root_status}")
     _require("text/html" in root_content_type, "/ did not return HTML")
@@ -216,6 +246,7 @@ def check_preview(base_url: str = DEFAULT_BASE_URL, *, timeout: float = 2.0, ope
         "Standard Mode vs KORA Boost",
         "Report Viewer Placeholder",
         "api_endpoint_connected",
+        "/api/harness/events",
         "Provider calls: disabled",
         "Cloud sync: disabled",
         "No model is downloaded",

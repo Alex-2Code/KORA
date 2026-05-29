@@ -7,7 +7,7 @@ import json
 import webbrowser
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from typing import Any, Callable
-from urllib.parse import urlparse
+from urllib.parse import parse_qs, urlparse
 
 from kora.studio_execution_fixture import get_execution_viewer_fixture_summary, get_standard_vs_kora_status_fields
 from kora.studio_harness_comparison import get_local_harness_comparison_status_fields
@@ -16,6 +16,7 @@ from kora.studio_harness_requests import get_local_harness_request_summary, get_
 from kora.studio_harness_runs import (
     LOCAL_HARNESS_RUN_CLAIM_BOUNDARY,
     get_local_harness_run_record,
+    get_local_harness_run_events,
     get_local_harness_run_store_status,
     trigger_local_harness_run,
 )
@@ -70,6 +71,9 @@ def get_studio_server_status(host: str = DEFAULT_STUDIO_HOST, port: int = DEFAUL
         "run_trigger_status": "api_endpoint_connected",
         "run_trigger_endpoint": "/api/harness/run",
         "run_retrieval_endpoint": "/api/harness/run/{run_id}",
+        "events_endpoint": "/api/harness/events?run_id=<id>",
+        "events_endpoint_status": "generated_events_retrieval_connected",
+        "sse_endpoint_status": "not_connected",
         "approved_request_ids_only": True,
         "arbitrary_prompt_execution_connected": False,
         "sample_request_count": len(local_harness_requests),
@@ -918,6 +922,7 @@ def render_studio_placeholder_html(status: dict[str, Any]) -> str:
           <div class=\"card\"><h3><a href=\"/status\">/status</a></h3><p>Returns local preview status, system profile, model capability estimate, KORA Boost copy, docs paths, and fixture paths.</p></div>
           <div class=\"card\"><h3>/api/harness/run</h3><p>POST accepts only approved local deterministic sample request IDs and returns generated local harness events. Arbitrary prompt execution is not connected.</p></div>
           <div class=\"card\"><h3>/api/harness/run/&lt;run_id&gt;</h3><p>GET returns an in-memory local harness run record if it exists. No persistence, provider call, download, or model execution is connected.</p></div>
+          <div class=\"card\"><h3>/api/harness/events?run_id=&lt;id&gt;</h3><p>GET returns generated harness events for an existing local run. This is not SSE, not model token streaming, and not model output.</p></div>
         </div>
       </section>
 
@@ -1004,6 +1009,30 @@ def create_studio_request_handler(status_provider: StatusProvider | None = None)
                 return
             if path == "/":
                 self._write_html(render_studio_placeholder_html(status))
+                return
+            if path == "/api/harness/events":
+                query = parse_qs(parsed_path.query)
+                run_id = query.get("run_id", [""])[0]
+                if not run_id:
+                    self._write_json(
+                        get_harness_run_error_payload(
+                            "missing_run_id",
+                            "GET /api/harness/events expects an existing local harness run_id query parameter.",
+                        ),
+                        status_code=400,
+                    )
+                    return
+                events_payload = get_local_harness_run_events(run_id)
+                if events_payload is None:
+                    self._write_json(
+                        get_harness_run_error_payload(
+                            "run_not_found",
+                            "No generated local harness events exist for this run_id.",
+                        ),
+                        status_code=404,
+                    )
+                    return
+                self._write_json(events_payload)
                 return
             if path.startswith("/api/harness/run/"):
                 run_id = path.removeprefix("/api/harness/run/")

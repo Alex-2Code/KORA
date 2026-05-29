@@ -140,6 +140,9 @@ def test_get_studio_server_status_fields() -> None:
     assert status["local_harness_status"]["run_trigger_status"] == "api_endpoint_connected"
     assert status["local_harness_status"]["run_trigger_endpoint"] == "/api/harness/run"
     assert status["local_harness_status"]["run_retrieval_endpoint"] == "/api/harness/run/{run_id}"
+    assert status["local_harness_status"]["events_endpoint"] == "/api/harness/events?run_id=<id>"
+    assert status["local_harness_status"]["events_endpoint_status"] == "generated_events_retrieval_connected"
+    assert status["local_harness_status"]["sse_endpoint_status"] == "not_connected"
     assert status["local_harness_status"]["approved_request_ids_only"] is True
     assert status["local_harness_status"]["arbitrary_prompt_execution_connected"] is False
     assert status["local_harness_status"]["sample_request_count"] == 5
@@ -567,6 +570,8 @@ def test_request_handler_triggers_and_retrieves_local_harness_run() -> None:
 
         with urllib.request.urlopen(f"{base_url}/api/harness/run/{run['run_id']}", timeout=2) as response:
             retrieved_run = json.loads(response.read().decode("utf-8"))
+        with urllib.request.urlopen(f"{base_url}/api/harness/events?run_id={run['run_id']}", timeout=2) as response:
+            events_payload = json.loads(response.read().decode("utf-8"))
     finally:
         server.shutdown()
         thread.join(timeout=2)
@@ -575,6 +580,8 @@ def test_request_handler_triggers_and_retrieves_local_harness_run() -> None:
     assert run["ok"] is True
     assert run["request_id"] == "local-harness-known-faq-001"
     assert run["run_status"] == "completed"
+    assert run["created_at"].endswith("Z")
+    assert run["completed_at"].endswith("Z")
     assert run["generated_events"][0]["stage_id"] == "request_received"
     assert run["generated_events"][-1]["stage_id"] == "final_counters"
     assert run["generated_counters"]["structured_lookup_routes"] == 1
@@ -586,6 +593,14 @@ def test_request_handler_triggers_and_retrieves_local_harness_run() -> None:
     assert run["model_execution_connected"] is False
     assert run["download_connected"] is False
     assert retrieved_run == run
+    assert events_payload["run_id"] == run["run_id"]
+    assert events_payload["request_id"] == run["request_id"]
+    assert events_payload["run_status"] == "completed"
+    assert events_payload["event_count"] == len(events_payload["events"])
+    assert events_payload["events"] == run["generated_events"]
+    assert events_payload["sse_connected"] is False
+    assert events_payload["streaming_connected"] is False
+    assert events_payload["model_execution_connected"] is False
 
 
 def test_request_handler_rejects_invalid_local_harness_run_request() -> None:
@@ -613,6 +628,9 @@ def test_request_handler_rejects_invalid_local_harness_run_request() -> None:
         with pytest.raises(urllib.error.HTTPError) as missing_run_exc:
             urllib.request.urlopen(f"{base_url}/api/harness/run/missing-run", timeout=2)
         missing_run_body = json.loads(missing_run_exc.value.read().decode("utf-8"))
+        with pytest.raises(urllib.error.HTTPError) as missing_events_exc:
+            urllib.request.urlopen(f"{base_url}/api/harness/events?run_id=missing-run", timeout=2)
+        missing_events_body = json.loads(missing_events_exc.value.read().decode("utf-8"))
     finally:
         server.shutdown()
         thread.join(timeout=2)
@@ -628,6 +646,9 @@ def test_request_handler_rejects_invalid_local_harness_run_request() -> None:
 
     assert missing_run_exc.value.code == 404
     assert missing_run_body["error"] == "run_not_found"
+    assert missing_events_exc.value.code == 404
+    assert missing_events_body["error"] == "run_not_found"
+    assert missing_events_body["model_execution_connected"] is False
 
 
 def test_static_preview_html_content_is_safe_and_complete() -> None:
