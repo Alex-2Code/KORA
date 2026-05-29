@@ -171,6 +171,7 @@ The page shows a first-run flow ordered around launch/local-only status, Your Co
 - [KORA Studio v0.2 visual QA checklist](kora-studio-v0-2-visual-qa-checklist.md)
 - [KORA Studio v0.2 readiness report](kora-studio-v0-2-readiness-report.md)
 - [KORA Studio v0.2 goal report](kora-studio-v0-2-goal-report.md)
+- [KORA Studio v0.3 live harness plan](kora-studio-v0-3-live-harness-plan.md)
 - [Harness engineering specification](kora-studio-harness-engineering-spec.md)
 - [Runtime setup guidance](kora-studio-runtime-setup-guidance.md)
 - [Report viewer requirements](report-viewer-requirements.md)
