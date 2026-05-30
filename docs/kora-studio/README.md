@@ -189,6 +189,8 @@ The page shows a first-run flow ordered around launch/local-only status, Your Co
 - [KORA Studio v0.4 readiness report](kora-studio-v0-4-readiness-report.md)
 - [KORA Studio v0.4 goal report](kora-studio-v0-4-goal-report.md)
 - [KORA Studio v0.5 local interactive UI plan](kora-studio-v0-5-local-interactive-ui-plan.md)
+- [KORA Studio v0.5 readiness report](kora-studio-v0-5-readiness-report.md)
+- [KORA Studio v0.5 goal report](kora-studio-v0-5-goal-report.md)
 - [Harness engineering specification](kora-studio-harness-engineering-spec.md)
 - [Runtime setup guidance](kora-studio-runtime-setup-guidance.md)
 - [Report viewer requirements](report-viewer-requirements.md)

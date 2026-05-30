@@ -467,7 +467,7 @@ Acceptance criteria:
 
 ## Phase 3.16 — v0.5 Local Interactive UI Plan
 
-Status: Approved request selector and local Run Local Harness button are connected to approved request IDs only. See `docs/kora-studio/kora-studio-v0-5-local-interactive-ui-plan.md`.
+Status: v0.5 local interactive UI readiness is documented. See `docs/kora-studio/kora-studio-v0-5-local-interactive-ui-plan.md`, `docs/kora-studio/kora-studio-v0-5-readiness-report.md`, and `docs/kora-studio/kora-studio-v0-5-goal-report.md`.
 
 Goal: Add a local interactive UI for approved deterministic sample requests and selected-run state.
 
