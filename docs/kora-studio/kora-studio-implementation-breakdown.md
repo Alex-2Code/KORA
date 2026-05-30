@@ -500,6 +500,42 @@ Acceptance criteria:
 - model-needed boundaries remain `execution_not_connected`
 - no production cost, energy, provider, model execution, or unsupported larger-model claim is introduced
 
+## Phase 3.17 — v0.6 Frontend Interaction Hardening Plan
+
+Status: v0.6 frontend interaction hardening is planned. See `docs/kora-studio/kora-studio-v0-6-frontend-interaction-hardening-plan.md`.
+
+Goal: Harden the local preview interaction layer around selected-run errors, retry behavior, browser-local history, optional generated-event SSE display, and local preview reliability.
+
+Scope:
+
+- selected-run error state display
+- retry last approved request
+- local endpoint unavailable messages
+- malformed local response messages
+- browser-local run history state
+- selected-run history list
+- selected `run_id` switching in browser memory
+- clear local state action
+- optional generated-event SSE UI for existing local harness runs
+- fallback to generated event retrieval
+- no arbitrary prompt input
+- no model execution
+- no provider calls
+- no downloads
+- no cloud sync
+- no private model directory scans
+- no runtime model list commands
+- no report file export
+
+Acceptance criteria:
+
+- retry behavior is limited to approved request IDs
+- browser-local history is not persisted to disk or cloud
+- optional SSE UI streams generated harness events only
+- selected-run error copy remains claim-safe
+- local preview smoke checks cover v0.6 interaction markers
+- no production cost, energy, provider, model execution, or unsupported larger-model claim is introduced
+
 ## Phase 4 — Report Viewer
 
 Goal: Render existing local Markdown validation reports.
