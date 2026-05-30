@@ -770,6 +770,19 @@ def test_static_preview_html_content_is_safe_and_complete() -> None:
     assert "id=\"kora-run-local-harness-button\"" in html
     assert "id=\"kora-selected-run-state\"" in html
     assert "Selected run state" in html
+    assert "Selected Run Error State" in html
+    assert "id=\"kora-run-error-state\"" in html
+    assert "Retry Last Approved Request" in html
+    assert "id=\"kora-retry-last-approved-request-button\"" in html
+    assert "id=\"kora-last-approved-request-id\"" in html
+    assert "Retry uses the last approved request only" in html
+    assert "The local harness endpoint was unavailable" in html
+    assert "The local response could not be parsed" in html
+    assert "lastApprovedRequestId" in html
+    assert "retryAvailable" in html
+    assert "runError" in html
+    assert "runLoading" in html
+    assert "await runLocalHarness(lastApprovedRequestId)" in html
     assert "Generated local harness output only" in html
     assert "Selected Run Event Timeline" in html
     assert "id=\"kora-selected-run-events\"" in html
@@ -912,7 +925,9 @@ def test_static_preview_html_content_is_safe_and_complete() -> None:
     assert "renderSelectedCounters(run.generated_counters" in html
     assert "renderSelectedComparison(run.comparison_summary" in html
     assert "renderSelectedReportMetadata(run.report_metadata_summary)" in html
-    assert "JSON.stringify({request_id: selectedRequestId})" in html
+    assert "JSON.stringify({request_id: requestId})" in html
+    assert "Retry any prompt" not in html
+    assert "Type a prompt" not in html
     assert "src=" not in html.lower()
     assert 'href="http' not in html.lower()
     assert "https://" not in html.lower()

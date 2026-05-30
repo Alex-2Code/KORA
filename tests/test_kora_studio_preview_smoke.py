@@ -192,6 +192,14 @@ def _fake_opener(url: object, timeout: float) -> FakeResponse:
             Selector state is browser-local in-memory page state only
             Selected run state
             Generated local harness output only
+            Selected Run Error State
+            kora-run-error-state
+            Retry Last Approved Request
+            kora-retry-last-approved-request-button
+            kora-last-approved-request-id
+            Retry uses the last approved request only
+            The local harness endpoint was unavailable
+            The local response could not be parsed
             Selected Run Event Timeline
             kora-selected-run-events
             kora-selected-events-status

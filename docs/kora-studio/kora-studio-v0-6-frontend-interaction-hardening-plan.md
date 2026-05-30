@@ -237,6 +237,8 @@ Create this v0.6 frontend interaction hardening plan and add public-safe links f
 
 Add selected-run error state display, retry last approved request behavior, endpoint unavailable copy, malformed response copy, and tests. Keep retry limited to approved request IDs.
 
+Status: Connected in the local preview. The UI tracks browser-local loading/error state, shows claim-safe endpoint unavailable and malformed response messages, and exposes Retry Last Approved Request. Retry reuses only the last approved request ID and calls only `POST /api/harness/run`.
+
 ### Task 451 - Multi-run Browser-local History State
 
 Add page-memory run history, selected `run_id` switching, and clear local state behavior. Do not persist state beyond browser memory.
@@ -268,4 +270,3 @@ Create `docs/kora-studio/kora-studio-v0-6-goal-report.md` with task summaries, c
 - Smoke check covers v0.6 local interaction markers.
 - No model/provider/download/cloud/report export behavior is introduced.
 - No unsupported product claims are introduced.
-
